@@ -1,5 +1,5 @@
 
-#define shaderName basic_clockwise_square_example
+#define shaderName Rotating_Square
 
 #include "Common.h" 
 

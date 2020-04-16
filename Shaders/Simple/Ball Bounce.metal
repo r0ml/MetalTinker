@@ -1,5 +1,5 @@
 
-#define shaderName ball_bounce
+#define shaderName Ball_Bounce
 
 #include "Common.h" 
 

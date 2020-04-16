@@ -33,7 +33,7 @@
 		E736937024474D7D0027A739 /* Breathing Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936724474D7D0027A739 /* Breathing Ring.metal */; };
 		E736937124474D7D0027A739 /* Basic Bar.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936824474D7D0027A739 /* Basic Bar.metal */; };
 		E736937224474D7D0027A739 /* Spinning Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936924474D7D0027A739 /* Spinning Ring.metal */; };
-		E736937324474D7D0027A739 /* Basic clockwise square example.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936A24474D7D0027A739 /* Basic clockwise square example.metal */; };
+		E736937324474D7D0027A739 /* Rotating Square.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936A24474D7D0027A739 /* Rotating Square.metal */; };
 		E736937424474D7D0027A739 /* Ball Bounce.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936B24474D7D0027A739 /* Ball Bounce.metal */; };
 		E73693762447710C0027A739 /* Spinning Star.metal in Sources */ = {isa = PBXBuildFile; fileRef = E73693752447710C0027A739 /* Spinning Star.metal */; };
 		E73A2D092362B79D0007123A /* ShaderPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73A2D082362B79D0007123A /* ShaderPreviewView.swift */; };
@@ -131,7 +131,7 @@
 		E7ED6295217657EA007ABB53 /* RenderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7500791216B181100FABE79 /* RenderManager.swift */; };
 		E7ED629821779685007ABB53 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E7EED1232448C490006F06F0 /* Sliding Rectangles.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED1222448C490006F06F0 /* Sliding Rectangles.metal */; };
-		E7EED12F2448C497006F06F0 /* Base Colors Evo.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED11E2448C2E1006F06F0 /* Base Colors Evo.metal */; };
+		E7EED12F2448C497006F06F0 /* Blend.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED11E2448C2E1006F06F0 /* Blend.metal */; };
 		E7EED1302448C497006F06F0 /* Sliding Bar.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */; };
 		E7EED1322448C4D8006F06F0 /* Bars.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED1312448C4D8006F06F0 /* Bars.metal */; };
 		E7F84DAD2374693800E774E2 /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F84DAC2374693800E774E2 /* FFT.swift */; };
@@ -201,7 +201,7 @@
 		E736936724474D7D0027A739 /* Breathing Ring.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Breathing Ring.metal"; sourceTree = "<group>"; };
 		E736936824474D7D0027A739 /* Basic Bar.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Basic Bar.metal"; sourceTree = "<group>"; };
 		E736936924474D7D0027A739 /* Spinning Ring.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Spinning Ring.metal"; sourceTree = "<group>"; };
-		E736936A24474D7D0027A739 /* Basic clockwise square example.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Basic clockwise square example.metal"; sourceTree = "<group>"; };
+		E736936A24474D7D0027A739 /* Rotating Square.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Rotating Square.metal"; sourceTree = "<group>"; };
 		E736936B24474D7D0027A739 /* Ball Bounce.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Ball Bounce.metal"; sourceTree = "<group>"; };
 		E73693752447710C0027A739 /* Spinning Star.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Spinning Star.metal"; sourceTree = "<group>"; };
 		E73A2D082362B79D0007123A /* ShaderPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderPreviewView.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 		E7ED62842174DF49007ABB53 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		E7ED628A2174E00A007ABB53 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E7ED629721779685007ABB53 /* support.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = support.metal; sourceTree = "<group>"; };
-		E7EED11E2448C2E1006F06F0 /* Base Colors Evo.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Base Colors Evo.metal"; sourceTree = "<group>"; };
+		E7EED11E2448C2E1006F06F0 /* Blend.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Blend.metal; sourceTree = "<group>"; };
 		E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Sliding Bar.metal"; sourceTree = "<group>"; };
 		E7EED1222448C490006F06F0 /* Sliding Rectangles.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Sliding Rectangles.metal"; sourceTree = "<group>"; };
 		E7EED1312448C4D8006F06F0 /* Bars.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Bars.metal; sourceTree = "<group>"; };
@@ -358,9 +358,9 @@
 				E736936424474D7D0027A739 /* Animation Test.metal */,
 				E736936B24474D7D0027A739 /* Ball Bounce.metal */,
 				E7EED1312448C4D8006F06F0 /* Bars.metal */,
-				E7EED11E2448C2E1006F06F0 /* Base Colors Evo.metal */,
+				E7EED11E2448C2E1006F06F0 /* Blend.metal */,
 				E736936824474D7D0027A739 /* Basic Bar.metal */,
-				E736936A24474D7D0027A739 /* Basic clockwise square example.metal */,
+				E736936A24474D7D0027A739 /* Rotating Square.metal */,
 				E736936724474D7D0027A739 /* Breathing Ring.metal */,
 				E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */,
 				E7EED1222448C490006F06F0 /* Sliding Rectangles.metal */,
@@ -724,7 +724,7 @@
 			files = (
 				E736937024474D7D0027A739 /* Breathing Ring.metal in Sources */,
 				E7EED1302448C497006F06F0 /* Sliding Bar.metal in Sources */,
-				E7EED12F2448C497006F06F0 /* Base Colors Evo.metal in Sources */,
+				E7EED12F2448C497006F06F0 /* Blend.metal in Sources */,
 				E7EED1322448C4D8006F06F0 /* Bars.metal in Sources */,
 				E736937224474D7D0027A739 /* Spinning Ring.metal in Sources */,
 				E78BEE5424448B530086AAA9 /* glsl.metal in Sources */,
@@ -732,7 +732,7 @@
 				E78BEE5524448B530086AAA9 /* sdf.metal in Sources */,
 				E736937124474D7D0027A739 /* Basic Bar.metal in Sources */,
 				E736936C24474D7D0027A739 /* Twisting Squares.metal in Sources */,
-				E736937324474D7D0027A739 /* Basic clockwise square example.metal in Sources */,
+				E736937324474D7D0027A739 /* Rotating Square.metal in Sources */,
 				E78BEE5624448B530086AAA9 /* support.metal in Sources */,
 				E78BEE5F24448BEE0086AAA9 /* Animated Pinwheel.metal in Sources */,
 				E7EED1232448C490006F06F0 /* Sliding Rectangles.metal in Sources */,

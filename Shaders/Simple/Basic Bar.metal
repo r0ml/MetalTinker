@@ -1,5 +1,5 @@
 
-#define shaderName basic_bar
+#define shaderName Basic_Bar
 
 #include "Common.h" 
 
