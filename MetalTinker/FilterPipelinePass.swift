@@ -56,8 +56,8 @@ class FilterPipelinePass : PipelinePass {
     psd.colorAttachments[0].rgbBlendOperation = .add
     psd.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha // I would like to set this to   .one   for some cases
     psd.colorAttachments[0].sourceAlphaBlendFactor = .sourceAlpha
-    psd.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha // I would like to set this to  .one for some cases
-    psd.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusSourceAlpha
+    psd.colorAttachments[0].destinationRGBBlendFactor = .destinationAlpha // .oneMinusSourceAlpha // I would like to set this to  .one for some cases
+    psd.colorAttachments[0].destinationAlphaBlendFactor = .destinationAlpha // .oneMinusSourceAlpha
 
     //              psd.depthAttachmentPixelFormat =  .depth32Float   // metalView.depthStencilPixelFormat
 
@@ -126,7 +126,7 @@ class FilterPipelinePass : PipelinePass {
       let c = rm.config.clearColor
 
       // for preview, I make the clearColor have alpha of 1 so that it becomes the background.
-      rpd.colorAttachments[0].clearColor =  MTLClearColor(red: Double(c[0]), green: Double(c[1]), blue: Double(c[2]), alpha: 1)
+      rpd.colorAttachments[0].clearColor =  MTLClearColor(red: Double(c[0]), green: Double(c[1]), blue: Double(c[2]), alpha: Double(c[3]))
       rpd.colorAttachments[0].loadAction = .clear // .load
 
     }

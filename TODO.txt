@@ -1,4 +1,8 @@
 
+- should I separate depth handling from blend mode?
+
+- clearColor is handled differently between MetalView and offscreen snapshot for preview
+
 - If the requested texture is not available, don't crash
 
 - loop music playback

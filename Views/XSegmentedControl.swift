@@ -19,16 +19,5 @@ struct XSegmentedControl : View {
       }
     }.pickerStyle( SegmentedPickerStyle() )
   }
-  
-/*  func pickone(_ z : Int) {
-    UserDefaults.standard.set( z , forKey: pref )
-    setPickS(sel.x, items)
-  }
-  
-  func setPickS(_ a : Int, _ items : [MyMTLStruct] ) {
-    for (i, tt) in items.enumerated() {
-      tt.setValue( Int32(i == a ? 1 : 0) )
-    }
-  }*/
 }
 

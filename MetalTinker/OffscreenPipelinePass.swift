@@ -72,8 +72,8 @@ class OffscreenPipelinePass : PipelinePass {
       psd.colorAttachments[0].rgbBlendOperation = .add
       psd.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha // I would like to set this to   .one   for some cases
       psd.colorAttachments[0].sourceAlphaBlendFactor = .sourceAlpha
-      psd.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha // I would like to set this to  .one for some cases
-      psd.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusSourceAlpha
+      psd.colorAttachments[0].destinationRGBBlendFactor = .destinationAlpha // .oneMinusSourceAlpha // I would like to set this to  .one for some cases
+      psd.colorAttachments[0].destinationAlphaBlendFactor = .destinationAlpha // .oneMinusSourceAlpha
 
       psd.depthAttachmentPixelFormat =  .depth32Float   // metalView.depthStencilPixelFormat
 

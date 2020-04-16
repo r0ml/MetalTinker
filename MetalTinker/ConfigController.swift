@@ -18,7 +18,7 @@ public class ConfigController {
   var initializationBuffer : MTLBuffer!
 
   // this is the clear color for alpha blending?
-  var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 1 )
+  var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 0.1 )
 
 
   private var cached : [IdentifiableView]?
@@ -83,13 +83,11 @@ public class ConfigController {
    It would be the "Uniform" buffer, but that one is fixed, whereas this one is variable -- so it's
    just easier to make it a separate buffer
    */
-
-
   init(_ x : String, _ rm : RenderManager) {
     shaderName = x
     renderManager = rm
     empty = NSImage(named: "BrokenImage")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
-//    textureThumbnail = Array(repeating: nil, count: numberOfTextures)
+    // textureThumbnail = Array(repeating: nil, count: numberOfTextures)
     inputTexture = Array(repeating: nil, count: RenderManager.numberOfTextures)
   }
   
@@ -108,9 +106,12 @@ public class ConfigController {
   }
   
   func getClearColor(_ bst : MyMTLStruct) {
-    if let v : SIMD4<Float> = bst["clearColor"]?.getValue() {
-      self.clearColor = v
-    }
+    guard let bb = bst["clearColor"] else { return }
+    let v : SIMD4<Float> = bb.getValue()
+    self.clearColor = v
+//    if let v : SIMD4<Float> = bb.getValue() {
+//      self.clearColor = v
+//    }
   }
   
   func processMicrophone(_ bst : MyMTLStruct ) {
@@ -245,22 +246,6 @@ public class ConfigController {
       }
     }
   }
-
- /* func getTextureThumbnail(_ n : Int) -> CGImage {
-    if let t = textureThumbnail[n] {
-      return t
-    } else {
-      if let it = inputTexture[n],
-        let ti = CIImage.init(mtlTexture: it, options: nil),
-        let tt = ti.cgImage { // CIContext(options: nil).createCGImage(ti, from: ti.extent) {
-        textureThumbnail[n] = tt
-        return tt
-      } else {
-        textureThumbnail[n] = empty
-        return empty
-      }
-    }
-  } */
 
   func processCubes(_ bst : MyMTLStruct ) {
     _cubeNames = []

@@ -159,7 +159,7 @@ struct ShaderView: View {
           Image(shader.textureThumbnail[3], scale: 1, label: Text("Texture 4") ).resizable().scaledToFit().frame(width: 100, height: 100)
           .onDrop(of: ["public.url", "public.image", "public.string"], delegate: MyDropDelegate(3, shader) )
         }
-        
+
         HStack() {
           Image(shader.videoThumbnail[0], scale: 1, label: Text("Video 1") ).resizable().scaledToFit().frame(width: 100, height: 100)
           .onDrop(of: ["public.file-url"], delegate: MyDropDelegate(4, shader) )
@@ -170,7 +170,7 @@ struct ShaderView: View {
           /*Image(shader.videoTexture[3]?.toImage() ?? empty, scale: 1, label: Text("Video 4") ).resizable().scaledToFit().frame(width: 100, height: 100)
  */
         }
-        
+
         HStack() {
           EmptyView()
           Color(.green)

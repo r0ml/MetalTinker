@@ -155,7 +155,6 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
     fftBuffer = Array(repeating: ib, count: RenderManager.numberOfSounds)
     
     setup = RenderSetup(myName)
-
     empty = NSImage(named: "camera")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
     videoThumbnail = Array(repeating: empty, count: RenderManager.numberOfVideos)
     textureThumbnail = Array(repeating: empty, count: RenderManager.numberOfTextures)
@@ -242,7 +241,6 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
             ,  .generateMipmaps: NSNumber(value: true)
           ])
 //        }
-
 
 //        self.videoTexture[txtd] = vidsup.getTexture()
         DispatchQueue.main.async {
@@ -366,7 +364,6 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
           MTKTextureLoader.Origin.bottomLeft
       ] ) :
       config.webcam?.prepare()
-
     
     if config.pipelinePasses.isEmpty {
       config.setupPipelines(size: mySize!)

@@ -53,7 +53,7 @@ class DynamicPreferences {
         
         let x = self.makeSegmented( bstm.name, dnam, ddm, value: (dd as? Int) ?? v)
         res.append( IdentifiableView(id: dnam, view: x) )
-        
+
       } else {
         
         let dat = bstm.value

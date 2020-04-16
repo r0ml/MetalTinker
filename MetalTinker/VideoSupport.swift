@@ -152,22 +152,15 @@ class VideoSupport {
     let pivo = player.currentItem!.outputs[0] as! AVPlayerItemVideoOutput
     let currentTime = pivo.itemTime(forHostTime: nextVSync)
     let tx = getPixels(currentTime)
-
     textureQ.async { self.myTexture = tx }
-
     return tx
     // if paused { player.pause() }
 //    return textureQ.sync(flags: .barrier) { myTexture }
   }
 
- // func getTexture() -> MTLTexture? {
- //   return textureQ.sync(flags: .barrier) { myTexture }
- // }
-
   func getThumbnail(_ f : @escaping (CGImage) -> ()) {
     video.getThumbnailImage(f)
   }
   var observer : NSObject?
-  
 
 }

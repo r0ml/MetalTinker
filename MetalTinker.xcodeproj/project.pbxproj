@@ -28,6 +28,14 @@
 		E72A7FFA23C2C2AB008C642A /* XSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */; };
 		E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72D600A2391D948009CF90A /* MyMTLStruct.swift */; };
 		E731C36021AF6847001D2345 /* VideoSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E731C35F21AF6847001D2345 /* VideoSupport.swift */; };
+		E736936C24474D7D0027A739 /* Twisting Squares.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936324474D7D0027A739 /* Twisting Squares.metal */; };
+		E736936D24474D7D0027A739 /* Animation Test.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936424474D7D0027A739 /* Animation Test.metal */; };
+		E736937024474D7D0027A739 /* Breathing Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936724474D7D0027A739 /* Breathing Ring.metal */; };
+		E736937124474D7D0027A739 /* Basic Bar.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936824474D7D0027A739 /* Basic Bar.metal */; };
+		E736937224474D7D0027A739 /* Spinning Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936924474D7D0027A739 /* Spinning Ring.metal */; };
+		E736937324474D7D0027A739 /* Basic clockwise square example.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936A24474D7D0027A739 /* Basic clockwise square example.metal */; };
+		E736937424474D7D0027A739 /* Ball Bounce.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936B24474D7D0027A739 /* Ball Bounce.metal */; };
+		E73693762447710C0027A739 /* Spinning Star.metal in Sources */ = {isa = PBXBuildFile; fileRef = E73693752447710C0027A739 /* Spinning Star.metal */; };
 		E73A2D092362B79D0007123A /* ShaderPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73A2D082362B79D0007123A /* ShaderPreviewView.swift */; };
 		E743D67D236BEEBB00EB81BC /* videos in Resources */ = {isa = PBXBuildFile; fileRef = E743D67C236BEEBB00EB81BC /* videos */; };
 		E743D681236C03EA00EB81BC /* music in Resources */ = {isa = PBXBuildFile; fileRef = E743D680236C03EA00EB81BC /* music */; };
@@ -93,6 +101,10 @@
 		E786CA152394220B00CD5AFA /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = E743D689236C081E00EB81BC /* TODO.txt */; };
 		E786CA162394220B00CD5AFA /* Textures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7CF9B7C227CC6FE00413280 /* Textures.xcassets */; };
 		E786CA172394220B00CD5AFA /* music in Resources */ = {isa = PBXBuildFile; fileRef = E743D680236C03EA00EB81BC /* music */; };
+		E78BEE5424448B530086AAA9 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
+		E78BEE5524448B530086AAA9 /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
+		E78BEE5624448B530086AAA9 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E78BEE5F24448BEE0086AAA9 /* Animated Pinwheel.metal in Sources */ = {isa = PBXBuildFile; fileRef = E78BEE5B24448BBC0086AAA9 /* Animated Pinwheel.metal */; };
 		E79752D922185CF0001B5FC3 /* SoundSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79752D822185CF0001B5FC3 /* SoundSupport.swift */; };
 		E79A10E222CF9B4D004FD5E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E79A10E122CF9B4D004FD5E2 /* README.md */; };
 		E79DD73B23E8DFF200DAB04A /* RenderSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */; };
@@ -118,6 +130,10 @@
 		E7ED62912174E00C007ABB53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7ED628A2174E00A007ABB53 /* Main.storyboard */; };
 		E7ED6295217657EA007ABB53 /* RenderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7500791216B181100FABE79 /* RenderManager.swift */; };
 		E7ED629821779685007ABB53 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E7EED1232448C490006F06F0 /* Sliding Rectangles.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED1222448C490006F06F0 /* Sliding Rectangles.metal */; };
+		E7EED12F2448C497006F06F0 /* Base Colors Evo.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED11E2448C2E1006F06F0 /* Base Colors Evo.metal */; };
+		E7EED1302448C497006F06F0 /* Sliding Bar.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */; };
+		E7EED1322448C4D8006F06F0 /* Bars.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED1312448C4D8006F06F0 /* Bars.metal */; };
 		E7F84DAD2374693800E774E2 /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F84DAC2374693800E774E2 /* FFT.swift */; };
 		E7FCB46A212A2B1000CED4FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCB469212A2B1000CED4FA /* AppDelegate.swift */; };
 		E7FCB46E212A2B1200CED4FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7FCB46D212A2B1200CED4FA /* Assets.xcassets */; };
@@ -130,6 +146,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E743DB49236C863400EB81BC;
 			remoteInfo = "Edge Detection";
+		};
+		E78BEE5D24448BDB0086AAA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E78BEE5224448B530086AAA9;
+			remoteInfo = Simple;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -173,6 +196,14 @@
 		E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSegmentedControl.swift; sourceTree = "<group>"; };
 		E72D600A2391D948009CF90A /* MyMTLStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMTLStruct.swift; sourceTree = "<group>"; };
 		E731C35F21AF6847001D2345 /* VideoSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSupport.swift; sourceTree = "<group>"; };
+		E736936324474D7D0027A739 /* Twisting Squares.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Twisting Squares.metal"; sourceTree = "<group>"; };
+		E736936424474D7D0027A739 /* Animation Test.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Animation Test.metal"; sourceTree = "<group>"; };
+		E736936724474D7D0027A739 /* Breathing Ring.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Breathing Ring.metal"; sourceTree = "<group>"; };
+		E736936824474D7D0027A739 /* Basic Bar.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Basic Bar.metal"; sourceTree = "<group>"; };
+		E736936924474D7D0027A739 /* Spinning Ring.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Spinning Ring.metal"; sourceTree = "<group>"; };
+		E736936A24474D7D0027A739 /* Basic clockwise square example.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Basic clockwise square example.metal"; sourceTree = "<group>"; };
+		E736936B24474D7D0027A739 /* Ball Bounce.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Ball Bounce.metal"; sourceTree = "<group>"; };
+		E73693752447710C0027A739 /* Spinning Star.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Spinning Star.metal"; sourceTree = "<group>"; };
 		E73A2D082362B79D0007123A /* ShaderPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderPreviewView.swift; sourceTree = "<group>"; };
 		E743D67C236BEEBB00EB81BC /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = videos; sourceTree = "<group>"; };
 		E743D680236C03EA00EB81BC /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
@@ -194,6 +225,7 @@
 		E77675D72283786000614B7B /* glsl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = glsl.metal; sourceTree = "<group>"; };
 		E77675DA2283791A00614B7B /* glsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glsl.h; sourceTree = "<group>"; };
 		E786CA1E2394220B00CD5AFA /* TinyTinker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyTinker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E78BEE5B24448BBC0086AAA9 /* Animated Pinwheel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Animated Pinwheel.metal"; sourceTree = "<group>"; };
 		E79752D822185CF0001B5FC3 /* SoundSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSupport.swift; sourceTree = "<group>"; };
 		E79A10E122CF9B4D004FD5E2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderSupport.swift; sourceTree = "<group>"; };
@@ -215,6 +247,10 @@
 		E7ED62842174DF49007ABB53 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		E7ED628A2174E00A007ABB53 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E7ED629721779685007ABB53 /* support.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = support.metal; sourceTree = "<group>"; };
+		E7EED11E2448C2E1006F06F0 /* Base Colors Evo.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Base Colors Evo.metal"; sourceTree = "<group>"; };
+		E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Sliding Bar.metal"; sourceTree = "<group>"; };
+		E7EED1222448C490006F06F0 /* Sliding Rectangles.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Sliding Rectangles.metal"; sourceTree = "<group>"; };
+		E7EED1312448C4D8006F06F0 /* Bars.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Bars.metal; sourceTree = "<group>"; };
 		E7F84DAC2374693800E774E2 /* FFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFT.swift; sourceTree = "<group>"; };
 		E7FCB466212A2B1000CED4FA /* MetalTinker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTinker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FCB469212A2B1000CED4FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -310,8 +346,29 @@
 			isa = PBXGroup;
 			children = (
 				E743DC17236C869500EB81BC /* Edge Detection */,
+				E78BEE5A24448B6A0086AAA9 /* Simple */,
 			);
 			path = Shaders;
+			sourceTree = "<group>";
+		};
+		E78BEE5A24448B6A0086AAA9 /* Simple */ = {
+			isa = PBXGroup;
+			children = (
+				E78BEE5B24448BBC0086AAA9 /* Animated Pinwheel.metal */,
+				E736936424474D7D0027A739 /* Animation Test.metal */,
+				E736936B24474D7D0027A739 /* Ball Bounce.metal */,
+				E7EED1312448C4D8006F06F0 /* Bars.metal */,
+				E7EED11E2448C2E1006F06F0 /* Base Colors Evo.metal */,
+				E736936824474D7D0027A739 /* Basic Bar.metal */,
+				E736936A24474D7D0027A739 /* Basic clockwise square example.metal */,
+				E736936724474D7D0027A739 /* Breathing Ring.metal */,
+				E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */,
+				E7EED1222448C490006F06F0 /* Sliding Rectangles.metal */,
+				E736936924474D7D0027A739 /* Spinning Ring.metal */,
+				E73693752447710C0027A739 /* Spinning Star.metal */,
+				E736936324474D7D0027A739 /* Twisting Squares.metal */,
+			);
+			path = Simple;
 			sourceTree = "<group>";
 		};
 		E7CF9BCB227F421800413280 /* Extensions */ = {
@@ -435,6 +492,20 @@
 			productReference = E786CA1E2394220B00CD5AFA /* TinyTinker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E78BEE5224448B530086AAA9 /* Simple */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E78BEE5724448B530086AAA9 /* Build configuration list for PBXNativeTarget "Simple" */;
+			buildPhases = (
+				E78BEE5324448B530086AAA9 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Simple;
+			productName = Simple;
+			productType = "com.apple.product-type.metal-library";
+		};
 		E7FCB465212A2B1000CED4FA /* MetalTinker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "MetalTinker" */;
@@ -449,6 +520,7 @@
 			);
 			dependencies = (
 				E743DD52236C86BC00EB81BC /* PBXTargetDependency */,
+				E78BEE5E24448BDB0086AAA9 /* PBXTargetDependency */,
 			);
 			name = MetalTinker;
 			productName = XDabble;
@@ -495,6 +567,7 @@
 				E7FCB465212A2B1000CED4FA /* MetalTinker */,
 				E786C9672394220B00CD5AFA /* TinyTinker */,
 				E743DB49236C863400EB81BC /* Edge Detection */,
+				E78BEE5224448B530086AAA9 /* Simple */,
 				E743D701236C83FE00EB81BC /* Template */,
 			);
 		};
@@ -645,6 +718,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E78BEE5324448B530086AAA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E736937024474D7D0027A739 /* Breathing Ring.metal in Sources */,
+				E7EED1302448C497006F06F0 /* Sliding Bar.metal in Sources */,
+				E7EED12F2448C497006F06F0 /* Base Colors Evo.metal in Sources */,
+				E7EED1322448C4D8006F06F0 /* Bars.metal in Sources */,
+				E736937224474D7D0027A739 /* Spinning Ring.metal in Sources */,
+				E78BEE5424448B530086AAA9 /* glsl.metal in Sources */,
+				E736936D24474D7D0027A739 /* Animation Test.metal in Sources */,
+				E78BEE5524448B530086AAA9 /* sdf.metal in Sources */,
+				E736937124474D7D0027A739 /* Basic Bar.metal in Sources */,
+				E736936C24474D7D0027A739 /* Twisting Squares.metal in Sources */,
+				E736937324474D7D0027A739 /* Basic clockwise square example.metal in Sources */,
+				E78BEE5624448B530086AAA9 /* support.metal in Sources */,
+				E78BEE5F24448BEE0086AAA9 /* Animated Pinwheel.metal in Sources */,
+				E7EED1232448C490006F06F0 /* Sliding Rectangles.metal in Sources */,
+				E73693762447710C0027A739 /* Spinning Star.metal in Sources */,
+				E736937424474D7D0027A739 /* Ball Bounce.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7FCB462212A2B1000CED4FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -704,6 +800,11 @@
 			isa = PBXTargetDependency;
 			target = E743DB49236C863400EB81BC /* Edge Detection */;
 			targetProxy = E743DD51236C86BC00EB81BC /* PBXContainerItemProxy */;
+		};
+		E78BEE5E24448BDB0086AAA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E78BEE5224448B530086AAA9 /* Simple */;
+			targetProxy = E78BEE5D24448BDB0086AAA9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -792,6 +893,24 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E78BEE5824448B530086AAA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E78BEE5924448B530086AAA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -997,6 +1116,15 @@
 			buildConfigurations = (
 				E786CA1C2394220B00CD5AFA /* Debug */,
 				E786CA1D2394220B00CD5AFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E78BEE5724448B530086AAA9 /* Build configuration list for PBXNativeTarget "Simple" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E78BEE5824448B530086AAA9 /* Debug */,
+				E78BEE5924448B530086AAA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

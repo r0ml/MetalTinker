@@ -40,7 +40,7 @@ class RenderPipelinePass : PipelinePass {
     td.width = Int(canvasSize.width)  // should be the colorAttachments[0]  size
     td.height = Int(canvasSize.height)
 
-    td.sampleCount = 4
+    td.sampleCount = multisampleCount
 
     let dt = device.makeTexture(descriptor: td)
 
@@ -64,7 +64,7 @@ class RenderPipelinePass : PipelinePass {
     self.label = label
     self.isFinal = isFinal
 
-    if let rpp = setupRenderPipeline(vertexFunction: f.0, fragmentFunction: f.1, topology: topology, isFinal: isFinal),
+    if let rpp = setupRenderPipeline(vertexFunction: f.0, fragmentFunction: f.1, topology: topology, isFinal: isFinal, flags: flags),
       let ts = makeRenderPassTexture(label, size: canvasSize) {
 
       (pipelineState, metadata) = rpp
@@ -141,7 +141,7 @@ class RenderPipelinePass : PipelinePass {
       td.width = Int(canvasSize.width)  // should be the colorAttachments[0]  size
       td.height = Int(canvasSize.height)
 
-      td.sampleCount = 4
+      td.sampleCount = 4 // should be multisampleCount -- but I can't see it
 
       let dt = device.makeTexture(descriptor: td)
 
@@ -175,7 +175,7 @@ class RenderPipelinePass : PipelinePass {
     }
 
     let c = rm.config.clearColor
-    let ccc = MTLClearColor(red: Double(c[0]), green: Double(c[1]), blue: Double(c[2]), alpha: 1)
+    let ccc = MTLClearColor(red: Double(c[0]), green: Double(c[1]), blue: Double(c[2]), alpha: Double(c[3]))
 
     // for preview, I make the clearColor have alpha of 1 so that it becomes the background.
     rpd.colorAttachments[0].clearColor =  ccc
@@ -254,8 +254,11 @@ class RenderPipelinePass : PipelinePass {
     if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
       renderEncoder.label = "render encoder"
 
-      renderEncoder.setDepthStencilState(rm.depthStencilState)
-
+      // if the low order bit of flags is set -- this is a 2d (blended) render
+      if ( (flags & 1) == 1) {
+      } else {
+        renderEncoder.setDepthStencilState(rm.depthStencilState)
+      }
       renderEncoder.setVertexBuffer(rm.uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setVertexBuffer(rm.config.initializationBuffer, offset: 0, index: kbuffId)
       renderEncoder.setVertexBuffer(computeBuffer, offset: 0, index:computeBuffId)
@@ -282,8 +285,6 @@ class RenderPipelinePass : PipelinePass {
       } else {
         renderEncoder.setFragmentTexture(nil, index: webcamId)
       }
-
-
       renderEncoder.setRenderPipelineState(pipelineState)
 
       // This sets up the drawable size?
@@ -317,11 +318,10 @@ class RenderPipelinePass : PipelinePass {
 
     }
   }
-
-
 }
+
 private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?, topology: MTLPrimitiveType
-  , isFinal: Bool) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
+  , isFinal: Bool, flags: Int32) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
   // ============================================
   // this is the actual rendering fragment shader
 
@@ -332,6 +332,7 @@ private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction:
   psd.fragmentFunction = fragmentFunction
   psd.colorAttachments[0].pixelFormat = isFinal ? thePixelFormat : theOtherPixelFormat
 
+  let doesBlend = ((flags & 1) == 1)
 
   psd.isAlphaToOneEnabled = false
   psd.colorAttachments[0].isBlendingEnabled = true
@@ -339,8 +340,8 @@ private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction:
   psd.colorAttachments[0].rgbBlendOperation = .add
   psd.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha // I would like to set this to   .one   for some cases
   psd.colorAttachments[0].sourceAlphaBlendFactor = .sourceAlpha
-  psd.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha // I would like to set this to  .one for some cases
-  psd.colorAttachments[0].destinationAlphaBlendFactor = .oneMinusSourceAlpha
+  psd.colorAttachments[0].destinationRGBBlendFactor = doesBlend ? .destinationAlpha : .oneMinusSourceAlpha 
+  psd.colorAttachments[0].destinationAlphaBlendFactor = doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
 
   psd.depthAttachmentPixelFormat =  .depth32Float   // metalView.depthStencilPixelFormat
 
@@ -397,7 +398,6 @@ private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction:
   return nil
 
 }
-
 
 private func makeRenderPassTexture(_ nam : String, size: CGSize) -> (MTLTexture, MTLTexture, MTLTexture)? {
   let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: theOtherPixelFormat, width: Int(size.width), height: Int(size.height), mipmapped: false)

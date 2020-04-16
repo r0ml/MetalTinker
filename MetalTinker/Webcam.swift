@@ -13,14 +13,12 @@ class WebcamSupport : NSObject {
   private var frameTexture : MTLTexture? = nil
   private var region : MTLRegion = MTLRegion()
   private var textureLoader = MTKTextureLoader(device: device)
-  
+
   private var permissionGranted = false
   private let sessionQueue = DispatchQueue(label: "session queue")
   private let captureSession = AVCaptureSession()
   private let context = CIContext()
   
- // private var frameQ : DispatchQueue = DispatchQueue(label: "frameGrabber")
-
   override init() {
     super.init()
     checkPermission()
