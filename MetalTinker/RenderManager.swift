@@ -1,7 +1,6 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import AppKit
 import MetalKit
@@ -10,8 +9,7 @@ import os
 import AVFoundation
 
 let thePixelFormat = MTLPixelFormat.bgra8Unorm_srgb // could be bgra8Unorm_srgb
-// let theOtherPixelFormat = MTLPixelFormat.rgba32Float
-let theOtherPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
+// let theOtherPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
 
 let multisampleCount = 4
 
@@ -86,10 +84,17 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
   
   var setup : RenderSetup
   
-  var renderPipelineDescriptor : MTLRenderPipelineDescriptor!
-  
   var depthStencilState : MTLDepthStencilState?
-  
+
+  var renderPassDescriptor : MTLRenderPassDescriptor {
+    get {
+      if let rr = _renderPassDescriptor { return rr }
+      _renderPassDescriptor = makeRenderPassDescriptor(label: "render output", size: self.mySize!)
+      return _renderPassDescriptor!
+    }
+ }
+
+  var _renderPassDescriptor : MTLRenderPassDescriptor?
   
   var videoTexture : [MTLTexture?] = Array(repeating: nil, count: numberOfVideos)
   @Published var videoThumbnail : [CGImage]
@@ -368,8 +373,8 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
     if config.pipelinePasses.isEmpty {
       config.setupPipelines(size: mySize!)
     }
-    for mm in config.pipelinePasses {
-      mm.makeEncoder(commandBuffer, scale, self, stat)
+    for (x, mm) in config.pipelinePasses.enumerated() {
+      mm.makeEncoder(commandBuffer, scale, self, stat, x == 0)
     }
 
     // =========================================================================
@@ -377,11 +382,13 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
 
     var rt : MTLTexture?
 
-    if let frpp = config.pipelinePasses.last as? RenderPipelinePass {
-      rt = frpp.resolveTextures.1
-    } else if let frpp = config.pipelinePasses.last as? FilterPipelinePass {
-      rt = frpp.texture
-    }
+//    if let frpp = config.pipelinePasses.last as? RenderPipelinePass {
+      rt = self.renderPassDescriptor.colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
+
+    // FIXME: what about a filter?
+//  } else if let frpp = config.pipelinePasses.last as? FilterPipelinePass {
+//      rt = frpp.texture
+//    }
 
     // what I want here is the resolve texture of the last pipeline pass
     commandBuffer.addCompletedHandler{ commandBuffer in
@@ -607,3 +614,58 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
 
 }
 
+
+func makeRenderPassTexture(_ nam : String, size: CGSize) -> (MTLTexture, MTLTexture, MTLTexture)? {
+  let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+  texd.textureType = .type2DMultisample
+  texd.usage = [.renderTarget]
+  texd.sampleCount = multisampleCount
+  texd.resourceOptions = .storageModePrivate
+
+  let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
+  texi.textureType = .type2D
+  texi.usage = [.shaderRead]
+  texi.resourceOptions = .storageModePrivate
+
+  let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+  texo.textureType = .type2D
+  texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
+  texo.resourceOptions = .storageModePrivate
+
+  if let p = device.makeTexture(descriptor: texd),
+    let q = device.makeTexture(descriptor: texi),
+    let r = device.makeTexture(descriptor: texo) {
+    p.label = "render pass \(nam) multisample"
+    q.label = "render pass \(nam) input"
+    r.label = "render pass \(nam) output"
+    //        swapQ.async {
+
+
+
+    return (p, q, r)
+  }
+  return nil
+}
+
+fileprivate func makeRenderPassDescriptor(label : String, size canvasSize: CGSize) -> MTLRenderPassDescriptor {
+  //------------------------------------------------------------
+  // texture on device to be written to..
+  //------------------------------------------------------------
+  let ts = makeRenderPassTexture(label, size: canvasSize)!
+  let texture = ts.0
+  let resolveTextures = (ts.1, ts.2)
+
+  let renderPassDescriptor = MTLRenderPassDescriptor()
+  renderPassDescriptor.colorAttachments[0].texture = texture
+  renderPassDescriptor.colorAttachments[0].storeAction = .storeAndMultisampleResolve
+  renderPassDescriptor.colorAttachments[0].resolveLevel = 0
+  renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTextures.1 //  device.makeTexture(descriptor: xostd)
+  renderPassDescriptor.colorAttachments[0].loadAction = .clear // .load
+  //      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
+
+
+  // only if I need depthing?
+  renderPassDescriptor.depthAttachment = makeDepthAttachmentDescriptor(size: canvasSize)
+
+  return renderPassDescriptor
+}

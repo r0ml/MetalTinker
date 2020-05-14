@@ -488,6 +488,38 @@ float3 annulus(uint vid, uint sides, float inner, float outer, float2 aspect) {
   return res;
 }
 
+
+// centered at 0
+float3 annulus(uint vid, uint sides, float inner, float outer, float2 aspect, float startAngle, float endAngle) {
+  uint tv = vid % 6;
+  uint tn = vid / 6;
+  float3 res = 0;
+  float subtend = endAngle - startAngle; // in radians -- default is TAU
+  switch(tv) {
+    case 0:
+    case 4:
+      res.z = startAngle + 2 * float(tn + 0.5) / float(sides) * subtend;
+      res.xy = float2(outer, 0) * aspect * rot2d(res.z) / aspect;
+      break;
+    case 1:
+      res.z = startAngle + 2 * float(tn)     / float(sides) * subtend; // this one is negative for tn = 0
+      res.xy = float2(inner, 0) * aspect * rot2d( res.z) / aspect;
+      break;
+    case 2:
+    case 3:
+      res.z = startAngle + 2 * float(tn + 1) / float(sides) * subtend;
+      res.xy = float2(inner, 0) * aspect * rot2d( res.z ) / aspect;
+      break;
+    case 5:
+      res.z = startAngle + 2 * float(tn + 1.5) / float(sides) * subtend;
+      res.xy = float2(outer, 0) * aspect * rot2d( res.z ) / aspect;
+      break;
+  }
+  return res;
+}
+
+
+
 // ==============================================================
 
 float rand( float n ) {

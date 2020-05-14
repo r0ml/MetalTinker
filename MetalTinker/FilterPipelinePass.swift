@@ -1,7 +1,6 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import MetalKit
 import os
@@ -88,7 +87,7 @@ class FilterPipelinePass : PipelinePass {
   }
 
   func makeEncoder(_ commandBuffer : MTLCommandBuffer,
-                   _ scale : CGFloat, _ rm : RenderManager, _ stat : Bool) {
+                   _ scale : CGFloat, _ rm : RenderManager, _ stat : Bool, _ isFirst : Bool) {
 
     // var sz = CGSize(width : rpd.colorAttachments[0].texture!.width /* / scale */ ,
     //  height: rpd.colorAttachments[0].texture!.height /* / scale */ )
@@ -127,7 +126,7 @@ class FilterPipelinePass : PipelinePass {
 
       // for preview, I make the clearColor have alpha of 1 so that it becomes the background.
       rpd.colorAttachments[0].clearColor =  MTLClearColor(red: Double(c[0]), green: Double(c[1]), blue: Double(c[2]), alpha: Double(c[3]))
-      rpd.colorAttachments[0].loadAction = .clear // .load
+      rpd.colorAttachments[0].loadAction = isFirst ? .clear : .load // .load
 
     }
 

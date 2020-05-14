@@ -1,7 +1,6 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import SwiftUI
 import MetalKit
@@ -37,22 +36,11 @@ class MetalViewController : NSViewController {
     
     shader.resetTarget( mtkView )
     
-    // let _ = shader.config.buildPrefView()
-
-    // There are two notions here:
-    // 1) The shader configuration:  values which are the same across
-    //    multiple view (size) instantiations.  The preferences and buffers
-    // and
-    // 2) The shader instance which has resources specific to the size
-    //    and onscreen-ness of the current view.
-
-
     mtkView.device = device
-//    mtkView.delegate = shader
     mtkView.preferredFramesPerSecond = 60
+
     // If I don't do this, I can't debug
     mtkView.framebufferOnly = false
-    
     self.view = mtkView
   }
   
@@ -106,6 +94,5 @@ struct MetalViewC : NSViewControllerRepresentable {
   }
   
   func updateNSViewController(_ nsViewController: MetalViewController, context: NSViewControllerRepresentableContext<MetalViewC>) {
-    //    print("update?")
   }
 }

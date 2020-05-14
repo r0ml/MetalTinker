@@ -1,8 +1,6 @@
 
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import MetalKit
 import os
@@ -33,7 +31,8 @@ class PipelineState {
 protocol PipelinePass {
   func makeEncoder(_ commandBuffer : MTLCommandBuffer,
                    _ scale : CGFloat, _ : RenderManager,
-                   _ stat : Bool);
+                   _ stat : Bool,
+                   _ isFirst : Bool);
 };
 
 

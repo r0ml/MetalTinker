@@ -10,10 +10,18 @@ struct KBuffer {
   struct {
     int4 _1;
   } pipeline;
+  struct {
+    float3 radius;
+    float3 thickness;
+  } options;
 };
 initialize() {
   kbuff.pipeline._1 = {3, 3 * ringSides, 1, 0};
+  kbuff.options.thickness = { 0.01, 0.05, 0.1};
+  kbuff.options.radius = {0.2, 0.3, 0.5};
 }
+
+/*
 
 struct MyVertexOut {
   float4  where [[position]];   // this is in the range -1 -> 1 in the vertex shader,  0 -> viewSize in the fragment shader
@@ -21,14 +29,15 @@ struct MyVertexOut {
   float4  barrio;               // this is in the range 0 -> 1 in the vertex shader
   float theta;
 };
+*/
 
-#undef VertexOut
-#define VertexOut MyVertexOut
+// #undef VertexOut
+// #define VertexOut MyVertexOut
 
 vertexFn(_1) {
   VertexOut v;
   float2 aspect = uni.iResolution / uni.iResolution.y;
-  float3 a = annulus(vid, ringSides, 0.1, 0.2, aspect);
+  float3 a = annulus(vid, ringSides, kbuff.options.radius.y - kbuff.options.thickness.y / 2, kbuff.options.radius.y + kbuff.options.thickness.y / 2, aspect);
   
   a.xy = (a.xy * aspect * rot2d( -uni.iTime * 5. + (sin(uni.iTime) * 3. + 1.))) / aspect;
   
@@ -37,20 +46,6 @@ vertexFn(_1) {
   v.where.xy = (2 * v.barrio.xy - 1) * 0.5;
   v.where.zw = {0, 1};
   v.color = smoothstep(1, 0, a.z * 1.05);
-  v.theta = a.z;
+//  v.theta = a.z;
   return v;
 }
-
-/*
-fragmentFn() {
-  
-  float2 u = thisVertex.where.xy / uni.iResolution - .5;
-  
-  float t = uni.iTime;
-  
-  u.x *= uni.iResolution.x / uni.iResolution.y;
-  u = u * rot2d( -t * 5. + (sin(t) * 3.+ 1.));
-  
-  return float4(length(u) < .2 && length(u) > .1 ? 1.- atan2(u.y, u.x) * .5 : 0.);
-}
-*/

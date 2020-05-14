@@ -1,6 +1,6 @@
 
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import AppKit
 import MetalKit
@@ -49,17 +49,13 @@ class RenderSetup {
       iFrame += 1
 
       let modifierFlags = NSEvent.modifierFlags
-        //   let mouseButtons = NSEvent.pressedMouseButtons
+      //   let mouseButtons = NSEvent.pressedMouseButtons
 
-      // Y coordinate on mouse needs to be flipped for Metal ?
-
-     uniform.pointee.iMouse = SIMD2<Float>( Float(scale) * Float(mouseLoc.x) / Float(size.width), ( Float(size.height ) - Float(scale) *  Float(mouseLoc.y) ) / Float(size.height) )
-     // uniform.pointee.iMouse = SIMD2<Float>( Float(scale) * Float(mouseLoc.x) / Float(size.width), Float(scale) *  Float(mouseLoc.y) / Float(size.height) )
-
-     uniform.pointee.lastTouch = SIMD2<Float>( Float(scale) * Float(lastTouch.x) / Float(size.width), ( Float(size.height ) - Float(scale) *  Float(lastTouch.y) ) / Float(size.height) );
-     // uniform.pointee.lastTouch = SIMD2<Float>( Float(scale) * Float(lastTouch.x) / Float(size.width), Float(scale) * Float(lastTouch.y) / Float(size.height) )
-
-      // ,                                            Float(mouseButtons), Float(modifierFlags.rawValue) )
+      let w = Float(size.width)
+      let h = Float(size.height)
+      let s = Float(scale)
+      uniform.pointee.iMouse    = SIMD2<Float>( s * Float(mouseLoc.x)  / w, ( h - s * Float(mouseLoc.y)  ) / h )
+      uniform.pointee.lastTouch = SIMD2<Float>( s * Float(lastTouch.x) / w, ( h - s * Float(lastTouch.y) ) / h );
       uniform.pointee.mouseButtons = Int32(mouseButtons)
       uniform.pointee.eventModifiers = Int32(modifierFlags.rawValue)
     } else {

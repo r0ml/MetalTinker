@@ -1,7 +1,6 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import Metal
 import os
@@ -37,24 +36,18 @@ var functionMap : [String : Int ] = {
 
 /** Look up a function name in the libraries and return the MTLFunction for that name */
 private func findNoCacheFunction(_ n : String) -> MTLFunction? {
-  if let k = functionMap[n] {
-    return metalLibraries[k].makeFunction(name: n)
-  } else {
-    // I no longer log this, because reflection looks for the existence of functions -- not finding it is OK
-    // os_log("%s", type: .error, "did not find fragment function \(n)")
-    return nil
-  }
+  guard let k = functionMap[n] else { return nil }
+  return metalLibraries[k].makeFunction(name: n)
 }
 
 private var functionCache = [String : MTLFunction]()
 private var fcQ = DispatchQueue(label: "function cache access")
 func findFunction(_ fn : String) -> MTLFunction? {
   fcQ.sync(flags: .barrier) {
-  var f = functionCache[fn]
-  if (f == nil) {
-    f = findNoCacheFunction(fn)
-    functionCache[fn] = f
-  }
-  return f
+    guard let f = functionCache[fn] else {
+      functionCache[fn] = findNoCacheFunction(fn)
+      return functionCache[fn]
+    }
+    return f
   }
 }

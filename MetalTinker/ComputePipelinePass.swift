@@ -1,7 +1,6 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import MetalKit
 import os
@@ -36,22 +35,15 @@ class ComputePipelinePass : PipelinePass {
   }
 
   func makeEncoder(_ commandBuffer : MTLCommandBuffer,
-                   _ scale : CGFloat, _ rm: RenderManager, _ : Bool) {
-    let cps = commandBuffer.makeComputeCommandEncoder();
-    cps?.label = "compute pass for \(label)"
-    cps?.setComputePipelineState( pipelineState)
-
-    cps?.setBuffer(rm.uniformBuffer, offset: 0, index: uniformId)
-    cps?.setBuffer(rm.config.initializationBuffer, offset: 0, index: kbuffId)
-
-    cps?.setBuffer(computeBuffer, offset: 0, index: computeBuffId)
-
-      //    cps?.setTexture(rm.config., index: <#T##Int#>)
-    
-    cps?.dispatchThreads( MTLSize(width: gridSize.0, height: gridSize.1, depth: 1), threadsPerThreadgroup: MTLSize(width: 8, height: 8, depth: 1));
-    cps?.endEncoding()
+                   _ scale : CGFloat, _ rm: RenderManager, _ : Bool, _ isFirst : Bool ) {
+    guard let cps = commandBuffer.makeComputeCommandEncoder() else { return }
+    cps.label = "compute pass for \(label)"
+    cps.setComputePipelineState( pipelineState)
+    cps.setBuffer(rm.uniformBuffer, offset: 0, index: uniformId)
+    cps.setBuffer(rm.config.initializationBuffer, offset: 0, index: kbuffId)
+    cps.setBuffer(computeBuffer, offset: 0, index: computeBuffId)
+    cps.dispatchThreads( MTLSize(width: gridSize.0, height: gridSize.1, depth: 1), threadsPerThreadgroup: MTLSize(width: 8, height: 8, depth: 1));
+    cps.endEncoding()
   }
-
-
 }
 

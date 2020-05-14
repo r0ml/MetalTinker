@@ -1,7 +1,6 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import MetalKit
 import os
@@ -11,18 +10,13 @@ class BlitPipelinePass : PipelinePass {
   var outTexture : MTLTexture
   var label: String
 
-  init?(label: String,
-        input: MTLTexture,
-        output: MTLTexture) {
+  init?(label: String, input: MTLTexture, output: MTLTexture) {
     self.label = label
     self.inTexture = input
     self.outTexture = output
   }
 
-  func makeEncoder(_ commandBuffer : MTLCommandBuffer,
-                   _ scale : CGFloat, _ rm : RenderManager, _ stat : Bool) {
-
-
+  func makeEncoder(_ commandBuffer : MTLCommandBuffer, _ scale : CGFloat, _ rm : RenderManager, _ stat : Bool, _ isFirst : Bool ) {
     let bce = commandBuffer.makeBlitCommandEncoder()!
       bce.copy(from: inTexture, to: outTexture)
       bce.endEncoding()

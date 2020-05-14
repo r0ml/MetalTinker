@@ -1,4 +1,7 @@
 
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
+
 import AVFoundation
 
 private var textureQ = DispatchQueue(label: "videoThumbnailTextureQ")

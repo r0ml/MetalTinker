@@ -37,6 +37,8 @@
 		E736937424474D7D0027A739 /* Ball Bounce.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936B24474D7D0027A739 /* Ball Bounce.metal */; };
 		E73693762447710C0027A739 /* Spinning Star.metal in Sources */ = {isa = PBXBuildFile; fileRef = E73693752447710C0027A739 /* Spinning Star.metal */; };
 		E73A2D092362B79D0007123A /* ShaderPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73A2D082362B79D0007123A /* ShaderPreviewView.swift */; };
+		E7403F2D24690D2300EA5631 /* Basic Orbit.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7403F2C24690D2000EA5631 /* Basic Orbit.metal */; };
+		E7403F30246AF03C00EA5631 /* Arcs.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7403F2E246AEEB000EA5631 /* Arcs.metal */; };
 		E743D67D236BEEBB00EB81BC /* videos in Resources */ = {isa = PBXBuildFile; fileRef = E743D67C236BEEBB00EB81BC /* videos */; };
 		E743D681236C03EA00EB81BC /* music in Resources */ = {isa = PBXBuildFile; fileRef = E743D680236C03EA00EB81BC /* music */; };
 		E743D68A236C081E00EB81BC /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = E743D689236C081E00EB81BC /* TODO.txt */; };
@@ -59,6 +61,10 @@
 		E76378AB21BD7F6200E94079 /* MicrophoneSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76378AA21BD7F6200E94079 /* MicrophoneSupport.swift */; };
 		E7652E1A2423FE80004CB302 /* AVAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7652E192423FE80004CB302 /* AVAsset.swift */; };
 		E7652E1B2423FE80004CB302 /* AVAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7652E192423FE80004CB302 /* AVAsset.swift */; };
+		E7761A0D2461AE61006C9E4A /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
+		E7761A0E2461AE61006C9E4A /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
+		E7761A0F2461AE61006C9E4A /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E7761A162461C61C006C9E4A /* Bello.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7761A152461C61C006C9E4A /* Bello.metal */; };
 		E77675D5228347A800614B7B /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77675D4228347A800614B7B /* Library.swift */; };
 		E77675D82283786000614B7B /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E786C9ED2394220B00CD5AFA /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A0EA1B2362415E0014C886 /* LibraryView.swift */; };
@@ -79,7 +85,6 @@
 		E786C9FD2394220B00CD5AFA /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F84DAC2374693800E774E2 /* FFT.swift */; };
 		E786C9FE2394220B00CD5AFA /* ShaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02BF2366497C00A88C16 /* ShaderView.swift */; };
 		E786C9FF2394220B00CD5AFA /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
-		E786CA002394220B00CD5AFA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED62842174DF49007ABB53 /* Utils.swift */; };
 		E786CA012394220B00CD5AFA /* ConfigController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E753EBFA21B905DD003E4678 /* ConfigController.swift */; };
 		E786CA022394220B00CD5AFA /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C12366511A00A88C16 /* PreferencesView.swift */; };
 		E786CA032394220B00CD5AFA /* MicrophoneSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76378AA21BD7F6200E94079 /* MicrophoneSupport.swift */; };
@@ -109,8 +114,6 @@
 		E79A10E222CF9B4D004FD5E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E79A10E122CF9B4D004FD5E2 /* README.md */; };
 		E79DD73B23E8DFF200DAB04A /* RenderSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */; };
 		E79DD73C23E8E01600DAB04A /* RenderSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */; };
-		E79DD73E23E936A700DAB04A /* FilterPipelinePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD73D23E936A700DAB04A /* FilterPipelinePass.swift */; };
-		E79DD73F23E936AB00DAB04A /* FilterPipelinePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD73D23E936A700DAB04A /* FilterPipelinePass.swift */; };
 		E79DD74123E936C000DAB04A /* ComputePipelinePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD74023E936C000DAB04A /* ComputePipelinePass.swift */; };
 		E79DD74223E936C300DAB04A /* ComputePipelinePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD74023E936C000DAB04A /* ComputePipelinePass.swift */; };
 		E79DD74423E9377D00DAB04A /* RenderPipelinePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD74323E9377D00DAB04A /* RenderPipelinePass.swift */; };
@@ -126,7 +129,6 @@
 		E7CF9BD3227F430900413280 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BD2227F430900413280 /* NSImage.swift */; };
 		E7CF9BD9227F434A00413280 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BD8227F434A00413280 /* NSView.swift */; };
 		E7CF9BDC227F439300413280 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BDB227F439300413280 /* String.swift */; };
-		E7ED62852174DF49007ABB53 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED62842174DF49007ABB53 /* Utils.swift */; };
 		E7ED62912174E00C007ABB53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7ED628A2174E00A007ABB53 /* Main.storyboard */; };
 		E7ED6295217657EA007ABB53 /* RenderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7500791216B181100FABE79 /* RenderManager.swift */; };
 		E7ED629821779685007ABB53 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
@@ -146,6 +148,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E743DB49236C863400EB81BC;
 			remoteInfo = "Edge Detection";
+		};
+		E7761A132461AE6E006C9E4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7761A0B2461AE61006C9E4A;
+			remoteInfo = Circles;
 		};
 		E78BEE5D24448BDB0086AAA9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -205,6 +214,8 @@
 		E736936B24474D7D0027A739 /* Ball Bounce.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Ball Bounce.metal"; sourceTree = "<group>"; };
 		E73693752447710C0027A739 /* Spinning Star.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Spinning Star.metal"; sourceTree = "<group>"; };
 		E73A2D082362B79D0007123A /* ShaderPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderPreviewView.swift; sourceTree = "<group>"; };
+		E7403F2C24690D2000EA5631 /* Basic Orbit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Basic Orbit.metal"; sourceTree = "<group>"; };
+		E7403F2E246AEEB000EA5631 /* Arcs.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Arcs.metal; sourceTree = "<group>"; };
 		E743D67C236BEEBB00EB81BC /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = videos; sourceTree = "<group>"; };
 		E743D680236C03EA00EB81BC /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
 		E743D689236C081E00EB81BC /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
@@ -221,6 +232,7 @@
 		E75C931221ADE7D200679E62 /* Webcam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webcam.swift; sourceTree = "<group>"; };
 		E76378AA21BD7F6200E94079 /* MicrophoneSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophoneSupport.swift; sourceTree = "<group>"; };
 		E7652E192423FE80004CB302 /* AVAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAsset.swift; sourceTree = "<group>"; };
+		E7761A152461C61C006C9E4A /* Bello.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Bello.metal; sourceTree = "<group>"; };
 		E77675D4228347A800614B7B /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		E77675D72283786000614B7B /* glsl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = glsl.metal; sourceTree = "<group>"; };
 		E77675DA2283791A00614B7B /* glsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glsl.h; sourceTree = "<group>"; };
@@ -244,7 +256,6 @@
 		E7CF9BD8227F434A00413280 /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
 		E7CF9BDB227F439300413280 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		E7DDEFCB23C82ED200E1DD0A /* TinyTinker-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TinyTinker-Info.plist"; sourceTree = "<group>"; };
-		E7ED62842174DF49007ABB53 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		E7ED628A2174E00A007ABB53 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E7ED629721779685007ABB53 /* support.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = support.metal; sourceTree = "<group>"; };
 		E7EED11E2448C2E1006F06F0 /* Blend.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Blend.metal; sourceTree = "<group>"; };
@@ -345,10 +356,20 @@
 		E76E82FD212F076500AD97D2 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				E7761A0A2461AE54006C9E4A /* CIrcles */,
 				E743DC17236C869500EB81BC /* Edge Detection */,
 				E78BEE5A24448B6A0086AAA9 /* Simple */,
 			);
 			path = Shaders;
+			sourceTree = "<group>";
+		};
+		E7761A0A2461AE54006C9E4A /* CIrcles */ = {
+			isa = PBXGroup;
+			children = (
+				E7761A152461C61C006C9E4A /* Bello.metal */,
+				E7403F2C24690D2000EA5631 /* Basic Orbit.metal */,
+			);
+			path = CIrcles;
 			sourceTree = "<group>";
 		};
 		E78BEE5A24448B6A0086AAA9 /* Simple */ = {
@@ -365,6 +386,7 @@
 				E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */,
 				E7EED1222448C490006F06F0 /* Sliding Rectangles.metal */,
 				E736936924474D7D0027A739 /* Spinning Ring.metal */,
+				E7403F2E246AEEB000EA5631 /* Arcs.metal */,
 				E73693752447710C0027A739 /* Spinning Star.metal */,
 				E736936324474D7D0027A739 /* Twisting Squares.metal */,
 			);
@@ -437,7 +459,6 @@
 				E79752D822185CF0001B5FC3 /* SoundSupport.swift */,
 				E7F84DAC2374693800E774E2 /* FFT.swift */,
 				E76378AA21BD7F6200E94079 /* MicrophoneSupport.swift */,
-				E7ED62842174DF49007ABB53 /* Utils.swift */,
 			);
 			path = MetalTinker;
 			sourceTree = "<group>";
@@ -470,6 +491,20 @@
 			dependencies = (
 			);
 			name = "Edge Detection";
+			productName = Simple;
+			productType = "com.apple.product-type.metal-library";
+		};
+		E7761A0B2461AE61006C9E4A /* Circles */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7761A102461AE61006C9E4A /* Build configuration list for PBXNativeTarget "Circles" */;
+			buildPhases = (
+				E7761A0C2461AE61006C9E4A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Circles;
 			productName = Simple;
 			productType = "com.apple.product-type.metal-library";
 		};
@@ -519,6 +554,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E7761A142461AE6E006C9E4A /* PBXTargetDependency */,
 				E743DD52236C86BC00EB81BC /* PBXTargetDependency */,
 				E78BEE5E24448BDB0086AAA9 /* PBXTargetDependency */,
 			);
@@ -566,6 +602,7 @@
 			targets = (
 				E7FCB465212A2B1000CED4FA /* MetalTinker */,
 				E786C9672394220B00CD5AFA /* TinyTinker */,
+				E7761A0B2461AE61006C9E4A /* Circles */,
 				E743DB49236C863400EB81BC /* Edge Detection */,
 				E78BEE5224448B530086AAA9 /* Simple */,
 				E743D701236C83FE00EB81BC /* Template */,
@@ -666,6 +703,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7761A0C2461AE61006C9E4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7761A0D2461AE61006C9E4A /* glsl.metal in Sources */,
+				E7761A0E2461AE61006C9E4A /* sdf.metal in Sources */,
+				E7761A162461C61C006C9E4A /* Bello.metal in Sources */,
+				E7761A0F2461AE61006C9E4A /* support.metal in Sources */,
+				E7403F2D24690D2300EA5631 /* Basic Orbit.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E786C9EC2394220B00CD5AFA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -691,7 +740,6 @@
 				E786C9FD2394220B00CD5AFA /* FFT.swift in Sources */,
 				E786C9FE2394220B00CD5AFA /* ShaderView.swift in Sources */,
 				E786C9FF2394220B00CD5AFA /* glsl.metal in Sources */,
-				E786CA002394220B00CD5AFA /* Utils.swift in Sources */,
 				E786CA012394220B00CD5AFA /* ConfigController.swift in Sources */,
 				E786CA022394220B00CD5AFA /* PreferencesView.swift in Sources */,
 				E72A7FF123C2C1B6008C642A /* XColorPicker.swift in Sources */,
@@ -703,7 +751,6 @@
 				E786CA052394220B00CD5AFA /* MyMTLStruct.swift in Sources */,
 				E786CA062394220B00CD5AFA /* DynamicPreferences.swift in Sources */,
 				E786CA072394220B00CD5AFA /* AppDelegate.swift in Sources */,
-				E79DD73F23E936AB00DAB04A /* FilterPipelinePass.swift in Sources */,
 				E786CA082394220B00CD5AFA /* ShaderPreviewView.swift in Sources */,
 				E786CA092394220B00CD5AFA /* ViewModel.swift in Sources */,
 				E72A7FF723C2C275008C642A /* XSlider.swift in Sources */,
@@ -735,6 +782,7 @@
 				E736937324474D7D0027A739 /* Rotating Square.metal in Sources */,
 				E78BEE5624448B530086AAA9 /* support.metal in Sources */,
 				E78BEE5F24448BEE0086AAA9 /* Animated Pinwheel.metal in Sources */,
+				E7403F30246AF03C00EA5631 /* Arcs.metal in Sources */,
 				E7EED1232448C490006F06F0 /* Sliding Rectangles.metal in Sources */,
 				E73693762447710C0027A739 /* Spinning Star.metal in Sources */,
 				E736937424474D7D0027A739 /* Ball Bounce.metal in Sources */,
@@ -766,7 +814,6 @@
 				E7F84DAD2374693800E774E2 /* FFT.swift in Sources */,
 				E71A02C02366497C00A88C16 /* ShaderView.swift in Sources */,
 				E77675D82283786000614B7B /* glsl.metal in Sources */,
-				E7ED62852174DF49007ABB53 /* Utils.swift in Sources */,
 				E753EBFB21B905DD003E4678 /* ConfigController.swift in Sources */,
 				E71A02C22366511A00A88C16 /* PreferencesView.swift in Sources */,
 				E72A7FF023C2C1B6008C642A /* XColorPicker.swift in Sources */,
@@ -778,7 +825,6 @@
 				E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */,
 				E70DAB44226056E5009B02CD /* DynamicPreferences.swift in Sources */,
 				E7FCB46A212A2B1000CED4FA /* AppDelegate.swift in Sources */,
-				E79DD73E23E936A700DAB04A /* FilterPipelinePass.swift in Sources */,
 				E73A2D092362B79D0007123A /* ShaderPreviewView.swift in Sources */,
 				E71A02C62366847600A88C16 /* ViewModel.swift in Sources */,
 				E72A7FF623C2C275008C642A /* XSlider.swift in Sources */,
@@ -800,6 +846,11 @@
 			isa = PBXTargetDependency;
 			target = E743DB49236C863400EB81BC /* Edge Detection */;
 			targetProxy = E743DD51236C86BC00EB81BC /* PBXContainerItemProxy */;
+		};
+		E7761A142461AE6E006C9E4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7761A0B2461AE61006C9E4A /* Circles */;
+			targetProxy = E7761A132461AE6E006C9E4A /* PBXContainerItemProxy */;
 		};
 		E78BEE5E24448BDB0086AAA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -837,6 +888,24 @@
 			name = Debug;
 		};
 		E743DB4F236C863400EB81BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E7761A112461AE61006C9E4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E7761A122461AE61006C9E4A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1107,6 +1176,15 @@
 			buildConfigurations = (
 				E743DB4E236C863400EB81BC /* Debug */,
 				E743DB4F236C863400EB81BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7761A102461AE61006C9E4A /* Build configuration list for PBXNativeTarget "Circles" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7761A112461AE61006C9E4A /* Debug */,
+				E7761A122461AE61006C9E4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

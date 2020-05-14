@@ -1,7 +1,6 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import Cocoa
 import MetalKit
@@ -19,10 +18,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
   var shaderWindow : NSWindow?
   
   public func applicationDidFinishLaunching(_ aNotification: Notification) {
-    // These are used for preference panes
-    ValueTransformer.setValueTransformer(RunningTransformer(), forName: NSValueTransformerName("RunningTransformer") )
-    ValueTransformer.setValueTransformer(RunningImageTransformer(), forName: NSValueTransformerName("RunningImageTransformer") )
-    
     let window = NSWindow(
       contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
       styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
@@ -47,8 +42,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     shaderWindow?.center()
     shaderWindow?.isReleasedWhenClosed = false
     shaderWindow?.setFrameAutosaveName("Shader Window")
-    shaderWindow?.delegate = self
-  }
+   }
   
   public func applicationWillTerminate(_ aNotification: Notification) {
     // Insert code here to tear down your application
@@ -59,17 +53,8 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
   }
   
   public func applicationWillResignActive(_ notification: Notification) {
-    //    print("resigning active")
   }
-  public func applicationDidBecomeActive(_ notification: Notification) {
-    //    print("becoming active")
-  }
-}
 
-extension AppDelegate : NSWindowDelegate {
-  //  public func windowWillClose(_ notification: Notification) {
-  //    if (notification.object as? NSWindow == shaderWindow) {
-  //      print("closing")
-  //    }
-  //  }
+  public func applicationDidBecomeActive(_ notification: Notification) {
+  }
 }

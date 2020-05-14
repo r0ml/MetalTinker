@@ -1,12 +1,9 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 /** This implements support for generating dynamic user interface for modifying shader preferences */
-import AppKit
 import os
-import MetalKit
 import SwiftUI
 
 fileprivate let LEFT_MARGIN = CGFloat(20)   // left edge of window
@@ -25,10 +22,11 @@ class DynamicPreferences {
   }
   
   func buildOptionsPane(_ bst : MyMTLStruct) -> [IdentifiableView] {
-    /*    guard let bstt = bst.structType() else {
+    guard let _ = bst.structure else {
      os_log("options buffer argument was not a struct", type: .error)
-     return [ IdentifiableView(id: UUID().uuidString, view: AnyView(Text("options buffer argument was not a struct")))] }
-     */
+     return [ IdentifiableView(id: UUID().uuidString, view: AnyView(Text("options buffer argument was not a struct")))]
+    }
+
     var res : [IdentifiableView] = []
     
     for bstm in bst.children {
@@ -58,43 +56,26 @@ class DynamicPreferences {
         
         let dat = bstm.value
         switch dat {
-        case is Bool:
-          // let b : Bool = (dd as? Bool) ?? (dat as! Bool)
+        case is Bool: // flag (checkbox)
           let x = self.makeBoolean(bstm, value: dd) // value: b)
           res.append( IdentifiableView(id: dnam, view: x) )
           
-        case is SIMD4<Float>:
+        case is SIMD4<Float>: // color (use a colorPicker)
           let v = dat as! SIMD4<Float>
           let cc = NSColor.init(calibratedRed: CGFloat(v[0]), green: CGFloat(v[1]), blue: CGFloat(v[2]), alpha: CGFloat(v[3]))
           let x = self.makeColorPicker(bstm, value: cc)
           res.append( IdentifiableView(id: dnam, view: x) )
           
-        case is SIMD3<Int32>:
+        case is SIMD3<Int32>: // integer slider (x and z are minimum and maximum values)
           let v = dat as! SIMD3<Int32>
           let x = self.makeNumberSlider(bstm, value: SIMD3<Float>(Float(v[0]), Float(v[1]), Float(v[2]) ), isFloat: false)
           res.append( IdentifiableView(id: dnam, view: x) )
           
-        case is SIMD3<Float>:
+        case is SIMD3<Float>: // floating point slider (x and z are minimum and maximum values)
           let v = dat as! SIMD3<Float>
           let x = self.makeNumberSlider(bstm, value: v, isFloat : true)
           res.append( IdentifiableView(id: dnam, view: x) )
           
-          /*
-           case .array:
-           // this is the boundary???
-           switch (bstm.arrayType()!.elementType) {
-           case .array:
-           os_log("two-D array", type:.debug)
-           default:
-           os_log("other array", type:.debug)
-           }
-           
-           if bstm.arrayType()!.elementType == .char {
-           os_log("%s", type: .debug, "\(bstm.name) is array of char")
-           } else {
-           os_log("%s", type:.debug, "\(bstm.name) is array of something else")
-           }
-           */
         default:
           os_log("%s", type:.error, "\(bstm.name!) is \(bstm.datatype)")
         }
@@ -103,17 +84,17 @@ class DynamicPreferences {
     return res
   }
   
-  func makeColorPicker(_ arg : MyMTLStruct, value: NSColor) -> AnyView {
+  private func makeColorPicker(_ arg : MyMTLStruct, value: NSColor) -> AnyView {
     return AnyView(XColorPicker(value: value, label: arg.name, pref: "\(self.title).\(arg.name!)", config: arg))
     
   }
   
-  public func makeBoolean(_ arg : MyMTLStruct, value: Any?) -> AnyView {
+  private func makeBoolean(_ arg : MyMTLStruct, value: Any?) -> AnyView {
     let button =  XBoolean(label: arg.name, pref : "\(self.title).\(arg.name!)", config: arg, bool: value as? Bool ?? arg.value as! Bool)
     return AnyView(button)
   }
   
-  func makeSegmented( _ t:String, _ p:String, _ items : [MyMTLStruct], value: Int) -> AnyView {
+  private func makeSegmented( _ t:String, _ p:String, _ items : [MyMTLStruct], value: Int) -> AnyView {
     let sb = XSegmentedControl.init(items: items, title: t, pref: p, sel : Observable<Int>(value) {
       UserDefaults.standard.set($0, forKey: p)
       for (i, tt) in items.enumerated() {
@@ -123,7 +104,7 @@ class DynamicPreferences {
     return AnyView(sb)
   }
   
-  public func makeNumberSlider( _ arg : MyMTLStruct, value: SIMD3<Float>, isFloat : Bool ) -> AnyView {
+  private func makeNumberSlider( _ arg : MyMTLStruct, value: SIMD3<Float>, isFloat : Bool ) -> AnyView {
     let of = Observable<Double>(Double(value.y))
     let slider = XSlider.init( val: of, minVal: Double(value.x), maxVal: Double(value.z),
                                pref: "\(self.title).\(arg.name!)", config: arg, isFloat: isFloat

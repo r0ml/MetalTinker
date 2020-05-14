@@ -120,6 +120,7 @@ float3 BlackBody( float t);
 // returns the rotation of the point in radians (at location .z)
 float3 polygon(uint vid, uint sides, float radius, float2 aspect);
 float3 annulus(uint vid, uint sides, float inner, float outer, float2 aspect);
+float3 annulus(uint vid, uint sides, float inner, float outer, float2 aspect, float startAngle, float endAngle);
 
 // ============================================
 

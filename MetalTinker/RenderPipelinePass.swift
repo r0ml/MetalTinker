@@ -1,7 +1,6 @@
-//
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
-//
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 import MetalKit
 import os
@@ -11,42 +10,41 @@ class RenderPipelinePass : PipelinePass {
   var flags : Int32
   var pipelineState : MTLRenderPipelineState
   var computeBuffer : MTLBuffer?
-  var texture : MTLTexture
-  var resolveTextures : (MTLTexture, MTLTexture)
+
   var topology : MTLPrimitiveType
   var label: String
-  var renderPassDescriptor = MTLRenderPassDescriptor()
-  var depthAttachmentDescriptor = MTLRenderPassDepthAttachmentDescriptor()
-  var isFinal = false;
   var metadata : MTLRenderPipelineReflection
 
   var renderInput : [(MTLTexture, MTLTexture, MTLTexture)] = []
 
   func resize(_ canvasSize: CGSize) {
-    if let ts = makeRenderPassTexture(self.label, size: canvasSize) {
-      texture = ts.0
-      resolveTextures = (ts.1, ts.2)
-    }
-    renderInput = renderInput.compactMap { _ in makeRenderPassTexture(label, size: canvasSize) }
-    renderPassDescriptor.colorAttachments[0].texture = texture
-    renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTextures.1 //  device.makeTexture(descriptor: xostd)
+    // FIXME: put me back
+    /*
+     if let ts = makeRenderPassTexture(self.label, size: canvasSize) {
+     texture = ts.0
+     resolveTextures = (ts.1, ts.2)
+     }
+     renderInput = renderInput.compactMap { _ in makeRenderPassTexture(label, size: canvasSize) }
+     renderPassDescriptor.colorAttachments[0].texture = texture
+     renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTextures.1 //  device.makeTexture(descriptor: xostd)
 
 
-    let td = MTLTextureDescriptor()
-    td.textureType = .type2DMultisample
-    td.pixelFormat = .depth32Float
-    td.storageMode = .private
-    td.usage = [.renderTarget, .shaderRead]
-    td.width = Int(canvasSize.width)  // should be the colorAttachments[0]  size
-    td.height = Int(canvasSize.height)
+     let td = MTLTextureDescriptor()
+     td.textureType = .type2DMultisample
+     td.pixelFormat = .depth32Float
+     td.storageMode = .private
+     td.usage = [.renderTarget, .shaderRead]
+     td.width = Int(canvasSize.width)  // should be the colorAttachments[0]  size
+     td.height = Int(canvasSize.height)
 
-    td.sampleCount = multisampleCount
+     td.sampleCount = multisampleCount
 
-    let dt = device.makeTexture(descriptor: td)
+     let dt = device.makeTexture(descriptor: td)
 
-//    depthAttachmentDescriptor.clearDepth = 1
-    depthAttachmentDescriptor.texture = dt
-//    depthAttachmentDescriptor.loadAction = .clear
+     //    depthAttachmentDescriptor.clearDepth = 1
+     depthAttachmentDescriptor.texture = dt
+     //    depthAttachmentDescriptor.loadAction = .clear
+     */
 
   }
 
@@ -55,24 +53,16 @@ class RenderPipelinePass : PipelinePass {
         canvasSize : CGSize,
         topology: MTLPrimitiveType,
         computeBuffer : MTLBuffer?,
-        functions f: (MTLFunction, MTLFunction),
-        isFinal: Bool) {
+        functions f: (MTLFunction, MTLFunction)
+  ) {
     self.viCount = viCount
     self.flags = flags
     self.topology = topology
     self.computeBuffer = computeBuffer
     self.label = label
-    self.isFinal = isFinal
 
-    if let rpp = setupRenderPipeline(vertexFunction: f.0, fragmentFunction: f.1, topology: topology, isFinal: isFinal, flags: flags),
-      let ts = makeRenderPassTexture(label, size: canvasSize) {
-
+    if let rpp = setupRenderPipeline(vertexFunction: f.0, fragmentFunction: f.1, topology: topology, flags: flags) {
       (pipelineState, metadata) = rpp
-      texture = ts.0
-      resolveTextures = (ts.1, ts.2)
-
-
-
       if let ri = metadata.fragmentArguments?.first(where: {$0.name == "renderInput"}) {
         // if I have an array length for renderInputs, I need to create output attachments and renderInputs to match
         let mc  = ri.arrayLength
@@ -84,71 +74,29 @@ class RenderPipelinePass : PipelinePass {
       }
 
       // Should I reuse this texture ?  -- the preview is serialized....
-   /*   var myt : MTLTexture
+      /*   var myt : MTLTexture
 
-      let ostd = MTLTextureDescriptor.texture2DDescriptor(
-        //        pixelFormat: .bgra8Unorm,
-        pixelFormat: thePixelFormat,
-        width: Int(canvasSize.width), // or I could always use 1280
-        height: Int(canvasSize.height),  // or I could always use 720
-        mipmapped: false)
-      ostd.textureType = .type2DMultisample
-      ostd.storageMode = .private
-      ostd.sampleCount = multisampleCount
-      ostd.usage = [.renderTarget ] // , .shaderWrite, .shaderRead ]   .pixelFormatView ?
-
-
-      let ost = device.makeTexture(descriptor: ostd)
-      ost?.label = "offscreen preview"
-
-      myt = ost!
-*/
-      //------------------------------------------------------------
-      // texture on device to be written to..
-      //------------------------------------------------------------
-
-      //         let rpd = MTLRenderPassDescriptor()
-      renderPassDescriptor.colorAttachments[0].texture = texture
-      renderPassDescriptor.colorAttachments[0].storeAction = .storeAndMultisampleResolve
-
-      renderPassDescriptor.colorAttachments[0].resolveLevel = 0
-
-/*
-      let xostd = ostd
-      xostd.textureType = .type2D
-      xostd.sampleCount = 1
-      xostd.usage = [.shaderRead ]  // .pixelFormatView?
-*/
-      // I need this if I'm creating a CGImage -- CIImage doesn't need it?
-      // xostd.storageMode = .managed
-
-      renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTextures.1 //  device.makeTexture(descriptor: xostd)
-
-      renderPassDescriptor.colorAttachments[0].loadAction = .clear // .load
-//      let c = NSColor.black.withAlphaComponent(0.6) // .load
-//      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
+       let ostd = MTLTextureDescriptor.texture2DDescriptor(
+       //        pixelFormat: .bgra8Unorm,
+       pixelFormat: thePixelFormat,
+       width: Int(canvasSize.width), // or I could always use 1280
+       height: Int(canvasSize.height),  // or I could always use 720
+       mipmapped: false)
+       ostd.textureType = .type2DMultisample
+       ostd.storageMode = .private
+       ostd.sampleCount = multisampleCount
+       ostd.usage = [.renderTarget ] // , .shaderWrite, .shaderRead ]   .pixelFormatView ?
 
 
+       let ost = device.makeTexture(descriptor: ostd)
+       ost?.label = "offscreen preview"
 
+       myt = ost!
+       */
 
+      // makeRenderPassDescriptor
 
-      // set up the depth texture
-      let td = MTLTextureDescriptor()
-      td.textureType = .type2DMultisample
-      td.pixelFormat = .depth32Float
-      td.storageMode = .private
-      td.usage = [.renderTarget, .shaderRead]
-      td.width = Int(canvasSize.width)  // should be the colorAttachments[0]  size
-      td.height = Int(canvasSize.height)
-
-      td.sampleCount = 4 // should be multisampleCount -- but I can't see it
-
-      let dt = device.makeTexture(descriptor: td)
-
-      depthAttachmentDescriptor.clearDepth = 1
-      depthAttachmentDescriptor.texture = dt
-      depthAttachmentDescriptor.loadAction = .clear
-
+      // let depthAttachementDescriptor = makeDepthAttachmentDescriptor(size: canvasSize)
 
     } else {
       return nil
@@ -157,14 +105,19 @@ class RenderPipelinePass : PipelinePass {
   }
   
   func makeEncoder(_ commandBuffer : MTLCommandBuffer,
-                   _ scale : CGFloat, _ rm : RenderManager, _ stat : Bool) {
+                   _ scale : CGFloat, _ rm : RenderManager, _ stat : Bool, _ isFirst : Bool) {
 
 
     // This statement overrides the render pass descriptor with the onscreen frameBuffer if one exists -- otherwise it is using the offscreen texture
-    let rpd = isFinal && !stat ? rm.metalView?.currentRenderPassDescriptor ?? renderPassDescriptor : renderPassDescriptor
+    var rpd : MTLRenderPassDescriptor
+    if !stat {
+      rpd = rm.metalView?.currentRenderPassDescriptor ?? rm.renderPassDescriptor
+    } else {
+      rpd = rm.renderPassDescriptor
+    }
 
     // If I need depthing....
-    rpd.depthAttachment = depthAttachmentDescriptor
+    // rpd.depthAttachment = depthAttachmentDescriptor
     // depth texture set up
 
     // to get the running shader to match the preview?
@@ -179,7 +132,7 @@ class RenderPipelinePass : PipelinePass {
 
     // for preview, I make the clearColor have alpha of 1 so that it becomes the background.
     rpd.colorAttachments[0].clearColor =  ccc
-    rpd.colorAttachments[0].loadAction = .clear
+    rpd.colorAttachments[0].loadAction = isFirst ? .clear : .load
 
     for i in 0..<renderInput.count {
       // FIXME: here is where I look at rpp.flags
@@ -189,43 +142,32 @@ class RenderPipelinePass : PipelinePass {
       rpd.colorAttachments[i+1].storeAction = .storeAndMultisampleResolve
       rpd.colorAttachments[i+1].clearColor =  ccc
 
-     }
+    }
 
-//    renderToScreen(stat, commandBuffer: commandBuffer, topology: topology, rpp: self, rpd: rpd, rps : pipelineState,  scale: Int(scale), vertexCount: viCount.0, instanceCount: viCount.1 , computeBuffer: self.computeBuffer )
-//  }
+    //    renderToScreen(stat, commandBuffer: commandBuffer, topology: topology, rpp: self, rpd: rpd, rps : pipelineState,  scale: Int(scale), vertexCount: viCount.0, instanceCount: viCount.1 , computeBuffer: self.computeBuffer )
+    //  }
 
 
-  // texture map:
-  // 0 -> numberOfTextures (6) for inputs
-  // 10 -> 10+numberOfRenderPasses (4)?  -- each render pass
-  // 20 -> 20+numberOfCubes (2)? -- for 3d textures
-  // 30 -> 30+numberOfRenderPasses (4)? -- outputs for each render pass
+    // texture map:
+    // 0 -> numberOfTextures (6) for inputs
+    // 10 -> 10+numberOfRenderPasses (4)?  -- each render pass
+    // 20 -> 20+numberOfCubes (2)? -- for 3d textures
+    // 30 -> 30+numberOfRenderPasses (4)? -- outputs for each render pass
 
-  // 8 and 9 for renderPass Input and Output -- but that is obsolete
-  // 50 -> 50+numberOfVideos (2)? -- for video streaming?
-  //
-//  func renderToScreen(_ stat : Bool, commandBuffer : MTLCommandBuffer, topology : MTLPrimitiveType,
-//                      rpp : RenderPipelinePass,
-//                      rpd : MTLRenderPassDescriptor, rps : MTLRenderPipelineState, scale : Int,
-//                      vertexCount : Int, instanceCount : Int, computeBuffer : MTLBuffer? ) {
+    // 8 and 9 for renderPass Input and Output -- but that is obsolete
+    // 50 -> 50+numberOfVideos (2)? -- for video streaming?
+    //
+    //  func renderToScreen(_ stat : Bool, commandBuffer : MTLCommandBuffer, topology : MTLPrimitiveType,
+    //                      rpp : RenderPipelinePass,
+    //                      rpd : MTLRenderPassDescriptor, rps : MTLRenderPipelineState, scale : Int,
+    //                      vertexCount : Int, instanceCount : Int, computeBuffer : MTLBuffer? ) {
 
     var sz = CGSize(width : rpd.colorAttachments[0].texture!.width /* / scale */ ,
       height: rpd.colorAttachments[0].texture!.height /* / scale */ )
 
     rm.setup.setupUniform( size: sz, scale: Int(scale), stat: stat, uniform: rm.uniformBuffer, times: rm.times )
 
- /*   if (rm.setup.iFrame < 1) {
-        if let be = commandBuffer.makeBlitCommandEncoder() {
-           for ri in renderInput {
-             be.copy(from: ri.1, to: ri.2)
-           }
-           be.endEncoding()
-         }
-
-    }
-*/
-
-// I do this to clear out the renderInput textures
+    // I do this to clear out the renderInput textures
     if (rm.setup.iFrame < 1) {
 
       if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
@@ -233,18 +175,18 @@ class RenderPipelinePass : PipelinePass {
         renderEncoder.endEncoding()
       }
 
-    if let be = commandBuffer.makeBlitCommandEncoder() {
-      for ri in renderInput {
-        be.copy(from: ri.2, to: ri.1)
-        be.generateMipmaps(for: ri.1)
-      }
+      if let be = commandBuffer.makeBlitCommandEncoder() {
+        for ri in renderInput {
+          be.copy(from: ri.2, to: ri.1)
+          be.generateMipmaps(for: ri.1)
+        }
 
-      // FIXME: only do this on request?
-      for x in rm.videoTexture {
-        if let x = x { be.generateMipmaps(for: x) }
+        // FIXME: only do this on request?
+        for x in rm.videoTexture {
+          if let x = x { be.generateMipmaps(for: x) }
+        }
+        be.endEncoding()
       }
-      be.endEncoding()
-    }
     }
 
 
@@ -321,7 +263,7 @@ class RenderPipelinePass : PipelinePass {
 }
 
 private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?, topology: MTLPrimitiveType
-  , isFinal: Bool, flags: Int32) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
+  , flags: Int32) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
   // ============================================
   // this is the actual rendering fragment shader
 
@@ -330,7 +272,7 @@ private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction:
   psd.vertexFunction = vertexFunction
 
   psd.fragmentFunction = fragmentFunction
-  psd.colorAttachments[0].pixelFormat = isFinal ? thePixelFormat : theOtherPixelFormat
+  psd.colorAttachments[0].pixelFormat = thePixelFormat
 
   let doesBlend = ((flags & 1) == 1)
 
@@ -347,9 +289,9 @@ private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction:
 
 
   // FIXME: if I need additional attachments for renderPasses
-//   for i in 1 ..< numberOfRenderPasses {
-//    psd.colorAttachments[i].pixelFormat = theOtherPixelFormat
-//    }
+  //   for i in 1 ..< numberOfRenderPasses {
+  //    psd.colorAttachments[i].pixelFormat = theOtherPixelFormat
+  //    }
 
 
   psd.sampleCount = multisampleCount
@@ -377,7 +319,7 @@ private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction:
           // if I have an array length for renderInputs, I need to create output attachments and renderInputs to match
           let mc  = ri.arrayLength
           for i in 0..<mc {
-            psd.colorAttachments[i+1].pixelFormat = theOtherPixelFormat
+            psd.colorAttachments[i+1].pixelFormat = thePixelFormat //  theOtherPixelFormat
           }
           // do it again because I had to update the pixel formats
           res = try device.makeRenderPipelineState(descriptor: psd)
@@ -399,35 +341,26 @@ private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction:
 
 }
 
-private func makeRenderPassTexture(_ nam : String, size: CGSize) -> (MTLTexture, MTLTexture, MTLTexture)? {
-  let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: theOtherPixelFormat, width: Int(size.width), height: Int(size.height), mipmapped: false)
-  texd.textureType = .type2DMultisample
-  texd.usage = [.renderTarget]
-  texd.sampleCount = multisampleCount
-  texd.resourceOptions = .storageModePrivate
 
-  let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: theOtherPixelFormat, width: Int(size.width), height: Int(size.height), mipmapped: true)
-  texi.textureType = .type2D
-  texi.usage = [.shaderRead]
-  texi.resourceOptions = .storageModePrivate
+func makeDepthAttachmentDescriptor(size canvasSize : CGSize) -> MTLRenderPassDepthAttachmentDescriptor {
 
-  let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: theOtherPixelFormat, width: Int(size.width), height: Int(size.height), mipmapped: false)
-  texo.textureType = .type2D
-  texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-  texo.resourceOptions = .storageModePrivate
+  let depthAttachmentDescriptor = MTLRenderPassDepthAttachmentDescriptor()
+  // set up the depth texture
+  let td = MTLTextureDescriptor()
+  td.textureType = .type2DMultisample
+  td.pixelFormat = .depth32Float
+  td.storageMode = .private
+  td.usage = [.renderTarget, .shaderRead]
+  td.width = Int(canvasSize.width)  // should be the colorAttachments[0]  size
+  td.height = Int(canvasSize.height)
 
-  if let p = device.makeTexture(descriptor: texd),
-    let q = device.makeTexture(descriptor: texi),
-    let r = device.makeTexture(descriptor: texo) {
-    p.label = "render pass \(nam) multisample"
-    q.label = "render pass \(nam) input"
-    r.label = "render pass \(nam) output"
-    //        swapQ.async {
+  td.sampleCount = 4 // should be multisampleCount -- but I can't see it
 
+  let dt = device.makeTexture(descriptor: td)
 
-
-    return (p, q, r)
-  }
-  return nil
+  depthAttachmentDescriptor.clearDepth = 1
+  depthAttachmentDescriptor.texture = dt
+  depthAttachmentDescriptor.loadAction = .clear
+  return depthAttachmentDescriptor
 }
 
