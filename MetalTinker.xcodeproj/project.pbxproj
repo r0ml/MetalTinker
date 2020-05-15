@@ -27,7 +27,6 @@
 		E72A7FF923C2C2AB008C642A /* XSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */; };
 		E72A7FFA23C2C2AB008C642A /* XSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */; };
 		E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72D600A2391D948009CF90A /* MyMTLStruct.swift */; };
-		E731C36021AF6847001D2345 /* VideoSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E731C35F21AF6847001D2345 /* VideoSupport.swift */; };
 		E736936C24474D7D0027A739 /* Twisting Squares.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936324474D7D0027A739 /* Twisting Squares.metal */; };
 		E736936D24474D7D0027A739 /* Animation Test.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936424474D7D0027A739 /* Animation Test.metal */; };
 		E736937024474D7D0027A739 /* Breathing Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E736936724474D7D0027A739 /* Breathing Ring.metal */; };
@@ -57,8 +56,6 @@
 		E748C45B239809E100AD7A64 /* RenderSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E748C459239809E100AD7A64 /* RenderSetup.swift */; };
 		E74F94592256A05900706CBF /* MetalVideoRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F94582256A05800706CBF /* MetalVideoRecorder.swift */; };
 		E753EBFB21B905DD003E4678 /* ConfigController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E753EBFA21B905DD003E4678 /* ConfigController.swift */; };
-		E75C931321ADE7D200679E62 /* Webcam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C931221ADE7D200679E62 /* Webcam.swift */; };
-		E76378AB21BD7F6200E94079 /* MicrophoneSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76378AA21BD7F6200E94079 /* MicrophoneSupport.swift */; };
 		E7652E1A2423FE80004CB302 /* AVAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7652E192423FE80004CB302 /* AVAsset.swift */; };
 		E7652E1B2423FE80004CB302 /* AVAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7652E192423FE80004CB302 /* AVAsset.swift */; };
 		E7761A0D2461AE61006C9E4A /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
@@ -68,7 +65,6 @@
 		E77675D5228347A800614B7B /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77675D4228347A800614B7B /* Library.swift */; };
 		E77675D82283786000614B7B /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E786C9ED2394220B00CD5AFA /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A0EA1B2362415E0014C886 /* LibraryView.swift */; };
-		E786C9EE2394220B00CD5AFA /* VideoSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E731C35F21AF6847001D2345 /* VideoSupport.swift */; };
 		E786C9F02394220B00CD5AFA /* RenderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7500791216B181100FABE79 /* RenderManager.swift */; };
 		E786C9F12394220B00CD5AFA /* Common.h in Sources */ = {isa = PBXBuildFile; fileRef = E701A3F12171573F00FC9795 /* Common.h */; };
 		E786C9F22394220B00CD5AFA /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C923673C2400A88C16 /* CIImage.swift */; };
@@ -77,17 +73,14 @@
 		E786C9F52394220B00CD5AFA /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E786C9F62394220B00CD5AFA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BDB227F439300413280 /* String.swift */; };
 		E786C9F72394220B00CD5AFA /* MTLTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BD0227F42BF00413280 /* MTLTexture.swift */; };
-		E786C9F82394220B00CD5AFA /* SoundSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79752D822185CF0001B5FC3 /* SoundSupport.swift */; };
 		E786C9F92394220B00CD5AFA /* NSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C72367397B00A88C16 /* NSImageView.swift */; };
 		E786C9FA2394220B00CD5AFA /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70CC93F2134BA2500926EB3 /* colors.swift */; };
 		E786C9FB2394220B00CD5AFA /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02CB236767C000A88C16 /* MetalView.swift */; };
 		E786C9FC2394220B00CD5AFA /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BD2227F430900413280 /* NSImage.swift */; };
-		E786C9FD2394220B00CD5AFA /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F84DAC2374693800E774E2 /* FFT.swift */; };
 		E786C9FE2394220B00CD5AFA /* ShaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02BF2366497C00A88C16 /* ShaderView.swift */; };
 		E786C9FF2394220B00CD5AFA /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E786CA012394220B00CD5AFA /* ConfigController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E753EBFA21B905DD003E4678 /* ConfigController.swift */; };
 		E786CA022394220B00CD5AFA /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C12366511A00A88C16 /* PreferencesView.swift */; };
-		E786CA032394220B00CD5AFA /* MicrophoneSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76378AA21BD7F6200E94079 /* MicrophoneSupport.swift */; };
 		E786CA042394220B00CD5AFA /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCC227F425400413280 /* NSColor.swift */; };
 		E786CA052394220B00CD5AFA /* MyMTLStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72D600A2391D948009CF90A /* MyMTLStruct.swift */; };
 		E786CA062394220B00CD5AFA /* DynamicPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70DAB43226056E5009B02CD /* DynamicPreferences.swift */; };
@@ -95,7 +88,6 @@
 		E786CA082394220B00CD5AFA /* ShaderPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73A2D082362B79D0007123A /* ShaderPreviewView.swift */; };
 		E786CA092394220B00CD5AFA /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C52366847600A88C16 /* ViewModel.swift */; };
 		E786CA0A2394220B00CD5AFA /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCE227F429A00413280 /* UserDefaults.swift */; };
-		E786CA0B2394220B00CD5AFA /* Webcam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C931221ADE7D200679E62 /* Webcam.swift */; };
 		E786CA0C2394220B00CD5AFA /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C32366512B00A88C16 /* ControlsView.swift */; };
 		E786CA0D2394220B00CD5AFA /* quickdraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = E714AF912148188900029F9E /* quickdraw.swift */; };
 		E786CA0E2394220B00CD5AFA /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77675D4228347A800614B7B /* Library.swift */; };
@@ -110,7 +102,6 @@
 		E78BEE5524448B530086AAA9 /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
 		E78BEE5624448B530086AAA9 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E78BEE5F24448BEE0086AAA9 /* Animated Pinwheel.metal in Sources */ = {isa = PBXBuildFile; fileRef = E78BEE5B24448BBC0086AAA9 /* Animated Pinwheel.metal */; };
-		E79752D922185CF0001B5FC3 /* SoundSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79752D822185CF0001B5FC3 /* SoundSupport.swift */; };
 		E79A10E222CF9B4D004FD5E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E79A10E122CF9B4D004FD5E2 /* README.md */; };
 		E79DD73B23E8DFF200DAB04A /* RenderSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */; };
 		E79DD73C23E8E01600DAB04A /* RenderSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */; };
@@ -136,7 +127,6 @@
 		E7EED12F2448C497006F06F0 /* Blend.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED11E2448C2E1006F06F0 /* Blend.metal */; };
 		E7EED1302448C497006F06F0 /* Sliding Bar.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */; };
 		E7EED1322448C4D8006F06F0 /* Bars.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7EED1312448C4D8006F06F0 /* Bars.metal */; };
-		E7F84DAD2374693800E774E2 /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F84DAC2374693800E774E2 /* FFT.swift */; };
 		E7FCB46A212A2B1000CED4FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCB469212A2B1000CED4FA /* AppDelegate.swift */; };
 		E7FCB46E212A2B1200CED4FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7FCB46D212A2B1200CED4FA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -204,7 +194,6 @@
 		E72A7FF523C2C275008C642A /* XSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSlider.swift; sourceTree = "<group>"; };
 		E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSegmentedControl.swift; sourceTree = "<group>"; };
 		E72D600A2391D948009CF90A /* MyMTLStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMTLStruct.swift; sourceTree = "<group>"; };
-		E731C35F21AF6847001D2345 /* VideoSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSupport.swift; sourceTree = "<group>"; };
 		E736936324474D7D0027A739 /* Twisting Squares.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Twisting Squares.metal"; sourceTree = "<group>"; };
 		E736936424474D7D0027A739 /* Animation Test.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Animation Test.metal"; sourceTree = "<group>"; };
 		E736936724474D7D0027A739 /* Breathing Ring.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Breathing Ring.metal"; sourceTree = "<group>"; };
@@ -229,8 +218,6 @@
 		E74F94582256A05800706CBF /* MetalVideoRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalVideoRecorder.swift; sourceTree = "<group>"; };
 		E7500791216B181100FABE79 /* RenderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderManager.swift; sourceTree = "<group>"; };
 		E753EBFA21B905DD003E4678 /* ConfigController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigController.swift; sourceTree = "<group>"; };
-		E75C931221ADE7D200679E62 /* Webcam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webcam.swift; sourceTree = "<group>"; };
-		E76378AA21BD7F6200E94079 /* MicrophoneSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophoneSupport.swift; sourceTree = "<group>"; };
 		E7652E192423FE80004CB302 /* AVAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAsset.swift; sourceTree = "<group>"; };
 		E7761A152461C61C006C9E4A /* Bello.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Bello.metal; sourceTree = "<group>"; };
 		E77675D4228347A800614B7B /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
@@ -238,7 +225,6 @@
 		E77675DA2283791A00614B7B /* glsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glsl.h; sourceTree = "<group>"; };
 		E786CA1E2394220B00CD5AFA /* TinyTinker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyTinker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78BEE5B24448BBC0086AAA9 /* Animated Pinwheel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Animated Pinwheel.metal"; sourceTree = "<group>"; };
-		E79752D822185CF0001B5FC3 /* SoundSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSupport.swift; sourceTree = "<group>"; };
 		E79A10E122CF9B4D004FD5E2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderSupport.swift; sourceTree = "<group>"; };
 		E79DD73D23E936A700DAB04A /* FilterPipelinePass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPipelinePass.swift; sourceTree = "<group>"; };
@@ -262,7 +248,6 @@
 		E7EED11F2448C2E1006F06F0 /* Sliding Bar.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Sliding Bar.metal"; sourceTree = "<group>"; };
 		E7EED1222448C490006F06F0 /* Sliding Rectangles.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Sliding Rectangles.metal"; sourceTree = "<group>"; };
 		E7EED1312448C4D8006F06F0 /* Bars.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Bars.metal; sourceTree = "<group>"; };
-		E7F84DAC2374693800E774E2 /* FFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFT.swift; sourceTree = "<group>"; };
 		E7FCB466212A2B1000CED4FA /* MetalTinker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTinker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FCB469212A2B1000CED4FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7FCB46D212A2B1200CED4FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -454,11 +439,6 @@
 				E79DD74023E936C000DAB04A /* ComputePipelinePass.swift */,
 				E748C459239809E100AD7A64 /* RenderSetup.swift */,
 				E74F94582256A05800706CBF /* MetalVideoRecorder.swift */,
-				E731C35F21AF6847001D2345 /* VideoSupport.swift */,
-				E75C931221ADE7D200679E62 /* Webcam.swift */,
-				E79752D822185CF0001B5FC3 /* SoundSupport.swift */,
-				E7F84DAC2374693800E774E2 /* FFT.swift */,
-				E76378AA21BD7F6200E94079 /* MicrophoneSupport.swift */,
 			);
 			path = MetalTinker;
 			sourceTree = "<group>";
@@ -722,7 +702,6 @@
 				E79DD74523E9377D00DAB04A /* RenderPipelinePass.swift in Sources */,
 				E72A7FFA23C2C2AB008C642A /* XSegmentedControl.swift in Sources */,
 				E786C9ED2394220B00CD5AFA /* LibraryView.swift in Sources */,
-				E786C9EE2394220B00CD5AFA /* VideoSupport.swift in Sources */,
 				E786C9F02394220B00CD5AFA /* RenderManager.swift in Sources */,
 				E786C9F12394220B00CD5AFA /* Common.h in Sources */,
 				E79DD74223E936C300DAB04A /* ComputePipelinePass.swift in Sources */,
@@ -732,12 +711,10 @@
 				E786C9F52394220B00CD5AFA /* support.metal in Sources */,
 				E786C9F62394220B00CD5AFA /* String.swift in Sources */,
 				E786C9F72394220B00CD5AFA /* MTLTexture.swift in Sources */,
-				E786C9F82394220B00CD5AFA /* SoundSupport.swift in Sources */,
 				E786C9F92394220B00CD5AFA /* NSImageView.swift in Sources */,
 				E786C9FA2394220B00CD5AFA /* colors.swift in Sources */,
 				E786C9FB2394220B00CD5AFA /* MetalView.swift in Sources */,
 				E786C9FC2394220B00CD5AFA /* NSImage.swift in Sources */,
-				E786C9FD2394220B00CD5AFA /* FFT.swift in Sources */,
 				E786C9FE2394220B00CD5AFA /* ShaderView.swift in Sources */,
 				E786C9FF2394220B00CD5AFA /* glsl.metal in Sources */,
 				E786CA012394220B00CD5AFA /* ConfigController.swift in Sources */,
@@ -745,7 +722,6 @@
 				E72A7FF123C2C1B6008C642A /* XColorPicker.swift in Sources */,
 				E7652E1B2423FE80004CB302 /* AVAsset.swift in Sources */,
 				E72A7FF423C2C23F008C642A /* XBoolean.swift in Sources */,
-				E786CA032394220B00CD5AFA /* MicrophoneSupport.swift in Sources */,
 				E786CA042394220B00CD5AFA /* NSColor.swift in Sources */,
 				E79DD73C23E8E01600DAB04A /* RenderSupport.swift in Sources */,
 				E786CA052394220B00CD5AFA /* MyMTLStruct.swift in Sources */,
@@ -758,7 +734,6 @@
 				E7C54AA323EDE0E100DBA600 /* BlitPipelinePass.swift in Sources */,
 				E748C45B239809E100AD7A64 /* RenderSetup.swift in Sources */,
 				E746F31623F0D107003598F6 /* sdf.metal in Sources */,
-				E786CA0B2394220B00CD5AFA /* Webcam.swift in Sources */,
 				E786CA0C2394220B00CD5AFA /* ControlsView.swift in Sources */,
 				E786CA0D2394220B00CD5AFA /* quickdraw.swift in Sources */,
 				E786CA0E2394220B00CD5AFA /* Library.swift in Sources */,
@@ -796,7 +771,6 @@
 				E79DD74423E9377D00DAB04A /* RenderPipelinePass.swift in Sources */,
 				E72A7FF923C2C2AB008C642A /* XSegmentedControl.swift in Sources */,
 				E7A0EA1C2362415E0014C886 /* LibraryView.swift in Sources */,
-				E731C36021AF6847001D2345 /* VideoSupport.swift in Sources */,
 				E7ED6295217657EA007ABB53 /* RenderManager.swift in Sources */,
 				E7A3A16A21A7E07500742611 /* Common.h in Sources */,
 				E79DD74123E936C000DAB04A /* ComputePipelinePass.swift in Sources */,
@@ -806,12 +780,10 @@
 				E7ED629821779685007ABB53 /* support.metal in Sources */,
 				E7CF9BDC227F439300413280 /* String.swift in Sources */,
 				E7CF9BD1227F42BF00413280 /* MTLTexture.swift in Sources */,
-				E79752D922185CF0001B5FC3 /* SoundSupport.swift in Sources */,
 				E71A02C82367397B00A88C16 /* NSImageView.swift in Sources */,
 				E70CC9402134BA2500926EB3 /* colors.swift in Sources */,
 				E71A02CC236767C000A88C16 /* MetalView.swift in Sources */,
 				E7CF9BD3227F430900413280 /* NSImage.swift in Sources */,
-				E7F84DAD2374693800E774E2 /* FFT.swift in Sources */,
 				E71A02C02366497C00A88C16 /* ShaderView.swift in Sources */,
 				E77675D82283786000614B7B /* glsl.metal in Sources */,
 				E753EBFB21B905DD003E4678 /* ConfigController.swift in Sources */,
@@ -819,7 +791,6 @@
 				E72A7FF023C2C1B6008C642A /* XColorPicker.swift in Sources */,
 				E7652E1A2423FE80004CB302 /* AVAsset.swift in Sources */,
 				E72A7FF323C2C23F008C642A /* XBoolean.swift in Sources */,
-				E76378AB21BD7F6200E94079 /* MicrophoneSupport.swift in Sources */,
 				E7CF9BCD227F425400413280 /* NSColor.swift in Sources */,
 				E79DD73B23E8DFF200DAB04A /* RenderSupport.swift in Sources */,
 				E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */,
@@ -832,7 +803,6 @@
 				E7C54AA223EDE0E100DBA600 /* BlitPipelinePass.swift in Sources */,
 				E748C45A239809E100AD7A64 /* RenderSetup.swift in Sources */,
 				E746F31523F0D107003598F6 /* sdf.metal in Sources */,
-				E75C931321ADE7D200679E62 /* Webcam.swift in Sources */,
 				E71A02C42366512B00A88C16 /* ControlsView.swift in Sources */,
 				E714AF922148188900029F9E /* quickdraw.swift in Sources */,
 				E77675D5228347A800614B7B /* Library.swift in Sources */,

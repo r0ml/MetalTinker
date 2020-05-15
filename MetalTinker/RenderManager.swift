@@ -202,11 +202,6 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
     times.startTime += paused
     times.lastTime += paused
     
-    config.videoNames.forEach { $0.start() }
-    
-    config.webcam?.startCapture()
-    config.musicNames.forEach { $0.startStreaming() }
-    
     let sw = (NSApp.delegate as! AppDelegate).shaderWindow
     NotificationCenter.default.addObserver(forName: NSWindow.willCloseNotification, object: sw, queue: nil) { note in
       self.stop()
@@ -215,10 +210,6 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
   }
   
   func stop() {
-    config.webcam?.stopCapture()
-    config.musicNames.forEach { $0.stopStreaming() }
-    config.videoNames.forEach { $0.pause() }
-    
     NotificationCenter.default.removeObserver(self)
   }
   
@@ -232,28 +223,6 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
   
   
   // ====================================================================================
-  
-  func setupVideo() {
-    let zv : [VideoSupport] = config.videoNames
-    
-    for (txtd, vidsup) in zv.enumerated() {
-      let v = vidsup
-      v.getThumbnail() { p in
-
-        //textureQ.async {
-        self.videoTexture[txtd] = try? self.textureLoader.newTexture(cgImage: p, options: [
-          .SRGB: NSNumber(value: false)
-            ,  .generateMipmaps: NSNumber(value: true)
-          ])
-//        }
-
-//        self.videoTexture[txtd] = vidsup.getTexture()
-        DispatchQueue.main.async {
-          self.videoThumbnail[txtd] = p
-        }
-      }
-    }
-  }
   
   func setupCubes() -> String {
     let cz : [String] = config.cubeNames
@@ -319,8 +288,7 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
     if uniformBuffer == nil, let ms = mySize { // notInitialized
       uniformBuffer = config.doInitialization(true, config: config, size: ms)
       let m2 = setupCubes()
-      setupVideo()
-      if m2.isEmpty {
+       if m2.isEmpty {
       } else {
         print(m2)
       }
@@ -343,33 +311,7 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
     // Set up the command buffer for this frame
     let  commandBuffer = commandQueue.makeCommandBuffer()!
     commandBuffer.label = "Render command buffer for \(self.myName)"
-    
-    // load the current time video frames
-    
-    // I've accidentally loaded up the textures during setup....
-    if (!stat) {
-      for (i,v) in config.videoNames.enumerated() {
-        videoTexture[i] = v.readBuffer(times.currentTime) //     v.prepare(stat, currentTime - startTime)
-      }
-    }
-    
-    // load the current time audio frames
-    for (i, v) in config.musicNames.enumerated() {
-      let (a,b) = v.readBuffer(times.currentTime) //   prepare(stat, iFrame, currentTime - startTime)
-      if let a = a { audioBuffer[i] = a }
-      if let b = b { fftBuffer[i] = b }
-    }
-    
-    // load the current time webcam frame
-    webcamTexture = stat ?
-      try? self.textureLoader.newTexture(name: "webcam_still", scaleFactor: 1.0, bundle: Bundle.main, options: [ MTKTextureLoader.Option.SRGB : true
-      ,   .textureStorageMode : NSNumber(value: MTLStorageMode.private.rawValue)
-        ,   .generateMipmaps : NSNumber(value: true)
-        ,   .origin :  /* MTKTextureLoader.Origin.flippedVertically : */
-          MTKTextureLoader.Origin.bottomLeft
-      ] ) :
-      config.webcam?.prepare()
-    
+
     if config.pipelinePasses.isEmpty {
       config.setupPipelines(size: mySize!)
     }

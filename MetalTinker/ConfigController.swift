@@ -37,31 +37,10 @@ public class ConfigController {
     }
   }
   
-  var videoNames : [VideoSupport] {
-    get {
-      configQ.sync(flags: .barrier) {
-        return _videoNames.map { $0 }
-      }
-    }
-  }
-  
-  var musicNames : [SoundSupport] {
-    get {
-      configQ.sync(flags: .barrier) {
-        return _musicNames.map { $0 }
-      }
-    }
-  }
-  
   private var _textureNames : [String] = []
   private var _cubeNames : [String] = []
-  private var _videoNames : [VideoSupport] = []
-  private var _musicNames : [SoundSupport] = []
-  
+
   var pipelinePasses : [PipelinePass] = []
-  
-  // var microphone : Int? -- this got folded into musicNames
-  var webcam : WebcamSupport?
   
   private var myOptions : MyMTLStruct!
   private var dynPref : DynamicPreferences? // need to hold on to this for the callback
@@ -102,30 +81,6 @@ public class ConfigController {
     self.clearColor = v
   }
   
-  func processMicrophone(_ bst : MyMTLStruct ) {
-    if let _ = bst["microphone"] {
-      _musicNames.append( MicrophoneSupport() )
-    }
-  }
-  
-  func processWebcam(_ bst : MyMTLStruct ) {
-    if let _ = bst["webcam"] {
-      webcam = WebcamSupport()
-    }
-  }
-
-  func purge() {
-    _videoNames.forEach {
-      $0.endProcessing()
-    }
-    _musicNames.forEach {
-      $0.stopStreaming()
-    }
-    
-    _videoNames = []
-    _musicNames = []
-  }
-
   func processOptions(_ bst : MyMTLStruct ) {
     guard let mo = bst["options"] else {
       return
@@ -168,38 +123,6 @@ public class ConfigController {
           
         default:
           os_log("%s", type:.error, "\(bstm.name!) is \(bstm.datatype)")
-        }
-      }
-    }
-  }
-  
-  func processVideos(_  bst: MyMTLStruct ) {
-    _videoNames = []
-    if let bss = bst.getStructArray("videos") {
-      for bb in bss {
-        if let jj = bb.getString(),
-          let ii = Bundle.main.url(forResource: jj, withExtension: nil, subdirectory: "videos") {
-          // print("appending \(jj) for \(self.shaderName ?? "" )")
-          _videoNames.append( VideoSupport( ii ) )
-        }
-      }
-    }
-  }
-  
-  func processMusic(_  bst: MyMTLStruct ) {
-    _musicNames = []
-    if let bss = bst.getStructArray("music") {
-      for bb in bss {
-        if let jj = bb.getString() {
-          // if jj == "microphone" {
-          //   musicNames.append( MicrophoneSupport() )
-          // } else
-          if let ii = Bundle.main.url(forResource: jj, withExtension: nil, subdirectory: "music") {
-            // print("appending \(jj) for \(self.shaderName ?? "" )")
-            _musicNames.append( SoundSupport( ii ) )
-          } else {
-            os_log("failed to load music %s", type:.info, jj)
-          }
         }
       }
     }
@@ -347,10 +270,6 @@ public class ConfigController {
     if let gg = cpr?.arguments.first(where: { $0.name == "kbuff" }) {
       kbuff = MyMTLStruct.init(initializationBuffer, gg)
       processTextures(kbuff)
-      processVideos(kbuff)
-      processMicrophone(kbuff)
-      processWebcam(kbuff)
-      processMusic(kbuff)
       processCubes(kbuff)
       processOptions(kbuff)
       getClearColor(kbuff)
