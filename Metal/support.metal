@@ -49,17 +49,6 @@ vertex VertexOut flatVertexFn( uint vid [[ vertex_id ]] ) {
 
 // =====================================================
 
-float getAudio(device float* a, float x) {
-  return a[int(round(x * 4410.0))] * 0.5 + 0.5;
-}
-
-float getFft(device float* a, float x) {
-  return a[int(round(x * 512.0))];
-}
-
-
-// =====================================================
-
 float fix_atan2(float y, float x) {
   if (x == 0) { return M_PI_F / (y < 0 ? -2 : 2); }
   if (y == 0) { return M_PI_F * (x < 0 ? -1 : 0); }

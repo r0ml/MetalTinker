@@ -25,8 +25,6 @@ class RenderSetup {
   var keyPress : SIMD2<UInt32> = [0,0]
   private var myName : String
 
-  var textTextures : [MTLTexture?] = Array(repeating: nil, count: RenderManager.numberOfTexts)
-
   var mouseLoc : CGPoint = CGPoint(x: 800, y: 500)
   var lastTouch : CGPoint = CGPoint.zero
   var mouseButtons : Int = 0;

@@ -5,10 +5,8 @@
 #define constants_h
 
 constant int numberOfTextures = 6;
-constant int numberOfVideos = 4;
 constant int numberOfPasses = 6;
 constant int numberOfCubes = 3;
-constant int numberOfSounds = 2;
 constant int numberOfTexts = 10;
 
 namespace global {

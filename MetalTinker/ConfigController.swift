@@ -22,24 +22,6 @@ public class ConfigController {
   private var cached : [IdentifiableView]?
   private var renderManager : RenderManager
 
-  var textureNames : [String] {
-    get {
-      configQ.sync(flags: .barrier) {
-        return _textureNames.map { $0 }
-      }
-    }
-  }
-  var cubeNames : [String] {
-    get {
-      configQ.sync(flags: .barrier) {
-        return _cubeNames.map { $0 }
-      }
-    }
-  }
-  
-  private var _textureNames : [String] = []
-  private var _cubeNames : [String] = []
-
   var pipelinePasses : [PipelinePass] = []
   
   private var myOptions : MyMTLStruct!
@@ -60,7 +42,6 @@ public class ConfigController {
     renderManager = rm
     empty = NSImage(named: "BrokenImage")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
     // textureThumbnail = Array(repeating: nil, count: numberOfTextures)
-    inputTexture = Array(repeating: nil, count: RenderManager.numberOfTextures)
   }
   
   // this is getting called during onTapGesture in LibraryView -- when I'm launching the ShaderView
@@ -129,46 +110,6 @@ public class ConfigController {
   }
 
   private var textureLoader = MTKTextureLoader(device: device)
-  var inputTexture : [MTLTexture?]
-
-  func processTextures(_ bst : MyMTLStruct ) {
-    _textureNames = []
-    if let bss = bst.getStructArray("textures") {
-      for bb in bss {
-        if let jj = bb.getString() {
-          _textureNames.append(jj)
-        }
-      }
-    }
-
-    // this is loading textures.....
-    let z : [String] = textureNames
-    for (txtd, url) in z.enumerated() {
-      do {
-        let p = try self.textureLoader.newTexture(name: url, scaleFactor: 1.0, bundle: Bundle.main, options: [MTKTextureLoader.Option.textureStorageMode : MTLStorageMode.private.rawValue] )
-      //  p.setPurgeableState(.volatile)
-        self.inputTexture[txtd] = p
-        DispatchQueue.main.async {
-          self.renderManager.textureThumbnail[txtd] = p.cgImage  ?? self.empty
-        }
-      } catch(let e) {
-        let m = "failed to load texture \(url) in \(shaderName): \(e.localizedDescription)"
-        os_log("*** %s ***", type: .error, m)
-      }
-    }
-  }
-
-  func processCubes(_ bst : MyMTLStruct ) {
-    _cubeNames = []
-    if let bss = bst.getStructArray("cubes") {
-      for bb in bss {
-        if let jj = bb.getString() {
-          _cubeNames.append(jj)
-        }
-      }
-    }
-  }
-  
   func segmented( _ t:String, _ items : [MyMTLStruct]) {
     let iv = UserDefaults.standard.integer(forKey: "\(self.shaderName).\(t)")
     setPickS(iv, items)
@@ -269,8 +210,6 @@ public class ConfigController {
     // at this point, the initialization (preferences) buffer has been set
     if let gg = cpr?.arguments.first(where: { $0.name == "kbuff" }) {
       kbuff = MyMTLStruct.init(initializationBuffer, gg)
-      processTextures(kbuff)
-      processCubes(kbuff)
       processOptions(kbuff)
       getClearColor(kbuff)
     }

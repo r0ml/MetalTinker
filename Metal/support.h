@@ -95,10 +95,6 @@ float3 phase(float map);
 float3 tex3d( const texture2d<float> tex, const float3 pp, const float3 nn );
 float3 doBumpMap(const texture2d<float> txx, const float3 p, const float3 n, float bf);
 
-float getAudio(device float *a, float x);
-float getFft(device float *a, float x);
-
-
 float polySmin( float a, float b, float k );
 float polySmax( float a, float b, float k );
 float expSmin(float a, float b, float k);
