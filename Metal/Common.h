@@ -8,16 +8,8 @@
 constant int uniformId = 0;
 constant int kbuffId = 3;
 constant int computeBuffId = 15;
-constant int audioBuffId = 20;
-constant int fftBuffId = 24;
 
-constant int inputTextureId = 0;
 constant int renderInputId = 10;
-constant int renderOutputId = 30;
-constant int cubeId = 20;
-constant int renderedTextsId = 40;
-constant int videoId = 50;
-constant int webcamId = 60;
 
 struct string { char name[256]; } ;
 
@@ -64,11 +56,6 @@ typedef struct {
 struct KBuffer;
 
 float2 textureSize(texture2d<float> t);
-
-/*struct VertexOut {
-  float4  where [[position]];
-  float4  color;
-};*/
 
 #ifndef shaderName
 #warning you must #define shaderName ()
@@ -140,7 +127,6 @@ struct FragmentOutput4 {
 #define fragmentFn3(a) _fragmentFn(a, 3, shaderName)
 #define fragmentFn4(a) _fragmentFn(a, 4, shaderName)
 
-
 #define _fragmentFn(a, n, b) __fragmentFn(a, n, b)
 #define __fragmentFn(a, n, b) typedef FragmentOutput##n FragmentOutput; \
 fragment FragmentOutput##n b##___##a##___Fragment ( \
@@ -148,22 +134,7 @@ VertexOut thisVertex [[stage_in]], \
 float2 pointCoord [[point_coord]], \
 constant Uniform &uni [[buffer(uniformId)]], \
 device KBuffer &kbuff [[ buffer(kbuffId) ]], \
-array<texture2d<float>, numberOfTextures> texture [[texture(inputTextureId)]], \
 array<texture2d<float, access::sample>, n> renderInput [[texture(renderInputId)]], \
-array<texturecube<float>, numberOfCubes> cube [[texture(cubeId)]], \
-array<texture2d<float>, numberOfTexts> text [[texture(renderedTextsId)]], \
-device float* audio [[buffer(audioBuffId)]], \
-device float* fft [[buffer(fftBuffId)]], \
-array<texture2d<float>, numberOfVideos> video [[texture(videoId)]], \
-texture2d<float> webcam [[texture(webcamId)]], \
-device const ComputeBuffer &computeBuffer [[ buffer(computeBuffId) ]] \
-)
-
-#define filterFn(a) _filterFn(a, shaderName)
-#define _filterFn(a, b) __filterFn(a, b)
-#define __filterFn(a, b) fragment FragmentOutput b##a##___Filter ( \
-VertexOut thisVertex [[stage_in]], \
-array<texture2d<float>, numberOfTextures> texture [[texture(inputTextureId)]], \
 device const ComputeBuffer &computeBuffer [[ buffer(computeBuffId) ]] \
 )
 
@@ -188,25 +159,5 @@ kernel void n##InitializeOptions ( \
 void _initialize(constant Uniform &uni, device KBuffer& kbuff)
 
 // ==================================================
-
-#define stringSet(a, b) {\
-  char unb[] = b; \
-  _stringSet(a, sizeof(unb), unb); \
-}
-
-// void stringSet(device string& lval, uint n, const char[] );
-template <typename T>
-static void _stringSet(device string& lval, uint nv, T val) {
-  for(unsigned int i = 0;i < nv /*sizeof(val)*/; i++) {
-    lval.name[i]=val[i];
-  }
-}
-
-void stringCopy(device string& lval, uint n, thread char *val);
-
-#define setTex(n, v) _stringSet(kbuff.textures[n], sizeof(v), v)
-#define setMusic(n,v) _stringSet(kbuff.music[n], sizeof(v), v)
-#define setVideo(n, v) _stringSet(kbuff.videos[n], sizeof(v), v)
-#define setCube(n, v) _stringSet(kbuff.cubes[n], sizeof(v), v)
 
 #endif /* Common_h */

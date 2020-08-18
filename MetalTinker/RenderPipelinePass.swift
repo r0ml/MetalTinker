@@ -181,10 +181,6 @@ class RenderPipelinePass : PipelinePass {
           be.generateMipmaps(for: ri.1)
         }
 
-        // FIXME: only do this on request?
-        for x in rm.videoTexture {
-          if let x = x { be.generateMipmaps(for: x) }
-        }
         be.endEncoding()
       }
     }
@@ -207,26 +203,12 @@ class RenderPipelinePass : PipelinePass {
 
       renderEncoder.setFragmentBuffer(rm.uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setFragmentBuffer(rm.config.initializationBuffer, offset: 0, index: kbuffId)
-      renderEncoder.setFragmentTextures(rm.config.inputTexture, range: inputTextureId..<inputTextureId + RenderManager.numberOfTextures)
 
       renderEncoder.setFragmentBuffer(computeBuffer, offset: 0, index:computeBuffId)
 
       // FIXME: how to set renderPassInputs?
       renderEncoder.setFragmentTextures(self.renderInput.map { $0.1 }, range: renderInputId..<(renderInputId+self.renderInput.count))
 
-
-      renderEncoder.setFragmentTextures(rm.cubeTexture, range: cubeId..<(cubeId+RenderManager.numberOfCubes))
-      renderEncoder.setFragmentTextures(rm.setup.textTextures, range: renderedTextsId..<(renderedTextsId+RenderManager.numberOfTexts))
-
-      renderEncoder.setFragmentBuffers(rm.audioBuffer, offsets: Array(repeating: 0, count: RenderManager.numberOfSounds), range: audioBuffId..<(audioBuffId+RenderManager.numberOfSounds))
-      renderEncoder.setFragmentBuffers(rm.fftBuffer, offsets: Array(repeating: 0, count: RenderManager.numberOfSounds), range: fftBuffId..<(fftBuffId+RenderManager.numberOfSounds))
-
-      renderEncoder.setFragmentTextures(rm.videoTexture, range: videoId..<(videoId+RenderManager.numberOfVideos))
-      if let wct = rm.webcamTexture {
-        renderEncoder.setFragmentTexture(wct, index: webcamId)
-      } else {
-        renderEncoder.setFragmentTexture(nil, index: webcamId)
-      }
       renderEncoder.setRenderPipelineState(pipelineState)
 
       // This sets up the drawable size?

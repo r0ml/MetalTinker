@@ -18,16 +18,8 @@ let numberOfRenderPasses = 4
 let uniformId = 0
 let kbuffId = 3
 let computeBuffId = 15
-let audioBuffId = 20
-let fftBuffId = 24
 
-let inputTextureId = 0
 let renderInputId = 10
-let renderOutputId = 30
-let cubeId = 20
-let renderedTextsId = 40
-let videoId = 50
-let webcamId = 60
 
 var z : SIMD4<Float> = [0,0,0,0]
 
@@ -46,9 +38,7 @@ func now() -> Double {
 /** This class is responsible for rendering the MetalView (building the render pipeline) */
 final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identifiable {
   
-  static let numberOfVideos = 3
   static let numberOfCubes = 3
-  static let numberOfSounds = 4
   static let numberOfTexts = 10
   
   
@@ -96,15 +86,8 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
 
   var _renderPassDescriptor : MTLRenderPassDescriptor?
   
-  var videoTexture : [MTLTexture?] = Array(repeating: nil, count: numberOfVideos)
-  @Published var videoThumbnail : [CGImage]
-  
   var cubeTexture : [MTLTexture?] = Array(repeating: nil, count: numberOfCubes)
-  
-  var audioBuffer : [MTLBuffer?]
-  var fftBuffer : [MTLBuffer?]
-  var webcamTexture : MTLTexture?
-  
+
   private var textureLoader = MTKTextureLoader(device: device)
 
   @Published var textureThumbnail : [CGImage]
@@ -154,14 +137,9 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
     
     
     frameTimer = FrameTimer()
-    
-    let ib = device.makeBuffer(length: 16, options: [.storageModeShared])
-    audioBuffer = Array(repeating: ib, count: RenderManager.numberOfSounds)
-    fftBuffer = Array(repeating: ib, count: RenderManager.numberOfSounds)
-    
+
     setup = RenderSetup(myName)
     empty = NSImage(named: "camera")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
-    videoThumbnail = Array(repeating: empty, count: RenderManager.numberOfVideos)
     textureThumbnail = Array(repeating: empty, count: RenderManager.numberOfTextures)
     super.init()
 
@@ -223,36 +201,7 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
   
   
   // ====================================================================================
-  
-  func setupCubes() -> String {
-    let cz : [String] = config.cubeNames
-    for (txtd, url) in cz.enumerated() {
-      
-      do {
-        cubeTexture[txtd] = try textureLoader.newTexture(name: url, scaleFactor: 2, bundle: Bundle.main, options: [
-          .SRGB: NSNumber(value: false),
-          //               .textureUsage : NSNumber(value: 0),
-          //               .cubeLayout : MTKTextureLoader.CubeLayout.vertical,
-          //               .generateMipmaps : NSNumber(value: true)
-          // .allocateMipmaps : true
-        ])
-        /*
-         switch txtd {
-         case 0: controller?.cube0?.image = p
-         case 1: controller?.cube1?.image = p
-         default:
-         os_log("%s", type: .error, "cube \(txtd) greater than 1 is not implemented")
-         }
-         */
-      } catch(let e) {
-        let m = "failed to load cube \(url) in \(myName): \(e.localizedDescription)"
-        os_log("*** %s ***", type: .error, m)
-        return  m + "\n"
-      }
-    }
-    return ""
-  }
-  
+
   /** when the window resizes ... */
   public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
     if self.mySize?.width != size.width || self.mySize?.height != size.height {
@@ -287,11 +236,6 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
 
     if uniformBuffer == nil, let ms = mySize { // notInitialized
       uniformBuffer = config.doInitialization(true, config: config, size: ms)
-      let m2 = setupCubes()
-       if m2.isEmpty {
-      } else {
-        print(m2)
-      }
     }
     
     var scale : CGFloat = 1
@@ -496,23 +440,6 @@ final class RenderManager : NSObject, MTKViewDelegate, ObservableObject, Identif
     
     return nil // RenderManager.brokenImage
   }
-
-
-
-  /*
-   // FIXME: figure out how to do RENDER STRINGS
-   */
-  /*
-   if let j = bufstruc.getStructArray("renderStrings") {
-   // FIXME: since this is done for each frame, keep the previous frame values, and if they are unchanged,
-   //        leave the textures alone
-   for i in 0..<textTextures.count { textTextures[i] = nil}
-   j.enumerated().forEach { c in
-   let (a,b) = c
-   textTextures[a] = self.processFontRender(a, b)
-   }
-   }
-   */
 
   // I could possibly use the MTLHeap technique to generate a single heap with all resources
   public func processFontRender(_ tid : Int, _ m : MyMTLStruct ) -> MTLTexture? {
