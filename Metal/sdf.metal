@@ -56,3 +56,9 @@ float sdUnion( float d1, float d2 ) {
 float sdIntersect(float a, float b) {
   return max(a,b);
 }
+
+//======================================================
+
+float3 opRep( float3 p, float3 c ) {
+    return mod(p,c)-0.5*c;
+}

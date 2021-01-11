@@ -29,12 +29,6 @@
 	<key>NSCameraUsageDescription</key>
 	<string>We're just playing around with the camera -- nothing is being saved</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2018 Semasiology. All rights reserved.</string>
-	<key>NSMainStoryboardFile</key>
-	<string>Main</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>We're just playing around with the microphone -- nothing is being recorded</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>Copyright © 1868 Charles Babbage and Ada Lovelace</string>
 </dict>
 </plist>

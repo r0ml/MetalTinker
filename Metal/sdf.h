@@ -22,4 +22,8 @@ float sdSubtract( float d1, float d2);
 float sdUnion( float d1, float d2 );
 float sdIntersect(float a, float b);
 
+// ======================================================
+
+float3 opRep( float3 p, float3 c );
+
 #endif /* sdf_h */

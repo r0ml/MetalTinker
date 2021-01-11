@@ -9,6 +9,7 @@ class MyMTLStruct {
   let offset : Int
   let structure : MTLStructType?
   let datatype : MTLDataType
+  let texture : MTLTextureReferenceType?
   let name : String!
   
   // At the top level, there is no Struct Member, so there is no
@@ -19,6 +20,7 @@ class MyMTLStruct {
     offset = 0
     datatype = .struct
     name = struc.name
+    texture = nil
   }
   
   private init( _ buf : MTLBuffer, _ nam : String, _ struc : MTLStructType, _ off : Int) {
@@ -26,6 +28,7 @@ class MyMTLStruct {
     structure = struc
     offset = off
     datatype = .struct
+    texture = nil
     name = nam
   }
 
@@ -34,6 +37,16 @@ class MyMTLStruct {
     structure = nil
     offset = off
     datatype = s
+    name = nam
+    texture = nil
+  }
+
+  private init(_ buf : MTLBuffer, _ nam : String, _ s : MTLTextureReferenceType, _ off : Int) {
+    buffer = buf
+    structure = nil
+    offset = off
+    texture = s
+    datatype = .texture
     name = nam
   }
 
@@ -76,6 +89,9 @@ class MyMTLStruct {
   private func getMyMTLStruct(_ mdef : MTLStructMember) -> MyMTLStruct {
     if let ms = mdef.structType() {
       return MyMTLStruct.init(buffer, mdef.name, ms, offset + mdef.offset)
+      // FIXME:
+    } else if let ms = mdef.textureReferenceType() {
+      return MyMTLStruct.init(buffer, mdef.name, ms, offset + mdef.offset)
     } else {
       return MyMTLStruct.init(buffer, mdef.name, mdef.dataType, offset+mdef.offset )
     }
@@ -112,7 +128,9 @@ class MyMTLStruct {
       let v = buffer.contents().advanced(by: offset).assumingMemoryBound(to: SIMD4<Int32>.self).pointee
       return v  // (Int(v.x), Int(v.y))
       
-    case .float : return Float.self as? AnyClass
+    case .float :
+      let v = buffer.contents().advanced(by: offset).assumingMemoryBound(to: Float.self).pointee
+      return v  // (Int(v.x), Int(v.y))
     case .float2 :
       let v = buffer.contents().advanced(by: offset).assumingMemoryBound(to: SIMD2<Float>.self).pointee
       return v  // (Float(v.x), Float(v.y))
@@ -122,6 +140,12 @@ class MyMTLStruct {
     case .float4 :
       let v = buffer.contents().advanced(by: offset).assumingMemoryBound(to: SIMD4<Float>.self).pointee
       return v  // (Float(v.x), Float(v.y))
+    case .sampler:
+      let v = buffer.contents().advanced(by: offset).assumingMemoryBound(to: MTLSamplerState.self).pointee
+      return v
+    case .texture:
+      let v = buffer.contents().advanced(by: offset).assumingMemoryBound(to: MTLTexture.self).pointee
+      return v
     default: return nil
     }
     }

@@ -5,9 +5,6 @@
 #define constants_h
 
 constant int numberOfTextures = 6;
-constant int numberOfPasses = 6;
-constant int numberOfCubes = 3;
-constant int numberOfTexts = 10;
 
 namespace global {
   extern constant uint KEY_LEFT;
@@ -62,26 +59,6 @@ namespace asset {
   constant char stump[] = "stump";
   constant char water[] = "water";
   constant char wood[] = "wood";
-}
-
-namespace asset {
-  constant char cathedral_cube[] = "cathedral_cube";
-  constant char cave_cube[] = "cave_cube";
-  constant char forest_cube[] = "forest_cube";
-  constant char piazza_cube[] = "piazza_cube";
-}
-
-namespace asset {
-  constant char cantate_domino[] = "Cantate Domino.mp3";
-  constant char charleston[] = "Charleston.mp3";
-  constant char frog_legs[] = "Frog Legs.mp3";
-  constant char futuristic[] = "futuristic.mp3";
-  constant char mozart_41[] = "Mozart Symphony 41 Finale.mp3";
-  constant char mozart_turkish[] = "Mozart Turkish March.mp3";
-  constant char soviet[] = "Soviet.mp3";
-  constant char squinch[] = "Squinch Machine.mp3";
-  constant char surprising_encounter[] = "Surprising Encounter.mp3";
-  constant char tchaikovsky_violin_concerto[] = "Tchaikovsky Violin Concerto Finale.mp3";
 }
 
 constant float2x2 bayer2 = { 0, 2, 3, 1};

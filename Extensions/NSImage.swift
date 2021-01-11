@@ -14,21 +14,34 @@ extension NSImage {
     image.unlockFocus()
     return image
   }
-  
-  func getTexture(_ t : MTKTextureLoader, flipped: Bool = false, mipmaps : Bool = true) -> MTLTexture? {
+
+
+      var cgImage: CGImage {
+          get {
+              let imageData = self.tiffRepresentation!
+              let source = CGImageSourceCreateWithData(imageData as CFData, nil).unsafelyUnwrapped
+              let maskRef = CGImageSourceCreateImageAtIndex(source, Int(0), nil)
+              return maskRef.unsafelyUnwrapped
+          }
+      }
+
+
+  func getTexture(_ t : MTKTextureLoader, flipped: Bool = true, mipmaps : Bool = false) -> MTLTexture? {
     
     // This business fixed the problem with having a gray-scale png texture
     
     let sourceImageRep = self.tiffRepresentation!
     let targetColorSpace = NSColorSpace.genericRGB
     let targetImageRep = NSBitmapImageRep(data: sourceImageRep)?.converting(to: targetColorSpace, renderingIntent:NSColorRenderingIntent.perceptual)!
+    let data = targetImageRep!.tiffRepresentation!
     
     do {
-      return try t.newTexture(data: targetImageRep!.tiffRepresentation!,
+      let j = try t.newTexture(data: data,
                               options: [
-                                .origin :  flipped ? MTKTextureLoader.Origin.flippedVertically : MTKTextureLoader.Origin.bottomLeft,
+                                .origin :  flipped ? MTKTextureLoader.Origin.topLeft : MTKTextureLoader.Origin.bottomLeft,
                                 .SRGB: NSNumber(value: false),
                                 .generateMipmaps : NSNumber(value: mipmaps)])
+      return j
     } catch let e {
       os_log("getting texture: %s", type: .error, e.localizedDescription)
     }

@@ -5,32 +5,25 @@
 #ifndef Common_h
 #define Common_h
 
-constant int uniformId = 0;
+constant int uniformId = 2;
 constant int kbuffId = 3;
+constant int inputTextureId = 0;
 constant int computeBuffId = 15;
-
-constant int renderInputId = 10;
 
 struct string { char name[256]; } ;
 
 using namespace metal;
 
-#ifndef VertexOut
-#define VertexOut VertexOutTriangle
-#endif
-
-struct VertexOutTriangle {
-  float4  where [[position]];   // this is in the range -1 -> 1 in the vertex shader,  0 -> viewSize in the fragment shader
-  float4  color;
-  float4  barrio;               // this is in the range 0 -> 1 in the vertex shader
-  int3 parm;
+struct VertexOut {
+  float4 where [[position]];   // this is in the range -1 -> 1 in the vertex shader,  0 -> viewSize in the fragment shader
+  float4 color;
+  float2 texCoords;
+  float3 normal;
 };
 
 struct VertexOutPoint {
   float4  where [[position]];
   float4  color;
-  float4  barrio;
-  int3 parm;
   float point_size [[point_size]]; // only for pointcloud
 };
 
@@ -38,6 +31,20 @@ struct VertexOutPoint {
 #include "sdf.h"
 #include "constants.h"
 #include "glsl.h"
+#include "shapes.h"
+#include <SceneKit/scn_metal>
+
+typedef struct {
+  float4x4 modelTransform;
+  float4x4 inverseModelTransform;
+  float4x4 modelViewTransform;
+  float4x4 inverseModelViewTransform;
+  float4x4 normalTransform; // Inverse transpose of modelViewTransform
+  float4x4 modelViewProjectionTransform;
+  float4x4 inverseModelViewProjectionTransform;
+  float2x3 boundingBox;
+  float2x3 worldBoundingBox;
+} PerNodeData;
 
 typedef struct {
   float4 iDate;                        // (year, month, day, time in seconds)
@@ -53,7 +60,7 @@ typedef struct {
   int eventModifiers;
 } Uniform;
 
-struct KBuffer;
+struct InputBuffer;
 
 float2 textureSize(texture2d<float> t);
 
@@ -74,90 +81,106 @@ float2 textureSize(texture2d<float> t);
 #define __computeFn(a, b) kernel void b##___##a##___Kernel ( \
 uint3 xCoord [[thread_position_in_grid]], \
 constant Uniform &uni [[ buffer(uniformId) ]], \
-device KBuffer &kbuff [[ buffer(kbuffId) ]], \
+device InputBuffer &in [[ buffer(kbuffId) ]], \
 device ComputeBuffer &computeBuffer [[ buffer(computeBuffId) ]] \
 )
 
 // =========================================================================================
 // New render
 
-#define vertexFn(a) _vertexFn(a, shaderName)
-#define _vertexFn(a, b) __vertexFn(a, b)
-#define __vertexFn(a, b) vertex VertexOut b##___##a##___Vertex ( \
+#define vertexFn(...) vertexPass(, ##__VA_ARGS__ )
+
+#define vertexPass(a, ...) _vertexPass(a, shaderName, ##__VA_ARGS__ )
+#define _vertexPass(a, b, ...) __vertexPass(a, b, ##__VA_ARGS__ )
+#define __vertexPass(a, b, ...) vertex VertexOut b##___##a##___Vertex ( \
 uint vid [[ vertex_id ]], \
 uint iid [[ instance_id ]], \
 constant Uniform &uni [[ buffer(uniformId) ]], \
-constant KBuffer &kbuff [[ buffer(kbuffId) ]], \
-device const ComputeBuffer &computeBuffer [[ buffer(computeBuffId) ]] \
-)
+constant SCNSceneBuffer& scn_frame  [[buffer(0)]], \
+constant PerNodeData& scn_node [[buffer(1)]], \
+constant InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__ )
 
-// #ifndef FragmentOutput
-typedef float4 FragmentOutput0;
-// #endif
+// -------
 
-struct FragmentOutput1 {
-  float4 fragColor [[color(0)]];
-  float4 pass1 [[color(1)]];
-};
+#define fragmentFn(...) fragmentPass(, ##__VA_ARGS__ )
 
-struct FragmentOutput2 {
-  float4 fragColor [[color(0)]];
-  float4 pass1 [[color(1)]];
-  float4 pass2 [[color(2)]];
-};
-
-struct FragmentOutput3 {
-  float4 fragColor [[color(0)]];
-  float4 pass1 [[color(1)]];
-  float4 pass2 [[color(2)]];
-  float4 pass3 [[color(3)]];
-};
-
-struct FragmentOutput4 {
-  float4 fragColor [[color(0)]];
-  float4 pass1 [[color(1)]];
-  float4 pass2 [[color(2)]];
-  float4 pass3 [[color(3)]];
-  float4 pass4 [[color(4)]];
-};
-
-#define fragmentFn(a) _fragmentFn(a, 0, shaderName)
-#define fragmentFn1(a) _fragmentFn(a, 1, shaderName)
-#define fragmentFn2(a) _fragmentFn(a, 2, shaderName)
-#define fragmentFn3(a) _fragmentFn(a, 3, shaderName)
-#define fragmentFn4(a) _fragmentFn(a, 4, shaderName)
-
-#define _fragmentFn(a, n, b) __fragmentFn(a, n, b)
-#define __fragmentFn(a, n, b) typedef FragmentOutput##n FragmentOutput; \
-fragment FragmentOutput##n b##___##a##___Fragment ( \
+#define fragmentPass(a, ...) _fragmentPass( a, shaderName, ##__VA_ARGS__ )
+#define _fragmentPass(a, b, ... ) __fragmentPass(a, b, ##__VA_ARGS__ )
+#define __fragmentPass(a, b, ... ) fragment float4 b##___##a##___Fragment ( \
 VertexOut thisVertex [[stage_in]], \
+/* constant SCNSceneBuffer& scn_frame  [[buffer(0)]], */ \
+/* constant PerNodeData& scn_node [[buffer(1)]], */ \
+constant Uniform &uni [[ buffer(uniformId)]], \
+device InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__)
+//array<texture2d<float>, numberOfTextures> texture [[ texture(inputTextureId) ]] )
+
+// =========================================================================================
+// New render
+
+#define pointFn(...) pointPass(, ##__VA_ARGS__ )
+
+#define vertexPointPass(a, ...) _vertexPointPass(a, shaderName, ##__VA_ARGS__ )
+#define _vertexPointPass(a, b, ...) __vertexPointPass(a, b, ##__VA_ARGS__ )
+#define __vertexPointPass(a, b, ...) vertex VertexOutPoint b##___##a##___Vertex ( \
+uint vid [[ vertex_id ]], \
+uint iid [[ instance_id ]], \
+constant Uniform &uni [[ buffer(uniformId) ]], \
+constant InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__ )
+
+// -------
+
+#define fragmentPointFn(...) fragmentPointPass(, ##__VA_ARGS__ )
+
+#define fragmentPointPass(a, ...) _fragmentPointPass( a, shaderName, ##__VA_ARGS__ )
+#define _fragmentPointPass(a, b, ... ) __fragmentPointPass(a, b, ##__VA_ARGS__ )
+#define __fragmentPointPass(a, b, ... ) fragment float4 b##___##a##___Fragment ( \
+VertexOutPoint thisVertex [[stage_in]], \
+constant Uniform &uni [[ buffer(uniformId)]], \
 float2 pointCoord [[point_coord]], \
-constant Uniform &uni [[buffer(uniformId)]], \
-device KBuffer &kbuff [[ buffer(kbuffId) ]], \
-array<texture2d<float, access::sample>, n> renderInput [[texture(renderInputId)]], \
-device const ComputeBuffer &computeBuffer [[ buffer(computeBuffId) ]] \
-)
+device InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__)
+//array<texture2d<float>, numberOfTextures> texture [[ texture(inputTextureId) ]] )
+
+// ===========================================================================================================
+
+// #define worldCoord ((2 * thisVertex.where.xy - uni.iResolution) / uni.iResolution * float2(1, -1))
+#define worldCoord ((2 * thisVertex.texCoords - 1) * float2(1, -1))
+#define textureCoord ( thisVertex.texCoords )
+#define aspectRatio (uni.iResolution / min(uni.iResolution.y, uni.iResolution.x))
+#define worldCoordAspectAdjusted (worldCoord * aspectRatio)
 
 // ===========================================================================================================
 
 // this is required for pre-scanning calls to this macro
 #define initialize() ___initialize(shaderName)
-
 #define ___initialize(n) __initialize(n)
-
 #define __initialize(n) \
-static void _initialize(constant Uniform& uni, device KBuffer& kbuff); \
+static void _initialize(/* constant Uniform& uni, */ device InputBuffer& in); \
 \
 kernel void n##InitializeOptions ( \
-  constant Uniform &uni [[ buffer(uniformId) ]], \
-  device KBuffer &kbuff [[ buffer(kbuffId) ]] \
+/* constant Uniform &uni [[ buffer(uniformId) ]], */ \
+  device InputBuffer &in [[ buffer(kbuffId) ]] \
 ) { \
-  kbuff = KBuffer(); \
-  _initialize(uni, kbuff ); \
+  in = InputBuffer(); \
+  _initialize( /* uni, */ in ); \
 } \
 \
-void _initialize(constant Uniform &uni, device KBuffer& kbuff)
+void _initialize(/* constant Uniform &uni, */ device InputBuffer& in)
 
 // ==================================================
+
+#define stringSet(a, b) {\
+  char unb[] = b; \
+  _stringSet(a, sizeof(unb), unb); \
+}
+
+// void stringSet(device string& lval, uint n, const char[] );
+template <typename T>
+static void _stringSet(device string& lval, uint nv, T val) {
+  for(unsigned int i = 0;i < nv /*sizeof(val)*/; i++) {
+    lval.name[i]=val[i];
+  }
+}
+
+void stringCopy(device string& lval, uint n, thread char *val);
 
 #endif /* Common_h */

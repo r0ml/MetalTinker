@@ -33,19 +33,29 @@ fragment float4 passthruFragmentFn( VertexOut thisVertex [[stage_in]] ) {
 
 vertex VertexOut flatVertexFn( uint vid [[ vertex_id ]] ) {
   VertexOut v;
-  v.barrio.x = step( float(vid), 1);
+  float bx = step( float(vid), 1);
+  float by = fmod(float(vid), 2);
 
-//  v.barrio.y = 1-fmod(float(vid), 2);
-  v.barrio.y = fmod(float(vid), 2);
-
-  v.where.xy = 2 * v.barrio.xy - 1;
+  v.where.xy = 2 * float2(bx, by) - 1;
   v.where.y = - v.where.y;
 
   v.where.zw = {0, 1};
-  
+
+  v.texCoords = 0.5 + v.where.xy * float2(0.5, -0.5) ;
   v.color = 0; // then it works like it used to....
   return v;
 }
+
+// =====================================================
+
+float getAudio(device float* a, float x) {
+  return a[int(round(x * 4410.0))] * 0.5 + 0.5;
+}
+
+float getFft(device float* a, float x) {
+  return a[int(round(x * 512.0))];
+}
+
 
 // =====================================================
 
@@ -426,88 +436,6 @@ float3 BlackBody( float t ) {
 
 // ========================================================================
 
-// Vertex fns...
-
-// this is a radial way of creating polygons -- at around 50 sides it's a circle
-float3 polygon(uint vid, uint sides, float radius, float2 aspect) {
-  uint tv = vid % 3;
-  uint tn = vid / 3;
-  float3 res = 0;
-  switch(tv) {
-    case 0:
-      res.z = (float(tn) + 0.5) / float(sides);
-      break;
-    case 1:
-      res.z = float(tn) / float(sides);
-      res.xy = float2(radius, 0) * aspect * rot2d( res.z * TAU ) / aspect;
-      break;
-    case 2:
-      res.z = float(tn + 1) / float(sides);
-      res.xy = float2(radius, 0) * aspect * rot2d( res.z * TAU ) / aspect;
-      break;
-  }
-  return res;
-}
-
-// centered at 0
-float3 annulus(uint vid, uint sides, float inner, float outer, float2 aspect) {
-  uint tv = vid % 6;
-  uint tn = vid / 6;
-  float3 res = 0;
-  switch(tv) {
-    case 0:
-    case 4:
-      res.z = 2 * float(tn + 0.5) / float(sides);
-      res.xy = float2(outer, 0) * aspect * rot2d(res.z * TAU) / aspect;
-      break;
-    case 1:
-      res.z = 2 * float(tn)     / float(sides); // this one is negative for tn = 0
-      res.xy = float2(inner, 0) * aspect * rot2d( res.z * TAU ) / aspect;
-      break;
-    case 2:
-    case 3:
-      res.z = 2 * float(tn + 1) / float(sides);
-      res.xy = float2(inner, 0) * aspect * rot2d( res.z * TAU) / aspect;
-      break;
-    case 5:
-      res.z = 2 * float(tn + 1.5) / float(sides);
-      res.xy = float2(outer, 0) * aspect * rot2d( res.z * TAU ) / aspect;
-      break;
-  }
-  return res;
-}
-
-
-// centered at 0
-float3 annulus(uint vid, uint sides, float inner, float outer, float2 aspect, float startAngle, float endAngle) {
-  uint tv = vid % 6;
-  uint tn = vid / 6;
-  float3 res = 0;
-  float subtend = endAngle - startAngle; // in radians -- default is TAU
-  switch(tv) {
-    case 0:
-    case 4:
-      res.z = startAngle + 2 * float(tn + 0.5) / float(sides) * subtend;
-      res.xy = float2(outer, 0) * aspect * rot2d(res.z) / aspect;
-      break;
-    case 1:
-      res.z = startAngle + 2 * float(tn)     / float(sides) * subtend; // this one is negative for tn = 0
-      res.xy = float2(inner, 0) * aspect * rot2d( res.z) / aspect;
-      break;
-    case 2:
-    case 3:
-      res.z = startAngle + 2 * float(tn + 1) / float(sides) * subtend;
-      res.xy = float2(inner, 0) * aspect * rot2d( res.z ) / aspect;
-      break;
-    case 5:
-      res.z = startAngle + 2 * float(tn + 1.5) / float(sides) * subtend;
-      res.xy = float2(outer, 0) * aspect * rot2d( res.z ) / aspect;
-      break;
-  }
-  return res;
-}
-
-
 
 // ==============================================================
 
@@ -580,6 +508,10 @@ float vignette( float2 uv, float p) {
   return pow(uv.x * uv.y * (1-uv.x) * (1-uv.y), p);
 }
 
+float2 yflip(float2 x) {
+  return float2(0, 1) + x * float2(1, -1);
+}
+
 // Normalized Device Coordinate given Viewport coordinate and Viewport size
 float2 ndc(float2 vc, float2 res) {
   float2 uv = 2. * vc / res - 1.;
@@ -587,3 +519,36 @@ float2 ndc(float2 vc, float2 res) {
   uv.y = -uv.y;
   return uv;
 }
+
+float2 toWorld(float2 x) {
+  return (2 * x - 1) * float2(1, -1);
+}
+
+float4x4 translation(float x, float y, float z) {
+  return float4x4( float4(1, 0, 0, 0),
+                  float4(0, 1, 0, 0),
+                  float4(0, 0, 1, 0),
+                  float4(x, y, z, 1));
+}
+
+float4x4 scale(float x, float y, float z) {
+  return float4x4( float4(x, 0, 0, 0),
+                  float4(0, y, 0, 0),
+                  float4(0, 0, z, 0),
+                  float4(0, 0, 0, 1)
+                  );
+}
+
+float4x4 perspective(float aspect, float fovy, float near, float far) {
+  float yScale = 1 / tan(fovy * 0.5);
+  float xScale = yScale / aspect;
+  float zRange = far - near;
+  vector_float4 P = { xScale, 0, 0, 0 };
+  vector_float4 Q = { 0, yScale, 0, 0 };
+  vector_float4 R = { 0, 0, - (far + near) / zRange, -1 };
+  vector_float4 S = { 0, 0, -2 * far * near / zRange, 0 };
+  float4x4 mat = { P, Q, R, S };
+  return mat;
+}
+
+

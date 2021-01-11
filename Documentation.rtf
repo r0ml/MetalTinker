@@ -1,53 +1,11 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2511
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 Menlo-Regular;
-\f3\fnil\fcharset0 Menlo-Bold;}
-{\colortbl;\red255\green255\blue255;\red253\green143\blue63;\red31\green31\blue36;\red255\green255\blue255;
-\red252\green95\blue163;}
-{\*\expandedcolortbl;;\csgenericrgb\c99131\c56076\c24611;\csgenericrgb\c12054\c12284\c14131;\csgenericrgb\c100000\c100000\c100000\c85000;
-\csgenericrgb\c98839\c37355\c63833;}
+{\rtf1\ansi\ansicpg1252\cocoartf2575
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
 \margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 \
-\
-Shapes:\
-======\
-\
-Shapes are generated in a vertex shader.\
-\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf0 The first function to use is 
-\f1\b polygon
-\f0\b0 .\
-\
-Polygon will generate a regular polygon of any number of sides.  A polygon of 50 sides is usually indistinguishable from a circle.\
-\
-\pard\tx321\pardeftab321\pardirnatural\partightenfactor0
-
-\f2\fs26 \cf2 \cb3 VertexOut\cf4  polygon(
-\f3\b \cf5 uint
-\f2\b0 \cf4  vid, 
-\f3\b \cf5 uint
-\f2\b0 \cf4  sides, 
-\f3\b \cf5 float
-\f2\b0 \cf4  radius, 
-\f3\b \cf5 float2
-\f2\b0 \cf4  aspect);\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf0 \cb1 \
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-
-\f0\fs24 \cf0 The first argument is which vertex is being generated.  Then the number of sides for this polygon, and the radius of the circumscribed circle.  Lastly, an aspect ratio (x,y -- one of which is likely 1.) to make sure that the vertices will look right given the aspect ratio of the visual.\
-\
-There are two ways the set of triangles could be generated -- top down, where each side adds another triangle (alternating clockwise and counterclockwise).   The the other way is to generate the triangles radially -- so that each triangle has a vertex at the center.\
-I went with this second approach because it seems easier to set values for gradients.\
-\
-=========================\
-\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
-\cf0 The next function is 
-\f1\b ring
-\f0\b0 .  This creates a ring.   Given an inner and outer radius.\
-\
+This is a framework for running fragment shaders whose purpose is to take an input image and modify it -- generating a new output image.\
 \
 }

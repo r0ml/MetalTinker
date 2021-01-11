@@ -95,6 +95,10 @@ float3 phase(float map);
 float3 tex3d( const texture2d<float> tex, const float3 pp, const float3 nn );
 float3 doBumpMap(const texture2d<float> txx, const float3 p, const float3 n, float bf);
 
+float getAudio(device float *a, float x);
+float getFft(device float *a, float x);
+
+
 float polySmin( float a, float b, float k );
 float polySmax( float a, float b, float k );
 float expSmin(float a, float b, float k);
@@ -109,14 +113,6 @@ float HexEdgeDist(float2 p);
 
 float3 blackbody(float Temp);
 float3 BlackBody( float t);
-
-// ============================================
-
-// returns the canonical co-ords for the vertex (at location .xy)
-// returns the rotation of the point in radians (at location .z)
-float3 polygon(uint vid, uint sides, float radius, float2 aspect);
-float3 annulus(uint vid, uint sides, float inner, float outer, float2 aspect);
-float3 annulus(uint vid, uint sides, float inner, float outer, float2 aspect, float startAngle, float endAngle);
 
 // ============================================
 
@@ -136,6 +132,16 @@ Color palette( float t, Color a, Color b, Color c, Color d );
 float vignette( float2 uv, float p);
 
 // Normalized Device Coordinate given Viewport coordinate and Viewport size
+
+float2 yflip(float2 x);
+
 float2 ndc(float2 vc, float2 res);
+
+// convert texture coordinates to world coordinates
+float2 toWorld(float2 x);
+
+float4x4 translation(float x, float y, float z);
+float4x4 scale(float x, float y, float z);
+float4x4 perspective(float aspect, float fovy, float near, float far);
 
 #endif /* support_h */
