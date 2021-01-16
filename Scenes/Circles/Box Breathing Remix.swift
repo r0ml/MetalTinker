@@ -155,5 +155,13 @@ class Box_Breathing_Remix_Sprite : SKScene {
 
 class Box_Breathing_Remix : SKSCNScene {
   override var group : String { get  { "Circles - Scene" } }
-  override var skScene : SKScene { get { Box_Breathing_Remix_Sprite() }}
+
+  required init() {
+    super.init()
+    skScene = Box_Breathing_Remix_Sprite()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 }

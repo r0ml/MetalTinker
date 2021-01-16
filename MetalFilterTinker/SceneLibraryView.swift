@@ -20,7 +20,7 @@ class NewShaderLeaf : Identifiable, Equatable, Hashable {
     id.hash(into: &hasher)
   }
 
-  var rm : T3SCNScene
+  var rm : T1SCNScene
 
   public var id : String {
     if let k = rm as? T3ShaderSCNScene {
@@ -30,7 +30,7 @@ class NewShaderLeaf : Identifiable, Equatable, Hashable {
     }
   }
 
-  init(_ r : T3SCNScene) {
+  init(_ r : T1SCNScene) {
     rm = r
   }
 }
@@ -46,7 +46,7 @@ class NewShaderLib : Identifiable, Equatable, Hashable {
     id.hash(into: &hasher)
   }
 
-  var lib : Dictionary<String, T3SCNScene>
+  var lib : Dictionary<String, T1SCNScene>
 
   init(lib l: String) {
     id = l
@@ -240,11 +240,12 @@ struct NewRightPane : View {
 }
 
 class SKDelegate : NSObject, ObservableObject {
-  @Published var scene : T3SCNScene = T3SCNScene()
+  @Published var scene : T1SCNScene = T1SCNScene()
   @Published var shader : NewShaderLeaf?
   //  @Published var skscene : SKScene = SKScene()
 }
 
+/*
 class SceneCoordinator : NSObject, SCNSceneRendererDelegate, ObservableObject {
   var showsStatistics : Bool = true
   var debugOptions: SCNDebugOptions = []
@@ -254,13 +255,16 @@ class SceneCoordinator : NSObject, SCNSceneRendererDelegate, ObservableObject {
     renderer.debugOptions = self.debugOptions
   }
 }
+*/
 
 struct SceneWrapperView : View {
   @ObservedObject var delegate : SKDelegate
   @GestureState var magnifyBy : CGFloat = 1
   @GestureState var dragger : CGPoint = .zero
 
-  @StateObject var coordinator = SceneCoordinator()
+  @State var paused = false
+
+//  @StateObject var coordinator = SceneCoordinator()
 
   var mag : some Gesture {
     MagnificationGesture()
@@ -268,10 +272,14 @@ struct SceneWrapperView : View {
         cs, gs, t in gs = cs
       }
       .onChanged { m in
-        DispatchQueue.main.async { delegate.scene.zoom(m) }
+        if let x = delegate.scene as? T3SCNScene {
+          DispatchQueue.main.async { x.zoom(m) }
+        }
       }
       .onEnded { g in
-        DispatchQueue.main.async { delegate.scene.updateZoom(g) }
+        if let x = delegate.scene as? T3SCNScene {
+          DispatchQueue.main.async { x.updateZoom(g) }
+        }
       }
   }
 
@@ -283,7 +291,7 @@ struct SceneWrapperView : View {
   }
 
   var body: some View {
-    let j = SceneView(scene: delegate.scene, options: [ .allowsCameraControl, .rendersContinuously], delegate: coordinator)
+//    let j =
 
     VStack {
       GeometryReader { g in
@@ -300,17 +308,25 @@ struct SceneWrapperView : View {
             sc.startDragLoc = zz
           }
         }
+        let z = delegate.scene
+        let _ = z.setSize(g.size)
+        SceneView(scene: z,
+                  options: paused ? [] : [ .allowsCameraControl, .rendersContinuously, .temporalAntialiasingEnabled ],
 
-        j
+    //                      preferredFramesPerSecond: 120,
+    //                      antialiasingMode: SCNAntialiasingMode.multisampling16X,
+                          delegate: z
+        )
           .gesture(mag)
           .gesture(drag)
 
       }
 
+      SceneControlsView(scene: delegate.scene, paused: $paused ).frame(minWidth: 600)
+      
       //      SpriteView.init(scene: <#T##SKScene#>, transition: <#T##SKTransition?#>, isPaused: <#T##Bool#>, preferredFramesPerSecond: <#T##Int#>, options: <#T##SpriteView.Options#>, shouldRender: <#T##(TimeInterval) -> Bool#>)
       //      SpriteView(scene: delegate.skscene, options: [.allowsTransparency])
     }
-
 
     /// Convert the points on the screen to the 3D scene
 

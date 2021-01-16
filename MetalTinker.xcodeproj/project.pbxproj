@@ -38,6 +38,81 @@
 		E785E2E525AA46E600511B0C /* SKSCNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E785E2E425AA46E600511B0C /* SKSCNScene.swift */; };
 		E79A10E222CF9B4D004FD5E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E79A10E122CF9B4D004FD5E2 /* README.md */; };
 		E7A3A16A21A7E07500742611 /* Common.h in Sources */ = {isa = PBXBuildFile; fileRef = E701A3F12171573F00FC9795 /* Common.h */; };
+		E7A5A3A025AD15B80051A69A /* PointScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A39F25AD15B80051A69A /* PointScene.swift */; };
+		E7A5A3A725AD4EBD0051A69A /* Vogels Distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3A625AD4EBD0051A69A /* Vogels Distribution.swift */; };
+		E7A5A3AF25AD50E80051A69A /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
+		E7A5A3B025AD50E80051A69A /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A5A3B125AD50E80051A69A /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
+		E7A5A3B225AD50E80051A69A /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
+		E7A5A3B325AD50E80051A69A /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E7A5A3CC25AD510B0051A69A /* Circle Spiral.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C125AD510A0051A69A /* Circle Spiral.metal */; };
+		E7A5A3CD25AD510B0051A69A /* Linear motion.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C225AD510A0051A69A /* Linear motion.metal */; };
+		E7A5A3CF25AD510B0051A69A /* dot wave.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C425AD510A0051A69A /* dot wave.metal */; };
+		E7A5A3D025AD510B0051A69A /* Attempt 19 of 100.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C525AD510A0051A69A /* Attempt 19 of 100.metal */; };
+		E7A5A3D325AD510B0051A69A /* Vogel disk.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C825AD510B0051A69A /* Vogel disk.metal */; };
+		E7A5A3D425AD510B0051A69A /* Vogels Distrib.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C925AD510B0051A69A /* Vogels Distrib.metal */; };
+		E7A5A3D525AD510B0051A69A /* InfinityParticles.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3CA25AD510B0051A69A /* InfinityParticles.metal */; };
+		E7A5A3EE25AE78680051A69A /* Vogel Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3ED25AE78680051A69A /* Vogel Disk.swift */; };
+		E7A5A43425B00CA10051A69A /* Linear Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A43325B00CA10051A69A /* Linear Motion.swift */; };
+		E7A5A43C25B0CE6A0051A69A /* Dot Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A43B25B0CE6A0051A69A /* Dot Line.swift */; };
+		E7A5A44325B0CE870051A69A /* Dot Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A44225B0CE870051A69A /* Dot Wave.swift */; };
+		E7A5A44A25B0CE970051A69A /* Circle Spiral.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A44925B0CE970051A69A /* Circle Spiral.swift */; };
+		E7A5A45725B0CF270051A69A /* Attempt 23 of 100.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3CB25AD510B0051A69A /* Attempt 23 of 100.metal */; };
+		E7A5A45D25B0CFC50051A69A /* loopless dots along circle.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C625AD510B0051A69A /* loopless dots along circle.metal */; };
+		E7A5A46425B0D12C0051A69A /* Attempt 23.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A46325B0D12C0051A69A /* Attempt 23.swift */; };
+		E7A5A46B25B0D13E0051A69A /* Infinity Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A46A25B0D13E0051A69A /* Infinity Particles.swift */; };
+		E7A5A47225B0D1530051A69A /* Loopless Dots Along Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A47125B0D1530051A69A /* Loopless Dots Along Circle.swift */; };
+		E7A5A47925B0D1720051A69A /* Static Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A47825B0D1720051A69A /* Static Points.swift */; };
+		E7A5A7A225B256A90051A69A /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
+		E7A5A7A325B256A90051A69A /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A5A7A425B256A90051A69A /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
+		E7A5A7A525B256A90051A69A /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
+		E7A5A7A625B256A90051A69A /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E7A5A7B625B256D90051A69A /* Colored Rings.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A77E25B256960051A69A /* Colored Rings.metal */; };
+		E7A5A7B725B256D90051A69A /* Coloring CIrcle.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A77C25B256960051A69A /* Coloring CIrcle.metal */; };
+		E7A5A7B825B256D90051A69A /* arc segment.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79F25B256960051A69A /* arc segment.metal */; };
+		E7A5A7B925B256D90051A69A /* diffuese1.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78C25B256960051A69A /* diffuese1.metal */; };
+		E7A5A7BA25B256D90051A69A /* Rotating Color Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78525B256960051A69A /* Rotating Color Ring.metal */; };
+		E7A5A7BB25B256D90051A69A /* Ellipse Geometry.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78025B256960051A69A /* Ellipse Geometry.metal */; };
+		E7A5A7BC25B256D90051A69A /* Sunset and moonrise.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78125B256960051A69A /* Sunset and moonrise.metal */; };
+		E7A5A7BD25B256D90051A69A /* two circle.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79C25B256960051A69A /* two circle.metal */; };
+		E7A5A7BE25B256D90051A69A /* Breathing Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78F25B256960051A69A /* Breathing Ring.metal */; };
+		E7A5A7BF25B256D90051A69A /* SH directional lights.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79625B256960051A69A /* SH directional lights.metal */; };
+		E7A5A7C025B256D90051A69A /* Rounded Loading Spinner.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A77D25B256960051A69A /* Rounded Loading Spinner.metal */; };
+		E7A5A7C125B256D90051A69A /* Magic Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78325B256960051A69A /* Magic Ring.metal */; };
+		E7A5A7C225B256D90051A69A /* Vasarely 5.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78625B256960051A69A /* Vasarely 5.metal */; };
+		E7A5A7C325B256D90051A69A /* demosplash2016-cxw-03.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A77B25B256960051A69A /* demosplash2016-cxw-03.metal */; };
+		E7A5A7C425B256D90051A69A /* chrome logo.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78225B256960051A69A /* chrome logo.metal */; };
+		E7A5A7C525B256D90051A69A /* L spinner.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79925B256960051A69A /* L spinner.metal */; };
+		E7A5A7C625B256D90051A69A /* Ball Bounce Simple Physics.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78D25B256960051A69A /* Ball Bounce Simple Physics.metal */; };
+		E7A5A7C725B256D90051A69A /* Color mix.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A77F25B256960051A69A /* Color mix.metal */; };
+		E7A5A7C825B256D90051A69A /* Basic Orbit.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79D25B256960051A69A /* Basic Orbit.metal */; };
+		E7A5A7C925B256D90051A69A /* Circles-intersections.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79025B256960051A69A /* Circles-intersections.metal */; };
+		E7A5A7CA25B256D90051A69A /* blade jumper 2d.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79525B256960051A69A /* blade jumper 2d.metal */; };
+		E7A5A7CB25B256D90051A69A /* Rotating LED strip.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79225B256960051A69A /* Rotating LED strip.metal */; };
+		E7A5A7CC25B256D90051A69A /* Arcs.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79A25B256960051A69A /* Arcs.metal */; };
+		E7A5A7CD25B256D90051A69A /* Simple circle AA.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79E25B256960051A69A /* Simple circle AA.metal */; };
+		E7A5A7CE25B256D90051A69A /* Simple Eclipse.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78A25B256960051A69A /* Simple Eclipse.metal */; };
+		E7A5A7CF25B256D90051A69A /* Ball Bounce.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79325B256960051A69A /* Ball Bounce.metal */; };
+		E7A5A7D025B256D90051A69A /* Input Mouse.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79125B256960051A69A /* Input Mouse.metal */; };
+		E7A5A7D125B256D90051A69A /* Basic Radial Gradient.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78E25B256960051A69A /* Basic Radial Gradient.metal */; };
+		E7A5A7D225B256D90051A69A /* Oval Control.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79B25B256960051A69A /* Oval Control.metal */; };
+		E7A5A7D325B256D90051A69A /* Spinning Ring.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79725B256960051A69A /* Spinning Ring.metal */; };
+		E7A5A7D425B256D90051A69A /* Perturbation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78825B256960051A69A /* Perturbation.metal */; };
+		E7A5A7D525B256D90051A69A /* Loading With Glow and Falloff.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78425B256960051A69A /* Loading With Glow and Falloff.metal */; };
+		E7A5A7D625B256D90051A69A /* Circle emitting.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78B25B256960051A69A /* Circle emitting.metal */; };
+		E7A5A7D725B256D90051A69A /* Color Selection Wheel.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78725B256960051A69A /* Color Selection Wheel.metal */; };
+		E7A5A7D825B256D90051A69A /* Spinning circles.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A78925B256960051A69A /* Spinning circles.metal */; };
+		E7A5A7D925B256D90051A69A /* Loading 2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79825B256960051A69A /* Loading 2.metal */; };
+		E7A5A7DA25B256D90051A69A /* circles 3 animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79425B256960051A69A /* circles 3 animation.metal */; };
+		E7A5A7E925B257B80051A69A /* Static Points.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C725AD510B0051A69A /* Static Points.metal */; };
+		E7A5A7F025B257EE0051A69A /* Dot Line.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C325AD510A0051A69A /* Dot Line.metal */; };
+		E7A5A80325B26D110051A69A /* Attempt 19.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A45025B0CEAA0051A69A /* Attempt 19.swift */; };
+		E7A5A81125B34F860051A69A /* Bello.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A81025B34F860051A69A /* Bello.metal */; };
+		E7A5A81925B34F960051A69A /* Breathing Exercise.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A81825B34F960051A69A /* Breathing Exercise.metal */; };
+		E7A5A82125B34FA90051A69A /* Box Breathing Remix.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A82025B34FA90051A69A /* Box Breathing Remix.metal */; };
+		E7A5A83725B34FF80051A69A /* RYB Color wheel.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A83625B34FF80051A69A /* RYB Color wheel.metal */; };
+		E7A5A84525B353250051A69A /* SceneControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A84425B353250051A69A /* SceneControlsView.swift */; };
 		E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8CBA25A03F8400E464F9 /* Bello.swift */; };
 		E7AB8D3D25A5CCB600E464F9 /* Box Breathing Remix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */; };
 		E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */; };
@@ -103,6 +178,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E7A5A3DC25AD5E1B0051A69A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7A5A3AD25AD50E80051A69A;
+			remoteInfo = "Point Clouds";
+		};
+		E7A5A7E125B257080051A69A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7A5A7A025B256A90051A69A;
+			remoteInfo = CirclesVertex;
+		};
 		E7D7C07B25ABB36F004D75CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
@@ -202,6 +291,71 @@
 		E79A10E122CF9B4D004FD5E2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderSupport.swift; sourceTree = "<group>"; };
 		E79DD74323E9377D00DAB04A /* RenderPipelinePass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPipelinePass.swift; sourceTree = "<group>"; };
+		E7A5A39F25AD15B80051A69A /* PointScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointScene.swift; sourceTree = "<group>"; };
+		E7A5A3A625AD4EBD0051A69A /* Vogels Distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vogels Distribution.swift"; sourceTree = "<group>"; };
+		E7A5A3C125AD510A0051A69A /* Circle Spiral.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Circle Spiral.metal"; sourceTree = "<group>"; };
+		E7A5A3C225AD510A0051A69A /* Linear motion.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Linear motion.metal"; sourceTree = "<group>"; };
+		E7A5A3C325AD510A0051A69A /* Dot Line.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Dot Line.metal"; sourceTree = "<group>"; };
+		E7A5A3C425AD510A0051A69A /* dot wave.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "dot wave.metal"; sourceTree = "<group>"; };
+		E7A5A3C525AD510A0051A69A /* Attempt 19 of 100.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Attempt 19 of 100.metal"; sourceTree = "<group>"; };
+		E7A5A3C625AD510B0051A69A /* loopless dots along circle.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "loopless dots along circle.metal"; sourceTree = "<group>"; };
+		E7A5A3C725AD510B0051A69A /* Static Points.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Static Points.metal"; sourceTree = "<group>"; };
+		E7A5A3C825AD510B0051A69A /* Vogel disk.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Vogel disk.metal"; sourceTree = "<group>"; };
+		E7A5A3C925AD510B0051A69A /* Vogels Distrib.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Vogels Distrib.metal"; sourceTree = "<group>"; };
+		E7A5A3CA25AD510B0051A69A /* InfinityParticles.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = InfinityParticles.metal; sourceTree = "<group>"; };
+		E7A5A3CB25AD510B0051A69A /* Attempt 23 of 100.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Attempt 23 of 100.metal"; sourceTree = "<group>"; };
+		E7A5A3ED25AE78680051A69A /* Vogel Disk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vogel Disk.swift"; sourceTree = "<group>"; };
+		E7A5A43325B00CA10051A69A /* Linear Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Linear Motion.swift"; sourceTree = "<group>"; };
+		E7A5A43B25B0CE6A0051A69A /* Dot Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dot Line.swift"; sourceTree = "<group>"; };
+		E7A5A44225B0CE870051A69A /* Dot Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dot Wave.swift"; sourceTree = "<group>"; };
+		E7A5A44925B0CE970051A69A /* Circle Spiral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Circle Spiral.swift"; sourceTree = "<group>"; };
+		E7A5A45025B0CEAA0051A69A /* Attempt 19.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attempt 19.swift"; sourceTree = "<group>"; };
+		E7A5A46325B0D12C0051A69A /* Attempt 23.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attempt 23.swift"; sourceTree = "<group>"; };
+		E7A5A46A25B0D13E0051A69A /* Infinity Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Infinity Particles.swift"; sourceTree = "<group>"; };
+		E7A5A47125B0D1530051A69A /* Loopless Dots Along Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loopless Dots Along Circle.swift"; sourceTree = "<group>"; };
+		E7A5A47825B0D1720051A69A /* Static Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Static Points.swift"; sourceTree = "<group>"; };
+		E7A5A77B25B256960051A69A /* demosplash2016-cxw-03.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "demosplash2016-cxw-03.metal"; sourceTree = "<group>"; };
+		E7A5A77C25B256960051A69A /* Coloring CIrcle.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Coloring CIrcle.metal"; sourceTree = "<group>"; };
+		E7A5A77D25B256960051A69A /* Rounded Loading Spinner.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Rounded Loading Spinner.metal"; sourceTree = "<group>"; };
+		E7A5A77E25B256960051A69A /* Colored Rings.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Colored Rings.metal"; sourceTree = "<group>"; };
+		E7A5A77F25B256960051A69A /* Color mix.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Color mix.metal"; sourceTree = "<group>"; };
+		E7A5A78025B256960051A69A /* Ellipse Geometry.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Ellipse Geometry.metal"; sourceTree = "<group>"; };
+		E7A5A78125B256960051A69A /* Sunset and moonrise.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Sunset and moonrise.metal"; sourceTree = "<group>"; };
+		E7A5A78225B256960051A69A /* chrome logo.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "chrome logo.metal"; sourceTree = "<group>"; };
+		E7A5A78325B256960051A69A /* Magic Ring.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Magic Ring.metal"; sourceTree = "<group>"; };
+		E7A5A78425B256960051A69A /* Loading With Glow and Falloff.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Loading With Glow and Falloff.metal"; sourceTree = "<group>"; };
+		E7A5A78525B256960051A69A /* Rotating Color Ring.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Rotating Color Ring.metal"; sourceTree = "<group>"; };
+		E7A5A78625B256960051A69A /* Vasarely 5.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Vasarely 5.metal"; sourceTree = "<group>"; };
+		E7A5A78725B256960051A69A /* Color Selection Wheel.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Color Selection Wheel.metal"; sourceTree = "<group>"; };
+		E7A5A78825B256960051A69A /* Perturbation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Perturbation.metal; sourceTree = "<group>"; };
+		E7A5A78925B256960051A69A /* Spinning circles.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Spinning circles.metal"; sourceTree = "<group>"; };
+		E7A5A78A25B256960051A69A /* Simple Eclipse.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Simple Eclipse.metal"; sourceTree = "<group>"; };
+		E7A5A78B25B256960051A69A /* Circle emitting.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Circle emitting.metal"; sourceTree = "<group>"; };
+		E7A5A78C25B256960051A69A /* diffuese1.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = diffuese1.metal; sourceTree = "<group>"; };
+		E7A5A78D25B256960051A69A /* Ball Bounce Simple Physics.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Ball Bounce Simple Physics.metal"; sourceTree = "<group>"; };
+		E7A5A78E25B256960051A69A /* Basic Radial Gradient.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Basic Radial Gradient.metal"; sourceTree = "<group>"; };
+		E7A5A78F25B256960051A69A /* Breathing Ring.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Breathing Ring.metal"; sourceTree = "<group>"; };
+		E7A5A79025B256960051A69A /* Circles-intersections.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Circles-intersections.metal"; sourceTree = "<group>"; };
+		E7A5A79125B256960051A69A /* Input Mouse.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Input Mouse.metal"; sourceTree = "<group>"; };
+		E7A5A79225B256960051A69A /* Rotating LED strip.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Rotating LED strip.metal"; sourceTree = "<group>"; };
+		E7A5A79325B256960051A69A /* Ball Bounce.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Ball Bounce.metal"; sourceTree = "<group>"; };
+		E7A5A79425B256960051A69A /* circles 3 animation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "circles 3 animation.metal"; sourceTree = "<group>"; };
+		E7A5A79525B256960051A69A /* blade jumper 2d.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "blade jumper 2d.metal"; sourceTree = "<group>"; };
+		E7A5A79625B256960051A69A /* SH directional lights.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "SH directional lights.metal"; sourceTree = "<group>"; };
+		E7A5A79725B256960051A69A /* Spinning Ring.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Spinning Ring.metal"; sourceTree = "<group>"; };
+		E7A5A79825B256960051A69A /* Loading 2.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Loading 2.metal"; sourceTree = "<group>"; };
+		E7A5A79925B256960051A69A /* L spinner.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "L spinner.metal"; sourceTree = "<group>"; };
+		E7A5A79A25B256960051A69A /* Arcs.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Arcs.metal; sourceTree = "<group>"; };
+		E7A5A79B25B256960051A69A /* Oval Control.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Oval Control.metal"; sourceTree = "<group>"; };
+		E7A5A79C25B256960051A69A /* two circle.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "two circle.metal"; sourceTree = "<group>"; };
+		E7A5A79D25B256960051A69A /* Basic Orbit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Basic Orbit.metal"; sourceTree = "<group>"; };
+		E7A5A79E25B256960051A69A /* Simple circle AA.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Simple circle AA.metal"; sourceTree = "<group>"; };
+		E7A5A79F25B256960051A69A /* arc segment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "arc segment.metal"; sourceTree = "<group>"; };
+		E7A5A81025B34F860051A69A /* Bello.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Bello.metal; sourceTree = "<group>"; };
+		E7A5A81825B34F960051A69A /* Breathing Exercise.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Breathing Exercise.metal"; sourceTree = "<group>"; };
+		E7A5A82025B34FA90051A69A /* Box Breathing Remix.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Box Breathing Remix.metal"; sourceTree = "<group>"; };
+		E7A5A83625B34FF80051A69A /* RYB Color wheel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "RYB Color wheel.metal"; sourceTree = "<group>"; };
+		E7A5A84425B353250051A69A /* SceneControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneControlsView.swift; sourceTree = "<group>"; };
 		E7AB8CBA25A03F8400E464F9 /* Bello.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bello.swift; sourceTree = "<group>"; };
 		E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box Breathing Remix.swift"; sourceTree = "<group>"; };
 		E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ryb color wheel.swift"; sourceTree = "<group>"; };
@@ -271,6 +425,7 @@
 				E72A7FF523C2C275008C642A /* XSlider.swift */,
 				E72A7FEF23C2C1B6008C642A /* XColorPicker.swift */,
 				E72A7FF223C2C23F008C642A /* XBoolean.swift */,
+				E7A5A84425B353250051A69A /* SceneControlsView.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -296,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				E7ED2487257E92110075DD2E /* Circles */,
+				E7A5A3A525AD4E800051A69A /* Point Clouds */,
 				E74A42522576B7C500639F19 /* SceneProtocol.swift */,
 				E74A41CD2576B50E00639F19 /* Simple */,
 			);
@@ -347,6 +503,89 @@
 			path = IO;
 			sourceTree = "<group>";
 		};
+		E7A5A3A525AD4E800051A69A /* Point Clouds */ = {
+			isa = PBXGroup;
+			children = (
+				E7A5A39F25AD15B80051A69A /* PointScene.swift */,
+				E7A5A45025B0CEAA0051A69A /* Attempt 19.swift */,
+				E7A5A46325B0D12C0051A69A /* Attempt 23.swift */,
+				E7A5A44925B0CE970051A69A /* Circle Spiral.swift */,
+				E7A5A44225B0CE870051A69A /* Dot Wave.swift */,
+				E7A5A46A25B0D13E0051A69A /* Infinity Particles.swift */,
+				E7A5A43325B00CA10051A69A /* Linear Motion.swift */,
+				E7A5A47125B0D1530051A69A /* Loopless Dots Along Circle.swift */,
+				E7A5A3ED25AE78680051A69A /* Vogel Disk.swift */,
+				E7A5A3A625AD4EBD0051A69A /* Vogels Distribution.swift */,
+			);
+			path = "Point Clouds";
+			sourceTree = "<group>";
+		};
+		E7A5A3AC25AD50A70051A69A /* Point Clouds */ = {
+			isa = PBXGroup;
+			children = (
+				E7A5A3C525AD510A0051A69A /* Attempt 19 of 100.metal */,
+				E7A5A3CB25AD510B0051A69A /* Attempt 23 of 100.metal */,
+				E7A5A3C125AD510A0051A69A /* Circle Spiral.metal */,
+				E7A5A3C425AD510A0051A69A /* dot wave.metal */,
+				E7A5A3CA25AD510B0051A69A /* InfinityParticles.metal */,
+				E7A5A3C225AD510A0051A69A /* Linear motion.metal */,
+				E7A5A3C625AD510B0051A69A /* loopless dots along circle.metal */,
+				E7A5A3C825AD510B0051A69A /* Vogel disk.metal */,
+				E7A5A3C925AD510B0051A69A /* Vogels Distrib.metal */,
+			);
+			path = "Point Clouds";
+			sourceTree = "<group>";
+		};
+		E7A5A77A25B256960051A69A /* Circles - Vertex */ = {
+			isa = PBXGroup;
+			children = (
+				E7A5A79F25B256960051A69A /* arc segment.metal */,
+				E7A5A79A25B256960051A69A /* Arcs.metal */,
+				E7A5A78D25B256960051A69A /* Ball Bounce Simple Physics.metal */,
+				E7A5A79325B256960051A69A /* Ball Bounce.metal */,
+				E7A5A79D25B256960051A69A /* Basic Orbit.metal */,
+				E7A5A78E25B256960051A69A /* Basic Radial Gradient.metal */,
+				E7A5A81025B34F860051A69A /* Bello.metal */,
+				E7A5A79525B256960051A69A /* blade jumper 2d.metal */,
+				E7A5A82025B34FA90051A69A /* Box Breathing Remix.metal */,
+				E7A5A81825B34F960051A69A /* Breathing Exercise.metal */,
+				E7A5A78F25B256960051A69A /* Breathing Ring.metal */,
+				E7A5A78225B256960051A69A /* chrome logo.metal */,
+				E7A5A78B25B256960051A69A /* Circle emitting.metal */,
+				E7A5A79425B256960051A69A /* circles 3 animation.metal */,
+				E7A5A79025B256960051A69A /* Circles-intersections.metal */,
+				E7A5A77F25B256960051A69A /* Color mix.metal */,
+				E7A5A78725B256960051A69A /* Color Selection Wheel.metal */,
+				E7A5A77E25B256960051A69A /* Colored Rings.metal */,
+				E7A5A77C25B256960051A69A /* Coloring CIrcle.metal */,
+				E7A5A77B25B256960051A69A /* demosplash2016-cxw-03.metal */,
+				E7A5A78C25B256960051A69A /* diffuese1.metal */,
+				E7A5A3C325AD510A0051A69A /* Dot Line.metal */,
+				E7A5A78025B256960051A69A /* Ellipse Geometry.metal */,
+				E7A5A79125B256960051A69A /* Input Mouse.metal */,
+				E7A5A79925B256960051A69A /* L spinner.metal */,
+				E7A5A79825B256960051A69A /* Loading 2.metal */,
+				E7A5A78425B256960051A69A /* Loading With Glow and Falloff.metal */,
+				E7A5A78325B256960051A69A /* Magic Ring.metal */,
+				E7A5A79B25B256960051A69A /* Oval Control.metal */,
+				E7A5A78825B256960051A69A /* Perturbation.metal */,
+				E7A5A78525B256960051A69A /* Rotating Color Ring.metal */,
+				E7A5A79225B256960051A69A /* Rotating LED strip.metal */,
+				E7A5A77D25B256960051A69A /* Rounded Loading Spinner.metal */,
+				E7A5A83625B34FF80051A69A /* RYB Color wheel.metal */,
+				E7A5A79625B256960051A69A /* SH directional lights.metal */,
+				E7A5A79E25B256960051A69A /* Simple circle AA.metal */,
+				E7A5A78A25B256960051A69A /* Simple Eclipse.metal */,
+				E7A5A78925B256960051A69A /* Spinning circles.metal */,
+				E7A5A79725B256960051A69A /* Spinning Ring.metal */,
+				E7A5A3C725AD510B0051A69A /* Static Points.metal */,
+				E7A5A78125B256960051A69A /* Sunset and moonrise.metal */,
+				E7A5A79C25B256960051A69A /* two circle.metal */,
+				E7A5A78625B256960051A69A /* Vasarely 5.metal */,
+			);
+			path = "Circles - Vertex";
+			sourceTree = "<group>";
+		};
 		E7CF9BCB227F421800413280 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +625,8 @@
 		E7D7C0A425ABB410004D75CD /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				E7A5A77A25B256960051A69A /* Circles - Vertex */,
+				E7A5A3AC25AD50A70051A69A /* Point Clouds */,
 				E7D7C1B725ACBD1F004D75CD /* Shapes3dVertex */,
 				E7D7C0A325ABB410004D75CD /* Simple - Vertex */,
 			);
@@ -412,7 +653,9 @@
 				E7AB8CBA25A03F8400E464F9 /* Bello.swift */,
 				E7ED2488257E923E0075DD2E /* Breathing Exercise.swift */,
 				E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */,
+				E7A5A43B25B0CE6A0051A69A /* Dot Line.swift */,
 				E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */,
+				E7A5A47825B0D1720051A69A /* Static Points.swift */,
 			);
 			path = Circles;
 			sourceTree = "<group>";
@@ -495,6 +738,34 @@
 			productName = Simple;
 			productType = "com.apple.product-type.metal-library";
 		};
+		E7A5A3AD25AD50E80051A69A /* Point Clouds */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7A5A3B425AD50E80051A69A /* Build configuration list for PBXNativeTarget "Point Clouds" */;
+			buildPhases = (
+				E7A5A3AE25AD50E80051A69A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Point Clouds";
+			productName = Simple;
+			productType = "com.apple.product-type.metal-library";
+		};
+		E7A5A7A025B256A90051A69A /* CirclesVertex */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7A5A7A725B256A90051A69A /* Build configuration list for PBXNativeTarget "CirclesVertex" */;
+			buildPhases = (
+				E7A5A7A125B256A90051A69A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CirclesVertex;
+			productName = Simple;
+			productType = "com.apple.product-type.metal-library";
+		};
 		E7D7C06B25ABB355004D75CD /* Simple Vertex */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7D7C07225ABB355004D75CD /* Build configuration list for PBXNativeTarget "Simple Vertex" */;
@@ -555,6 +826,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				E7A5A7E225B257080051A69A /* PBXTargetDependency */,
+				E7A5A3DD25AD5E1B0051A69A /* PBXTargetDependency */,
 				E7D7C1C925ACBD4C004D75CD /* PBXTargetDependency */,
 				E7D7C07C25ABB36F004D75CD /* PBXTargetDependency */,
 				E7ED18F6257E903A0075DD2E /* PBXTargetDependency */,
@@ -605,6 +878,8 @@
 			projectRoot = "";
 			targets = (
 				E7FCB465212A2B1000CED4FA /* MetalTinker */,
+				E7A5A7A025B256A90051A69A /* CirclesVertex */,
+				E7A5A3AD25AD50E80051A69A /* Point Clouds */,
 				E7D7C1A525ACBCE6004D75CD /* Shapes 3d Vertex */,
 				E7D7C06B25ABB355004D75CD /* Simple Vertex */,
 				E743D701236C83FE00EB81BC /* Template */,
@@ -670,6 +945,82 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7A5A3AE25AD50E80051A69A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7A5A3CD25AD510B0051A69A /* Linear motion.metal in Sources */,
+				E7A5A3AF25AD50E80051A69A /* glsl.metal in Sources */,
+				E7A5A3CC25AD510B0051A69A /* Circle Spiral.metal in Sources */,
+				E7A5A3D025AD510B0051A69A /* Attempt 19 of 100.metal in Sources */,
+				E7A5A3B025AD50E80051A69A /* scenetest.metal in Sources */,
+				E7A5A3B125AD50E80051A69A /* shapes.metal in Sources */,
+				E7A5A45725B0CF270051A69A /* Attempt 23 of 100.metal in Sources */,
+				E7A5A3D525AD510B0051A69A /* InfinityParticles.metal in Sources */,
+				E7A5A3B225AD50E80051A69A /* sdf.metal in Sources */,
+				E7A5A3CF25AD510B0051A69A /* dot wave.metal in Sources */,
+				E7A5A3D325AD510B0051A69A /* Vogel disk.metal in Sources */,
+				E7A5A3D425AD510B0051A69A /* Vogels Distrib.metal in Sources */,
+				E7A5A45D25B0CFC50051A69A /* loopless dots along circle.metal in Sources */,
+				E7A5A3B325AD50E80051A69A /* support.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7A5A7A125B256A90051A69A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7A5A7CC25B256D90051A69A /* Arcs.metal in Sources */,
+				E7A5A7CF25B256D90051A69A /* Ball Bounce.metal in Sources */,
+				E7A5A7A225B256A90051A69A /* glsl.metal in Sources */,
+				E7A5A7D325B256D90051A69A /* Spinning Ring.metal in Sources */,
+				E7A5A7D925B256D90051A69A /* Loading 2.metal in Sources */,
+				E7A5A7A325B256A90051A69A /* scenetest.metal in Sources */,
+				E7A5A7B925B256D90051A69A /* diffuese1.metal in Sources */,
+				E7A5A83725B34FF80051A69A /* RYB Color wheel.metal in Sources */,
+				E7A5A82125B34FA90051A69A /* Box Breathing Remix.metal in Sources */,
+				E7A5A7BC25B256D90051A69A /* Sunset and moonrise.metal in Sources */,
+				E7A5A7C825B256D90051A69A /* Basic Orbit.metal in Sources */,
+				E7A5A7C125B256D90051A69A /* Magic Ring.metal in Sources */,
+				E7A5A7C425B256D90051A69A /* chrome logo.metal in Sources */,
+				E7A5A7C325B256D90051A69A /* demosplash2016-cxw-03.metal in Sources */,
+				E7A5A7A425B256A90051A69A /* shapes.metal in Sources */,
+				E7A5A7D025B256D90051A69A /* Input Mouse.metal in Sources */,
+				E7A5A7DA25B256D90051A69A /* circles 3 animation.metal in Sources */,
+				E7A5A7D725B256D90051A69A /* Color Selection Wheel.metal in Sources */,
+				E7A5A7B825B256D90051A69A /* arc segment.metal in Sources */,
+				E7A5A7C725B256D90051A69A /* Color mix.metal in Sources */,
+				E7A5A7D225B256D90051A69A /* Oval Control.metal in Sources */,
+				E7A5A7C225B256D90051A69A /* Vasarely 5.metal in Sources */,
+				E7A5A7D625B256D90051A69A /* Circle emitting.metal in Sources */,
+				E7A5A7C525B256D90051A69A /* L spinner.metal in Sources */,
+				E7A5A81125B34F860051A69A /* Bello.metal in Sources */,
+				E7A5A7BB25B256D90051A69A /* Ellipse Geometry.metal in Sources */,
+				E7A5A7BE25B256D90051A69A /* Breathing Ring.metal in Sources */,
+				E7A5A81925B34F960051A69A /* Breathing Exercise.metal in Sources */,
+				E7A5A7BA25B256D90051A69A /* Rotating Color Ring.metal in Sources */,
+				E7A5A7B625B256D90051A69A /* Colored Rings.metal in Sources */,
+				E7A5A7D425B256D90051A69A /* Perturbation.metal in Sources */,
+				E7A5A7BD25B256D90051A69A /* two circle.metal in Sources */,
+				E7A5A7C925B256D90051A69A /* Circles-intersections.metal in Sources */,
+				E7A5A7C625B256D90051A69A /* Ball Bounce Simple Physics.metal in Sources */,
+				E7A5A7F025B257EE0051A69A /* Dot Line.metal in Sources */,
+				E7A5A7B725B256D90051A69A /* Coloring CIrcle.metal in Sources */,
+				E7A5A7CA25B256D90051A69A /* blade jumper 2d.metal in Sources */,
+				E7A5A7C025B256D90051A69A /* Rounded Loading Spinner.metal in Sources */,
+				E7A5A7CB25B256D90051A69A /* Rotating LED strip.metal in Sources */,
+				E7A5A7D525B256D90051A69A /* Loading With Glow and Falloff.metal in Sources */,
+				E7A5A7CD25B256D90051A69A /* Simple circle AA.metal in Sources */,
+				E7A5A7E925B257B80051A69A /* Static Points.metal in Sources */,
+				E7A5A7D825B256D90051A69A /* Spinning circles.metal in Sources */,
+				E7A5A7BF25B256D90051A69A /* SH directional lights.metal in Sources */,
+				E7A5A7A525B256A90051A69A /* sdf.metal in Sources */,
+				E7A5A7D125B256D90051A69A /* Basic Radial Gradient.metal in Sources */,
+				E7A5A7CE25B256D90051A69A /* Simple Eclipse.metal in Sources */,
+				E7A5A7A625B256A90051A69A /* support.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7D7C06C25ABB355004D75CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -730,6 +1081,8 @@
 				E7D7C0D925ABB5E3004D75CD /* ComputePipelinePass.swift in Sources */,
 				E7D7C0B625ABB443004D75CD /* Webcam.swift in Sources */,
 				E7CF9BD9227F434A00413280 /* NSView.swift in Sources */,
+				E7A5A84525B353250051A69A /* SceneControlsView.swift in Sources */,
+				E7A5A3A725AD4EBD0051A69A /* Vogels Distribution.swift in Sources */,
 				E7D7C0CA25ABB4C8004D75CD /* RenderPipelinePass.swift in Sources */,
 				E7D7C0C225ABB48F004D75CD /* ControlsView.swift in Sources */,
 				E7D7C0E425AC27A1004D75CD /* LibraryView.swift in Sources */,
@@ -737,10 +1090,14 @@
 				E74F94592256A05900706CBF /* MetalVideoRecorder.swift in Sources */,
 				E7ED1A19257E909E0075DD2E /* Simple.swift in Sources */,
 				E749D2B6254F19D3000930BB /* KeyEventHandling.swift in Sources */,
+				E7A5A43425B00CA10051A69A /* Linear Motion.swift in Sources */,
+				E7A5A47225B0D1530051A69A /* Loopless Dots Along Circle.swift in Sources */,
 				E7ED629821779685007ABB53 /* support.metal in Sources */,
 				E7CF9BDC227F439300413280 /* String.swift in Sources */,
 				E7D7C0B225ABB440004D75CD /* VideoSupport.swift in Sources */,
 				E7D7C05025AB9EEF004D75CD /* Library.swift in Sources */,
+				E7A5A43C25B0CE6A0051A69A /* Dot Line.swift in Sources */,
+				E7A5A47925B0D1720051A69A /* Static Points.swift in Sources */,
 				E7CF9BD1227F42BF00413280 /* MTLTexture.swift in Sources */,
 				E71A02C82367397B00A88C16 /* NSImageView.swift in Sources */,
 				E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */,
@@ -752,8 +1109,10 @@
 				E7D7C04B25AB9E31004D75CD /* T3SCNScene.swift in Sources */,
 				E72A7FF023C2C1B6008C642A /* XColorPicker.swift in Sources */,
 				E7D7C0D525ABB5CB004D75CD /* RenderSupport.swift in Sources */,
+				E7A5A46425B0D12C0051A69A /* Attempt 23.swift in Sources */,
 				E7D7C03F25AB9C6F004D75CD /* PreferencesView.swift in Sources */,
 				E785E2E525AA46E600511B0C /* SKSCNScene.swift in Sources */,
+				E7A5A80325B26D110051A69A /* Attempt 19.swift in Sources */,
 				E7ED2489257E923E0075DD2E /* Breathing Exercise.swift in Sources */,
 				E74A42532576B7C500639F19 /* SceneProtocol.swift in Sources */,
 				E7652E1A2423FE80004CB302 /* AVAsset.swift in Sources */,
@@ -761,8 +1120,11 @@
 				E7ED19D9257E909E0075DD2E /* Simple4.swift in Sources */,
 				E7D7C0BA25ABB486004D75CD /* ConfigController.swift in Sources */,
 				E7CF9BCD227F425400413280 /* NSColor.swift in Sources */,
+				E7A5A44A25B0CE970051A69A /* Circle Spiral.swift in Sources */,
 				E7ED1A59257E909E0075DD2E /* Simple7.swift in Sources */,
+				E7A5A44325B0CE870051A69A /* Dot Wave.swift in Sources */,
 				E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */,
+				E7A5A3EE25AE78680051A69A /* Vogel Disk.swift in Sources */,
 				E7FCB46A212A2B1000CED4FA /* MetalFilterTinkerApp.swift in Sources */,
 				E71A02C62366847600A88C16 /* ViewModel.swift in Sources */,
 				E72A7FF623C2C275008C642A /* XSlider.swift in Sources */,
@@ -770,6 +1132,8 @@
 				E7CF9BCF227F429A00413280 /* UserDefaults.swift in Sources */,
 				E7D7C0D125ABB55F004D75CD /* Shader.swift in Sources */,
 				E7AB8E0125A8497F00E464F9 /* MetalX.swift in Sources */,
+				E7A5A46B25B0D13E0051A69A /* Infinity Particles.swift in Sources */,
+				E7A5A3A025AD15B80051A69A /* PointScene.swift in Sources */,
 				E748C45A239809E100AD7A64 /* RenderSetup.swift in Sources */,
 				E74A43972576EC1A00639F19 /* SceneLibraryView.swift in Sources */,
 				E746F31523F0D107003598F6 /* sdf.metal in Sources */,
@@ -780,6 +1144,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E7A5A3DD25AD5E1B0051A69A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7A5A3AD25AD50E80051A69A /* Point Clouds */;
+			targetProxy = E7A5A3DC25AD5E1B0051A69A /* PBXContainerItemProxy */;
+		};
+		E7A5A7E225B257080051A69A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7A5A7A025B256A90051A69A /* CirclesVertex */;
+			targetProxy = E7A5A7E125B257080051A69A /* PBXContainerItemProxy */;
+		};
 		E7D7C07C25ABB36F004D75CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E7D7C06B25ABB355004D75CD /* Simple Vertex */;
@@ -808,6 +1182,42 @@
 			name = Debug;
 		};
 		E743D70A236C83FE00EB81BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E7A5A3B525AD50E80051A69A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E7A5A3B625AD50E80051A69A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E7A5A7A825B256A90051A69A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E7A5A7A925B256A90051A69A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1096,6 +1506,24 @@
 			buildConfigurations = (
 				E743D709236C83FE00EB81BC /* Debug */,
 				E743D70A236C83FE00EB81BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7A5A3B425AD50E80051A69A /* Build configuration list for PBXNativeTarget "Point Clouds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7A5A3B525AD50E80051A69A /* Debug */,
+				E7A5A3B625AD50E80051A69A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7A5A7A725B256A90051A69A /* Build configuration list for PBXNativeTarget "CirclesVertex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7A5A7A825B256A90051A69A /* Debug */,
+				E7A5A7A925B256A90051A69A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

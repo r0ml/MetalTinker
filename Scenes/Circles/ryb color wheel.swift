@@ -121,5 +121,14 @@ class ryb_color_wheel_Sprite : SKScene {
 
 class ryb_color_wheel_Remix : SKSCNScene {
   override var group : String { get  { "Circles - Scene" } }
-  override var skScene : SKScene { get { ryb_color_wheel_Sprite() }}
+
+  required init() {
+    super.init()
+    skScene = ryb_color_wheel_Sprite()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
 }

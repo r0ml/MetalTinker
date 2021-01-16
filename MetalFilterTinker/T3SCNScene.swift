@@ -17,10 +17,9 @@ struct Times {
 
 
 // Renders a spritekit as the background for a SceneKit.  Hence, this is the same as just displaying the SpriteKit
-class T3SCNScene : SCNScene, TinkerScene {
-  var group : String { get { "abstract base class" } }
+class T3SCNScene : T1SCNScene {
 
-  override required init() {
+  required init() {
     super.init()
   }
 
@@ -130,8 +129,6 @@ class T3ShaderSCNScene : T3SCNScene {
   var shader : String
   var library : String
   var config : ConfigController
-  var myCamera : SCNCamera
-  var myCameraNode : SCNNode
   var touchLoc : CGPoint?
   var startDragLoc : CGPoint?
 
@@ -142,26 +139,14 @@ class T3ShaderSCNScene : T3SCNScene {
 
     let j = SCNMaterial( )
 
-
-    let c = SCNCamera()
-    c.usesOrthographicProjection = false
-  // c.orthographicScale = 9
-    c.zNear = 0
-    c.zFar = 1000
-
-    let cn = SCNNode()
-    cn.camera = c
-    cn.name = "Camera node"
-    myCamera = c
-
     var ttt = Times()
     let planeSize = CGSize(width: 140, height: 100)
 
-    let cd = tan(c.fieldOfView * CGFloat.pi / 180.0) * (c.projectionDirection == .vertical ? planeSize.height : planeSize.width) / 2.0
-    cn.position = SCNVector3(0, 0, cd)
-
-    myCameraNode = cn
     super.init()
+
+    let cd = tan(myCameraNode.camera!.fieldOfView * CGFloat.pi / 180.0) * (myCameraNode.camera!.projectionDirection == .vertical ? planeSize.height : planeSize.width) / 2.0
+    myCameraNode.position = SCNVector3(0, 0, cd)
+
 
 
 
@@ -226,13 +211,12 @@ class T3ShaderSCNScene : T3SCNScene {
 
     let target = SCNLookAtConstraint(target: gn)
     target.isGimbalLockEnabled = true
-    cn.constraints = [target]
+    myCameraNode.constraints = [target]
 
 
     self.dist = cd
 
     self.rootNode.addChildNode(gn)
-    self.rootNode.addChildNode(cn)
 
     self.background.contents = NSColor.orange
 
@@ -318,13 +302,13 @@ class T3ShaderSCNScene : T3SCNScene {
     let ss = NSScreen.main?.frame.size ?? CGSize(width: 16, height: 9)
 //    print(ss)
     let mp = point - bounds.size / 2.0
-    var y = tan(myCamera.fieldOfView / 180 / 2 * CGFloat.pi) * myCameraNode.position.z
+    var y = tan(myCameraNode.camera!.fieldOfView / 180 / 2 * CGFloat.pi) * myCameraNode.position.z
     var x = y * ss.width / ss.height
 
     let adjb = CGSize(width: bounds.size.height * ss.width / ss.height, height: bounds.size.height)
 //    print(adjb)
 
-    if myCamera.projectionDirection == .vertical {
+    if myCameraNode.camera!.projectionDirection == .vertical {
 
     } else {
       let z = x

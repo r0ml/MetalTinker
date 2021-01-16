@@ -11,10 +11,10 @@ protocol TinkerScene {
   var group : String {get}
 }
 
-var scenery : Dictionary<String, Dictionary<String, T3SCNScene>> = {
-  var a = Dictionary<String, Dictionary<String, T3SCNScene>>()
+var scenery : Dictionary<String, Dictionary<String, T1SCNScene>> = {
+  var a = Dictionary<String, Dictionary<String, T1SCNScene>>()
 
-  let j = getSubclassesOf(T3SCNScene.self).filter { ($0 as? T3ShaderSCNScene.Type) == nil }
+  let j = getSubclassesOf(T1SCNScene.self).filter { ($0 as? T3ShaderSCNScene.Type) == nil }
 
  let m = metalLibraries.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }
   // m are the libraries
@@ -31,13 +31,13 @@ var scenery : Dictionary<String, Dictionary<String, T3SCNScene>> = {
     }
     let ll = lib.label!
     for ss in res {
-      var b = a[ ll, default: Dictionary<String, T3SCNScene>()]
+      var b = a[ ll, default: Dictionary<String, T1SCNScene>()]
       b[ ss ] = T3ShaderSCNScene(shader: ss, library: ll)
       a[ ll ] = b
     }
   }
 
-  let k = j.compactMap { $0.init() }
+  let k = j.compactMap { (cc : T1SCNScene.Type) -> T1SCNScene? in if cc == PointScene.self { return nil } else { return cc.init() } }
 
 
   for kk in k {

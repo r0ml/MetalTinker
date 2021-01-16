@@ -106,5 +106,14 @@ class Bello_Sprite : SKScene {
 
 class Bello : SKSCNScene {
   override var group : String { get  { "Circles - Scene" } }
-  override var skScene : SKScene { get { Bello_Sprite() }}
+
+  required init() {
+    super.init()
+    skScene = Bello_Sprite()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
 }

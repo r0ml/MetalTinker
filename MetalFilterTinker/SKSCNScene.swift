@@ -7,11 +7,21 @@ import SpriteKit
 
 class SKSCNScene : T3SCNScene {
 //  override var group : String { get  { "" } }
-  var skScene : SKScene { get { SKScene() } }
+  var skScene : SKScene!
+  var planeNode : SCNNode = SCNNode()
 
   required init() {
 
     super.init()
+    planeNode.name = "Shader plane node"
+    self.rootNode.addChildNode(planeNode)
+    self.background.contents = NSColor.darkGray
+  }
+
+  override func setSize(_ sz : CGSize) {
+    let osz = self.size
+    super.setSize(sz)
+    if self.size == osz { return }
 
     let j = SCNMaterial( )
 
@@ -21,41 +31,27 @@ class SKSCNScene : T3SCNScene {
     j.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
     j.diffuse.contents = st
 
-    let c = SCNCamera()
-    c.usesOrthographicProjection = false
-    c.zNear = 0
-    c.zFar = 1000
+    j.lightingModel = .constant
 
-    let cn = SCNNode()
-    cn.camera = c
-    cn.name = "Camera node"
-
-    // why does this not work if I double the width and height?
-    let planeSize = CGSize(width: 700, height: 500)
-
-    let cd = tan(c.fieldOfView * CGFloat.pi / 180.0) * (c.projectionDirection == .vertical ? planeSize.height : planeSize.width) / 2.0
-    cn.position = SCNVector3(0, 0, cd)
-
-
-    let g = SCNPlane(width: planeSize.width, height: planeSize.height)
+    let g = SCNPlane(width: self.size.width, height: self.size.height)
     g.materials = [j]
 
+    planeNode.geometry = g
 
-    let gn = SCNNode(geometry: g)
-    gn.name = "Shader plane node"
+//    let target = SCNLookAtConstraint(target: gn)
+//    target.isGimbalLockEnabled = true
+//    myCameraNode.constraints = [target]
 
-    let target = SCNLookAtConstraint(target: gn)
-    target.isGimbalLockEnabled = true
-    cn.constraints = [target]
 
-    self.dist = cd
+//    self.dist = cd
 
-    self.rootNode.addChildNode(gn)
-    self.rootNode.addChildNode(cn)
 
-    self.background.contents = NSColor.orange
+  }
 
-    self.isPaused = false
+  override func pause(_ t : Bool) {
+    super.pause(t)
+    skScene.isPaused = t
+    planeNode.isPaused = t
   }
 
   required init?(coder: NSCoder) {
