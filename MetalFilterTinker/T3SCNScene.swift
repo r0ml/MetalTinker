@@ -140,7 +140,7 @@ class T3ShaderSCNScene : T3SCNScene {
     let j = SCNMaterial( )
 
     var ttt = Times()
-    let planeSize = CGSize(width: 140, height: 100)
+    let planeSize = CGSize(width: 1600, height: 900)
 
     super.init()
 

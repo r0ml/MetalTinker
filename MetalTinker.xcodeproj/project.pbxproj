@@ -117,6 +117,28 @@
 		E7AB8D3D25A5CCB600E464F9 /* Box Breathing Remix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */; };
 		E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */; };
 		E7AB8E0125A8497F00E464F9 /* MetalX.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8E0025A8497F00E464F9 /* MetalX.swift */; };
+		E7B5726925B3ADEF00DF1452 /* Vasarely 5.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5726825B3ADEF00DF1452 /* Vasarely 5.swift */; };
+		E7B5727125B40B4F00DF1452 /* Spinning_Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5727025B40B4F00DF1452 /* Spinning_Ring.swift */; };
+		E7B5727925B40B6700DF1452 /* Spinning_Circles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5727825B40B6700DF1452 /* Spinning_Circles.swift */; };
+		E7B5728125B40B8000DF1452 /* Simple_Eclipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5728025B40B8000DF1452 /* Simple_Eclipse.swift */; };
+		E7B5728925B40B9F00DF1452 /* Simple_Circle_AA.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5728825B40B9F00DF1452 /* Simple_Circle_AA.swift */; };
+		E7B5729125B40BC300DF1452 /* Rotating_LED_Strip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5729025B40BC300DF1452 /* Rotating_LED_Strip.swift */; };
+		E7B5729925B40BD900DF1452 /* Rotating_Color_Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5729825B40BD900DF1452 /* Rotating_Color_Ring.swift */; };
+		E7B572A125B40BF300DF1452 /* Perturbation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572A025B40BF300DF1452 /* Perturbation.swift */; };
+		E7B572A925B40C0800DF1452 /* Magic_Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572A825B40C0800DF1452 /* Magic_Ring.swift */; };
+		E7B572B125B40C2000DF1452 /* Loading_With_Glow_and_Falloff.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572B025B40C2000DF1452 /* Loading_With_Glow_and_Falloff.swift */; };
+		E7B572B925B40C3900DF1452 /* Loading_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572B825B40C3900DF1452 /* Loading_2.swift */; };
+		E7B572C125B40C5B00DF1452 /* L_Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572C025B40C5B00DF1452 /* L_Spinner.swift */; };
+		E7B572C925B40E1100DF1452 /* Color_Mix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572C825B40E1100DF1452 /* Color_Mix.swift */; };
+		E7B572D125B40E5A00DF1452 /* Circles_Intersections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572D025B40E5A00DF1452 /* Circles_Intersections.swift */; };
+		E7B572D925B40E7F00DF1452 /* Circles_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572D825B40E7E00DF1452 /* Circles_3.swift */; };
+		E7B572E125B40EC300DF1452 /* Chrome Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572E025B40EC300DF1452 /* Chrome Logo.swift */; };
+		E7B572E925B40F0300DF1452 /* Blade_Jumper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572E825B40F0300DF1452 /* Blade_Jumper.swift */; };
+		E7B572F125B40F4E00DF1452 /* Basic_Radial_Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572F025B40F4E00DF1452 /* Basic_Radial_Gradient.swift */; };
+		E7B572F925B40F7A00DF1452 /* Basic_Orbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B572F825B40F7A00DF1452 /* Basic_Orbit.swift */; };
+		E7B5730125B40FB400DF1452 /* Ball_Bounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5730025B40FB400DF1452 /* Ball_Bounce.swift */; };
+		E7B5730925B40FD600DF1452 /* Ball_Bounce_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5730825B40FD600DF1452 /* Ball_Bounce_2.swift */; };
+		E7B5731125B4100300DF1452 /* Arcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5731025B4100300DF1452 /* Arcs.swift */; };
 		E7CF9B7D227CC6FE00413280 /* Textures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7CF9B7C227CC6FE00413280 /* Textures.xcassets */; };
 		E7CF9BCD227F425400413280 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCC227F425400413280 /* NSColor.swift */; };
 		E7CF9BCF227F429A00413280 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCE227F429A00413280 /* UserDefaults.swift */; };
@@ -360,6 +382,28 @@
 		E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box Breathing Remix.swift"; sourceTree = "<group>"; };
 		E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ryb color wheel.swift"; sourceTree = "<group>"; };
 		E7AB8E0025A8497F00E464F9 /* MetalX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalX.swift; sourceTree = "<group>"; };
+		E7B5726825B3ADEF00DF1452 /* Vasarely 5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vasarely 5.swift"; sourceTree = "<group>"; };
+		E7B5727025B40B4F00DF1452 /* Spinning_Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinning_Ring.swift; sourceTree = "<group>"; };
+		E7B5727825B40B6700DF1452 /* Spinning_Circles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinning_Circles.swift; sourceTree = "<group>"; };
+		E7B5728025B40B8000DF1452 /* Simple_Eclipse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple_Eclipse.swift; sourceTree = "<group>"; };
+		E7B5728825B40B9F00DF1452 /* Simple_Circle_AA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple_Circle_AA.swift; sourceTree = "<group>"; };
+		E7B5729025B40BC300DF1452 /* Rotating_LED_Strip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotating_LED_Strip.swift; sourceTree = "<group>"; };
+		E7B5729825B40BD900DF1452 /* Rotating_Color_Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotating_Color_Ring.swift; sourceTree = "<group>"; };
+		E7B572A025B40BF300DF1452 /* Perturbation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Perturbation.swift; sourceTree = "<group>"; };
+		E7B572A825B40C0800DF1452 /* Magic_Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magic_Ring.swift; sourceTree = "<group>"; };
+		E7B572B025B40C2000DF1452 /* Loading_With_Glow_and_Falloff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading_With_Glow_and_Falloff.swift; sourceTree = "<group>"; };
+		E7B572B825B40C3900DF1452 /* Loading_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading_2.swift; sourceTree = "<group>"; };
+		E7B572C025B40C5B00DF1452 /* L_Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L_Spinner.swift; sourceTree = "<group>"; };
+		E7B572C825B40E1100DF1452 /* Color_Mix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_Mix.swift; sourceTree = "<group>"; };
+		E7B572D025B40E5A00DF1452 /* Circles_Intersections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circles_Intersections.swift; sourceTree = "<group>"; };
+		E7B572D825B40E7E00DF1452 /* Circles_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circles_3.swift; sourceTree = "<group>"; };
+		E7B572E025B40EC300DF1452 /* Chrome Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chrome Logo.swift"; sourceTree = "<group>"; };
+		E7B572E825B40F0300DF1452 /* Blade_Jumper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blade_Jumper.swift; sourceTree = "<group>"; };
+		E7B572F025B40F4E00DF1452 /* Basic_Radial_Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic_Radial_Gradient.swift; sourceTree = "<group>"; };
+		E7B572F825B40F7A00DF1452 /* Basic_Orbit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic_Orbit.swift; sourceTree = "<group>"; };
+		E7B5730025B40FB400DF1452 /* Ball_Bounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball_Bounce.swift; sourceTree = "<group>"; };
+		E7B5730825B40FD600DF1452 /* Ball_Bounce_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball_Bounce_2.swift; sourceTree = "<group>"; };
+		E7B5731025B4100300DF1452 /* Arcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arcs.swift; sourceTree = "<group>"; };
 		E7CF9B7B227CC0E900413280 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		E7CF9B7C227CC6FE00413280 /* Textures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Textures.xcassets; sourceTree = "<group>"; };
 		E7CF9BCC227F425400413280 /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
@@ -608,16 +652,16 @@
 		E7D7C0A325ABB410004D75CD /* Simple - Vertex */ = {
 			isa = PBXGroup;
 			children = (
-				E7D7C09925ABB410004D75CD /* Bars.metal */,
-				E7D7C09A25ABB410004D75CD /* Basic Bar.metal */,
-				E7D7C09B25ABB410004D75CD /* Sliding Rectangles.metal */,
 				E7D7C09C25ABB410004D75CD /* Animated Pinwheel.metal */,
 				E7D7C09D25ABB410004D75CD /* Animation Test.metal */,
+				E7D7C09925ABB410004D75CD /* Bars.metal */,
+				E7D7C09A25ABB410004D75CD /* Basic Bar.metal */,
 				E7D7C09E25ABB410004D75CD /* Blend.metal */,
-				E7D7C09F25ABB410004D75CD /* Sliding Bar.metal */,
-				E7D7C0A025ABB410004D75CD /* Twisting Squares.metal */,
-				E7D7C0A125ABB410004D75CD /* Spinning Star.metal */,
 				E7D7C0A225ABB410004D75CD /* Rotating Square.metal */,
+				E7D7C09F25ABB410004D75CD /* Sliding Bar.metal */,
+				E7D7C09B25ABB410004D75CD /* Sliding Rectangles.metal */,
+				E7D7C0A125ABB410004D75CD /* Spinning Star.metal */,
+				E7D7C0A025ABB410004D75CD /* Twisting Squares.metal */,
 			);
 			path = "Simple - Vertex";
 			sourceTree = "<group>";
@@ -650,12 +694,34 @@
 		E7ED2487257E92110075DD2E /* Circles */ = {
 			isa = PBXGroup;
 			children = (
+				E7B5731025B4100300DF1452 /* Arcs.swift */,
+				E7B5730825B40FD600DF1452 /* Ball_Bounce_2.swift */,
+				E7B5730025B40FB400DF1452 /* Ball_Bounce.swift */,
+				E7B572F825B40F7A00DF1452 /* Basic_Orbit.swift */,
+				E7B572F025B40F4E00DF1452 /* Basic_Radial_Gradient.swift */,
 				E7AB8CBA25A03F8400E464F9 /* Bello.swift */,
-				E7ED2488257E923E0075DD2E /* Breathing Exercise.swift */,
+				E7B572E825B40F0300DF1452 /* Blade_Jumper.swift */,
 				E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */,
+				E7ED2488257E923E0075DD2E /* Breathing Exercise.swift */,
+				E7B572E025B40EC300DF1452 /* Chrome Logo.swift */,
+				E7B572D825B40E7E00DF1452 /* Circles_3.swift */,
+				E7B572D025B40E5A00DF1452 /* Circles_Intersections.swift */,
+				E7B572C825B40E1100DF1452 /* Color_Mix.swift */,
 				E7A5A43B25B0CE6A0051A69A /* Dot Line.swift */,
+				E7B572C025B40C5B00DF1452 /* L_Spinner.swift */,
+				E7B572B825B40C3900DF1452 /* Loading_2.swift */,
+				E7B572B025B40C2000DF1452 /* Loading_With_Glow_and_Falloff.swift */,
+				E7B572A825B40C0800DF1452 /* Magic_Ring.swift */,
+				E7B572A025B40BF300DF1452 /* Perturbation.swift */,
+				E7B5729825B40BD900DF1452 /* Rotating_Color_Ring.swift */,
+				E7B5729025B40BC300DF1452 /* Rotating_LED_Strip.swift */,
 				E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */,
+				E7B5728825B40B9F00DF1452 /* Simple_Circle_AA.swift */,
+				E7B5728025B40B8000DF1452 /* Simple_Eclipse.swift */,
+				E7B5727825B40B6700DF1452 /* Spinning_Circles.swift */,
+				E7B5727025B40B4F00DF1452 /* Spinning_Ring.swift */,
 				E7A5A47825B0D1720051A69A /* Static Points.swift */,
+				E7B5726825B3ADEF00DF1452 /* Vasarely 5.swift */,
 			);
 			path = Circles;
 			sourceTree = "<group>";
@@ -1072,18 +1138,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B5729125B40BC300DF1452 /* Rotating_LED_Strip.swift in Sources */,
 				E74A445C257804AC00639F19 /* Simple3.swift in Sources */,
 				E72A7FF923C2C2AB008C642A /* XSegmentedControl.swift in Sources */,
 				E7539442257AD22F00642C36 /* scenetest.metal in Sources */,
+				E7B572D125B40E5A00DF1452 /* Circles_Intersections.swift in Sources */,
 				E7A3A16A21A7E07500742611 /* Common.h in Sources */,
+				E7B5730125B40FB400DF1452 /* Ball_Bounce.swift in Sources */,
 				E7ED1AD9257E909E0075DD2E /* Simple6.swift in Sources */,
+				E7B572F925B40F7A00DF1452 /* Basic_Orbit.swift in Sources */,
 				E71A02CA23673C2400A88C16 /* CIImage.swift in Sources */,
 				E7D7C0D925ABB5E3004D75CD /* ComputePipelinePass.swift in Sources */,
 				E7D7C0B625ABB443004D75CD /* Webcam.swift in Sources */,
+				E7B5727925B40B6700DF1452 /* Spinning_Circles.swift in Sources */,
 				E7CF9BD9227F434A00413280 /* NSView.swift in Sources */,
 				E7A5A84525B353250051A69A /* SceneControlsView.swift in Sources */,
 				E7A5A3A725AD4EBD0051A69A /* Vogels Distribution.swift in Sources */,
 				E7D7C0CA25ABB4C8004D75CD /* RenderPipelinePass.swift in Sources */,
+				E7B5730925B40FD600DF1452 /* Ball_Bounce_2.swift in Sources */,
 				E7D7C0C225ABB48F004D75CD /* ControlsView.swift in Sources */,
 				E7D7C0E425AC27A1004D75CD /* LibraryView.swift in Sources */,
 				E7D7C0BE25ABB48B004D75CD /* DynamicPreferences.swift in Sources */,
@@ -1091,9 +1163,12 @@
 				E7ED1A19257E909E0075DD2E /* Simple.swift in Sources */,
 				E749D2B6254F19D3000930BB /* KeyEventHandling.swift in Sources */,
 				E7A5A43425B00CA10051A69A /* Linear Motion.swift in Sources */,
+				E7B5728925B40B9F00DF1452 /* Simple_Circle_AA.swift in Sources */,
 				E7A5A47225B0D1530051A69A /* Loopless Dots Along Circle.swift in Sources */,
+				E7B5728125B40B8000DF1452 /* Simple_Eclipse.swift in Sources */,
 				E7ED629821779685007ABB53 /* support.metal in Sources */,
 				E7CF9BDC227F439300413280 /* String.swift in Sources */,
+				E7B5731125B4100300DF1452 /* Arcs.swift in Sources */,
 				E7D7C0B225ABB440004D75CD /* VideoSupport.swift in Sources */,
 				E7D7C05025AB9EEF004D75CD /* Library.swift in Sources */,
 				E7A5A43C25B0CE6A0051A69A /* Dot Line.swift in Sources */,
@@ -1102,41 +1177,54 @@
 				E71A02C82367397B00A88C16 /* NSImageView.swift in Sources */,
 				E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */,
 				E7ED1A99257E909E0075DD2E /* Simple2.swift in Sources */,
+				E7B572A125B40BF300DF1452 /* Perturbation.swift in Sources */,
 				E7CF9BD3227F430900413280 /* NSImage.swift in Sources */,
 				E77675D82283786000614B7B /* glsl.metal in Sources */,
+				E7B572B925B40C3900DF1452 /* Loading_2.swift in Sources */,
 				E7AB8D3D25A5CCB600E464F9 /* Box Breathing Remix.swift in Sources */,
 				E7D7C0C625ABB4B1004D75CD /* MetalView.swift in Sources */,
+				E7B572F125B40F4E00DF1452 /* Basic_Radial_Gradient.swift in Sources */,
 				E7D7C04B25AB9E31004D75CD /* T3SCNScene.swift in Sources */,
 				E72A7FF023C2C1B6008C642A /* XColorPicker.swift in Sources */,
 				E7D7C0D525ABB5CB004D75CD /* RenderSupport.swift in Sources */,
 				E7A5A46425B0D12C0051A69A /* Attempt 23.swift in Sources */,
 				E7D7C03F25AB9C6F004D75CD /* PreferencesView.swift in Sources */,
+				E7B5727125B40B4F00DF1452 /* Spinning_Ring.swift in Sources */,
 				E785E2E525AA46E600511B0C /* SKSCNScene.swift in Sources */,
 				E7A5A80325B26D110051A69A /* Attempt 19.swift in Sources */,
 				E7ED2489257E923E0075DD2E /* Breathing Exercise.swift in Sources */,
 				E74A42532576B7C500639F19 /* SceneProtocol.swift in Sources */,
 				E7652E1A2423FE80004CB302 /* AVAsset.swift in Sources */,
+				E7B5729925B40BD900DF1452 /* Rotating_Color_Ring.swift in Sources */,
 				E72A7FF323C2C23F008C642A /* XBoolean.swift in Sources */,
 				E7ED19D9257E909E0075DD2E /* Simple4.swift in Sources */,
+				E7B572D925B40E7F00DF1452 /* Circles_3.swift in Sources */,
+				E7B572E925B40F0300DF1452 /* Blade_Jumper.swift in Sources */,
 				E7D7C0BA25ABB486004D75CD /* ConfigController.swift in Sources */,
+				E7B572E125B40EC300DF1452 /* Chrome Logo.swift in Sources */,
+				E7B572B125B40C2000DF1452 /* Loading_With_Glow_and_Falloff.swift in Sources */,
 				E7CF9BCD227F425400413280 /* NSColor.swift in Sources */,
 				E7A5A44A25B0CE970051A69A /* Circle Spiral.swift in Sources */,
 				E7ED1A59257E909E0075DD2E /* Simple7.swift in Sources */,
 				E7A5A44325B0CE870051A69A /* Dot Wave.swift in Sources */,
 				E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */,
 				E7A5A3EE25AE78680051A69A /* Vogel Disk.swift in Sources */,
+				E7B572C925B40E1100DF1452 /* Color_Mix.swift in Sources */,
 				E7FCB46A212A2B1000CED4FA /* MetalFilterTinkerApp.swift in Sources */,
 				E71A02C62366847600A88C16 /* ViewModel.swift in Sources */,
+				E7B572C125B40C5B00DF1452 /* L_Spinner.swift in Sources */,
 				E72A7FF623C2C275008C642A /* XSlider.swift in Sources */,
 				E704CBCE25638F6100FB8C5F /* shapes.metal in Sources */,
 				E7CF9BCF227F429A00413280 /* UserDefaults.swift in Sources */,
 				E7D7C0D125ABB55F004D75CD /* Shader.swift in Sources */,
+				E7B572A925B40C0800DF1452 /* Magic_Ring.swift in Sources */,
 				E7AB8E0125A8497F00E464F9 /* MetalX.swift in Sources */,
 				E7A5A46B25B0D13E0051A69A /* Infinity Particles.swift in Sources */,
 				E7A5A3A025AD15B80051A69A /* PointScene.swift in Sources */,
 				E748C45A239809E100AD7A64 /* RenderSetup.swift in Sources */,
 				E74A43972576EC1A00639F19 /* SceneLibraryView.swift in Sources */,
 				E746F31523F0D107003598F6 /* sdf.metal in Sources */,
+				E7B5726925B3ADEF00DF1452 /* Vasarely 5.swift in Sources */,
 				E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

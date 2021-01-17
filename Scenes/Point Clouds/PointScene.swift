@@ -14,7 +14,7 @@ class T1SCNScene : SCNScene, SCNSceneRendererDelegate, TinkerScene {
     let c = SCNCamera()
     c.usesOrthographicProjection = false
     c.zNear = 0
-    c.zFar = 1000
+    c.zFar = 1677 // this seems to be the maximum value:  1678 doesn't work
 
     myCameraNode = SCNNode()
     myCameraNode.camera = c
@@ -39,7 +39,7 @@ class T1SCNScene : SCNScene, SCNSceneRendererDelegate, TinkerScene {
     // I could either 1) scale the size to have one co-ordinate always be 100 -- or
     // 2) use the size in generating the geometry
     let k : CGFloat = min(sz.width, sz.height)
-    self.scale = k / 100.0
+    self.scale = k / 10.0
     self.size = CGSize(width: sz.width / scale, height: sz.height / scale)
 
     let cd = tan(myCameraNode.camera!.fieldOfView * CGFloat.pi / 180.0) * (myCameraNode.camera!.projectionDirection == .vertical ? size.height : size.width) / 2.0

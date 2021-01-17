@@ -1,13 +1,4 @@
-/** 
- Author: antonOTI
- remix of https://www.shadertoy.com/view/MlVXDy
- by yousry
- tried my own implementation =)
- 
- original source : http://quietkit.com/box-breathing/
- 
- not perfect though
- */
+
 #define shaderName Box_Breathing_Remix
 
 #include "Common.h"

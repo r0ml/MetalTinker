@@ -314,7 +314,7 @@ struct SceneWrapperView : View {
                   options: paused ? [] : [ .allowsCameraControl, .rendersContinuously, .temporalAntialiasingEnabled ],
 
     //                      preferredFramesPerSecond: 120,
-    //                      antialiasingMode: SCNAntialiasingMode.multisampling16X,
+                          antialiasingMode: SCNAntialiasingMode.multisampling4X,
                           delegate: z
         )
           .gesture(mag)
