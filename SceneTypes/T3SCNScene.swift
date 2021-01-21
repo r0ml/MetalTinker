@@ -46,83 +46,6 @@ class T3SCNScene : T1SCNScene {
 
 
 
-extension CGSize {
-  public func asPoint() -> CGPoint {
-    return CGPoint(x: width, y: height)
-  }
-
-  public static func *(left: CGSize, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.width * right.x, y: left.height * right.y)
-  }
-
-  public static func /(left: CGSize, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.width / right.x, y: left.height / right.y)
-  }
-
-  public static func -(left: CGSize, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.width - right.x, y: left.height - right.y)
-  }
-
-  public static func +(left: CGSize, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.width + right.x, y: left.height + right.y)
-  }
-
-  public static func *(left: CGSize, right: CGFloat) -> CGPoint {
-    return CGPoint(x: left.width * right, y: left.height * right)
-  }
-
-  public static func /(left: CGSize, right: CGFloat) -> CGPoint {
-    return CGPoint(x: left.width / right, y: left.height / right)
-  }
-
-  public static func -(left: CGSize, right: CGFloat) -> CGPoint {
-    return CGPoint(x: left.width - right, y: left.height - right)
-  }
-
-  public static func +(left: CGSize, right: CGFloat) -> CGPoint {
-    return CGPoint(x: left.width + right, y: left.height + right)
-  }
-
-}
-
-extension CGPoint {
-
-    public static func *(left: CGPoint, right: CGPoint) -> CGPoint {
-      return CGPoint(x: left.x * right.x, y: left.y * right.y)
-    }
-
-    public static func *(left: CGPoint, right: CGSize) -> CGPoint {
-      return CGPoint(x: left.x * right.width, y: left.y * right.height)
-    }
-
-  public static func /(left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.x / right.x, y: left.y / right.y)
-  }
-
-  public static func /(left: CGPoint, right: CGSize) -> CGPoint {
-    return CGPoint(x: left.x / right.width, y: left.y / right.height)
-  }
-
-  public static func -(left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.x - right.x, y: left.y - right.y)
-  }
-
-  public static func -(left: CGPoint, right: CGSize) -> CGPoint {
-    return CGPoint(x: left.x - right.width, y: left.y - right.height)
-  }
-
-  public static func +(left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.x + right.x, y: left.y + right.y)
-  }
-
-  public static func +(left: CGPoint, right: CGSize) -> CGPoint {
-    return CGPoint(x: left.x + right.width, y: left.y + right.height)
-  }
-
-}
-
-
-
 // Renders a spritekit as the background for a SceneKit.  Hence, this is the same as just displaying the SpriteKit
 class T3ShaderSCNScene : T3SCNScene {
   override var group : String { get { self.library } }
@@ -140,12 +63,13 @@ class T3ShaderSCNScene : T3SCNScene {
     let j = SCNMaterial( )
 
     var ttt = Times()
-    let planeSize = CGSize(width: 1600, height: 900)
+    let planeSize = CGSize(width: 16, height: 9)
+
 
     super.init()
 
-    let cd = tan(myCameraNode.camera!.fieldOfView * CGFloat.pi / 180.0) * (myCameraNode.camera!.projectionDirection == .vertical ? planeSize.height : planeSize.width) / 2.0
-    myCameraNode.position = SCNVector3(0, 0, cd)
+//    let cd = tan(myCameraNode.camera!.fieldOfView * CGFloat.pi / 180.0) * (myCameraNode.camera!.projectionDirection == .vertical ? planeSize.height : planeSize.width) / 2.0
+//    myCameraNode.position = SCNVector3(0, 0, cd )
 
 
 
@@ -175,7 +99,7 @@ class T3ShaderSCNScene : T3SCNScene {
                             let s = planeSize
                             ttt.currentTime = now()
 
-                            var u = self.setupUniform(size: s, times: ttt)
+                            var u = self.setupUniform(size: CGSize(width: s.width * 10.0, height: s.height * 10), times: ttt)
                             buffer.writeBytes(&u, count: MemoryLayout<Uniform>.stride)
 
     })
@@ -209,12 +133,12 @@ class T3ShaderSCNScene : T3SCNScene {
 
     // I could set the background to a CAMetalLayer and then render into it.....
 
-    let target = SCNLookAtConstraint(target: gn)
-    target.isGimbalLockEnabled = true
-    myCameraNode.constraints = [target]
+//    let target = SCNLookAtConstraint(target: gn)
+//    target.isGimbalLockEnabled = true
+//    myCameraNode.constraints = [target]
 
 
-    self.dist = cd
+//    self.dist = cd
 
     self.rootNode.addChildNode(gn)
 

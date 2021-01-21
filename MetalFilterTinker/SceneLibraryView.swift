@@ -311,7 +311,7 @@ struct SceneWrapperView : View {
         let z = delegate.scene
         let _ = z.setSize(g.size)
         SceneView(scene: z,
-                  options: paused ? [] : [ .allowsCameraControl, .rendersContinuously, .temporalAntialiasingEnabled ],
+                  options: paused ? [] : [ .allowsCameraControl, .rendersContinuously ],
 
     //                      preferredFramesPerSecond: 120,
                           antialiasingMode: SCNAntialiasingMode.multisampling4X,

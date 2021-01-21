@@ -1,5 +1,5 @@
 
-#define shaderName Arcs
+#define shaderName Arcsx
 
 #include "Common.h"
 
@@ -21,8 +21,6 @@ initialize() {
   in.thickness = { 0.01, 0.05, 0.1};
   in.radius = {0.2, 0.3, 0.5};
 }
-
-
 
 vertexPass(_1) {
   VertexOut v;

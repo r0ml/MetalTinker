@@ -11,8 +11,8 @@ import Metal
 
 // import CoreVideo
 
-class SpriteShaderLeaf : Identifiable, Equatable, Hashable {
-  static func == (lhs: SpriteShaderLeaf, rhs: SpriteShaderLeaf) -> Bool {
+class FilterShaderLeaf : Identifiable, Equatable, Hashable {
+  static func == (lhs: FilterShaderLeaf, rhs: FilterShaderLeaf) -> Bool {
     return lhs.id == rhs.id
   }
 
@@ -31,8 +31,8 @@ class SpriteShaderLeaf : Identifiable, Equatable, Hashable {
   }
 }
 
-class SpriteShaderLib : Identifiable, Equatable, Hashable {
-  static func == (lhs: SpriteShaderLib, rhs: SpriteShaderLib) -> Bool {
+class FilterShaderLib : Identifiable, Equatable, Hashable {
+  static func == (lhs: FilterShaderLib, rhs: FilterShaderLib) -> Bool {
     return lhs.id == rhs.id
   }
 
@@ -46,22 +46,22 @@ class SpriteShaderLib : Identifiable, Equatable, Hashable {
 
   init(lib l: String) {
     id = l
-    lib = spritery[l]!
+    lib = filtery[l]!
   }
 
-  fileprivate static let folderList : [SpriteShaderLib] = {
-    return spritery.keys.sorted().map { SpriteShaderLib(lib: $0) }
+  fileprivate static let folderList : [FilterShaderLib] = {
+    return filtery.keys.sorted().map { FilterShaderLib(lib: $0) }
 //    return metalLibraries.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }.map { SpriteShaderLib(lib: $0)}
   }()
 
-  lazy var items : [SpriteShaderLeaf] = {
+  lazy var items : [FilterShaderLeaf] = {
     let res = Array(lib.keys)
-    return (Set(res).sorted { $0.lowercased() < $1.lowercased() }).map {(z : String) in SpriteShaderLeaf(lib[z]!) }
+    return (Set(res).sorted { $0.lowercased() < $1.lowercased() }).map {(z : String) in FilterShaderLeaf(lib[z]!) }
   }()
 }
 
-class SpriteLibState : ObservableObject {
-  @Published var lib : SpriteShaderLib? {
+class FilterLibState : ObservableObject {
+  @Published var lib : FilterShaderLib? {
     willSet {
       items = newValue?.items ?? []
     }
@@ -73,7 +73,7 @@ class SpriteLibState : ObservableObject {
 //      }
 //    }
 
-  var items : [SpriteShaderLeaf] = []
+  var items : [FilterShaderLeaf] = []
 
   var libName : String {
     return lib?.id ?? "none"
@@ -83,22 +83,22 @@ class SpriteLibState : ObservableObject {
 //    return shader?.id ?? "none"
 //  }
 
-  var delegate = SpriteKitDelegate()
+  var delegate = FilterKitDelegate()
 
 }
 
 
-struct SpriteLeftPane : View {
-  @ObservedObject var state : SpriteLibState
-  var fl : [SpriteShaderLib]
+struct FilterLeftPane : View {
+  @ObservedObject var state : FilterLibState
+  var fl : [FilterShaderLib]
 
-  init(state : SpriteLibState) {
+  init(state : FilterLibState) {
     self.state = state
-    fl = SpriteShaderLib.folderList
+    fl = FilterShaderLib.folderList
   }
 
   func moveSelection(_ n : Int, _ sv : ScrollViewProxy) {
-    let a = SpriteShaderLib.folderList
+    let a = FilterShaderLib.folderList
     if let cc = state.lib, let b = a.firstIndex(of: cc) {
       let d = min(a.count - 1, max(0, b + n))
       sv.scrollTo(a[d], anchor: .center)
@@ -107,11 +107,11 @@ struct SpriteLeftPane : View {
 
   }
 
-  func setLib(_ li : SpriteShaderLib) {
+  func setLib(_ li : FilterShaderLib) {
     state.lib = li
 //    state.delegate.stop()
 //    state.delegate.shader = nil
-    UserDefaults.standard.set(li.id, forKey: "selectedSpriteGroup")
+    UserDefaults.standard.set(li.id, forKey: "selectedFilterGroup")
     state.objectWillChange.send()
   }
 
@@ -168,8 +168,8 @@ struct SpriteLeftPane : View {
   }
 }
 
-struct SpriteRightPane : View {
-  @ObservedObject var state : SpriteLibState
+struct FilterRightPane : View {
+  @ObservedObject var state : FilterLibState
 
 
 /*  func moveSelection(_ n : Int, _ sv : ScrollViewProxy) {
@@ -184,11 +184,11 @@ struct SpriteRightPane : View {
  */
 
 
-  func setShader(_ li : SpriteShaderLeaf) {
+  func setShader(_ li : FilterShaderLeaf) {
     self.state.delegate.shader = li
 //    self.state.delegate.play()
     self.state.objectWillChange.send()
-    UserDefaults.standard.set(li.id, forKey: "selectedSprite")
+    UserDefaults.standard.set(li.id, forKey: "selectedFilter")
   }
 
   var body: some View {
@@ -239,35 +239,35 @@ struct SpriteRightPane : View {
   }
 }
 
-class SpriteKitDelegate : NSObject, ObservableObject {
-  @Published var shader : SpriteShaderLeaf?
-  @Published var scene : SKScene = SKScene()
+class FilterKitDelegate : NSObject, ObservableObject {
+  @Published var shader : FilterShaderLeaf?
+//  @Published var scene : SKScene = SKScene()
 }
 
-struct SpriteWrapperView : View {
-  @ObservedObject var delegate : SpriteKitDelegate
+struct FilterWrapperView : View {
+  @ObservedObject var delegate : FilterKitDelegate
 
   var body: some View {
     VStack {
 //      SpriteView.init(scene: <#T##SKScene#>, transition: <#T##SKTransition?#>, isPaused: <#T##Bool#>, preferredFramesPerSecond: <#T##Int#>, options: <#T##SpriteView.Options#>, shouldRender: <#T##(TimeInterval) -> Bool#>)
-      SpriteView(scene: delegate.scene, options: [.allowsTransparency])
+      FilterView(scene: delegate.scene, options: [.allowsTransparency])
     }
   }
 }
 
-struct SpriteLibraryView : View {
-  @ObservedObject var state : SpriteLibState
+struct FilterLibraryView : View {
+  @ObservedObject var state : FilterLibState
   @State var uuid = UUID()
-  var fl : [SpriteShaderLib]
+  var fl : [FilterShaderLib]
 
   init() {
-    state = SpriteLibState()
-    fl = SpriteShaderLib.folderList
-    if let sl = UserDefaults.standard.string(forKey: "selectedSpriteGroup"), self.state.libName != sl {
-      self.state.lib = SpriteShaderLib(lib: sl)
-      if let ss = UserDefaults.standard.string(forKey: "selectedSprite"), self.state.delegate.shader?.id != ss {
+    state = FilterLibState()
+    fl = FilterShaderLib.folderList
+    if let sl = UserDefaults.standard.string(forKey: "selectedFilterGroup"), self.state.libName != sl {
+      self.state.lib = FilterShaderLib(lib: sl)
+      if let ss = UserDefaults.standard.string(forKey: "selectedFilter"), self.state.delegate.shader?.id != ss {
         if let p = self.state.lib?.lib[ss] {
-          self.state.delegate.shader = SpriteShaderLeaf(p)
+          self.state.delegate.shader = FilterShaderLeaf(p)
       }
     }
   }
@@ -276,16 +276,16 @@ struct SpriteLibraryView : View {
   var thumbs : [NSImage] = [NSImage.init(named: "BrokenImage")!]
 
   var body: some View {
-  
-    let j = SpriteWrapperView(delegate: state.delegate)  // shader: ss.rm)
+
+    let j = FilterWrapperView(delegate: state.delegate)  // shader: ss.rm)
 //    let c = ControlsView( frameTimer: state.delegate.frameTimer, delegate: state.delegate, metalView: j.mtkView).frame(minWidth: 600)
     let m : AnyView = AnyView(VStack { j /* ; c */} )
     return HStack {
       Text(uuid.uuidString).hidden().frame(width: 0)
       VStack {
         HSplitView( ) {
-          SpriteLeftPane(state: state)
-          SpriteRightPane(state: state)
+          FilterLeftPane(state: state)
+          FilterRightPane(state: state)
         }
 
 
@@ -315,4 +315,29 @@ struct SpriteLibraryView : View {
 //       self.uuid = UUID()
 //     }
   }
+}
+
+
+
+var filtery : Dictionary<String, Dictionary<String, SKScene>> = {
+  var a = Dictionary<String, Dictionary<String, SKScene>>()
+
+//  a["SimpleFilter"] = register( [Simple3() ] )
+
+//  a["3d scene"] = register( [] )
+//  a["Shapes3d"] = register( [] )
+//  a["Spheres"] = register( [] )
+
+  return a
+}()
+
+// ==========================================================================
+
+func register(_ dd : [SKScene]) -> Dictionary<String, SKScene> { // _ d : inout Dictionary<String, SceneProtocol>) {
+  var b = Dictionary<String, SKScene>()
+  dd.forEach { d in
+    let a = String(describing: type(of: d))
+    b[a] = d
+  }
+  return b
 }
