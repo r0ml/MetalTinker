@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		E704CBCE25638F6100FB8C5F /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
 		E704CC8E25638FFB00FB8C5F /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
+		E705E02A26AB5F5E00E5AE40 /* MetalTinkerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E02926AB5F5E00E5AE40 /* MetalTinkerApp.swift */; };
+		E705E02C26AB5F5E00E5AE40 /* MetalTinkerDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E02B26AB5F5E00E5AE40 /* MetalTinkerDocument.swift */; };
+		E705E02E26AB5F5E00E5AE40 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E02D26AB5F5E00E5AE40 /* ContentView.swift */; };
+		E705E03026AB5F6100E5AE40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E705E02F26AB5F6100E5AE40 /* Assets.xcassets */; };
+		E705E03326AB5F6100E5AE40 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E705E03226AB5F6100E5AE40 /* Preview Assets.xcassets */; };
+		E705E03E26AB5F6100E5AE40 /* MetalTinkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E03D26AB5F6100E5AE40 /* MetalTinkerTests.swift */; };
+		E705E04826AB5F6100E5AE40 /* MetalTinkerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E04726AB5F6100E5AE40 /* MetalTinkerUITests.swift */; };
 		E70EC64E25B8D7DE00A204C3 /* VertexNode.metal in Sources */ = {isa = PBXBuildFile; fileRef = E70EC64525B8CBD400A204C3 /* VertexNode.metal */; };
 		E70EC67225BA100E00A204C3 /* Arcs.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79A25B256960051A69A /* Arcs.metal */; };
 		E71A02C62366847600A88C16 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C52366847600A88C16 /* ViewModel.swift */; };
@@ -206,6 +213,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E705E03A26AB5F6100E5AE40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E705E02626AB5F5E00E5AE40;
+			remoteInfo = MetalTinker;
+		};
+		E705E04426AB5F6100E5AE40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E705E02626AB5F5E00E5AE40;
+			remoteInfo = MetalTinker;
+		};
 		E7A5A3DC25AD5E1B0051A69A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
@@ -277,6 +298,17 @@
 		E701A3F12171573F00FC9795 /* Common.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = Common.h; sourceTree = "<group>"; };
 		E704CBCD25638F6100FB8C5F /* shapes.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shapes.metal; sourceTree = "<group>"; };
 		E704CC0E25638FBA00FB8C5F /* shapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shapes.h; sourceTree = "<group>"; };
+		E705E02726AB5F5E00E5AE40 /* MetalTinker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTinker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E705E02926AB5F5E00E5AE40 /* MetalTinkerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTinkerApp.swift; sourceTree = "<group>"; };
+		E705E02B26AB5F5E00E5AE40 /* MetalTinkerDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTinkerDocument.swift; sourceTree = "<group>"; };
+		E705E02D26AB5F5E00E5AE40 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E705E02F26AB5F6100E5AE40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E705E03226AB5F6100E5AE40 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E705E03426AB5F6100E5AE40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E705E03926AB5F6100E5AE40 /* MetalTinkerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalTinkerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E705E03D26AB5F6100E5AE40 /* MetalTinkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTinkerTests.swift; sourceTree = "<group>"; };
+		E705E04326AB5F6100E5AE40 /* MetalTinkerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalTinkerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E705E04726AB5F6100E5AE40 /* MetalTinkerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTinkerUITests.swift; sourceTree = "<group>"; };
 		E70DAB43226056E5009B02CD /* DynamicPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPreferences.swift; sourceTree = "<group>"; };
 		E70EC64525B8CBD400A204C3 /* VertexNode.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = VertexNode.metal; sourceTree = "<group>"; };
 		E71A02C12366511A00A88C16 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
@@ -452,7 +484,7 @@
 		E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Simple_Scenes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7ED2488257E923E0075DD2E /* Breathing Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breathing Exercise.swift"; sourceTree = "<group>"; };
 		E7ED629721779685007ABB53 /* support.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = support.metal; sourceTree = "<group>"; };
-		E7FCB466212A2B1000CED4FA /* MetalTinker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTinker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7FCB466212A2B1000CED4FA /* MetalTinkerOrig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTinkerOrig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FCB469212A2B1000CED4FA /* MetalFilterTinkerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalFilterTinkerApp.swift; sourceTree = "<group>"; };
 		E7FCB46D212A2B1200CED4FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7FCB472212A2B1200CED4FA /* MetalTinker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MetalTinker-Info.plist"; sourceTree = "<group>"; };
@@ -460,6 +492,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E705E02426AB5F5E00E5AE40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E705E03626AB5F6100E5AE40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E705E04026AB5F6100E5AE40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7ED18ED257E903A0075DD2E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -478,6 +531,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E705E02826AB5F5E00E5AE40 /* MetalTinker */ = {
+			isa = PBXGroup;
+			children = (
+				E705E02926AB5F5E00E5AE40 /* MetalTinkerApp.swift */,
+				E705E02B26AB5F5E00E5AE40 /* MetalTinkerDocument.swift */,
+				E705E02D26AB5F5E00E5AE40 /* ContentView.swift */,
+				E705E02F26AB5F6100E5AE40 /* Assets.xcassets */,
+				E705E03426AB5F6100E5AE40 /* Info.plist */,
+				E705E03126AB5F6100E5AE40 /* Preview Content */,
+			);
+			path = MetalTinker;
+			sourceTree = "<group>";
+		};
+		E705E03126AB5F6100E5AE40 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E705E03226AB5F6100E5AE40 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E705E03C26AB5F6100E5AE40 /* MetalTinkerTests */ = {
+			isa = PBXGroup;
+			children = (
+				E705E03D26AB5F6100E5AE40 /* MetalTinkerTests.swift */,
+			);
+			path = MetalTinkerTests;
+			sourceTree = "<group>";
+		};
+		E705E04626AB5F6100E5AE40 /* MetalTinkerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E705E04726AB5F6100E5AE40 /* MetalTinkerUITests.swift */,
+			);
+			path = MetalTinkerUITests;
+			sourceTree = "<group>";
+		};
 		E70BB0EB23C2AD3C001AC9FF /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -785,6 +875,9 @@
 				E7D7C0A425ABB410004D75CD /* Shaders */,
 				E74A445A2578043700639F19 /* Sprites */,
 				E74A41CC2576B4F600639F19 /* Scenes */,
+				E705E02826AB5F5E00E5AE40 /* MetalTinker */,
+				E705E03C26AB5F6100E5AE40 /* MetalTinkerTests */,
+				E705E04626AB5F6100E5AE40 /* MetalTinkerUITests */,
 				E7FCB467212A2B1000CED4FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -792,8 +885,11 @@
 		E7FCB467212A2B1000CED4FA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E7FCB466212A2B1000CED4FA /* MetalTinker.app */,
+				E7FCB466212A2B1000CED4FA /* MetalTinkerOrig.app */,
 				E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */,
+				E705E02726AB5F5E00E5AE40 /* MetalTinker.app */,
+				E705E03926AB5F6100E5AE40 /* MetalTinkerTests.xctest */,
+				E705E04326AB5F6100E5AE40 /* MetalTinkerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -833,6 +929,59 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		E705E02626AB5F5E00E5AE40 /* MetalTinker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E705E04926AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinker" */;
+			buildPhases = (
+				E705E02326AB5F5E00E5AE40 /* Sources */,
+				E705E02426AB5F5E00E5AE40 /* Frameworks */,
+				E705E02526AB5F5E00E5AE40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetalTinker;
+			productName = MetalTinker;
+			productReference = E705E02726AB5F5E00E5AE40 /* MetalTinker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E705E03826AB5F6100E5AE40 /* MetalTinkerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E705E04C26AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinkerTests" */;
+			buildPhases = (
+				E705E03526AB5F6100E5AE40 /* Sources */,
+				E705E03626AB5F6100E5AE40 /* Frameworks */,
+				E705E03726AB5F6100E5AE40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E705E03B26AB5F6100E5AE40 /* PBXTargetDependency */,
+			);
+			name = MetalTinkerTests;
+			productName = MetalTinkerTests;
+			productReference = E705E03926AB5F6100E5AE40 /* MetalTinkerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E705E04226AB5F6100E5AE40 /* MetalTinkerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E705E04F26AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinkerUITests" */;
+			buildPhases = (
+				E705E03F26AB5F6100E5AE40 /* Sources */,
+				E705E04026AB5F6100E5AE40 /* Frameworks */,
+				E705E04126AB5F6100E5AE40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E705E04526AB5F6100E5AE40 /* PBXTargetDependency */,
+			);
+			name = MetalTinkerUITests;
+			productName = MetalTinkerUITests;
+			productReference = E705E04326AB5F6100E5AE40 /* MetalTinkerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		E743D701236C83FE00EB81BC /* Template */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E743D708236C83FE00EB81BC /* Build configuration list for PBXNativeTarget "Template" */;
@@ -935,9 +1084,9 @@
 			productReference = E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E7FCB465212A2B1000CED4FA /* MetalTinker */ = {
+		E7FCB465212A2B1000CED4FA /* MetalTinkerOrig */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "MetalTinker" */;
+			buildConfigurationList = E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "MetalTinkerOrig" */;
 			buildPhases = (
 				E7FCB462212A2B1000CED4FA /* Sources */,
 				E7FCB463212A2B1000CED4FA /* Frameworks */,
@@ -956,9 +1105,9 @@
 				E7D7C07C25ABB36F004D75CD /* PBXTargetDependency */,
 				E7ED18F6257E903A0075DD2E /* PBXTargetDependency */,
 			);
-			name = MetalTinker;
+			name = MetalTinkerOrig;
 			productName = XDabble;
-			productReference = E7FCB466212A2B1000CED4FA /* MetalTinker.app */;
+			productReference = E7FCB466212A2B1000CED4FA /* MetalTinkerOrig.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -967,10 +1116,21 @@
 		E7FCB45E212A2B1000CED4FA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = Semasiology;
 				TargetAttributes = {
+					E705E02626AB5F5E00E5AE40 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					E705E03826AB5F6100E5AE40 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = E705E02626AB5F5E00E5AE40;
+					};
+					E705E04226AB5F6100E5AE40 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = E705E02626AB5F5E00E5AE40;
+					};
 					E7B5734D25B6B2AD00DF1452 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -1004,7 +1164,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E7FCB465212A2B1000CED4FA /* MetalTinker */,
+				E7FCB465212A2B1000CED4FA /* MetalTinkerOrig */,
+				E705E02626AB5F5E00E5AE40 /* MetalTinker */,
 				E7A5A7A025B256A90051A69A /* CirclesVertex */,
 				E7A5A3AD25AD50E80051A69A /* Point Clouds */,
 				E7D7C1A525ACBCE6004D75CD /* Shapes 3d Vertex */,
@@ -1012,11 +1173,36 @@
 				E743D701236C83FE00EB81BC /* Template */,
 				E7ED18EF257E903A0075DD2E /* Simple Scenes */,
 				E7B5734D25B6B2AD00DF1452 /* CIFilters */,
+				E705E03826AB5F6100E5AE40 /* MetalTinkerTests */,
+				E705E04226AB5F6100E5AE40 /* MetalTinkerUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E705E02526AB5F5E00E5AE40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E705E03326AB5F6100E5AE40 /* Preview Assets.xcassets in Resources */,
+				E705E03026AB5F6100E5AE40 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E705E03726AB5F6100E5AE40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E705E04126AB5F6100E5AE40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7ED18EE257E903A0075DD2E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1061,6 +1247,32 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E705E02326AB5F5E00E5AE40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E705E02A26AB5F5E00E5AE40 /* MetalTinkerApp.swift in Sources */,
+				E705E02C26AB5F5E00E5AE40 /* MetalTinkerDocument.swift in Sources */,
+				E705E02E26AB5F5E00E5AE40 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E705E03526AB5F6100E5AE40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E705E03E26AB5F6100E5AE40 /* MetalTinkerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E705E03F26AB5F6100E5AE40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E705E04826AB5F6100E5AE40 /* MetalTinkerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E743D702236C83FE00EB81BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1307,6 +1519,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E705E03B26AB5F6100E5AE40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E705E02626AB5F5E00E5AE40 /* MetalTinker */;
+			targetProxy = E705E03A26AB5F6100E5AE40 /* PBXContainerItemProxy */;
+		};
+		E705E04526AB5F6100E5AE40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E705E02626AB5F5E00E5AE40 /* MetalTinker */;
+			targetProxy = E705E04426AB5F6100E5AE40 /* PBXContainerItemProxy */;
+		};
 		E7A5A3DD25AD5E1B0051A69A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E7A5A3AD25AD50E80051A69A /* Point Clouds */;
@@ -1340,6 +1562,176 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		E705E04A26AB5F6100E5AE40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MetalTinker/Preview Content\"";
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MetalTinker/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 1868 Charles Babbage";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E705E04B26AB5F6100E5AE40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MetalTinker/Preview Content\"";
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MetalTinker/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 1868 Charles Babbage";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E705E04D26AB5F6100E5AE40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinkerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalTinker.app/Contents/MacOS/MetalTinker";
+			};
+			name = Debug;
+		};
+		E705E04E26AB5F6100E5AE40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinkerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalTinker.app/Contents/MacOS/MetalTinker";
+			};
+			name = Release;
+		};
+		E705E05026AB5F6100E5AE40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinkerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = MetalTinker;
+			};
+			name = Debug;
+		};
+		E705E05126AB5F6100E5AE40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinkerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = MetalTinker;
+			};
+			name = Release;
+		};
 		E743D709236C83FE00EB81BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1692,6 +2084,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E705E04926AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E705E04A26AB5F6100E5AE40 /* Debug */,
+				E705E04B26AB5F6100E5AE40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E705E04C26AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinkerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E705E04D26AB5F6100E5AE40 /* Debug */,
+				E705E04E26AB5F6100E5AE40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E705E04F26AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinkerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E705E05026AB5F6100E5AE40 /* Debug */,
+				E705E05126AB5F6100E5AE40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E743D708236C83FE00EB81BC /* Build configuration list for PBXNativeTarget "Template" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1764,7 +2183,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "MetalTinker" */ = {
+		E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "MetalTinkerOrig" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7FCB477212A2B1200CED4FA /* Debug */,

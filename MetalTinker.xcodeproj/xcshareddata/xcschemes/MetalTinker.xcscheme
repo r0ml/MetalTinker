@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E7FCB465212A2B1000CED4FA"
                BuildableName = "MetalTinker.app"
-               BlueprintName = "MetalTinker"
+               BlueprintName = "MetalTinkerOrig"
                ReferencedContainer = "container:MetalTinker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -48,12 +48,21 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E7FCB465212A2B1000CED4FA"
+            BlueprintIdentifier = "E705E02626AB5F5E00E5AE40"
             BuildableName = "MetalTinker.app"
             BlueprintName = "MetalTinker"
             ReferencedContainer = "container:MetalTinker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E7FCB465212A2B1000CED4FA"
+            BuildableName = "MetalTinker.app"
+            BlueprintName = "MetalTinkerOrig"
+            ReferencedContainer = "container:MetalTinker.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Debug"
@@ -67,7 +76,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E7FCB465212A2B1000CED4FA"
             BuildableName = "MetalTinker.app"
-            BlueprintName = "MetalTinker"
+            BlueprintName = "MetalTinkerOrig"
             ReferencedContainer = "container:MetalTinker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
