@@ -898,8 +898,9 @@
 			isa = PBXGroup;
 			children = (
 				E7FCB469212A2B1000CED4FA /* MetalFilterTinkerApp.swift */,
-				E71A02CB236767C000A88C16 /* MetalView.swift */,
 				E74A43962576EC1A00639F19 /* SceneLibraryView.swift */,
+				E7D7C0E325AC27A1004D75CD /* LibraryView.swift */,
+				E71A02CB236767C000A88C16 /* MetalView.swift */,
 				E74A44182578002F00639F19 /* SpriteLibraryView.swift */,
 				E7B5739525B6BA2D00DF1452 /* FilterLibraryView.swift */,
 				E77675D4228347A800614B7B /* Library.swift */,
@@ -911,7 +912,6 @@
 				E748C459239809E100AD7A64 /* RenderSetup.swift */,
 				E749D2B5254F19D3000930BB /* KeyEventHandling.swift */,
 				E74A45A02578458100639F19 /* BlitPipelinePass.swift */,
-				E7D7C0E325AC27A1004D75CD /* LibraryView.swift */,
 			);
 			path = MetalFilterTinker;
 			sourceTree = "<group>";
