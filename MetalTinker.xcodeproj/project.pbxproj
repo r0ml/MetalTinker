@@ -807,7 +807,7 @@
 				E7D7C0A325ABB410004D75CD /* Simple - Vertex */,
 			);
 			name = Shaders;
-			path = /Users/r0ml/Repositories/MetalTinker/Shaders;
+			path = /Volumes/Rock/Users/r0ml/Repositories/MetalTinker/Shaders;
 			sourceTree = "<absolute>";
 		};
 		E7D7C1B725ACBD1F004D75CD /* Shapes3dVertex */ = {
@@ -1117,7 +1117,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = Semasiology;
 				TargetAttributes = {
 					E705E02626AB5F5E00E5AE40 = {
@@ -1568,6 +1568,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1600,6 +1601,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
