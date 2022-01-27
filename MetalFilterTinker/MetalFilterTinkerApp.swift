@@ -7,21 +7,11 @@ import SwiftUI
 import Combine
 import SceneKit
 
-var clem : NSWindow?
-var clem2 : NSWindow?
+// var clem : NSWindow?
+// var clem2 : NSWindow?
 
 @main struct MetalFilterTinker : App {
-  init() {
-    let v = NSWindow(
-      contentRect: CGRect(x: 0, y: 0, width: 800, height: 400),
-      styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-      backing: .buffered, defer: false)
-    v.setFrameAutosaveName("SceneKit Window")
-    v.contentView = NSHostingView(rootView: LibraryView())
-    v.makeKeyAndOrderFront(nil)
-    v.isReleasedWhenClosed = false
-    clem = v
-
+    
 /*    let v2 = NSWindow(
       contentRect: CGRect(x: 0, y: 0, width: 800, height: 400),
       styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
@@ -45,14 +35,29 @@ var clem2 : NSWindow?
     clem3 = v
 */
 
-
- }
-
   var body: some Scene {
     Group {
-      WindowGroup {
-        SceneLibraryView().navigationTitle("SceneKit Window")
+      WindowGroup("SceneKit") {
+        SceneLibraryView().navigationTitle("SceneKit Window").handlesExternalEvents(preferring: Set(arrayLiteral: "SceneKit"), allowing: Set(arrayLiteral: ""))
       }
+//      .handlesExternalEvents(matching: ["appRender://scenekit"])
+//      .handlesExternalEvents(preferring: Set(arrayLiteral: "viewer"), allowing: Set(arrayLiteral: "*"))
+        .commands {
+   //       CommandGroup(replacing: .newItem, addition: { })
+        }
+      
+      WindowGroup("SpriteKit") {
+        SpriteLibraryView().navigationTitle("SpriteKit Window")
+      }.handlesExternalEvents(matching: ["appRender://spritekit","*"])
+        .commands {
+   //       CommandGroup(replacing: .newItem, addition: { })
+        }
+
+      WindowGroup("MetalKit") {
+        LibraryView().navigationTitle("MetalKit Window")
+      }.handlesExternalEvents(matching: ["appRender://metalkit"])
+
+      
 //      .commands {
 //        MyCommands()
 //      }

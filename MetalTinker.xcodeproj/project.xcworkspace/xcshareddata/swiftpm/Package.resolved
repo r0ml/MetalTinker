@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "R0Kit",
+        "repositoryURL": "git@github.com:r0ml/R0Kit.git",
+        "state": {
+          "branch": "main",
+          "revision": "24cac0db06190d91d53f24e0d717463902ee43fa",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
