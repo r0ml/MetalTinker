@@ -9,14 +9,14 @@ class Simple2 : T3SCNScene {
   required init() {
     super.init()
     let mat = SCNMaterial()
-    mat.diffuse.contents = NSColor.red
+    mat.diffuse.contents = XColor.red
     let a = SCNBox.init(width: 0.5, height: 0.5, length: 0.5, chamferRadius: 0.05)
     a.materials = [mat]
     let na = SCNNode(geometry: a)
 
     let b = SCNTorus.init(ringRadius: 0.6, pipeRadius: 0.2)
     let mat2 = SCNMaterial()
-    mat2.diffuse.contents = NSColor.blue
+    mat2.diffuse.contents = XColor.blue
     b.materials = [mat2]
     let nb = SCNNode(geometry: b)
 

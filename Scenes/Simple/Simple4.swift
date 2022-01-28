@@ -17,7 +17,7 @@ class Simple4 : T3SCNScene {
     mat.diffuse.wrapS = .repeat
     mat.diffuse.wrapT = .repeat
 
-    mat.diffuse.contentsTransform = SCNMatrix4MakeScale(20 * (k.size.height / k.size.width), -20, 0)
+    mat.diffuse.contentsTransform = SCNMatrix4MakeScale(20 * XFloat((k.size.height / k.size.width)), -20, 0)
 //    mat.transparencyMode = .singleLayer
 //    mat.transparency = 1
 
@@ -27,7 +27,7 @@ class Simple4 : T3SCNScene {
 
     let b = SCNTorus.init(ringRadius: 0.6, pipeRadius: 0.2)
     let mat2 = SCNMaterial()
-    mat2.diffuse.contents = NSColor.blue
+    mat2.diffuse.contents = XColor.blue
     b.materials = [mat2]
     let nb = SCNNode(geometry: b)
 
@@ -35,7 +35,7 @@ class Simple4 : T3SCNScene {
     self.rootNode.addChildNode(nb)
 
 
-    self.background.contents = NSColor.black
+    self.background.contents = XColor.black
   }
 
   required init?(coder: NSCoder) {

@@ -2,10 +2,36 @@
 // Copyright (c) 1868 Charles Babbage
 // Found amongst his effects by r0ml
 
+#if os(macOS)
 import AppKit
+typealias XImage = NSImage
+
+#else
+import UIKit
+typealias XImage = UIImage
+
+#endif
+
 import MetalKit
 import os
 
+import SwiftUI
+
+#if os(macOS)
+extension Image {
+  init(xImage: NSImage) {
+    self.init(nsImage: xImage)
+  }
+}
+#else
+extension Image {
+  init(xImage: UIImage) {
+    self.init(uiImage: xImage)
+  }
+}
+#endif
+
+#if os(macOS)
 extension NSImage {
   class func swatchWithColor(color: NSColor, size: NSSize) -> NSImage {
     let image = NSImage(size: size)
@@ -109,3 +135,11 @@ extension NSImage {
     }
   }
 }
+#endif
+
+
+#if os(macOS)
+let emptyImage = XImage(named: "camera")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+#else
+let emptyImage = XImage(named: "camera")!.cgImage!
+#endif

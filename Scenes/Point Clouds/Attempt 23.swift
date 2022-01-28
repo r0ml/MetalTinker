@@ -13,7 +13,11 @@ class Attempt_23 : PointScene {
 
   required init() {
     super.init()
-    self.background.contents = NSColor.init(deviceWhite: 112 / 255.0, alpha: 1)
+    #if os(macOS)
+    self.background.contents = XColor.init(deviceWhite: 112 / 255.0, alpha: 1)
+    #else
+    self.background.contents = XColor.init(white: 112 / 255.0, alpha: 1)
+    #endif
 
     let act = SCNAction.repeatForever( SCNAction.customAction(duration: 2.0 * Double(velocity) * Double.pi) { (n, t) in
       n.geometry = self.geometry(t)

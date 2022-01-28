@@ -2,7 +2,10 @@
 // Copyright (c) 1868 Charles Babbage
 // Found amongst his effects by r0ml
 
+#if os(macOS)
 import AppKit
+#endif
+
 import MetalKit
 import os
 import AVFoundation
@@ -97,10 +100,10 @@ final class Shader : NSObject, ObservableObject, Identifiable {
     return q
   }()
   
-  static var brokenImage : NSImage = NSImage(named: "BrokenImage")!
+  static var brokenImage : XImage = XImage(named: "BrokenImage")!
   
   // =============================================================================================
-  private var empty : CGImage
+//  private var empty : CGImage
 
   static let numberOfTextures = 6
 
@@ -111,7 +114,7 @@ final class Shader : NSObject, ObservableObject, Identifiable {
     
     // let ib = device.makeBuffer(length: 16, options: [.storageModeShared])
 
-    empty = NSImage(named: "camera")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+
     super.init()
 
     DispatchQueue.global().async {

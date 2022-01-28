@@ -3,6 +3,7 @@
 
 import SceneKit
 import SpriteKit
+import SwiftUI
 
 class Rotating_LED_Strip_Sprite : SKScene {
   let speedx = 1.5
@@ -25,14 +26,14 @@ class Rotating_LED_Strip_Sprite : SKScene {
     path.addArc(center: CGPoint(x: 1.5, y: 0.5), radius: rrat * 2, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
 
     let a = SKShapeNode(path: path)
-    a.fillColor = NSColor.white
+    a.fillColor = XColor.white
     a.lineWidth = 0
     a.isAntialiased = true
     return a
   }
 
   func thing() -> SKShapeNode {
-    let color = NSColor.white
+    let color = XColor.white
     let path = CGMutablePath()
 
     let rrat : CGFloat = 0.3 //  CGFloat.pi / 11
@@ -78,7 +79,7 @@ class Rotating_LED_Strip_Sprite : SKScene {
     super.init(size: size)
     self.scaleMode = .aspectFit
 
-    self.backgroundColor = NSColor.darkGray
+    self.backgroundColor = XColor.darkGray
 
     for i in 0 ..< 9 {
       let a = thing()

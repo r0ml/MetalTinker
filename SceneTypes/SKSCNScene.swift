@@ -15,7 +15,7 @@ class SKSCNScene : T3SCNScene {
     super.init()
     planeNode.name = "Shader plane node"
     self.rootNode.addChildNode(planeNode)
-    self.background.contents = NSColor.darkGray
+    self.background.contents = XColor.darkGray
   }
 
   override func setSize(_ sz : CGSize) {

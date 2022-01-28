@@ -34,7 +34,7 @@ class Vogels_Distribution : PointScene {
     let geometry = SCNGeometry(sources: [vertexSource], elements: [pointCloudElement])
 
     let material = SCNMaterial()
-    material.diffuse.contents = NSColor.green
+    material.diffuse.contents = XColor.green
     geometry.firstMaterial = material
 
     return geometry

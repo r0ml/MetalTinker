@@ -2,6 +2,7 @@
 // Found amongst his effects by r0ml
 
 import Foundation
+import CoreGraphics
 
 extension CGSize {
   public func asPoint() -> CGPoint {

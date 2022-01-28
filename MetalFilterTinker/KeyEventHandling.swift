@@ -3,6 +3,8 @@
 
 import SwiftUI
 
+#if os(macOS)
+
 class Clem {
   var view : NSView?
 }
@@ -58,3 +60,4 @@ struct KeyEventHandling: NSViewRepresentable {
   }
 }
 
+#endif

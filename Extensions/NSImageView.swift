@@ -2,12 +2,17 @@
 // Copyright (c) 1868 Charles Babbage
 // Found amongst his effects by r0ml
 
+#if os(macOS)
 import AppKit
+#endif
+
 import AVFoundation
 import MetalKit
 
 // ============================================================================================================
 // For drag'n'drop
+
+#if os(macOS)
 
 extension NSImageView {
   override open func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
@@ -97,3 +102,4 @@ extension NSImageView {
   
 }
 
+#endif

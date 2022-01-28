@@ -61,7 +61,7 @@ class VertexNode : SCNNode {
     j.program = p
     j.isDoubleSided = true
 
-    let im = NSImage.init(named: "london")!
+    let im = XImage.init(named: "london")!
     let matprop = SCNMaterialProperty.init(contents: im)
     j.setValue(matprop, forKey: "tex")
 
@@ -121,8 +121,11 @@ class VertexNode : SCNNode {
 
 //    iFrame += 1
 
-    let modifierFlags = NSEvent.modifierFlags
-    let mouseButtons = NSEvent.pressedMouseButtons
+    #if os(macOS)
+    let modifierFlags = XEvent.modifierFlags
+    let mouseButtons = XEvent.pressedMouseButtons
+    #endif
+
     //   let mouseButtons = NSEvent.pressedMouseButtons
 
     // let w = Float(size.width)
@@ -140,8 +143,11 @@ class VertexNode : SCNNode {
       uniform.lastTouch = SIMD2<Float>(x: Float(ohl.x), y: Float(ohl.y) )
     }
  */
+    #if os(macOS)
     uniform.mouseButtons = Int32(mouseButtons)
     uniform.eventModifiers = Int32(modifierFlags.rawValue)
+    #endif
+    
     // ==================================================
 
     // ==================================================
@@ -205,7 +211,7 @@ class VertexSCNScene : T3SCNScene {
     vx.position = SCNVector3(0.5, 0.5, 0.5)
     self.rootNode.addChildNode(vx)
 
-    self.background.contents = NSColor.orange
+    self.background.contents = XColor.orange
 
     self.isPaused = false
 
@@ -226,8 +232,11 @@ class VertexSCNScene : T3SCNScene {
 
     iFrame += 1
 
-    let modifierFlags = NSEvent.modifierFlags
-    let mouseButtons = NSEvent.pressedMouseButtons
+    #if os(macOS)
+    let modifierFlags = XEvent.modifierFlags
+    let mouseButtons = XEvent.pressedMouseButtons
+    #endif
+
     //   let mouseButtons = NSEvent.pressedMouseButtons
 
     // let w = Float(size.width)
@@ -245,8 +254,12 @@ class VertexSCNScene : T3SCNScene {
       uniform.lastTouch = SIMD2<Float>(x: Float(ohl.x), y: Float(ohl.y) )
     }
  */
+    #if os(macOS)
     uniform.mouseButtons = Int32(mouseButtons)
     uniform.eventModifiers = Int32(modifierFlags.rawValue)
+    #endif
+
+    
     // ==================================================
 
     // ==================================================

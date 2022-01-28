@@ -3,7 +3,10 @@
 // Found amongst his effects by r0ml
 
 import Foundation
+#if os(macOS)
 import AppKit
+#endif
+
 import MetalKit
 import os
 import SwiftUI
@@ -36,7 +39,7 @@ struct TextureParameter : Identifiable {
   var type : MTLTextureType
   var access : MTLArgumentAccess
   var data : MTLDataType
-  var image : NSImage
+  var image : XImage
   var video : VideoStream?
   var texture : MTLTexture?
 
@@ -47,7 +50,7 @@ struct TextureParameter : Identifiable {
       type = a.textureType
       access = a.access
       data = a.textureDataType
-      image = NSImage.init(named: ["london", "flagstones", "water", "wood", "still_life"][a.index % 5] )!
+      image = XImage.init(named: ["london", "flagstones", "water", "wood", "still_life"][a.index % 5] )!
     } else {
       return nil
     }
@@ -74,7 +77,7 @@ public class ConfigController {
   private var shaderName : String
   private var configQ = DispatchQueue(label: "config q")
   private var computeBuffer : MTLBuffer?
-  private var empty : CGImage
+//  private var empty : CGImage
 
   //  var videoNames : [VideoSupport] = []
   //  var webcam : WebcamSupport?
@@ -89,7 +92,7 @@ public class ConfigController {
    */
   init(_ x : String) {
     shaderName = x
-    empty = NSImage(named: "BrokenImage")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+//    empty = XImage(named: "BrokenImage")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
     // textureThumbnail = Array(repeating: nil, count: numberOfTextures)
     // inputTexture = Array(repeating: nil, count: Shader.numberOfTextures)
 
@@ -474,7 +477,7 @@ struct ImageStrip : View {
       ForEach(texes) { (jj) in
 
         // FIXME: i windws up out of range -- must be from resetting texes
-        Image.init(nsImage: texes[jj.id].image).resizable().scaledToFit()
+        Image.init(xImage: texes[jj.id].image).resizable().scaledToFit()
           .onDrop(of: [UTType.fileURL, UTType.plainText, UTType.image], isTargeted: nil, perform: { (y) in
 
             var res = false
@@ -523,7 +526,7 @@ struct ImageStrip : View {
                  */
                 if uti[0].conforms(to: UTType.image) {
 
-                  if let k = NSImage.init(contentsOf: j) {
+                  if let k = XImage.init(contentsOf: j) {
                     texes[jj.id].image = k
                     texes[jj.id].texture = k.getTexture(MTKTextureLoader(device: device))
                     uuid = UUID()
@@ -533,7 +536,7 @@ struct ImageStrip : View {
                   let vs = VideoSupport(j)
                   texes[jj.id].video = vs
                   vs.getThumbnail {
-                    texes[jj.id].image = NSImage.init(cgImage: $0, size: CGSize(width: $0.width, height: $0.height))
+                    texes[jj.id].image = XImage.init(cgImage: $0, size: CGSize(width: $0.width, height: $0.height))
                   }
                   uuid = UUID()
                   res = true

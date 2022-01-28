@@ -74,7 +74,7 @@ class PointScene : T1SCNScene {
     pointNode = gn
     self.rootNode.addChildNode(pointNode!)
 
-    self.background.contents = NSColor.orange
+    self.background.contents = XColor.orange
 
     self.isPaused = false
   }

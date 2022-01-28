@@ -273,7 +273,7 @@ struct SpriteLibraryView : View {
   }
   }
 
-  var thumbs : [NSImage] = [NSImage.init(named: "BrokenImage")!]
+  var thumbs : [XImage] = [XImage.init(named: "BrokenImage")!]
 
   var body: some View {
   

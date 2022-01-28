@@ -35,27 +35,42 @@ import SceneKit
     clem3 = v
 */
 
+  @Environment(\.scenePhase) private var scenePhase
+
+
   var body: some Scene {
+
     Group {
       WindowGroup("SceneKit") {
         SceneLibraryView().navigationTitle("SceneKit Window").handlesExternalEvents(preferring: Set(arrayLiteral: "SceneKit"), allowing: Set(arrayLiteral: ""))
       }
-//      .handlesExternalEvents(matching: ["appRender://scenekit"])
+      .onChange(of: scenePhase) { phase in
+        print("scene phase is \(phase)")
+      }
+      .handlesExternalEvents(matching: ["appRender://scenekit"])
 //      .handlesExternalEvents(preferring: Set(arrayLiteral: "viewer"), allowing: Set(arrayLiteral: "*"))
         .commands {
-   //       CommandGroup(replacing: .newItem, addition: { })
+//           CommandGroup(replacing: .newItem, addition: { })
         }
       
       WindowGroup("SpriteKit") {
         SpriteLibraryView().navigationTitle("SpriteKit Window")
-      }.handlesExternalEvents(matching: ["appRender://spritekit","*"])
+      }
+      .onChange(of: scenePhase) { phase in
+        print("sprite phase is \(phase)")
+      }
+      .handlesExternalEvents(matching: ["appRender://spritekit","*"])
         .commands {
-   //       CommandGroup(replacing: .newItem, addition: { })
+//           CommandGroup(replacing: .newItem, addition: { })
         }
 
       WindowGroup("MetalKit") {
         LibraryView().navigationTitle("MetalKit Window")
-      }.handlesExternalEvents(matching: ["appRender://metalkit"])
+      }
+      .onChange(of: scenePhase) { phase in
+        print("metal phase is \(phase)")
+      }
+      .handlesExternalEvents(matching: ["appRender://metalkit"])
 
       
 //      .commands {

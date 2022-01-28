@@ -8,19 +8,19 @@ import SwiftUI
 var colorUpdater : XColorPicker.ColorUpdater? = nil
 
 struct XColorPicker : View {
-  @State var value : NSColor
+  @State var value : XColor
   var label : String
   var pref : String
   var config : MyMTLStruct
-  var f : (NSColor) -> ()
+  var f : (XColor) -> ()
 
   class ColorUpdater {
     var bufferMem : UnsafeMutablePointer<SIMD4<Float>>
     var key : String
-    var bv : Binding<NSColor>
-    var f : (NSColor) -> ()
+    var bv : Binding<XColor>
+    var f : (XColor) -> ()
     
-    init(_ j : UnsafeMutablePointer<SIMD4<Float>>, _ v : Binding<NSColor>, _ k : String , _ f : @escaping (NSColor) -> ()) {
+    init(_ j : UnsafeMutablePointer<SIMD4<Float>>, _ v : Binding<XColor>, _ k : String , _ f : @escaping (XColor) -> ()) {
       bufferMem = j
       key = k
       bv = v

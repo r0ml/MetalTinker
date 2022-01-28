@@ -3,10 +3,14 @@
 // Found amongst his effects by r0ml
 
 import CoreImage
+
+#if os(macOS)
 import AppKit
+#endif
 
 let TheCIContext = CIContext() // .init(mtlDevice: device)
 
+#if os(macOS)
 extension CIImage {
   var nsImage : NSImage? {
     get {
@@ -23,4 +27,4 @@ extension CIImage {
   }
 
 }
-
+#endif

@@ -8,5 +8,8 @@
       "filename" : "water.jpg",
       "mipmap-level" : "base"
     }
-  ]
+  ],
+  "properties" : {
+    "level-mode" : "none"
+  }
 }

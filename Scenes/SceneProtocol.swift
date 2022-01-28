@@ -162,15 +162,30 @@ class SpriteTest : SKScene {
 
 extension SKColor {
   func toSRGB() -> SKColor {
+
+    #if os(macOS)
     let a = self.redComponent
     let b = self.greenComponent
     let c = self.blueComponent
-
+    let d = self.alphaComponent
+#else
+    var a : CGFloat = 0
+    var b : CGFloat = 0
+    var c : CGFloat = 0
+    var d : CGFloat = 0
+    self.getRed(&a, green: &b, blue: &c, alpha: &d)
+    #endif
 
     let r = a < 0.0031308 ? 12.92 * a : 1.055 * pow(a, 1/2.2) - 0.055
     let g = b < 0.0031308 ? 12.92 * b : 1.055 * pow(b, 1/2.2) - 0.055
     let bl = c < 0.0031308 ? 12.92 * c : 1.055 * pow(c, 1/2.2) - 0.055
-    return SKColor.init(calibratedRed: r, green: g-0.03, blue: bl-0.02, alpha: self.alphaComponent)
+
+    #if os(macOS)
+    return SKColor.init(calibratedRed: r, green: g-0.03, blue: bl-0.02, alpha: d)
+    #else
+    return SKColor.init(red: r, green: g-0.03, blue: bl-0.03, alpha: d)
+    #endif
+
   }
 }
 

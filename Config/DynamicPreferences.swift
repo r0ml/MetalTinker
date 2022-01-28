@@ -64,7 +64,7 @@ class DynamicPreferences {
           
         case is SIMD4<Float>: // color (use a colorPicker)
           let v = dat as! SIMD4<Float>
-          let cc = NSColor.init(calibratedRed: CGFloat(v[0]), green: CGFloat(v[1]), blue: CGFloat(v[2]), alpha: CGFloat(v[3]))
+          let cc = XColor.init(calibratedRed: CGFloat(v[0]), green: CGFloat(v[1]), blue: CGFloat(v[2]), alpha: CGFloat(v[3]))
           let x = self.makeColorPicker(bstm, value: cc)
           res.append( IdentifiableView(id: dnam, view: x) )
           
@@ -86,7 +86,7 @@ class DynamicPreferences {
     return res
   }
   
-  private func makeColorPicker(_ arg : MyMTLStruct, value: NSColor) -> AnyView {
+  private func makeColorPicker(_ arg : MyMTLStruct, value: XColor) -> AnyView {
     return AnyView(XColorPicker(value: value, label: arg.name, pref: "\(self.title).\(arg.name!)", config: arg, f: {
       if arg.name == "clearColor" {
         self.config.clearColor = $0.asFloat4()

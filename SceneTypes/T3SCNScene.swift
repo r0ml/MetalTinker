@@ -33,7 +33,7 @@ class T3SCNScene : T1SCNScene {
   func zoom(_ n : CGFloat) {
 //    print("zoomed \(n)")
     zoom = n
-    self.rootNode.childNodes[1].position.z = min(999, max(0.1, dist / max(n, 0.1)))
+    self.rootNode.childNodes[1].position.z = XFloat(min(999, max(0.1, dist / max(n, 0.1))))
 //    print("\(self.rootNode.childNodes[1].position.z)")
   }
 
@@ -120,7 +120,7 @@ class T3ShaderSCNScene : T3SCNScene {
     j.program = p
     j.isDoubleSided = true
 
-    let im = NSImage.init(named: "london")!
+    let im = XImage.init(named: "london")!
     let matprop = SCNMaterialProperty.init(contents: im)
     j.setValue(matprop, forKey: "tex")
     j.setValue(config.initializationBuffer, forKey: "in")
@@ -142,7 +142,7 @@ class T3ShaderSCNScene : T3SCNScene {
 
     self.rootNode.addChildNode(gn)
 
-    self.background.contents = NSColor.orange
+    self.background.contents = XColor.orange
 
     self.isPaused = false
 
@@ -167,8 +167,11 @@ class T3ShaderSCNScene : T3SCNScene {
 
       iFrame += 1
 
-      let modifierFlags = NSEvent.modifierFlags
-    let mouseButtons = NSEvent.pressedMouseButtons
+    #if os(macOS)
+      let modifierFlags = XEvent.modifierFlags
+    let mouseButtons = XEvent.pressedMouseButtons
+    #endif
+
       //   let mouseButtons = NSEvent.pressedMouseButtons
 
       // let w = Float(size.width)
@@ -185,8 +188,12 @@ class T3ShaderSCNScene : T3SCNScene {
       uniform.iMouse = SIMD2<Float>(x: Float(hl.x), y: Float(hl.y) )
       uniform.lastTouch = SIMD2<Float>(x: Float(ohl.x), y: Float(ohl.y) )
     }
+
+    #if os(macOS)
     uniform.mouseButtons = Int32(mouseButtons)
     uniform.eventModifiers = Int32(modifierFlags.rawValue)
+    #endif
+    
     // ==================================================
 
     // ==================================================
@@ -223,10 +230,15 @@ class T3ShaderSCNScene : T3SCNScene {
 
     // assuming that the fieldOfView is vertical
 
+    #if os(macOS)
     let ss = NSScreen.main?.frame.size ?? CGSize(width: 16, height: 9)
+    #else
+    let ss = UIScreen.main.currentMode?.size ?? CGSize(width: 16, height: 9)
+    #endif
+
 //    print(ss)
     let mp = point - bounds.size / 2.0
-    var y = tan(myCameraNode.camera!.fieldOfView / 180 / 2 * CGFloat.pi) * myCameraNode.position.z
+    var y = tan(myCameraNode.camera!.fieldOfView / 180 / 2 * CGFloat.pi) * Double(myCameraNode.position.z)
     var x = y * ss.width / ss.height
 
     let adjb = CGSize(width: bounds.size.height * ss.width / ss.height, height: bounds.size.height)
@@ -240,8 +252,8 @@ class T3ShaderSCNScene : T3SCNScene {
       y = z
     }
 
-    let xx = mp.x * x * 2 / adjb.width
-    let yy = mp.y * y * 2 / adjb.height
+    let xx = XFloat(mp.x * x * 2 / adjb.width)
+    let yy = XFloat(mp.y * y * 2 / adjb.height)
 
 
     let d = rootNode.childNodes[0].position.z

@@ -130,6 +130,7 @@ struct LeftPane : View {
     ScrollView {
       ScrollViewReader { sv -> AnyView in
 
+
         let bk = KeyEventHandling("left") { event in
           print(">> left pane key \(event.charactersIgnoringModifiers ?? "")")
           if let c = event.characters?.unicodeScalars.first?.value {
@@ -261,7 +262,7 @@ struct LibraryView : View {
     }
   }
 
-  var thumbs : [NSImage] = [NSImage.init(named: "BrokenImage")!]
+  var thumbs : [XImage] = [XImage.init(named: "BrokenImage")!]
 
   var body: some View {
     let j = MetalViewC(delegate: state.delegate)  // shader: ss.rm)
