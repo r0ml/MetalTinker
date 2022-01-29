@@ -110,7 +110,14 @@ class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
     var paused = now() - times.lastTime;
 
     // single step backwards if shift key is pressed
-    if (NSEvent.modifierFlags.contains(.shift)) {
+    
+    #if os(macOS)
+    let shifted = NSEvent.modifierFlags.contains(.shift)
+    #else
+    let shifted = false
+    #endif
+    
+    if shifted {
       paused += (1/60.0)
       setup.iFrame -= 2;
     } else {
@@ -157,13 +164,20 @@ class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
 
 }
 
+#if os(macOS)
+typealias XViewController = NSViewController
+typealias XViewControllerRepresentableContext = NSViewControllerRepresentableContext
+#else
+typealias XViewController = UIViewController
+typealias XViewControllerRepresentableContext = UIViewControllerRepresentableContext
+#endif
 
-class MetalViewController : NSViewController {
+class MetalViewController : XViewController {
   var mtkView : MTKView
   var delegate : MetalDelegate
-  var context : NSViewControllerRepresentableContext<MetalViewC>
+  var context : XViewControllerRepresentableContext<MetalViewC>
   
-  init( delegate: MetalDelegate, context x: NSViewControllerRepresentableContext<MetalViewC>, mtkView mtkv : MTKView) {
+  init( delegate: MetalDelegate, context x: XViewControllerRepresentableContext<MetalViewC>, mtkView mtkv : MTKView) {
     context = x
     mtkView = mtkv
     self.delegate = delegate
@@ -176,11 +190,18 @@ class MetalViewController : NSViewController {
   
   override func loadView() {
     mtkView.preferredFramesPerSecond = 60
+    
+    #if os(macOS)
     mtkView.wantsLayer = true
+    let ml = mtkView.layer!
+    #else
+    let ml = mtkView.layer
+    #endif
 
-    mtkView.layer?.backgroundColor = (context.environment.colorScheme == .dark ? NSColor.darkGray : NSColor.lightGray).cgColor
 
-    mtkView.layer?.opacity = 1.0
+    ml.backgroundColor = (context.environment.colorScheme == .dark ? XColor.darkGray : XColor.lightGray).cgColor
+
+    ml.opacity = 1.0
     mtkView.sampleCount = multisampleCount
     mtkView.colorPixelFormat = thePixelFormat
     
@@ -201,6 +222,8 @@ class MetalViewController : NSViewController {
   }
   
   override func viewDidLoad() {
+    // FIXME: how to do this in iOS
+    #if os(macOS)
     NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp, .leftMouseDown, .leftMouseUp, .leftMouseDragged]) { ev in
       switch(ev.type) {
       case .leftMouseDown:
@@ -237,9 +260,11 @@ class MetalViewController : NSViewController {
       }
       return ev
     }
+    #endif
   }
 }
 
+#if os(macOS)
 struct MetalViewC : NSViewControllerRepresentable {
   typealias NSViewControllerType = MetalViewController
   // @ObservedObject var shader : Shader
@@ -254,3 +279,22 @@ struct MetalViewC : NSViewControllerRepresentable {
     // nsViewController.delegate.shader = self.shader
   }
 }
+#else
+
+struct MetalViewC : UIViewControllerRepresentable {
+  typealias UIViewControllerType = MetalViewController
+  // @ObservedObject var shader : Shader
+  var mtkView : MTKView = MTKView()
+  var delegate : MetalDelegate
+
+  func makeUIViewController(context: UIViewControllerRepresentableContext<MetalViewC>) -> MetalViewController {
+    return MetalViewController( delegate: delegate, context: context, mtkView: mtkView)
+  }
+  
+  func updateUIViewController(_ nsViewController: MetalViewController, context: UIViewControllerRepresentableContext<MetalViewC>) {
+    // nsViewController.delegate.shader = self.shader
+  }
+}
+
+#endif
+
