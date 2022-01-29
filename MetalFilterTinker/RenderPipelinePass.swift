@@ -114,13 +114,13 @@ class RenderPipelinePass : PipelinePass {
                    _ isFirst : Bool, delegate : MetalDelegate) {
 
 
-    guard let config = delegate.shader!.config else { return }
+    guard let config = delegate.shader.config else { return }
 
     // This statement overrides the render pass descriptor with the onscreen frameBuffer if one exists -- otherwise it is using the offscreen texture
     var rpd : MTLRenderPassDescriptor
 
 //    if !stat {
-    rpd = delegate.shader!.metalView?.currentRenderPassDescriptor ?? delegate.shader!.renderPassDescriptor(delegate.mySize!)
+    rpd = delegate.shader.metalView?.currentRenderPassDescriptor ?? delegate.shader.renderPassDescriptor(delegate.mySize!)
 //    } else {
 //      rpd = rm.renderPassDescriptor
 //    }
@@ -209,7 +209,7 @@ class RenderPipelinePass : PipelinePass {
       // if the low order bit of flags is set -- this is a 2d (blended) render
       if ( (flags & 1) == 1) {
       } else {
-        renderEncoder.setDepthStencilState(delegate.shader!.depthStencilState)
+        renderEncoder.setDepthStencilState(delegate.shader.depthStencilState)
       }
       renderEncoder.setVertexBuffer(delegate.uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setVertexBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
@@ -220,7 +220,7 @@ class RenderPipelinePass : PipelinePass {
  //     renderEncoder.setFragmentTextures(rm.config.inputTexture, range: inputTextureId..<inputTextureId + Shader.numberOfTextures)
       for i in 0..<config.fragmentTextures.count {
         if config.fragmentTextures[i].texture == nil {
-          config.fragmentTextures[i].texture = config.fragmentTextures[i].image.getTexture(delegate.shader!.textureLoader, mipmaps: true)
+          config.fragmentTextures[i].texture = config.fragmentTextures[i].image.getTexture(delegate.shader.textureLoader, mipmaps: true)
         }
         renderEncoder.setFragmentTexture( config.fragmentTextures[i].texture, index: config.fragmentTextures[i].index)
       }
@@ -230,7 +230,7 @@ class RenderPipelinePass : PipelinePass {
       renderEncoder.setRenderPipelineState(pipelineState)
 
       // This sets up the drawable size?
-      if let v = delegate.shader!.metalView {
+      if let v = delegate.shader.metalView {
         // FIXME:
         // did the drawableSize change since the last time?
         sz = v.drawableSize

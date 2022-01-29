@@ -42,7 +42,7 @@ class ComputePipelinePass : PipelinePass {
                    _ isFirst : Bool,
                    delegate : MetalDelegate) {
     guard let cps = commandBuffer.makeComputeCommandEncoder() else { return }
-    guard let config = delegate.shader!.config else { return }
+    guard let config = delegate.shader.config else { return }
     cps.label = "compute pass for \(label)"
     cps.setComputePipelineState( pipelineState)
     cps.setBuffer(delegate.uniformBuffer, offset: 0, index: uniformId)

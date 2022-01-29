@@ -57,7 +57,7 @@ struct ControlsView: View {
             let savePanel = NSSavePanel()
             savePanel.canCreateDirectories = true
             savePanel.showsTagField = true
-            savePanel.nameFieldStringValue = "\(self.delegate.shader?.myName).png"
+            savePanel.nameFieldStringValue = "\(self.delegate.shader.myName).png"
             savePanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.modalPanelWindow)))
             savePanel.begin { (result) in
               if result.rawValue == NSApplication.ModalResponse.OK.rawValue {

@@ -7,6 +7,13 @@ import SwiftUI
 import Combine
 import SceneKit
 
+
+#if os(macOS)
+var sceneWindow : NSWindow?
+var spriteWindow : NSWindow?
+var metalWindow : NSWindow?
+#endif
+
 // var clem : NSWindow?
 // var clem2 : NSWindow?
 
@@ -41,6 +48,15 @@ import SceneKit
   var body: some Scene {
 
     Group {
+      WindowGroup("MetalKit") {
+        ShaderLibraryView().navigationTitle("MetalKit Window")
+      }
+      .onChange(of: scenePhase) { phase in
+        print("metal phase is \(phase)")
+      }
+      .handlesExternalEvents(matching: ["appRender://metalkit"])
+
+
       WindowGroup("SceneKit") {
         SceneLibraryView().navigationTitle("SceneKit Window").handlesExternalEvents(preferring: Set(arrayLiteral: "SceneKit"), allowing: Set(arrayLiteral: ""))
       }
@@ -64,15 +80,7 @@ import SceneKit
 //           CommandGroup(replacing: .newItem, addition: { })
         }
 
-      WindowGroup("MetalKit") {
-        LibraryView().navigationTitle("MetalKit Window")
-      }
-      .onChange(of: scenePhase) { phase in
-        print("metal phase is \(phase)")
-      }
-      .handlesExternalEvents(matching: ["appRender://metalkit"])
 
-      
 //      .commands {
 //        MyCommands()
 //      }

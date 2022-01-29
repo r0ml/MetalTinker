@@ -11,7 +11,7 @@ class FrameTimer : ObservableObject {
 }
 
 class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
-  var shader : Shader?
+  var shader : Shader
   // Don't start out running
   @Published var isRunning : Bool = false
 
@@ -30,6 +30,10 @@ class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
   var gpuSemaphore : DispatchSemaphore = DispatchSemaphore(value: semCount)
 
 
+  init(shader: Shader) {
+    self.shader = shader
+  }
+
   // delegate
 
   func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
@@ -40,7 +44,7 @@ class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
       // print("got a size update \(mySize) -> \(size)")
       // FIXME:
       // self.makeRenderPassTextures(size: size)
-      self.shader?.config?.pipelinePasses.forEach { ($0 as? RenderPipelinePass)?.resize(size) }
+      self.shader.config?.pipelinePasses.forEach { ($0 as? RenderPipelinePass)?.resize(size) }
     } else {
       // print("got a size update message when the size didn't change \(size)")
     }
@@ -53,7 +57,7 @@ class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
   }
 
   func draw(in view: MTKView) {
-    shader?.metalView = view
+    shader.metalView = view
 
     if isRunning {
 
@@ -93,8 +97,8 @@ class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
 
 
 
-      shader?.grabVideo(times)
-      shader?.draw(in: view, delegate : self)
+      shader.grabVideo(times)
+      shader.draw(in: view, delegate : self)
     }
   }
 
@@ -115,7 +119,7 @@ class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
     times.startTime += paused
     times.lastTime += paused
 
-    self.shader?.draw(in: metalView, delegate : self)
+    self.shader.draw(in: metalView, delegate : self)
   }
 
   func play() {

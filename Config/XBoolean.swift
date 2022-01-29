@@ -24,6 +24,9 @@ struct XBoolean : View {
   var body : some View {
     Toggle(isOn: $bool) {
       doStuff() ? Text(label) : Text("not happening")
-    }.toggleStyle( CheckboxToggleStyle() )
+    }
+    #if os(macOS)
+    .toggleStyle( CheckboxToggleStyle() )
+    #endif
   }
 }
