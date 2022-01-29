@@ -48,8 +48,10 @@ class RenderSetup {
     
       iFrame += 1
 
+    #if os(macOS)
       let modifierFlags = NSEvent.modifierFlags
       //   let mouseButtons = NSEvent.pressedMouseButtons
+    #endif
 
       let w = Float(size.width)
       let h = Float(size.height)
@@ -57,8 +59,11 @@ class RenderSetup {
       uniform.pointee.iMouse    = SIMD2<Float>( s * Float(mouseLoc.x)  / w, 1 - s * Float(mouseLoc.y) / h )
       uniform.pointee.lastTouch = SIMD2<Float>( s * Float(lastTouch.x) / w, 1 - s * Float(lastTouch.y) / h );
       uniform.pointee.mouseButtons = Int32(mouseButtons)
-      uniform.pointee.eventModifiers = Int32(modifierFlags.rawValue)
 
+    #if os(macOS)
+    uniform.pointee.eventModifiers = Int32(modifierFlags.rawValue)
+    #endif
+    
     // Pass the key event in to the shader, then reset (so it only gets passed once)
     // when the key is released, event handling will so indicate.
     uniform.pointee.keyPress = self.keyPress

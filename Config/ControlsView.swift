@@ -43,7 +43,9 @@ struct ControlsView: View {
       Text(frameTimer.shaderFPS)
       
       Spacer()
-      
+
+      // FIXME: change this to use SwiftUI version of Save panel
+      #if os(macOS)
       Image("camera", bundle: nil, label: Text("Snapshot")).resizable().scaledToFit()
         .frame(width: 64, height: 64).onTapGesture {
           let lastDrawableDisplayed = self.metalView.currentDrawable?.texture
@@ -67,7 +69,8 @@ struct ControlsView: View {
           }
           
       }
-      
+      #endif
+
       Image("videocam", bundle: nil, label: Text("Record")).resizable().scaledToFit()
         .frame(width:64, height: 64).onTapGesture {
           if let v = self.delegate.videoRecorder {

@@ -93,7 +93,6 @@ class DynamicPreferences {
       }
     })
     )
-    
   }
   
   private func makeBoolean(_ arg : MyMTLStruct, value: Any?) -> AnyView {

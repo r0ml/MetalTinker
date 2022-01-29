@@ -5,7 +5,7 @@
 import SwiftUI
 
 // I need to hang this somewhere to prevent it from being garbage collected
-var colorUpdater : XColorPicker.ColorUpdater? = nil
+// var colorUpdater : XColorPicker.ColorUpdater? = nil
 
 struct XColorPicker : View {
   @State var value : XColor
@@ -14,6 +14,16 @@ struct XColorPicker : View {
   var config : MyMTLStruct
   var f : (XColor) -> ()
 
+  init(value: XColor, label: String, pref: String, config: MyMTLStruct, f: @escaping (XColor) -> () ) {
+    self.value = value
+    self.label = label
+    self.pref = pref
+    self.config = config
+    self.f = f
+    let cu : UnsafeMutablePointer<SIMD4<Float>> = self.config.getBufPtr()
+//    self.value = XColor(cu.pointee)
+  }
+  /*
   class ColorUpdater {
     var bufferMem : UnsafeMutablePointer<SIMD4<Float>>
     var key : String
@@ -37,8 +47,27 @@ struct XColorPicker : View {
       }
     }
   }
-  
+  */
+
   var body : some View {
+
+    //    let j = ColorUpdater(cu, self.$value, self.pref, f )
+
+    let bb = Binding<Color>(
+      get: {
+        Color( value )
+      },
+      set: { z in
+        value = XColor(z)
+        UserDefaults.standard.set( value,  forKey: self.pref)
+        f(value)
+      }
+    )
+
+    ColorPicker(label, selection: bb)
+
+/*
+
     Button(action: {
       let cp = NSColorPanel.shared
       let cu : UnsafeMutablePointer<SIMD4<Float>> = self.config.getBufPtr()
@@ -55,6 +84,7 @@ struct XColorPicker : View {
         Color(value).frame(width: 15, height: 15)
       }
     }
+ */
   }
 }
 

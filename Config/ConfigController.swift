@@ -524,6 +524,9 @@ struct ImageStrip : View {
                  nil)
                  let utix = uti?.takeRetainedValue()
                  */
+
+                // FIXME: bring it back for iOS
+                #if os(macOS)
                 if uti[0].conforms(to: UTType.image) {
 
                   if let k = XImage.init(contentsOf: j) {
@@ -545,7 +548,8 @@ struct ImageStrip : View {
                   // fail
                   print("unknown file type dropped")
                 }
-
+                #endif
+                
               }
               return
             }

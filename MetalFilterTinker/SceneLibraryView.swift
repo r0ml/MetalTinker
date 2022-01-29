@@ -194,20 +194,26 @@ struct SceneLibraryView : View {
   var body: some View {
     NavigationView {
       SidebarView(folderList: fl)
+
+      #if os(macOS)
         .toolbar {
           Button(action: toggleSidebar) {
             Image(systemName: "sidebar.left")
               .help("Toggle Sidebar")
           }
         }
+      #endif
+
       Text("No Sidebar Selection")
       Text("No Scene Selection")
     }
   }
 
+  #if os(macOS)
   private func toggleSidebar() {
     NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
   }
+  #endif
 
   /*
 

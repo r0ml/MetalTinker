@@ -204,7 +204,9 @@ stat ?
     }
     
     var scale : CGFloat = 1
-    
+
+      // FIXME: what is this in iOS land?  What is it in mac land?
+      #if os(macOS)
     if let viewx = xview {let eml = NSEvent.mouseLocation
       let wp = viewx.window!.convertPoint(fromScreen: eml)
       let ml = viewx.convert(wp, from: nil)
@@ -215,7 +217,7 @@ stat ?
       
       scale = xview?.window?.screen?.backingScaleFactor ?? 1
     }
-
+      #endif
 
     // Set up the command buffer for this frame
     let  commandBuffer = commandQueue.makeCommandBuffer()!

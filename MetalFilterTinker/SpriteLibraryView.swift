@@ -11,6 +11,9 @@ import Metal
 
 // import CoreVideo
 
+// FIXME: bring me in for iOS
+
+#if os(macOS)
 class SpriteShaderLeaf : Identifiable, Equatable, Hashable {
   static func == (lhs: SpriteShaderLeaf, rhs: SpriteShaderLeaf) -> Bool {
     return lhs.id == rhs.id
@@ -316,3 +319,5 @@ struct SpriteLibraryView : View {
 //     }
   }
 }
+
+#endif

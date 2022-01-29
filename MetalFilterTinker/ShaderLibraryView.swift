@@ -87,13 +87,23 @@ struct ShaderView : View {
   var delegate : MetalDelegate
 
   var body : some View {
-    MetalViewC(delegate: delegate)
+    let j = MetalViewC(delegate: delegate)
+    HStack {
+    VStack {
+      j
+      #if os(macOS)
+        .aspectRatio(1.4, contentMode: .fill)
+      #endif
       .onAppear {
         delegate.play()
       }
       .onDisappear {
         delegate.stop()
       }
+      ControlsView( frameTimer: delegate.frameTimer, delegate: delegate, metalView: j.mtkView).frame(minWidth: 600)
+    }
+      PreferencesView(shader: delegate.shader)
+    }
   }
 }
 
@@ -132,20 +142,25 @@ struct ShaderLibraryView : View {
   var body: some View {
     NavigationView {
       FoldersListView(folders : fl)
+      #if os(macOS)
         .toolbar {
           Button(action: toggleSidebar) {
             Image(systemName: "sidebar.left")
               .help("Toggle Sidebar")
           }
         }
+      #endif
       Text("No Sidebar Selection")
       Text("No Shader Selection")
     }
   }
 
+  #if os(macOS)
   private func toggleSidebar() {
     NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
   }
+  #endif
+
     /*
 
 

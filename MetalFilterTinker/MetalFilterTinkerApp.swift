@@ -68,7 +68,9 @@ var metalWindow : NSWindow?
         .commands {
 //           CommandGroup(replacing: .newItem, addition: { })
         }
-      
+
+      // FIXME: put me back?
+      #if os(macOS)
       WindowGroup("SpriteKit") {
         SpriteLibraryView().navigationTitle("SpriteKit Window")
       }
@@ -79,7 +81,7 @@ var metalWindow : NSWindow?
         .commands {
 //           CommandGroup(replacing: .newItem, addition: { })
         }
-
+      #endif
 
 //      .commands {
 //        MyCommands()

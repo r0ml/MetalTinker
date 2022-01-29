@@ -17,7 +17,6 @@
 		E71A02C82367397B00A88C16 /* NSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C72367397B00A88C16 /* NSImageView.swift */; };
 		E71A02CA23673C2400A88C16 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C923673C2400A88C16 /* CIImage.swift */; };
 		E71AE71723E0FFB200A0FC1C /* Documentation.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E71AE71623E0FFB100A0FC1C /* Documentation.rtf */; };
-		E71E629C27A2649E009E13F6 /* SpriteLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A44182578002F00639F19 /* SpriteLibraryView.swift */; };
 		E71E629D27A264D6009E13F6 /* ShaderLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C0E325AC27A1004D75CD /* ShaderLibraryView.swift */; };
 		E71E629E27A264EB009E13F6 /* SpriteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A451E25780EC400639F19 /* SpriteProtocol.swift */; };
 		E72A7FF023C2C1B6008C642A /* XColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FEF23C2C1B6008C642A /* XColorPicker.swift */; };
@@ -126,6 +125,7 @@
 		E7B561E827A343480070EC65 /* XEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B561E727A343480070EC65 /* XEvent.swift */; };
 		E7B561EA27A3559B0070EC65 /* XFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B561E927A3559B0070EC65 /* XFloat.swift */; };
 		E7B561EB27A359B50070EC65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7FCB46D212A2B1200CED4FA /* Assets.xcassets */; };
+		E7B561EC27A5A19B0070EC65 /* SpriteLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A44182578002F00639F19 /* SpriteLibraryView.swift */; };
 		E7B5726925B3ADEF00DF1452 /* Vasarely 5.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5726825B3ADEF00DF1452 /* Vasarely 5.swift */; };
 		E7B5727125B40B4F00DF1452 /* Spinning_Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5727025B40B4F00DF1452 /* Spinning_Ring.swift */; };
 		E7B5727925B40B6700DF1452 /* Spinning_Circles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5727825B40B6700DF1452 /* Spinning_Circles.swift */; };
@@ -1427,10 +1427,10 @@
 				E7A5A46B25B0D13E0051A69A /* Infinity Particles.swift in Sources */,
 				E7A5A3A025AD15B80051A69A /* PointScene.swift in Sources */,
 				E748C45A239809E100AD7A64 /* RenderSetup.swift in Sources */,
+				E7B561EC27A5A19B0070EC65 /* SpriteLibraryView.swift in Sources */,
 				E74A43972576EC1A00639F19 /* SceneLibraryView.swift in Sources */,
 				E746F31523F0D107003598F6 /* sdf.metal in Sources */,
 				E7B5726925B3ADEF00DF1452 /* Vasarely 5.swift in Sources */,
-				E71E629C27A2649E009E13F6 /* SpriteLibraryView.swift in Sources */,
 				E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -143,3 +143,35 @@ let emptyImage = XImage(named: "camera")!.cgImage(forProposedRect: nil, context:
 #else
 let emptyImage = XImage(named: "camera")!.cgImage!
 #endif
+
+
+#if os(iOS)
+extension UIImage {
+func getTexture(_ t : MTKTextureLoader, flipped: Bool = true, mipmaps : Bool = false) -> MTLTexture? {
+
+  // This business fixed the problem with having a gray-scale png texture
+
+  /*
+  let sourceImageRep = self.tiffRepresentation!
+  let targetColorSpace = NSColorSpace.genericRGB
+  let targetImageRep = NSBitmapImageRep(data: sourceImageRep)?.converting(to: targetColorSpace, renderingIntent:NSColorRenderingIntent.perceptual)!
+  let data = targetImageRep!.tiffRepresentation!
+*/
+
+  let data = self.pngData()!
+
+  do {
+    let j = try t.newTexture(data: data,
+                            options: [
+                              .origin :  flipped ? MTKTextureLoader.Origin.topLeft : MTKTextureLoader.Origin.bottomLeft,
+                              .SRGB: NSNumber(value: false),
+                              .generateMipmaps : NSNumber(value: mipmaps)])
+    return j
+  } catch let e {
+    os_log("getting texture: %s", type: .error, e.localizedDescription)
+  }
+  return nil
+}
+
+}
+#endif
