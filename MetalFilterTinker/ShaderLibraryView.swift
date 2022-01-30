@@ -68,18 +68,40 @@ class ShaderLib : Identifiable, Equatable, Hashable {
 
 struct FoldersListView : View {
   var folders : [ShaderLib]
-
+  var initialSelection : String
+  @Binding var selectedItem : String?
+  
+  init(folders: [ShaderLib], selectedItem: Binding<String?>) {
+    self.folders = folders
+    initialSelection = folders[2].id
+    self._selectedItem = selectedItem
+  }
+  
   var body: some View {
     List {
       ForEach( folders ) { li in
-        NavigationLink(destination: ShaderListView(items: li.items)) {
+        NavigationLink(destination: ShaderListView(items: li.items)
+                        .navigationBarTitle(li.id, displayMode: .inline),
+                       tag: li.id,
+                       selection: $selectedItem) {
         HStack {
           Text(li.id).frame(maxWidth: .infinity, alignment: .leading)
 
-         }
+        }
        }.frame(minWidth: 100, maxWidth: 400)
      }
-  }
+    }.listStyle(SidebarListStyle())
+      .navigationTitle("Sidebar")
+      .onAppear {
+        print("set selection \(initialSelection)")
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+          selectedItem = initialSelection
+        }
+      }
+
+
   }
 }
 
@@ -109,12 +131,16 @@ struct ShaderView : View {
 
 struct ShaderListView : View {
   var items : [ShaderLeaf]
-
+  @State var sel : String?
+  
   var body: some View {
         List {
           ForEach( items, id: \.self ) { li  in
             NavigationLink(destination:
-                            ShaderView(delegate: MetalDelegate(shader: li.rm))
+                            ShaderView(delegate: MetalDelegate(shader: li.rm)),
+                           tag: li.id,
+                           selection: $sel
+                           
             ) {
               HStack {
                 Text( li.id ).frame(maxWidth: .infinity, alignment: .leading)
@@ -127,9 +153,13 @@ struct ShaderListView : View {
 
 struct ShaderLibraryView : View {
   var fl : [ShaderLib]
-
+  @State var selectedItem : String?
+  var initialSelection : String?
   init() {
     fl = ShaderLib.folderList
+    initialSelection = fl[2].id
+    selectedItem = initialSelection
+    
 /*    if let sl = UserDefaults.standard.string(forKey: "selectedLibrary"), self.state.libName != sl {
       self.state.lib = fl.first(where: { $0.id == sl })
       if let ss = UserDefaults.standard.string(forKey: "selectedShader"), self.state.delegate.shader?.id != ss {
@@ -141,18 +171,23 @@ struct ShaderLibraryView : View {
 
   var body: some View {
     NavigationView {
-      FoldersListView(folders : fl)
-      #if os(macOS)
-        .toolbar {
-          Button(action: toggleSidebar) {
-            Image(systemName: "sidebar.left")
-              .help("Toggle Sidebar")
-          }
-        }
-      #endif
-      Text("No Sidebar Selection")
+      FoldersListView(folders : fl, selectedItem: $selectedItem)
+        .listStyle(SidebarListStyle() )
+      NothingSelectedView()
       Text("No Shader Selection")
     }
+    .navigationViewStyle( DoubleColumnNavigationViewStyle() )
+#if os(macOS)
+    .toolbar {
+      ToolbarItem(placement: .navigation) {
+      Button(action: toggleSidebar) {
+        Image(systemName: "sidebar.left")
+          .help("Toggle Sidebar")
+      }
+    }
+    }
+  #endif
+
   }
 
   #if os(macOS)

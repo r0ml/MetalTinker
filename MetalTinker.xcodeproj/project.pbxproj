@@ -207,6 +207,7 @@
 		E7ED1AD9257E909E0075DD2E /* Simple6.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A46DE257AAA0300639F19 /* Simple6.swift */; };
 		E7ED2489257E923E0075DD2E /* Breathing Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED2488257E923E0075DD2E /* Breathing Exercise.swift */; };
 		E7ED629821779685007ABB53 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E7EFE24C27A6E988007D6154 /* FixSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFE24B27A6E988007D6154 /* FixSwiftUI.swift */; };
 		E7FCB46A212A2B1000CED4FA /* MetalFilterTinkerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCB469212A2B1000CED4FA /* MetalFilterTinkerApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -431,7 +432,6 @@
 		E7B5731025B4100300DF1452 /* Arcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arcs.swift; sourceTree = "<group>"; };
 		E7B5733625B6B21C00DF1452 /* MyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFilter.swift; sourceTree = "<group>"; };
 		E7B5734425B6B24300DF1452 /* CIFilters.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CIFilters.metal; sourceTree = "<group>"; };
-		E7B5739525B6BA2D00DF1452 /* FilterLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLibraryView.swift; sourceTree = "<group>"; };
 		E7B573A625B7F0D000DF1452 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		E7B573AF25B7F0F500DF1452 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		E7B573B825B80A3B00DF1452 /* VertexScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexScene.swift; sourceTree = "<group>"; };
@@ -463,6 +463,7 @@
 		E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Simple_Scenes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7ED2488257E923E0075DD2E /* Breathing Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breathing Exercise.swift"; sourceTree = "<group>"; };
 		E7ED629721779685007ABB53 /* support.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = support.metal; sourceTree = "<group>"; };
+		E7EFE24B27A6E988007D6154 /* FixSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSwiftUI.swift; sourceTree = "<group>"; };
 		E7FCB466212A2B1000CED4FA /* MetalTinkerOrig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTinkerOrig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FCB469212A2B1000CED4FA /* MetalFilterTinkerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalFilterTinkerApp.swift; sourceTree = "<group>"; };
 		E7FCB46D212A2B1200CED4FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -860,7 +861,6 @@
 				E71A02CB236767C000A88C16 /* MetalView.swift */,
 				E7D7C0E325AC27A1004D75CD /* ShaderLibraryView.swift */,
 				E74A44182578002F00639F19 /* SpriteLibraryView.swift */,
-				E7B5739525B6BA2D00DF1452 /* FilterLibraryView.swift */,
 				E77675D4228347A800614B7B /* Library.swift */,
 				E7500791216B181100FABE79 /* Shader.swift */,
 				E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */,
@@ -870,6 +870,7 @@
 				E748C459239809E100AD7A64 /* RenderSetup.swift */,
 				E749D2B5254F19D3000930BB /* KeyEventHandling.swift */,
 				E74A45A02578458100639F19 /* BlitPipelinePass.swift */,
+				E7EFE24B27A6E988007D6154 /* FixSwiftUI.swift */,
 			);
 			path = MetalFilterTinker;
 			sourceTree = "<group>";
@@ -1372,6 +1373,7 @@
 				E7D7C05025AB9EEF004D75CD /* Library.swift in Sources */,
 				E7A5A43C25B0CE6A0051A69A /* Dot Line.swift in Sources */,
 				E7A5A47925B0D1720051A69A /* Static Points.swift in Sources */,
+				E7EFE24C27A6E988007D6154 /* FixSwiftUI.swift in Sources */,
 				E7CF9BD1227F42BF00413280 /* MTLTexture.swift in Sources */,
 				E71A02C82367397B00A88C16 /* NSImageView.swift in Sources */,
 				E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */,

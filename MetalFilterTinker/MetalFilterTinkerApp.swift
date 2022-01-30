@@ -51,17 +51,13 @@ var metalWindow : NSWindow?
       WindowGroup("MetalKit") {
         ShaderLibraryView().navigationTitle("MetalKit Window")
       }
-      .onChange(of: scenePhase) { phase in
-        print("metal phase is \(phase)")
-      }
       .handlesExternalEvents(matching: ["appRender://metalkit"])
-
+      .commands {
+        SidebarCommands()
+      }
 
       WindowGroup("SceneKit") {
         SceneLibraryView().navigationTitle("SceneKit Window").handlesExternalEvents(preferring: Set(arrayLiteral: "SceneKit"), allowing: Set(arrayLiteral: ""))
-      }
-      .onChange(of: scenePhase) { phase in
-        print("scene phase is \(phase)")
       }
       .handlesExternalEvents(matching: ["appRender://scenekit"])
 //      .handlesExternalEvents(preferring: Set(arrayLiteral: "viewer"), allowing: Set(arrayLiteral: "*"))
@@ -73,9 +69,6 @@ var metalWindow : NSWindow?
       #if os(macOS)
       WindowGroup("SpriteKit") {
         SpriteLibraryView().navigationTitle("SpriteKit Window")
-      }
-      .onChange(of: scenePhase) { phase in
-        print("sprite phase is \(phase)")
       }
       .handlesExternalEvents(matching: ["appRender://spritekit","*"])
         .commands {
