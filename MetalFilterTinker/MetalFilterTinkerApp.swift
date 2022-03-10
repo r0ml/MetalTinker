@@ -17,7 +17,7 @@ var metalWindow : NSWindow?
 // var clem : NSWindow?
 // var clem2 : NSWindow?
 
-@main struct MetalFilterTinker : App {
+@main struct AppRender : App {
     
 /*    let v2 = NSWindow(
       contentRect: CGRect(x: 0, y: 0, width: 800, height: 400),

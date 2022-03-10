@@ -81,7 +81,10 @@ struct FoldersListView : View {
     List {
       ForEach( folders ) { li in
         NavigationLink(destination: ShaderListView(items: li.items)
-                        .navigationBarTitle(li.id, displayMode: .inline),
+                       #if os(iOS)
+                        .navigationBarTitle(li.id, displayMode: .inline)
+                       #endif
+                       ,
                        tag: li.id,
                        selection: $selectedItem) {
         HStack {
@@ -176,7 +179,7 @@ struct ShaderLibraryView : View {
       NothingSelectedView()
       Text("No Shader Selection")
     }
-    .navigationViewStyle( DoubleColumnNavigationViewStyle() )
+//    .navigationViewStyle( DoubleColumnNavigationViewStyle() )
 #if os(macOS)
     .toolbar {
       ToolbarItem(placement: .navigation) {

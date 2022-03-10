@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		E704CBCE25638F6100FB8C5F /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
 		E704CC8E25638FFB00FB8C5F /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
-		E705E03E26AB5F6100E5AE40 /* MetalTinkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E03D26AB5F6100E5AE40 /* MetalTinkerTests.swift */; };
-		E705E04826AB5F6100E5AE40 /* MetalTinkerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E04726AB5F6100E5AE40 /* MetalTinkerUITests.swift */; };
 		E70EC64E25B8D7DE00A204C3 /* VertexNode.metal in Sources */ = {isa = PBXBuildFile; fileRef = E70EC64525B8CBD400A204C3 /* VertexNode.metal */; };
 		E70EC67225BA100E00A204C3 /* Arcs.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79A25B256960051A69A /* Arcs.metal */; };
 		E71A02C62366847600A88C16 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C52366847600A88C16 /* ViewModel.swift */; };
@@ -283,10 +281,6 @@
 		E701A3F12171573F00FC9795 /* Common.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = Common.h; sourceTree = "<group>"; };
 		E704CBCD25638F6100FB8C5F /* shapes.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shapes.metal; sourceTree = "<group>"; };
 		E704CC0E25638FBA00FB8C5F /* shapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shapes.h; sourceTree = "<group>"; };
-		E705E03926AB5F6100E5AE40 /* MetalTinkerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalTinkerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E705E03D26AB5F6100E5AE40 /* MetalTinkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTinkerTests.swift; sourceTree = "<group>"; };
-		E705E04326AB5F6100E5AE40 /* MetalTinkerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalTinkerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E705E04726AB5F6100E5AE40 /* MetalTinkerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTinkerUITests.swift; sourceTree = "<group>"; };
 		E70DAB43226056E5009B02CD /* DynamicPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPreferences.swift; sourceTree = "<group>"; };
 		E70EC64525B8CBD400A204C3 /* VertexNode.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = VertexNode.metal; sourceTree = "<group>"; };
 		E71A02C12366511A00A88C16 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
@@ -464,28 +458,14 @@
 		E7ED2488257E923E0075DD2E /* Breathing Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breathing Exercise.swift"; sourceTree = "<group>"; };
 		E7ED629721779685007ABB53 /* support.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = support.metal; sourceTree = "<group>"; };
 		E7EFE24B27A6E988007D6154 /* FixSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSwiftUI.swift; sourceTree = "<group>"; };
-		E7FCB466212A2B1000CED4FA /* MetalTinkerOrig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTinkerOrig.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7FCB466212A2B1000CED4FA /* AppRender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppRender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FCB469212A2B1000CED4FA /* MetalFilterTinkerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalFilterTinkerApp.swift; sourceTree = "<group>"; };
 		E7FCB46D212A2B1200CED4FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E7FCB472212A2B1200CED4FA /* MetalTinker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MetalTinker-Info.plist"; sourceTree = "<group>"; };
-		E7FCB473212A2B1200CED4FA /* MetalTinker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetalTinker.entitlements; sourceTree = "<group>"; };
+		E7FCB472212A2B1200CED4FA /* AppRender-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppRender-Info.plist"; sourceTree = "<group>"; };
+		E7FCB473212A2B1200CED4FA /* AppRender.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppRender.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E705E03626AB5F6100E5AE40 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E705E04026AB5F6100E5AE40 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E7ED18ED257E903A0075DD2E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,22 +484,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E705E03C26AB5F6100E5AE40 /* MetalTinkerTests */ = {
-			isa = PBXGroup;
-			children = (
-				E705E03D26AB5F6100E5AE40 /* MetalTinkerTests.swift */,
-			);
-			path = MetalTinkerTests;
-			sourceTree = "<group>";
-		};
-		E705E04626AB5F6100E5AE40 /* MetalTinkerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E705E04726AB5F6100E5AE40 /* MetalTinkerUITests.swift */,
-			);
-			path = MetalTinkerUITests;
-			sourceTree = "<group>";
-		};
 		E70BB0EB23C2AD3C001AC9FF /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,13 +498,6 @@
 				E7A5A84425B353250051A69A /* SceneControlsView.swift */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		E71E629B27A2632F009E13F6 /* Obsolete */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Obsolete;
 			sourceTree = "<group>";
 		};
 		E72A7FFC23C2C3F7008C642A /* Metal */ = {
@@ -597,8 +554,8 @@
 			isa = PBXGroup;
 			children = (
 				E743D67C236BEEBB00EB81BC /* videos */,
-				E7FCB472212A2B1200CED4FA /* MetalTinker-Info.plist */,
-				E7FCB473212A2B1200CED4FA /* MetalTinker.entitlements */,
+				E7FCB472212A2B1200CED4FA /* AppRender-Info.plist */,
+				E7FCB473212A2B1200CED4FA /* AppRender.entitlements */,
 				E7FCB46D212A2B1200CED4FA /* Assets.xcassets */,
 				E7CF9B7C227CC6FE00413280 /* Textures.xcassets */,
 				E7722C16253FD69A006EDEB1 /* Images.xcassets */,
@@ -835,9 +792,6 @@
 				E7D7C0A425ABB410004D75CD /* Shaders */,
 				E74A445A2578043700639F19 /* Sprites */,
 				E74A41CC2576B4F600639F19 /* Scenes */,
-				E705E03C26AB5F6100E5AE40 /* MetalTinkerTests */,
-				E705E04626AB5F6100E5AE40 /* MetalTinkerUITests */,
-				E71E629B27A2632F009E13F6 /* Obsolete */,
 				E7FCB467212A2B1000CED4FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -845,10 +799,8 @@
 		E7FCB467212A2B1000CED4FA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E7FCB466212A2B1000CED4FA /* MetalTinkerOrig.app */,
+				E7FCB466212A2B1000CED4FA /* AppRender.app */,
 				E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */,
-				E705E03926AB5F6100E5AE40 /* MetalTinkerTests.xctest */,
-				E705E04326AB5F6100E5AE40 /* MetalTinkerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -888,40 +840,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E705E03826AB5F6100E5AE40 /* MetalTinkerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E705E04C26AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinkerTests" */;
-			buildPhases = (
-				E705E03526AB5F6100E5AE40 /* Sources */,
-				E705E03626AB5F6100E5AE40 /* Frameworks */,
-				E705E03726AB5F6100E5AE40 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MetalTinkerTests;
-			productName = MetalTinkerTests;
-			productReference = E705E03926AB5F6100E5AE40 /* MetalTinkerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		E705E04226AB5F6100E5AE40 /* MetalTinkerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E705E04F26AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinkerUITests" */;
-			buildPhases = (
-				E705E03F26AB5F6100E5AE40 /* Sources */,
-				E705E04026AB5F6100E5AE40 /* Frameworks */,
-				E705E04126AB5F6100E5AE40 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MetalTinkerUITests;
-			productName = MetalTinkerUITests;
-			productReference = E705E04326AB5F6100E5AE40 /* MetalTinkerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		E743D701236C83FE00EB81BC /* Template */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E743D708236C83FE00EB81BC /* Build configuration list for PBXNativeTarget "Template" */;
@@ -1024,9 +942,9 @@
 			productReference = E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E7FCB465212A2B1000CED4FA /* MetalTinkerOrig */ = {
+		E7FCB465212A2B1000CED4FA /* AppRender */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "MetalTinkerOrig" */;
+			buildConfigurationList = E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "AppRender" */;
 			buildPhases = (
 				E7FCB462212A2B1000CED4FA /* Sources */,
 				E7FCB463212A2B1000CED4FA /* Frameworks */,
@@ -1045,9 +963,9 @@
 				E7D7C07C25ABB36F004D75CD /* PBXTargetDependency */,
 				E7ED18F6257E903A0075DD2E /* PBXTargetDependency */,
 			);
-			name = MetalTinkerOrig;
+			name = AppRender;
 			productName = XDabble;
-			productReference = E7FCB466212A2B1000CED4FA /* MetalTinkerOrig.app */;
+			productReference = E7FCB466212A2B1000CED4FA /* AppRender.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1060,14 +978,6 @@
 				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = Semasiology;
 				TargetAttributes = {
-					E705E03826AB5F6100E5AE40 = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = E705E02626AB5F5E00E5AE40;
-					};
-					E705E04226AB5F6100E5AE40 = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = E705E02626AB5F5E00E5AE40;
-					};
 					E7B5734D25B6B2AD00DF1452 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -1088,7 +998,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E7FCB461212A2B1000CED4FA /* Build configuration list for PBXProject "MetalTinker" */;
+			buildConfigurationList = E7FCB461212A2B1000CED4FA /* Build configuration list for PBXProject "AppRender" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1101,7 +1011,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E7FCB465212A2B1000CED4FA /* MetalTinkerOrig */,
+				E7FCB465212A2B1000CED4FA /* AppRender */,
 				E7A5A7A025B256A90051A69A /* CirclesVertex */,
 				E7A5A3AD25AD50E80051A69A /* Point Clouds */,
 				E7D7C1A525ACBCE6004D75CD /* Shapes 3d Vertex */,
@@ -1109,27 +1019,11 @@
 				E743D701236C83FE00EB81BC /* Template */,
 				E7ED18EF257E903A0075DD2E /* Simple Scenes */,
 				E7B5734D25B6B2AD00DF1452 /* CIFilters */,
-				E705E03826AB5F6100E5AE40 /* MetalTinkerTests */,
-				E705E04226AB5F6100E5AE40 /* MetalTinkerUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E705E03726AB5F6100E5AE40 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E705E04126AB5F6100E5AE40 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E7ED18EE257E903A0075DD2E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1173,22 +1067,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E705E03526AB5F6100E5AE40 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E705E03E26AB5F6100E5AE40 /* MetalTinkerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E705E03F26AB5F6100E5AE40 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E705E04826AB5F6100E5AE40 /* MetalTinkerUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E743D702236C83FE00EB81BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1473,124 +1351,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		E705E04D26AB5F6100E5AE40 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinkerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalTinker.app/Contents/MacOS/MetalTinker";
-			};
-			name = Debug;
-		};
-		E705E04E26AB5F6100E5AE40 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinkerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalTinker.app/Contents/MacOS/MetalTinker";
-			};
-			name = Release;
-		};
-		E705E05026AB5F6100E5AE40 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinkerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = MetalTinker;
-			};
-			name = Debug;
-		};
-		E705E05126AB5F6100E5AE40 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal.MetalTinkerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = MetalTinker;
-			};
-			name = Release;
-		};
 		E743D709236C83FE00EB81BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1862,7 +1622,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MTL_COMPILER_FLAGS = "-Wno-missing-braces -gline-tables-only -MO -g";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1876,6 +1636,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "2,6";
 			};
 			name = Debug;
 		};
@@ -1926,7 +1687,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MTL_COMPILER_FLAGS = "-Wno-missing-braces";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1938,6 +1699,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "2,6";
 			};
 			name = Release;
 		};
@@ -1947,19 +1709,19 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Resources/MetalTinker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/AppRender.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = "Resources/MetalTinker-Info.plist";
+				INFOPLIST_FILE = "Resources/AppRender-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MTL_COMPILER_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal;
+				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.apprender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -1977,19 +1739,19 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Resources/MetalTinker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/AppRender.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = "Resources/MetalTinker-Info.plist";
+				INFOPLIST_FILE = "Resources/AppRender-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MTL_COMPILER_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.metal;
+				PRODUCT_BUNDLE_IDENTIFIER = software.tinker.apprender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -2003,24 +1765,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E705E04C26AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinkerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E705E04D26AB5F6100E5AE40 /* Debug */,
-				E705E04E26AB5F6100E5AE40 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E705E04F26AB5F6100E5AE40 /* Build configuration list for PBXNativeTarget "MetalTinkerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E705E05026AB5F6100E5AE40 /* Debug */,
-				E705E05126AB5F6100E5AE40 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		E743D708236C83FE00EB81BC /* Build configuration list for PBXNativeTarget "Template" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2084,7 +1828,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E7FCB461212A2B1000CED4FA /* Build configuration list for PBXProject "MetalTinker" */ = {
+		E7FCB461212A2B1000CED4FA /* Build configuration list for PBXProject "AppRender" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7FCB474212A2B1200CED4FA /* Debug */,
@@ -2093,7 +1837,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "MetalTinkerOrig" */ = {
+		E7FCB476212A2B1200CED4FA /* Build configuration list for PBXNativeTarget "AppRender" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7FCB477212A2B1200CED4FA /* Debug */,

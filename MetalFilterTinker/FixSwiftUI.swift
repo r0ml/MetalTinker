@@ -1,10 +1,5 @@
-//
-//  File.swift
-//  MetalTinkerOrig
-//
 //  Created by Robert Lefkowitz on 1/30/22.
 //  Copyright © 2022 Semasiology. All rights reserved.
-//
 
 import SwiftUI
 
@@ -47,6 +42,7 @@ extension UIResponder {
         return result
     }
 }
+#endif
 
 struct NothingSelectedView: View {
     
@@ -73,7 +69,4 @@ struct NothingSelectedView: View {
         #endif
     }
 }
-
-
-#endif
 

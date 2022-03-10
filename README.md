@@ -2,8 +2,6 @@
 Introduction
 =========
 
-The original motivation for this project was to learn and engage in Metal programming by building something like [Shadertoy](http://www.shadertoy.com) while adding additional features that I wanted to experiment with.  Along the way, I discovered that the SceneKit framework has Metal integration which allows running a shader inside a SceneKit scene.  Additionally, SceneKit has integration with SpriteKit to use a SpriteKit scene as a SceneKit material.  And furthermore, there is integration between SpriteKit and Metal.  I then pivoted to implementing an application which would let me experiment with the entire stack of graphics technologies and integration with the GPU via Metal.
-
 This application implements a variety of scenes which replicate various GLSL shaders by using SceneKit, SpriteKit, and Metal in various combinations.  In addtion to browsing and viewing these scenes, the feature that are (or will be) implemented are:
 
 1. Support for kernel shaders and vertex shaders in addition to fragment shaders.
