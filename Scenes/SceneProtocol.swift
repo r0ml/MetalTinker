@@ -16,7 +16,7 @@ var scenery : Dictionary<String, Dictionary<String, T1SCNScene>> = {
 
   let j = getSubclassesOf(T1SCNScene.self).filter { ($0 as? T3ShaderSCNScene.Type) == nil }
 
- let m = metalLibraries.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }
+  let m = Function.metalLibraries.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }
   // m are the libraries
 
   for lib in m {
@@ -112,8 +112,6 @@ func getSubclassesOf<T>(_ c : T.Type) -> [T.Type] where T : AnyObject {
   }
   return res
 }
-
-
 
 // In order to handle interaction, I need to subclass SKScene
 // (for things like didMove()?  and definitely  touchesBegan

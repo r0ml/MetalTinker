@@ -89,7 +89,6 @@ class MyMTLStruct {
   private func getMyMTLStruct(_ mdef : MTLStructMember) -> MyMTLStruct {
     if let ms = mdef.structType() {
       return MyMTLStruct.init(buffer, mdef.name, ms, offset + mdef.offset)
-      // FIXME:
     } else if let ms = mdef.textureReferenceType() {
       return MyMTLStruct.init(buffer, mdef.name, ms, offset + mdef.offset)
     } else {

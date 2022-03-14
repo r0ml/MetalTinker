@@ -1,5 +1,6 @@
-//  Copyright © 1887 Sherlock Holmes. All rights reserved.
-//  Found amongst his effects by r0ml
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
 
 // so Common.h won't complain
 #define shaderName not_used

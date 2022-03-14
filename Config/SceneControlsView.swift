@@ -6,16 +6,15 @@ import SwiftUI
 import MetalKit
 
 struct SceneControlsView: View {
-  // @ObservedObject var shader : Shader
-//  @ObservedObject var frameTimer : FrameTimer
-/*  @ObservedObject */ var scene : T1SCNScene
-//  var metalView : MTKView
+  var scene : T1SCNScene
 
   @Binding var paused : Bool
 
   var body: some View {
     if paused != self.scene.isPaused {
-      DispatchQueue.main.async { paused = self.scene.isPaused }
+      Task {
+        await MainActor.run { paused = self.scene.isPaused }
+      }
     }
     return HStack.init(alignment: .center, spacing: 20) {
       Image( "rewind", bundle: nil, label: Text("Rewind")).resizable().scaledToFit()

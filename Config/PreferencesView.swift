@@ -9,16 +9,16 @@ struct IdentifiableView : Identifiable {
   var view : AnyView
 }
 
-struct PreferencesView: View {
-  var config : ConfigController?
+struct PreferencesView<T : Shader>: View {
+  var config : T.Config
 
-  init(scene: T3ShaderSCNScene?) {
-    config = scene?.config
+  init(config: T.Config) {
+    self.config = config
   }
 
-  init(shader: Shader?) {
+/*  init(shader: T?) {
     config = shader?.config
-  }
+  }*/
 
   var body: some View {
     if let c = self.config {

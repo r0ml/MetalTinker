@@ -5,10 +5,10 @@
 import SwiftUI
 import MetalKit
 
-struct ControlsView: View {
+struct ControlsView<T:Shader>: View {
   // @ObservedObject var shader : Shader
   @ObservedObject var frameTimer : FrameTimer
-  @ObservedObject var delegate : MetalDelegate
+  @ObservedObject var delegate : MetalDelegate<T>
   var metalView : MTKView
 
   var body: some View {

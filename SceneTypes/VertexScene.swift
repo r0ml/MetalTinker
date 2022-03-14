@@ -16,7 +16,7 @@ class VertexNode : SCNNode {
     //     p.vertexFunctionName = "flatVertexFn"
     p.vertexFunctionName = String("\(s)___\(pp)___Vertex")
 
-    p.library = metalLibraries.first(where: {$0.label == l })!
+    p.library = Function.metalLibraries.first(where: {$0.label == l })!
 
     let planeSize = CGSize(width: 16, height: 9)
     var ttt = Times()

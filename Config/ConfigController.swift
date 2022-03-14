@@ -10,27 +10,12 @@ import AppKit
 import MetalKit
 import os
 import SwiftUI
-import UniformTypeIdentifiers
 
 protocol VideoStream {
   func readBuffer(_ nVSync : TimeInterval) -> MTLTexture?
 }
 
 /** This class processes the initializer and sets up the shader parameters based on the shader defaults and user defaults */
-
-
-/*struct Clem : Identifiable {
- typealias ObjectIdentifier = Int
- var id: ObjectIdentifier
- var parm : TextureParameter
-
- init(_ t : (Int, TextureParameter) ) {
- id = t.0
- parm = t.1
- }
-
- }*/
-
 struct TextureParameter : Identifiable {
   typealias ObjectIdentifier = Int
   var id : ObjectIdentifier
@@ -56,6 +41,9 @@ struct TextureParameter : Identifiable {
     }
   }
 }
+
+let function = Function()
+
 public class ConfigController {
 
   /// This buffer is known as in on the metal side
@@ -69,18 +57,16 @@ public class ConfigController {
   private var cached : [IdentifiableView]?
   //  private var renderManager : RenderManager
 
-  var pipelinePasses : [PipelinePass] = []
+  var pipelinePasses : [RenderPipelinePass] = []
   var fragmentTextures : [TextureParameter] = []
 
   private var myOptions : MyMTLStruct!
   private var dynPref : DynamicPreferences? // need to hold on to this for the callback
-  private var shaderName : String
-  private var configQ = DispatchQueue(label: "config q")
+  /* internal */ private var shaderName : String
   private var computeBuffer : MTLBuffer?
-//  private var empty : CGImage
 
   //  var videoNames : [VideoSupport] = []
-  //  var webcam : WebcamSupport?
+  var webcam : WebcamSupport?
 
   var uniformBuffer : MTLBuffer?
 
@@ -90,7 +76,7 @@ public class ConfigController {
    It would be the "Uniform" buffer, but that one is fixed, whereas this one is variable -- so it's
    just easier to make it a separate buffer
    */
-  init(_ x : String) {
+  required init(_ x : String) {
     shaderName = x
 //    empty = XImage(named: "BrokenImage")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
     // textureThumbnail = Array(repeating: nil, count: numberOfTextures)
@@ -127,11 +113,11 @@ public class ConfigController {
     self.clearColor = v
   }
 
-  /* func processWebcam(_ bst : MyMTLStruct ) {
+  func processWebcam(_ bst : MyMTLStruct ) {
    if let _ = bst["webcam"] {
    webcam = WebcamSupport()
    }
-   } */
+   }
 
   /*
    func purge() {
@@ -152,7 +138,6 @@ public class ConfigController {
       let dd =  UserDefaults.standard.object(forKey: dnam)
       
       if let _ = bstm.structure {
-        if bstm.name == "pipeline" { continue }
         let ddm = bstm.children
         if let kk = bstm.children.first?.datatype, kk == .int {
           self.segmented(bstm.name, ddm)
@@ -255,9 +240,9 @@ public class ConfigController {
   }
 
 
-  func justInitialization() {
+  func justInitialization() async {
     let nam = shaderName + "InitializeOptions"
-    guard let initializationProgram = findFunction( nam ) else {
+    guard let initializationProgram = await function.find( nam ) else {
       print("no initialization program for \(self.shaderName)")
       return
     }
@@ -319,17 +304,17 @@ public class ConfigController {
 
    This should only be called once at the beginning of the render -- when the view is loaded
    */
-  func doInitialization( /* _ live : Bool */ /*, config : ConfigController */  /*, size canvasSize : CGSize */ ) {
+  func doInitialization( ) async {
 
     let uniformSize : Int = MemoryLayout<Uniform>.stride
     let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
     uni.label = "uniform"
     uniformBuffer = uni
 
-    justInitialization()
+    await justInitialization()
 
 
-    setupPipelines()
+    await setupPipelines()
 
     if let a = (pipelinePasses[0] as? RenderPipelinePass)?.metadata.fragmentArguments {
       processTextures(a)
@@ -342,68 +327,14 @@ public class ConfigController {
     fragmentTextures = []
   }
 
-  func setupPipelines() {
+  func setupPipelines() async {
     pipelinePasses = []
 
 
     fragmentTextures = []
-    //    var lastRender : MTLTexture?
 
-
-    if let j = inbuf["pipeline"] {
-      let jc = j.children
-      for  (xx, mm) in jc.enumerated() {
-        let sfx = mm.name!
-
-        // HERE is where I can also figure out blend mode and clear mode (from the fourth int32)
-
-        // the compute pipeline
-        let pms : SIMD4<Int32> = mm.getValue()
-        if (pms[0] == -1 ) {
-          if let f = findFunction("\(shaderName)___\(sfx)___Kernel"),
-             let p = ComputePipelinePass(
-              label: "\(sfx) in \(shaderName)",
-              //                pms: mm,
-              viCount: (Int(pms[1]), Int(pms[2])) ,
-              flags: pms[3],
-              function: f) {
-            self.computeBuffer = p.computeBuffer
-            pipelinePasses.append(p)
-          }
-        } else {
-          if let vertexProgram = currentVertexFn(sfx),
-             let fragmentProgram = currentFragmentFn(sfx),
-             let ptc = MTLPrimitiveType.init(rawValue: UInt(pms[0])),
-             let p = RenderPipelinePass(
-              label: "\(sfx) in \(shaderName)",
-              // pms: mm,
-              viCount: (Int(pms[1]), Int(pms[2])),
-              flags: pms[3],
-              // canvasSize: canvasSize,
-              topology: ptc,
-              computeBuffer : self.computeBuffer,
-              functions: (vertexProgram, fragmentProgram)
-             ) {
-
-            pipelinePasses.append(p)
-            // FIXME: put me back?
-            // lastRender = p.resolveTextures.1
-          } else {
-            os_log("failed to create render pipeline pass for %s in %s", type:.error, sfx, shaderName)
-            return
-          }
-        }
-      }
-
-      //      }
-    } else {
-      setupDefaultPipeline()
-    }
-  }
-
-  func setupDefaultPipeline() {
-    if let vertexProgram = currentVertexFn(""),
-       let fragmentProgram = currentFragmentFn(""),
+    if let vertexProgram = await currentVertexFn(""),
+       let fragmentProgram = await currentFragmentFn(""),
        let p = RenderPipelinePass(
         label: "\(shaderName)",
         viCount: (4, 1),
@@ -423,143 +354,16 @@ public class ConfigController {
   }
 
 
-  private func currentVertexFn(_ sfx : String) -> MTLFunction? {
-    let lun = "\(shaderName)___\(sfx)___Vertex";
-    return findFunction(lun) ?? findFunction("flatVertexFn");
+  private func currentVertexFn(_ sfx : String) async -> MTLFunction? {
+    let lun = "\(shaderName)___\(sfx)___Vertex"
+    if let z = await function.find(lun) { return z }
+    return await function.find("flatVertexFn")!
   }
 
-  private func currentFragmentFn(_ sfx : String) -> MTLFunction? {
-    let lun = "\(shaderName)___\(sfx)___Fragment";
-    return findFunction(lun) ?? findFunction("passthruFragmentFn")
-  }
-}
-
-/*class SourceProvider : NSObject, NSItemProviderWriting {
- var name : String
-
- init(_ n : String) {
- name = n
- }
-
- }*/
-
-struct SourceStrip : View {
-
-  var body: some View {
-    let z = NSItemProvider(item: "webcam".data(using: .utf8)as NSSecureCoding?, typeIdentifier: UTType.plainText.identifier)
-
-    return HStack {
-      Image(systemName: "video.circle" ).onDrag {
-        return z
-      }
-    }
+  private func currentFragmentFn(_ sfx : String) async -> MTLFunction? {
+    let lun = "\(shaderName)___\(sfx)___Fragment"
+    if let z = await function.find(lun) { return z }
+    return await function.find("passthruFragmentFn")!
   }
 }
 
-/*struct Clem : Identifiable {
- typealias ObjectIdentifier = Int
- var id: ObjectIdentifier
- var parm : TextureParameter
-
- init(_ t : (Int, TextureParameter) ) {
- id = t.0
- parm = t.1
- }
-
- }*/
-
-struct ImageStrip : View {
-  @Binding var texes : [TextureParameter]
-  @State var uuid = UUID()
-
-  var body : some View {
-    HStack {
-      ForEach(texes) { (jj) in
-
-        // FIXME: i windws up out of range -- must be from resetting texes
-        Image.init(xImage: texes[jj.id].image).resizable().scaledToFit()
-          .onDrop(of: [UTType.fileURL, UTType.plainText, UTType.image], isTargeted: nil, perform: { (y) in
-
-            var res = false
-            //          var sem = DispatchSemaphore(value: 0)
-
-            //          DispatchQueue.global().async {
-            /*          y[0].loadItem(forTypeIdentifier: UTType.image.identifier, options: nil ) {
-             (im, error) in
-             print(im)
-             print(error)
-             }
-
-             */
-            y[0].loadItem(forTypeIdentifier: UTType.plainText.identifier, options: nil) {
-              (data, error) in
-              if let d = data {
-                // I guess I should initialize the webcam here?
-                // and also grab a thumbnail frame
-                let z = WebcamSupport()
-                z.startRunning()
-                texes[jj.id].video = z // WebcamSupport()
-              }
-            }
-
-
-            y[0].loadItem(forTypeIdentifier: UTType.fileURL.identifier, options: nil) {
-              (urlData, error)  in
-              //            defer {
-              //              sem.signal()
-              //            }
-              if let e = error {
-                print(e.localizedDescription)
-                return
-              }
-
-              if let urlData = urlData as? Data {
-                let j = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
-
-                // FIXME: Fix this on StackOverflow
-                let uti = UTType.types(tag: j.pathExtension, tagClass: UTTagClass.filenameExtension, conformingTo: UTType.data)
-                /*            let uti = UTTypeCreatePreferredIdentifierForTag(
-                 kUTTagClassFilenameExtension,
-                 j.pathExtension as CFString,
-                 nil)
-                 let utix = uti?.takeRetainedValue()
-                 */
-
-                // FIXME: bring it back for iOS
-                #if os(macOS)
-                if uti[0].conforms(to: UTType.image) {
-
-                  if let k = XImage.init(contentsOf: j) {
-                    texes[jj.id].image = k
-                    texes[jj.id].texture = k.getTexture(MTKTextureLoader(device: device))
-                    uuid = UUID()
-                    res = true
-                  }
-                } else if uti[0].conforms(to: .movie) {
-                  let vs = VideoSupport(j)
-                  texes[jj.id].video = vs
-                  vs.getThumbnail {
-                    texes[jj.id].image = XImage.init(cgImage: $0, size: CGSize(width: $0.width, height: $0.height))
-                  }
-                  uuid = UUID()
-                  res = true
-                } else {
-
-                  // fail
-                  print("unknown file type dropped")
-                }
-                #endif
-                
-              }
-              return
-            }
-            //          }
-            //          sem.wait()
-            return true // res
-          }).frame(width: 100, height: 100).border(Color.purple, width: 4)
-
-      }
-      Text(uuid.uuidString).hidden()
-    }
-  }
-}

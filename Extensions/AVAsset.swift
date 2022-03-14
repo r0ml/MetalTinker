@@ -4,8 +4,6 @@
 
 import AVFoundation
 
-private var textureQ = DispatchQueue(label: "videoThumbnailTextureQ")
-
 extension AVAsset {
   func getThumbnailImage( _ f : @escaping (CGImage) -> () ) {
     let videoGen = AVAssetImageGenerator.init(asset: self )
