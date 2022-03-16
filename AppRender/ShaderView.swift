@@ -23,7 +23,7 @@ struct ShaderView<T : Shader> : View {
           }
         ControlsView( frameTimer: delegate.frameTimer, delegate: delegate, metalView: j.mtkView).frame(minWidth: 300)
       }
-      PreferencesView<T>(config: delegate.shader.config)
+      PreferencesView<T>(shdr: delegate.shader)
     }
   }
 }

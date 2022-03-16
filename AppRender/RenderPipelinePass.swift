@@ -121,7 +121,10 @@ class RenderPipelinePass {
 //    if !stat {
     // FIXME: put me back
 //    rpd = delegate.shader.metalView?.currentRenderPassDescriptor ?? delegate.shader.renderPassDescriptor(delegate.mySize!)
-    rpd = delegate.shader._renderPassDescriptor!
+ //   rpd = delegate.shader._renderPassDescriptor!
+    
+    rpd = delegate.shader.renderPassDescriptor(delegate.mySize!)
+    
     
 //    } else {
 //      rpd = rm.renderPassDescriptor
@@ -225,7 +228,7 @@ class RenderPipelinePass {
       renderEncoder.setFragmentBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
       for i in 0..<config.fragmentTextures.count {
         if config.fragmentTextures[i].texture == nil {
-          config.fragmentTextures[i].texture = config.fragmentTextures[i].image.getTexture(delegate.shader.textureLoader, mipmaps: true)
+          config.fragmentTextures[i].texture = config.fragmentTextures[i].image.getTexture(textureLoader, mipmaps: true)
         }
         renderEncoder.setFragmentTexture( config.fragmentTextures[i].texture, index: config.fragmentTextures[i].index)
       }

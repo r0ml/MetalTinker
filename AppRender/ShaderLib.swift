@@ -24,11 +24,11 @@ class ShaderLib<T : Shader> : Identifiable, Equatable, Hashable {
   }
   
   static func folderList() -> [ShaderLib<ShaderTwo>] {
-    return Function.metalLibraries.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }.map { ShaderLib<ShaderTwo>(lib: $0)}
+    return ShaderTwo.function.shaderLib()
   }
 
   static func filterList() -> [ShaderLib<ShaderFilter>] {
-    return Function.filterLibraries.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }.map { ShaderLib<ShaderFilter>(lib: $0)}
+    return ShaderFilter.function.shaderLib()
   }
 
   lazy var items : [T] = {

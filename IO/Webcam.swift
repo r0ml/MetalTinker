@@ -9,7 +9,6 @@ import os
 class WebcamSupport : NSObject, VideoStream {
   private var frameTexture : MTLTexture? = nil
   private var region : MTLRegion = MTLRegion()
-  private var textureLoader = MTKTextureLoader(device: device)
 
   private var permissionGranted = false
   private let sessionQueue = DispatchQueue(label: "session queue")

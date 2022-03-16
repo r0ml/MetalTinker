@@ -9,6 +9,7 @@ final class ShaderTwo : Shader {
   
   var myName : String
   var config : Config
+  static var function = Function("Shaders")
   
   func setupFrame(_ t : Times) {
   }
@@ -21,6 +22,7 @@ final class ShaderTwo : Shader {
     print("ShaderTwo init \(s)")
     self.myName = s
     self.config = ConfigController(s)
+    doConfig()
   }
 
   var depthStencilState : MTLDepthStencilState?
@@ -38,8 +40,6 @@ final class ShaderTwo : Shader {
   var _renderPassDescriptor : MTLRenderPassDescriptor?
   var _mySize : CGSize?
   
-  var textureLoader = MTKTextureLoader(device: device)
-    
   /** There are three times for a shader:
    the startTime is when the shader started running
    the currentTime is the time of the current frame
@@ -87,7 +87,7 @@ final class ShaderTwo : Shader {
   
   
   func doConfig() {
-    Task.detached {
+    Task {
       await self.config.doInitialization()
       
       let depthStencilDescriptor = MTLDepthStencilDescriptor()

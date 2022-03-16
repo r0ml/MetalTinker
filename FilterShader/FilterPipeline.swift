@@ -117,7 +117,7 @@ class FilterPipeline {
                      _ isFirst : Bool, delegate : MetalDelegate<ShaderFilter>) {
 
 
-       let config = delegate.shader.config
+//       let config = delegate.shader.config
 
       // This statement overrides the render pass descriptor with the onscreen frameBuffer if one exists -- otherwise it is using the offscreen texture
       var rpd : MTLRenderPassDescriptor
@@ -218,11 +218,11 @@ class FilterPipeline {
 
         renderEncoder.setFragmentBuffer(delegate.uniformBuffer, offset: 0, index: uniformId)
         renderEncoder.setFragmentBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
-        for i in 0..<config.fragmentTextures.count {
-          if config.fragmentTextures[i].texture == nil {
-            config.fragmentTextures[i].texture = config.fragmentTextures[i].image.getTexture(delegate.shader.textureLoader, mipmaps: true)
+        for i in 0..<delegate.shader.fragmentTextures.count {
+          if delegate.shader.fragmentTextures[i].texture == nil {
+            delegate.shader.fragmentTextures[i].texture = delegate.shader.fragmentTextures[i].image.getTexture(textureLoader, mipmaps: true)
           }
-          renderEncoder.setFragmentTexture( config.fragmentTextures[i].texture, index: config.fragmentTextures[i].index)
+          renderEncoder.setFragmentTexture( delegate.shader.fragmentTextures[i].texture, index: delegate.shader.fragmentTextures[i].index)
         }
 
         renderEncoder.setFragmentBuffer(computeBuffer, offset: 0, index:computeBuffId)

@@ -5,9 +5,14 @@
 import Metal
 import os
 
-actor Function {
+
+// FIXME: should this not be an actor?
+class Function {
+  
   private var functionCache = [String : MTLFunction]()
   private var fcQ = DispatchQueue(label: "function cache access")
+  
+  
   func find(_ fn : String) async -> MTLFunction? {
     guard let f = functionCache[fn] else {
       functionCache[fn] = findNoCacheFunction(fn)
@@ -19,23 +24,28 @@ actor Function {
   /** Look up a function name in the libraries and return the MTLFunction for that name */
   private func findNoCacheFunction(_ n : String) -> MTLFunction? {
     guard let k = functionMap[n] else { return nil }
-    return Function.metalLibraries[k].makeFunction(name: n)
+    return libs[k].makeFunction(name: n)
   }
 
+  var functionMap : [String : Int] = [:]
+  var libs : [MTLLibrary]
+  
   /** A mapping between function names and the metal library they are found in */
-  lazy var functionMap : [String : Int ] = {
+  init( _ s : String) {
+    libs = Self.mtlLibs(s)
+    let k = libs
     // This will blow up if there is a duplicate name in two different libraries
     // so I changed it to map each function name to a list of libraries
     // I would have liked to know which names were duplicate, but uniquingKeysWith: only provides values, not the key
-    let res = Dictionary(Function.metalLibraries.enumerated().flatMap { ml in ml.1.functionNames.map { ($0, [ml.0] )  } },
+    let res = Dictionary(libs.enumerated().flatMap { ml in ml.1.functionNames.map { ($0, [ml.0] )  } },
                          uniquingKeysWith: { $0 + $1 } )
     res.forEach { if $0.1.count > 1 {
-      os_log("duplicate metal function definition %s: %s", type: .info, $0.0, ($0.1.map { Function.metalLibraries[$0].label! }).joined(separator: ", "))  } }
-    return Dictionary( uniqueKeysWithValues: res.map { ($0.0, $0.1[0]) } )
-  }()
+      os_log("duplicate metal function definition %s: %s", type: .info, $0.0, ($0.1.map { k[$0].label! }).joined(separator: ", "))  } }
+    functionMap = Dictionary( uniqueKeysWithValues: res.map { ($0.0, $0.1[0]) } )
+  }
 
-  static func mtlLibs(_ u : URL?) -> [MTLLibrary] {
-    guard let u = u else {
+  static func mtlLibs(_ s : String) -> [MTLLibrary] {
+    guard let u = URL(string: s, relativeTo:  Bundle.main.resourceURL) else {
       os_log("failure to find resource URL", type:.fault)
       return []
     }
@@ -49,14 +59,10 @@ actor Function {
       return lib
     }
   }
-
-  /** All the metal libraries in Resources */
-  static var metalLibraries : [MTLLibrary] = {
-    return mtlLibs( Bundle.main.resourceURL )
-  }()
-
-  static var filterLibraries : [MTLLibrary] = {
-    return mtlLibs( URL(string: "Filters", relativeTo:  Bundle.main.resourceURL) )
-  }()
+  
+  func shaderLib<T>() -> [ShaderLib<T>] {
+    return libs.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }.map { ShaderLib<T>(lib: $0)}
+  }
+  
 
 }

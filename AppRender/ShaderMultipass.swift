@@ -11,18 +11,24 @@ final class ShaderMultipass : Shader {
   func startRunning() {
   }
   
-  typealias Config = ConfigController
+    //  typealias Config = ConfigController
   
   var myName : String
-  var config : Config
+//  var config : Config
   
   required init(_ s : String ) {
     print("ShaderMultipass init \(s)")
     myName = s
-    config = Config(s)
+//    config = Config(s)
   }
 
   func draw(in viewx: MTKView, delegate : MetalDelegate<ShaderMultipass>) {
     
   }
+  
+  func buildPrefView() -> [IdentifiableView] {
+    return []
+  }
+  
+
 }

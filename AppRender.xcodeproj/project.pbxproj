@@ -22,6 +22,7 @@
 		E72A7FF623C2C275008C642A /* XSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FF523C2C275008C642A /* XSlider.swift */; };
 		E72A7FF923C2C2AB008C642A /* XSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */; };
 		E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72D600A2391D948009CF90A /* MyMTLStruct.swift */; };
+		E73D807427E17A7300F25018 /* ConfigControllerT3SCN.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */; };
 		E743D67D236BEEBB00EB81BC /* videos in Resources */ = {isa = PBXBuildFile; fileRef = E743D67C236BEEBB00EB81BC /* videos */; };
 		E743D68A236C081E00EB81BC /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = E743D689236C081E00EB81BC /* TODO.txt */; };
 		E743D706236C83FE00EB81BC /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
@@ -128,7 +129,6 @@
 		E7B561E827A343480070EC65 /* XEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B561E727A343480070EC65 /* XEvent.swift */; };
 		E7B561EA27A3559B0070EC65 /* XFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B561E927A3559B0070EC65 /* XFloat.swift */; };
 		E7B561EB27A359B50070EC65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7FCB46D212A2B1200CED4FA /* Assets.xcassets */; };
-		E7B561EC27A5A19B0070EC65 /* SpriteLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A44182578002F00639F19 /* SpriteLibraryView.swift */; };
 		E7B5726925B3ADEF00DF1452 /* Vasarely 5.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5726825B3ADEF00DF1452 /* Vasarely 5.swift */; };
 		E7B5727125B40B4F00DF1452 /* Spinning_Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5727025B40B4F00DF1452 /* Spinning_Ring.swift */; };
 		E7B5727925B40B6700DF1452 /* Spinning_Circles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5727825B40B6700DF1452 /* Spinning_Circles.swift */; };
@@ -156,7 +156,6 @@
 		E7B573A725B7F0D000DF1452 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B573A625B7F0D000DF1452 /* CGSize.swift */; };
 		E7B573B025B7F0F500DF1452 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B573AF25B7F0F500DF1452 /* CGPoint.swift */; };
 		E7B573B925B80A3B00DF1452 /* VertexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B573B825B80A3B00DF1452 /* VertexScene.swift */; };
-		E7CB0EC227DEEE6A00235E64 /* FilterPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB0EC127DEEE6A00235E64 /* FilterPipeline.swift */; };
 		E7CF9BCD227F425400413280 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCC227F425400413280 /* NSColor.swift */; };
 		E7CF9BCF227F429A00413280 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCE227F429A00413280 /* UserDefaults.swift */; };
 		E7CF9BD1227F42BF00413280 /* MTLTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BD0227F42BF00413280 /* MTLTexture.swift */; };
@@ -206,7 +205,6 @@
 		E7E9D6F327DC609A00431EB0 /* ShaderTextures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6F227DC609A00431EB0 /* ShaderTextures.swift */; };
 		E7E9D6F527DCE6EA00431EB0 /* MetalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6F427DCE6EA00431EB0 /* MetalDelegate.swift */; };
 		E7E9D6F727DD01F500431EB0 /* ShaderLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6F627DD01F500431EB0 /* ShaderLib.swift */; };
-		E7E9D6FB27DD048C00431EB0 /* ConfigControllerFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6FA27DD048C00431EB0 /* ConfigControllerFilter.swift */; };
 		E7E9D6FD27DD06AD00431EB0 /* ImageStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6FC27DD06AD00431EB0 /* ImageStrip.swift */; };
 		E7E9D6FF27DE4DCD00431EB0 /* ShaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6FE27DE4DCD00431EB0 /* ShaderView.swift */; };
 		E7E9D70127DE4E7D00431EB0 /* SceneWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D70027DE4E7D00431EB0 /* SceneWrapperView.swift */; };
@@ -317,6 +315,7 @@
 		E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSegmentedControl.swift; sourceTree = "<group>"; };
 		E72D600A2391D948009CF90A /* MyMTLStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMTLStruct.swift; sourceTree = "<group>"; };
 		E731C35F21AF6847001D2345 /* VideoSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSupport.swift; sourceTree = "<group>"; };
+		E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigControllerT3SCN.swift; sourceTree = "<group>"; };
 		E743D67C236BEEBB00EB81BC /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = videos; sourceTree = "<group>"; };
 		E743D689236C081E00EB81BC /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		E746F31423F0D107003598F6 /* sdf.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = sdf.metal; sourceTree = "<group>"; };
@@ -685,6 +684,7 @@
 				E72A7FF223C2C23F008C642A /* XBoolean.swift */,
 				E7A5A84425B353250051A69A /* SceneControlsView.swift */,
 				E7E9D6FC27DD06AD00431EB0 /* ImageStrip.swift */,
+				E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -1384,8 +1384,8 @@
 				E7FCB464212A2B1000CED4FA /* Resources */,
 				E71AFD06236539B900A88C16 /* CopyFiles */,
 				E7ED18FC257E903A0075DD2E /* Embed Frameworks */,
-				E7D7C06A25ABB333004D75CD /* ShellScript */,
-				E7E9D6E427DA731F00431EB0 /* ShellScript */,
+				E7D7C06A25ABB333004D75CD /* Run Script Copy Shaders */,
+				E7E9D6E427DA731F00431EB0 /* Run Script Copy Filters */,
 			);
 			buildRules = (
 			);
@@ -1486,7 +1486,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E7D7C06A25ABB333004D75CD /* ShellScript */ = {
+		E7D7C06A25ABB333004D75CD /* Run Script Copy Shaders */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1495,15 +1495,16 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script Copy Shaders";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp -a ${TARGET_BUILD_DIR}/*.metallib ${METAL_LIBRARY_OUTPUT_DIR}\n";
+			shellPath = /bin/zsh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/Shaders\nmkdir -p \"${OD}\"\n\ncp -a ${TARGET_BUILD_DIR}/Shaders.*.metallib ${OD}/\ncd ${OD}\nzmv -f 'Shaders.(*).metallib' '$1.metallib'\n";
 		};
-		E7E9D6E427DA731F00431EB0 /* ShellScript */ = {
+		E7E9D6E427DA731F00431EB0 /* Run Script Copy Filters */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1512,6 +1513,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script Copy Filters";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -1702,7 +1704,6 @@
 				E7B573B025B7F0F500DF1452 /* CGPoint.swift in Sources */,
 				E7D7C0CA25ABB4C8004D75CD /* RenderPipelinePass.swift in Sources */,
 				E7B5730925B40FD600DF1452 /* Ball_Bounce_2.swift in Sources */,
-				E7E9D6FB27DD048C00431EB0 /* ConfigControllerFilter.swift in Sources */,
 				E7D7C0C225ABB48F004D75CD /* ControlsView.swift in Sources */,
 				E7D7C0BE25ABB48B004D75CD /* DynamicPreferences.swift in Sources */,
 				E74F94592256A05900706CBF /* MetalVideoRecorder.swift in Sources */,
@@ -1744,7 +1745,6 @@
 				E7B5734525B6B24300DF1452 /* CIFilters.metal in Sources */,
 				E7B5727125B40B4F00DF1452 /* Spinning_Ring.swift in Sources */,
 				E785E2E525AA46E600511B0C /* SKSCNScene.swift in Sources */,
-				E7CB0EC227DEEE6A00235E64 /* FilterPipeline.swift in Sources */,
 				E7A5A80325B26D110051A69A /* Attempt 19.swift in Sources */,
 				E7ED2489257E923E0075DD2E /* Breathing Exercise.swift in Sources */,
 				E74A42532576B7C500639F19 /* SceneProtocol.swift in Sources */,
@@ -1752,6 +1752,7 @@
 				E7E9D6EE27DC365E00431EB0 /* ShaderTwo.swift in Sources */,
 				E7B5729925B40BD900DF1452 /* Rotating_Color_Ring.swift in Sources */,
 				E72A7FF323C2C23F008C642A /* XBoolean.swift in Sources */,
+				E73D807427E17A7300F25018 /* ConfigControllerT3SCN.swift in Sources */,
 				E7ED19D9257E909E0075DD2E /* Simple4.swift in Sources */,
 				E7B572D925B40E7F00DF1452 /* Circles_3.swift in Sources */,
 				E7B5733725B6B21C00DF1452 /* MyFilter.swift in Sources */,
@@ -1783,7 +1784,6 @@
 				E7A5A46B25B0D13E0051A69A /* Infinity Particles.swift in Sources */,
 				E7A5A3A025AD15B80051A69A /* PointScene.swift in Sources */,
 				E748C45A239809E100AD7A64 /* RenderSetup.swift in Sources */,
-				E7B561EC27A5A19B0070EC65 /* SpriteLibraryView.swift in Sources */,
 				E74A43972576EC1A00639F19 /* SceneLibraryView.swift in Sources */,
 				E76DDCA127DA61D7006BEBB2 /* SidebarView.swift in Sources */,
 				E746F31523F0D107003598F6 /* sdf.metal in Sources */,
@@ -1883,7 +1883,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Shaders.$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
 			};
@@ -1895,7 +1895,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Shaders.$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
 			};
@@ -1907,7 +1907,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Shaders.$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
@@ -1920,7 +1920,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Shaders.$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
@@ -1963,7 +1963,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Shaders.$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
 			};
@@ -1975,7 +1975,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Shaders.$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
 			};
@@ -1987,7 +1987,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Shaders.$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
 			};
@@ -1999,7 +1999,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Shaders.$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
 			};

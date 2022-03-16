@@ -42,27 +42,26 @@ struct TextureParameter : Identifiable {
   }
 }
 
-let function = Function()
 
 public class ConfigController {
 
   /// This buffer is known as in on the metal side
-  var initializationBuffer : MTLBuffer!
+  public var initializationBuffer : MTLBuffer!
   /// This is the CPU overlay on the initialization buffer
-  private var inbuf : MyMTLStruct!
+  var inbuf : MyMTLStruct!
 
   /// this is the clear color for alpha blending?
   var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 0.1 )
 
-  private var cached : [IdentifiableView]?
+  /* private */ var cached : [IdentifiableView]?
   //  private var renderManager : RenderManager
 
   var pipelinePasses : [RenderPipelinePass] = []
   var fragmentTextures : [TextureParameter] = []
 
-  private var myOptions : MyMTLStruct!
-  private var dynPref : DynamicPreferences? // need to hold on to this for the callback
-  /* internal */ private var shaderName : String
+  /* private */ var myOptions : MyMTLStruct!
+  /* private  */ var dynPref : DynamicPreferences? // need to hold on to this for the callback
+  /* internal */ /* private */ var shaderName : String
   private var computeBuffer : MTLBuffer?
 
   //  var videoNames : [VideoSupport] = []
@@ -96,7 +95,7 @@ public class ConfigController {
   func buildPrefView() -> [IdentifiableView] {
     if let z = cached { return z }
     if let mo = myOptions {
-      let a = DynamicPreferences.init(shaderName, self)
+      let a = DynamicPreferences.init(shaderName)
       dynPref = a
       let c = buildImageWells()
       let d = IdentifiableView(id: "sources", view: AnyView(SourceStrip()))
@@ -188,8 +187,6 @@ public class ConfigController {
    }
    }
    */
-
-  private var textureLoader = MTKTextureLoader(device: device)
 
   func processTextures(_ bst : [MTLArgument] ) {
     for a in bst {
@@ -352,8 +349,7 @@ public class ConfigController {
       return
     }
   }
-
-
+  
   private func currentVertexFn(_ sfx : String) async -> MTLFunction? {
     let lun = "\(shaderName)___\(sfx)___Vertex"
     if let z = await function.find(lun) { return z }

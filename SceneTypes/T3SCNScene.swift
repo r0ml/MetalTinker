@@ -57,7 +57,7 @@ class T3ShaderSCNScene : T3SCNScene {
   required init(shader: String, library: String) {
     self.shader = shader
     self.library = library
-    self.config = ConfigController(shader)
+    self.config = ConfigControllerT3SCN(shader)
     
     let j = SCNMaterial( )
     
@@ -75,7 +75,8 @@ class T3ShaderSCNScene : T3SCNScene {
     p.fragmentFunctionName = self.shader + "______Fragment"
     p.vertexFunctionName = "vertex_function"
     
-    p.library = Function.metalLibraries.first(where: {$0.label == self.library })!
+    // FIXME: this is broken -- need to split out the SceneKit shaders
+    p.library = ShaderTwo.function.libs.first(where: {$0.label == self.library })!
     
     Task {
       await config.justInitialization()

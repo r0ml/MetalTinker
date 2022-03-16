@@ -18,7 +18,7 @@ import Accelerate
 class VideoSupport : VideoStream {
   private var video : AVAsset
   private var url : URL
-  private var textureLoader = MTKTextureLoader(device: device)
+
   // This is my thumbnail
   private var myTexture : MTLTexture?
   // private var thumbnail : NSImage?

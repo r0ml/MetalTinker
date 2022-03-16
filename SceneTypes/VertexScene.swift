@@ -5,7 +5,7 @@ import Foundation
 import SceneKit
 
 class VertexNode : SCNNode {
-
+  
   static func make(_ s : String, _ l : String, _ pp : String, _ n : Int) -> SCNNode {
 
 //    super.init()
@@ -16,7 +16,8 @@ class VertexNode : SCNNode {
     //     p.vertexFunctionName = "flatVertexFn"
     p.vertexFunctionName = String("\(s)___\(pp)___Vertex")
 
-    p.library = Function.metalLibraries.first(where: {$0.label == l })!
+    // FIXME: this is broken -- need to split out the SceneKit shaders
+    p.library = ShaderTwo.function.libs.first(where: {$0.label == l })!
 
     let planeSize = CGSize(width: 16, height: 9)
     var ttt = Times()

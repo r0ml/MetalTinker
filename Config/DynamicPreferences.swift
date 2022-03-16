@@ -13,12 +13,12 @@ fileprivate let LINE_SPACING = CGFloat(10)   // leading between each line
 fileprivate let FONT_SIZE = 17   // Magic hardcoded UITableView font size.
 
 class DynamicPreferences {
-  private let config : ConfigController
+//  private let config : ConfigController
   private let title : String
   
-  init(_ title : String, _ config : ConfigController) { // _ sv : NSStackView) {
+  init(_ title : String) { // _ sv : NSStackView) {
     self.title = title
-    self.config = config
+//    self.config = config
   }
   
   func buildOptionsPane(_ bst : MyMTLStruct) -> [IdentifiableView] {
@@ -87,10 +87,14 @@ class DynamicPreferences {
   }
   
   private func makeColorPicker(_ arg : MyMTLStruct, value: XColor) -> AnyView {
-    return AnyView(XColorPicker(value: value, label: arg.name, pref: "\(self.title).\(arg.name!)", config: arg, f: {
+    return AnyView(XColorPicker(value: value, label: arg.name, pref: "\(self.title).\(arg.name!)", config: arg, f: { _ in
+      
+      // FIXME: how do I set the clear color?
+      /*
       if arg.name == "clearColor" {
         self.config.clearColor = $0.asFloat4()
       }
+       */
     })
     )
   }

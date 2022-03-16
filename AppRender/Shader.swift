@@ -19,6 +19,7 @@ import AVFoundation
 
 public let device = MTLCreateSystemDefaultDevice()!
 public let commandQueue = device.makeCommandQueue()!
+public var textureLoader = MTKTextureLoader(device: device)
 
 
 let thePixelFormat = MTLPixelFormat.bgra8Unorm_srgb // could be bgra8Unorm_srgb
@@ -36,14 +37,12 @@ let computeBuffId = 15
 
 /** This class is responsible for rendering the MetalView (building the render pipeline) */
 protocol Shader : Identifiable {
-  associatedtype Config
-  
   var myName : String { get set }
   func setupFrame(_ times : Times) // used to be grabVideo
-  var config : Config { get }
   init(_ s : String)
   func draw(in viewx: MTKView, delegate : MetalDelegate<Self>)
   func startRunning()
+  func buildPrefView() -> [IdentifiableView]
 }
 
 extension Shader {

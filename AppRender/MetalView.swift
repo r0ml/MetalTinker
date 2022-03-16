@@ -101,16 +101,16 @@ class MetalViewController<T : Shader> : XViewController {
 }
 
 #if os(macOS)
-struct MetalViewC : NSViewControllerRepresentable {
+struct MetalViewC<T:Shader> : NSViewControllerRepresentable {
   typealias NSViewControllerType = MetalViewController
   var mtkView : MTKView = MTKView()
-  var delegate : MetalDelegate
+  var delegate : MetalDelegate<T>
 
-  func makeNSViewController(context: NSViewControllerRepresentableContext<MetalViewC>) -> MetalViewController {
+  func makeNSViewController(context: NSViewControllerRepresentableContext<MetalViewC<T>>) -> MetalViewController<T> {
     return MetalViewController( delegate: delegate, context: context, mtkView: mtkView)
   }
   
-  func updateNSViewController(_ nsViewController: MetalViewController, context: NSViewControllerRepresentableContext<MetalViewC>) {
+  func updateNSViewController(_ nsViewController: MetalViewController<T>, context: NSViewControllerRepresentableContext<MetalViewC<T>>) {
     // nsViewController.delegate.shader = self.shader
   }
 }
