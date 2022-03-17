@@ -1,7 +1,3 @@
-/** 
- Author: luluco250
- This is a work in progress to simulate water
- */
 
 #define shaderName test_water_ripple
 

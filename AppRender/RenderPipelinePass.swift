@@ -113,7 +113,7 @@ class RenderPipelinePass {
                    _ isFirst : Bool, delegate : MetalDelegate<ShaderTwo>) {
 
 
-     let config = delegate.shader.config 
+     let config = delegate.shader 
 
     // This statement overrides the render pass descriptor with the onscreen frameBuffer if one exists -- otherwise it is using the offscreen texture
     var rpd : MTLRenderPassDescriptor
@@ -183,7 +183,7 @@ class RenderPipelinePass {
     var sz = CGSize(width : rpd.colorAttachments[0].texture!.width /* / scale */ ,
       height: rpd.colorAttachments[0].texture!.height /* / scale */ )
 
-    delegate.setup.setupUniform( size: sz, scale: Int(scale), uniform: delegate.uniformBuffer, times: delegate.times )
+    delegate.setup.setupUniform( size: sz, scale: Int(scale), uniform: delegate.shader.uniformBuffer!, times: delegate.times )
 
     // I do this to clear out the renderInput textures
     if (delegate.setup.iFrame < 1) {
@@ -220,11 +220,11 @@ class RenderPipelinePass {
       } else {
         renderEncoder.setDepthStencilState(delegate.shader.depthStencilState)
       }
-      renderEncoder.setVertexBuffer(delegate.uniformBuffer, offset: 0, index: uniformId)
+      renderEncoder.setVertexBuffer(config.uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setVertexBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
       renderEncoder.setVertexBuffer(computeBuffer, offset: 0, index:computeBuffId)
 
-      renderEncoder.setFragmentBuffer(delegate.uniformBuffer, offset: 0, index: uniformId)
+      renderEncoder.setFragmentBuffer(config.uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setFragmentBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
       for i in 0..<config.fragmentTextures.count {
         if config.fragmentTextures[i].texture == nil {

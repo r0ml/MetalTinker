@@ -13,7 +13,7 @@ class Function {
   private var fcQ = DispatchQueue(label: "function cache access")
   
   
-  func find(_ fn : String) async -> MTLFunction? {
+  func find(_ fn : String) -> MTLFunction? {
     guard let f = functionCache[fn] else {
       functionCache[fn] = findNoCacheFunction(fn)
       return functionCache[fn]

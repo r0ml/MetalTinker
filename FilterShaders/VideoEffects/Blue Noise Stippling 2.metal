@@ -1,6 +1,4 @@
 /** 
- Author: FabriceNeyret2
- simplified version of  joeedh's  https://www.shadertoy.com/view/Md3GWf
  "Attempt at a procedurally generated blue noise mask"
  to experiment and understand it.
  */

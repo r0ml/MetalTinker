@@ -1,7 +1,4 @@
-/** 
- Author: slarsen
- does a reveal thing
- */
+
 #define shaderName Revealing_the_Van
 
 #include "Common.h"

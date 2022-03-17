@@ -8,10 +8,11 @@
 
 import Foundation
 
-
+/*
 class ConfigControllerT3SCN : ConfigController {
 
   override func justInitialization() async {
     await super.justInitialization()
   }
 }
+*/

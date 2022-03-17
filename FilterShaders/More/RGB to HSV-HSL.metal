@@ -1,5 +1,4 @@
 /** 
- Author: tayloia
  Sandbox for RGB to HSV/HSL conversions and vice versa
  
  Things to notice:

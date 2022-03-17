@@ -1,11 +1,3 @@
-/** 
- Author: flockaroo
- watercolor effect.
- basic principle: blurring strokes perpendicular to gradient, colors parallel.
- 
- */
-
-// created by florian berger (flockaroo) - 2016
 
 // trying to resemble watercolors
 

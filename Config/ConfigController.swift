@@ -42,7 +42,7 @@ struct TextureParameter : Identifiable {
   }
 }
 
-
+/*
 public class ConfigController {
 
   /// This buffer is known as in on the metal side
@@ -363,3 +363,4 @@ public class ConfigController {
   }
 }
 
+*/

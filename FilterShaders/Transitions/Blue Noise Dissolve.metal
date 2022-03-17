@@ -1,11 +1,4 @@
-/** 
- Author: demofox
- Shadertoy has a blue noise texture now, yay!
- 
- Left: blue noise. Right: white noise.
- 
- Check bottom of shader for notes.
- */
+
 #define shaderName Blue_Noise_Dissolve
 
 #include "Common.h"

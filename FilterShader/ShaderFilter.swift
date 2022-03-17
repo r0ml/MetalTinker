@@ -43,8 +43,8 @@ final class ShaderFilter : Shader {
 //      self.label = label
 
     Task {
-      let vertexProgram = await Self.function.find("flatVertexFn")
-    let fragmentProgram = await currentFragmentFn(myName)
+      let vertexProgram = Self.function.find("flatVertexFn")
+    let fragmentProgram = currentFragmentFn(myName)
     
     if let rpp = Self.setupRenderPipeline(vertexFunction: vertexProgram, fragmentFunction: fragmentProgram) {
         (pipelineState, metadata) = rpp
@@ -54,10 +54,10 @@ final class ShaderFilter : Shader {
     
   }
 
-  private func currentFragmentFn(_ sfx : String) async -> MTLFunction? {
+  private func currentFragmentFn(_ sfx : String) -> MTLFunction? {
     let lun = "\(myName)___\(sfx)___Fragment"
-    if let z = await Self.function.find(lun) { return z }
-    return await Self.function.find("passthruFragmentFn")!
+    if let z = Self.function.find(lun) { return z }
+    return Self.function.find("passthruFragmentFn")!
   }
 
   
@@ -123,10 +123,6 @@ stat ?
     delegate : MetalDelegate<ShaderFilter>,
     _ f : ((MTLTexture?) -> ())? ) { // for off-screen renderings, use a callback function instead of a semaphore?
       
-      if delegate.uniformBuffer == nil { // notInitialized
-        delegate.uniformBuffer = uniformBuffer
-        // setupVideo()
-      }
       
       var scale : CGFloat = 1
       
@@ -317,7 +313,7 @@ stat ?
     var sz = CGSize(width : rpd.colorAttachments[0].texture!.width /* / scale */ ,
       height: rpd.colorAttachments[0].texture!.height /* / scale */ )
 
-    delegate.setup.setupUniform( size: sz, scale: Int(scale), uniform: delegate.uniformBuffer, times: delegate.times )
+    delegate.setup.setupUniform( size: sz, scale: Int(scale), uniform: config.uniformBuffer!, times: delegate.times )
 
     // I do this to clear out the renderInput textures
     if (delegate.setup.iFrame < 1) {
@@ -336,7 +332,7 @@ stat ?
     if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
       renderEncoder.label = "render encoder"
 
-      renderEncoder.setFragmentBuffer(delegate.uniformBuffer, offset: 0, index: uniformId)
+      renderEncoder.setFragmentBuffer(config.uniformBuffer, offset: 0, index: uniformId)
        renderEncoder.setFragmentBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
       for i in 0..<config.fragmentTextures.count {
         if config.fragmentTextures[i].texture == nil {

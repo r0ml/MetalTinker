@@ -1067,9 +1067,7 @@
 		E7CB0EC027DEEDE800235E64 /* FilterShader */ = {
 			isa = PBXGroup;
 			children = (
-				E7E9D6FA27DD048C00431EB0 /* ConfigControllerFilter.swift */,
 				E7E9D6EB27DC363B00431EB0 /* ShaderFilter.swift */,
-				E7CB0EC127DEEE6A00235E64 /* FilterPipeline.swift */,
 			);
 			path = FilterShader;
 			sourceTree = "<group>";
@@ -1148,6 +1146,8 @@
 				E7CB0EBD27DEEBA900235E64 /* OrigRenderStuff.swift */,
 				E7494E31255256D8000930BB /* ComputePipelinePass.swift */,
 				E7CB0EBE27DEED7D00235E64 /* OrigShader.swift */,
+				E7E9D6FA27DD048C00431EB0 /* ConfigControllerFilter.swift */,
+				E7CB0EC127DEEE6A00235E64 /* FilterPipeline.swift */,
 			);
 			path = Unused;
 			sourceTree = "<group>";

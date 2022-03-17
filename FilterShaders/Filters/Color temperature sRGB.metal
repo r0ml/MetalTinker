@@ -1,7 +1,4 @@
-/** 
- Author: BeRo
- Color temperature
- */
+
 #define shaderName Color_temperature_sRGB
 
 #include "Common.h"

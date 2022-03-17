@@ -1,7 +1,3 @@
-/** 
- Author: FabriceNeyret2
- distort a texture with noise
- */
 
 #define shaderName waterly_video_test
 

@@ -1,5 +1,4 @@
 /** 
-Author: codywatts
 It's a lens which magnifies and removes blurriness. Click and drag the mouse to move the lens around.
 */
 #define shaderName a_magnifying_lens

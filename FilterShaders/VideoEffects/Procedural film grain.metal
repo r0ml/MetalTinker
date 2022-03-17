@@ -1,9 +1,4 @@
-/** 
- Author: luluco250
- Nice and smooth.
- 
- 
- */
+
 #define shaderName Procedural_film_grain
 
 #include "Common.h"

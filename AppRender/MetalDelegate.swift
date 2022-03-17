@@ -23,7 +23,7 @@ class MetalDelegate<T : Shader> : NSObject, MTKViewDelegate, ObservableObject {
   var fpsSamples : [Double] = Array(repeating: 1.0/60.0 , count: 60)
   var fpsX : Int = 0
   
-  var uniformBuffer : MTLBuffer!
+//  var uniformBuffer : MTLBuffer!
   var setup = RenderSetup()
   var mySize : CGSize?
   

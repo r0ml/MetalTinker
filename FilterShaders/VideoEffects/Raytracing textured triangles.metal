@@ -1,7 +1,4 @@
-/** 
-Author: doom
-Raytracing textured triangles
-*/
+
 #define shaderName Raytracing_textured_triangles
 
 #include "Common.h"

@@ -1,10 +1,3 @@
-/** 
- Author: bram
- This renders an image, but bevels its edges.
- It is a little verbose, and is not optimized (uses a lot of branching) but it does do the trick.
- 
- TODO: fix that nasty aliasing at the edge between bevels.
- */
 
 #define shaderName image_with_a_bevelled_edge
 

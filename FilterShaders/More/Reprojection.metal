@@ -1,8 +1,4 @@
-/** 
- Author: P_Malin
- Projecting a 2d texture onto a 3d scene. Click in window to see grid over 3d scene.
 
- */
 #define shaderName Reprojection
 
 #include "Common.h"
@@ -14,12 +10,6 @@ struct InputBuffer {
 initialize() {
 }
 
-
-
-
-
-
-// Reprojection - @P_Malin
 
 constant const int kMaxIterations = 64;
 

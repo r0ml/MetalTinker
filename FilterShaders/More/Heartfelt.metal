@@ -1,6 +1,4 @@
-/** 
-Author: BigWIngs
-If you want to really get sad then be sure to watch with sound  ;)
+/**
 If you want to see and control the rain, comment out the HAS_HEART define
 Controls: Mouse x = scrub time  y = rain amount (only without heart)
 */

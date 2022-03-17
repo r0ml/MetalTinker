@@ -1,7 +1,4 @@
-/** 
- Author: snakebyteme2
- Printed comic book effect
- */
+
 #define shaderName Comic_Book_Video_FX
 
 #include "Common.h"

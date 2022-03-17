@@ -1,8 +1,3 @@
-/** 
-Author: ridhojeftha
-Ps modes
-*/
-
 
 #define shaderName photoshop_blend_modes
 

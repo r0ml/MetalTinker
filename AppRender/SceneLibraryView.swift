@@ -21,7 +21,7 @@ struct SceneShaderLeaf : Identifiable, Equatable, Hashable {
 
   public var id : String {
     if let k = rm as? T3ShaderSCNScene {
-      return k.shader
+      return k.shaderName
     } else {
       return String(describing: type(of: rm))
     }
