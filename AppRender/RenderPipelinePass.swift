@@ -70,6 +70,8 @@ class RenderPipelinePass {
     }
   }
 
+
+  /*
   func makeRenderTextures(_ canvasSize : CGSize) {
       if let ri = metadata.fragmentArguments?.first(where: {$0.name == "renderInput"}) {
         // if I have an array length for renderInputs, I need to create output attachments and renderInputs to match
@@ -107,7 +109,9 @@ class RenderPipelinePass {
       // let depthAttachementDescriptor = makeDepthAttachmentDescriptor(size: canvasSize)
 
     }
+*/
 
+  
   func makeEncoder(_ commandBuffer : MTLCommandBuffer,
                    _ scale : CGFloat,
                    _ isFirst : Bool, delegate : MetalDelegate<ShaderTwo>) {
@@ -194,7 +198,7 @@ class RenderPipelinePass {
       }
 
       if let be = commandBuffer.makeBlitCommandEncoder() {
-        for ri in renderInput {
+        for ri in renderInput { 
           be.copy(from: ri.2, to: ri.1)
           be.generateMipmaps(for: ri.1)
         }
@@ -218,7 +222,7 @@ class RenderPipelinePass {
       // if the low order bit of flags is set -- this is a 2d (blended) render
       if ( (flags & 1) == 1) {
       } else {
-        renderEncoder.setDepthStencilState(delegate.shader.depthStencilState)
+   //     renderEncoder.setDepthStencilState(delegate.shader.depthStencilState)
       }
       renderEncoder.setVertexBuffer(config.uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setVertexBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
@@ -291,7 +295,7 @@ static func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: 
   psd.colorAttachments[0].destinationRGBBlendFactor = doesBlend ? .destinationAlpha : .oneMinusSourceAlpha 
   psd.colorAttachments[0].destinationAlphaBlendFactor = doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
 
-  psd.depthAttachmentPixelFormat =  .depth32Float   // metalView.depthStencilPixelFormat
+//  psd.depthAttachmentPixelFormat =  .depth32Float   // metalView.depthStencilPixelFormat
 
   // FIXME: if I need additional attachments for renderPasses
   //   for i in 1 ..< numberOfRenderPasses {
@@ -355,7 +359,6 @@ static func makeDepthAttachmentDescriptor(size canvasSize : CGSize) -> MTLRender
   td.sampleCount = 4 // should be multisampleCount -- but I can't see it
 
   let dt = device.makeTexture(descriptor: td)
-
   depthAttachmentDescriptor.clearDepth = 1
   depthAttachmentDescriptor.texture = dt
   depthAttachmentDescriptor.loadAction = .clear

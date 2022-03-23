@@ -23,7 +23,7 @@ public var textureLoader = MTKTextureLoader(device: device)
 
 
 let thePixelFormat = MTLPixelFormat.bgra8Unorm_srgb // could be bgra8Unorm_srgb
-// let theOtherPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
+                                                    // let theOtherPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
 
 let multisampleCount = 4
 
@@ -56,60 +56,62 @@ extension Shader {
   
 }
 
+extension Shader {
+  // FIXME: when I fix RenderPassPipeline -- move this out of the class
+  func makeRenderPassTexture(_ nam : String, size: CGSize) -> (MTLTexture, MTLTexture, MTLTexture)? {
+    let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+    texd.textureType = .type2DMultisample
+    texd.usage = [.renderTarget]
+    texd.sampleCount = multisampleCount
+    texd.resourceOptions = .storageModePrivate
 
-func makeRenderPassTexture(_ nam : String, size: CGSize) -> (MTLTexture, MTLTexture, MTLTexture)? {
-  let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-  texd.textureType = .type2DMultisample
-  texd.usage = [.renderTarget]
-  texd.sampleCount = multisampleCount
-  texd.resourceOptions = .storageModePrivate
-  
-  let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
-  texi.textureType = .type2D
-  texi.usage = [.shaderRead]
-  texi.resourceOptions = .storageModePrivate
-  
-  let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-  texo.textureType = .type2D
-  texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-  texo.resourceOptions = .storageModePrivate
-  
-  if let p = device.makeTexture(descriptor: texd),
-     let q = device.makeTexture(descriptor: texi),
-     let r = device.makeTexture(descriptor: texo) {
-    p.label = "render pass \(nam) multisample"
-    q.label = "render pass \(nam) input"
-    r.label = "render pass \(nam) output"
-    //        swapQ.async {
-    
-    
-    
-    return (p, q, r)
+    let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
+    texi.textureType = .type2D
+    texi.usage = [.shaderRead]
+    texi.resourceOptions = .storageModePrivate
+
+    let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+    texo.textureType = .type2D
+    texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
+    texo.resourceOptions = .storageModePrivate
+
+    if let p = device.makeTexture(descriptor: texd),
+       let q = device.makeTexture(descriptor: texi),
+       let r = device.makeTexture(descriptor: texo) {
+      p.label = "render pass \(nam) multisample"
+      q.label = "render pass \(nam) input"
+      r.label = "render pass \(nam) output"
+      //        swapQ.async {
+
+
+
+      return (p, q, r)
+    }
+    return nil
   }
-  return nil
-}
 
-func makeRenderPassDescriptor(label : String, size canvasSize: CGSize) -> MTLRenderPassDescriptor {
-  //------------------------------------------------------------
-  // texture on device to be written to..
-  //------------------------------------------------------------
-  let ts = makeRenderPassTexture(label, size: canvasSize)!
-  let texture = ts.0
-  let resolveTextures = (ts.1, ts.2)
-  
-  let renderPassDescriptor = MTLRenderPassDescriptor()
-  renderPassDescriptor.colorAttachments[0].texture = texture
-  renderPassDescriptor.colorAttachments[0].storeAction = .storeAndMultisampleResolve
-  renderPassDescriptor.colorAttachments[0].resolveLevel = 0
-  renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTextures.1 //  device.makeTexture(descriptor: xostd)
-  renderPassDescriptor.colorAttachments[0].loadAction = .clear // .load
-  //      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
-  
-  
-  // only if I need depthing?
-  renderPassDescriptor.depthAttachment = RenderPipelinePass.makeDepthAttachmentDescriptor(size: canvasSize)
-  
-  return renderPassDescriptor
+  func makeRenderPassDescriptor(label : String, size canvasSize: CGSize) -> MTLRenderPassDescriptor {
+    //------------------------------------------------------------
+    // texture on device to be written to..
+    //------------------------------------------------------------
+    let ts = makeRenderPassTexture(label, size: canvasSize)!
+    let texture = ts.0
+    let resolveTextures = (ts.1, ts.2)
+
+    let renderPassDescriptor = MTLRenderPassDescriptor()
+    renderPassDescriptor.colorAttachments[0].texture = texture
+    renderPassDescriptor.colorAttachments[0].storeAction = .storeAndMultisampleResolve
+    renderPassDescriptor.colorAttachments[0].resolveLevel = 0
+    renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTextures.1 //  device.makeTexture(descriptor: xostd)
+    renderPassDescriptor.colorAttachments[0].loadAction = .clear // .load
+                                                                 //      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
+
+
+    // only if I need depthing?
+    // renderPassDescriptor.depthAttachment = RenderPipelinePass.makeDepthAttachmentDescriptor(size: canvasSize)
+
+    return renderPassDescriptor
+  }
 }
 
 extension Shader {

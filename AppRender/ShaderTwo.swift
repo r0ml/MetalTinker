@@ -30,12 +30,13 @@ final class ShaderTwo : Shader {
     uniformBuffer = uni
 
     
-    
+    /*
     let depthStencilDescriptor = MTLDepthStencilDescriptor()
     depthStencilDescriptor.depthCompareFunction = .less
     depthStencilDescriptor.isDepthWriteEnabled = true // I would like to set this to false for triangle blending
     self.depthStencilState = device.makeDepthStencilState(descriptor: depthStencilDescriptor)!
-
+*/
+    
 //    Task {
       self.justInitialization()
 

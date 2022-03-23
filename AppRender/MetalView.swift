@@ -46,7 +46,10 @@ class MetalViewController<T : Shader> : XViewController {
     mtkView.colorPixelFormat = thePixelFormat
     
     // depth stuff
-    mtkView.depthStencilPixelFormat = .depth32Float
+    // FIXME: this needs to be added in if depth needed?
+    // mtkView.depthStencilPixelFormat = .depth32Float
+
+
     mtkView.delegate = delegate
     mtkView.device = device
     mtkView.preferredFramesPerSecond = 60
