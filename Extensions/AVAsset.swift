@@ -9,7 +9,7 @@ extension AVAsset {
     let videoGen = AVAssetImageGenerator.init(asset: self )
     videoGen.requestedTimeToleranceBefore = CMTime(value: 1, timescale: 10)
     videoGen.requestedTimeToleranceAfter = CMTime(value: 1, timescale: 10)
-    videoGen.appliesPreferredTrackTransform = false
+    videoGen.appliesPreferredTrackTransform = true
 
     let imageGenerator = videoGen
     let z = CMTime(seconds: 10, preferredTimescale: 60)

@@ -7,21 +7,21 @@ import MetalKit
 import os
 
 class WebcamSupport : NSObject, VideoStream {
-  private var frameTexture : MTLTexture? = nil
+  var frameTexture : MTLTexture? = nil
   private var region : MTLRegion = MTLRegion()
 
   private var permissionGranted = false
-  private let sessionQueue = DispatchQueue(label: "session queue")
+//  private let sessionQueue = DispatchQueue(label: "session queue")
   private let captureSession = AVCaptureSession()
   private let context = CIContext()
   
   override init() {
     super.init()
     checkPermission()
-    sessionQueue.async {
+//    sessionQueue.async {
       self.configureSession()
       // self.captureSession.startRunning()
-    }
+//    }
   }
   
   func startCapture() {
@@ -63,10 +63,10 @@ extension WebcamSupport :  AVCaptureVideoDataOutputSampleBufferDelegate {
   }
   
   private func requestPermission() {
-    sessionQueue.suspend()
+//    sessionQueue.suspend()
     AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
       self.permissionGranted = granted
-      self.sessionQueue.resume()
+//      self.sessionQueue.resume()
     }
   }
   
@@ -90,7 +90,7 @@ extension WebcamSupport :  AVCaptureVideoDataOutputSampleBufferDelegate {
         thePixelFormat, width: Int(z.width), height: Int(z.height), mipmapped: false)
       let tx = device.makeTexture(descriptor: mtd)
       tx?.label = "webcam frame"
-      tx?.setPurgeableState(.volatile)
+      tx?.setPurgeableState(.keepCurrent)
       self.frameTexture = tx
       region = MTLRegionMake2D(0, 0, mtd.width, mtd.height)
 
@@ -122,7 +122,7 @@ extension WebcamSupport :  AVCaptureVideoDataOutputSampleBufferDelegate {
         CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
         if let dd = CVPixelBufferGetBaseAddress(pixelBuffer) {
           tx.replace(region: region, mipmapLevel: 0, withBytes: dd, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer))
-          CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly);
+          CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
         }
         CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
       }

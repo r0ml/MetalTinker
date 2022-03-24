@@ -20,7 +20,8 @@ class VideoSupport : VideoStream {
   private var url : URL
 
   // This is my thumbnail
-  private var myTexture : MTLTexture?
+  // FIXME: make private again?
+  /* private */ var myTexture : MTLTexture?
   // private var thumbnail : NSImage?
   private var reader : AVAssetReader?
   private var player : AVQueuePlayer
@@ -153,7 +154,7 @@ class VideoSupport : VideoStream {
     let pivo = player.currentItem!.outputs[0] as! AVPlayerItemVideoOutput
     let currentTime = pivo.itemTime(forHostTime: nextVSync)
     let tx = getPixels(currentTime)
-    textureQ.async { self.myTexture = tx }
+    self.myTexture = tx
     return tx
     // if paused { player.pause() }
 //    return textureQ.sync(flags: .barrier) { myTexture }

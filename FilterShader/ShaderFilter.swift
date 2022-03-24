@@ -12,7 +12,11 @@ final class ShaderFilter : Shader {
   var myName : String
   
   func setupFrame(_ t : Times) {
-    
+    for (i,v) in fragmentTextures.enumerated() {
+      if let vs = v.video {
+        fragmentTextures[i].texture = vs.readBuffer(t.currentTime) //     v.prepare(stat, currentTime - startTime)
+      }
+    }
   }
   
   required init(_ s : String ) {
@@ -93,6 +97,7 @@ final class ShaderFilter : Shader {
       var scale : CGFloat = 1
       
       // FIXME: what is this in iOS land?  What is it in mac land?
+/*
 #if os(macOS)
         let eml = NSEvent.mouseLocation
         let wp = viewx.window!.convertPoint(fromScreen: eml)
@@ -104,6 +109,7 @@ final class ShaderFilter : Shader {
         
         scale = xview?.window?.screen?.backingScaleFactor ?? 1
 #endif
+  */
       
       // Set up the command buffer for this frame
       let  commandBuffer = commandQueue.makeCommandBuffer()!
@@ -579,7 +585,11 @@ final class ShaderFilter : Shader {
 
   func buildImageWells() -> [IdentifiableView] {
     var res = [IdentifiableView]()
-    let a = ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: { self.fragmentTextures = $0 }))
+
+    // I believe this is where the ImageStrip sets the images as texture inputs.
+    // It is also where the webcam and video support should be assigned
+    let a = ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: {
+      self.fragmentTextures = $0 }))
     res.append( IdentifiableView(id: "imageStrip", view: AnyView(a)))
     return res
   }
