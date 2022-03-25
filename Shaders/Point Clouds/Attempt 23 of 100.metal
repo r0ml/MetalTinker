@@ -3,7 +3,7 @@
 
 #include "Common.h" 
 struct InputBuffer {
-  float4 clearColor = { 0.9, 0.8, 0.7, 1 };
+//  float4 clearColor = { 0.9, 0.8, 0.7, 1 };
   struct {
     int4 _1;
   } pipeline;

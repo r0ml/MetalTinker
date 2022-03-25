@@ -329,9 +329,9 @@ class T3ShaderSCNScene : T3SCNScene {
       let a = DynamicPreferences.init(shaderName)
       dynPref = a
       let c = buildImageWells()
-      let d = IdentifiableView(id: "sources", view: AnyView(SourceStrip()))
+      // let d = IdentifiableView(id: "sources", view: AnyView(SourceStrip()))
 
-      cached = [d] + c + a.buildOptionsPane(mo)
+      cached = c + a.buildOptionsPane(mo)
       return cached!
     }
     return []
@@ -345,7 +345,7 @@ class T3ShaderSCNScene : T3SCNScene {
 
   func processWebcam(_ bst : MyMTLStruct ) {
    if let _ = bst["webcam"] {
-   webcam = WebcamSupport()
+     webcam = WebcamSupport(camera: "FIXME:")
    }
    }
 
@@ -535,7 +535,13 @@ class T3ShaderSCNScene : T3SCNScene {
   func doInitialization( ) async {
 
     let uniformSize : Int = MemoryLayout<Uniform>.stride
-    let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
+
+#if os(macOS) || targetEnvironment(macCatalyst)
+let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
+#else
+let uni = device.makeBuffer(length: uniformSize, options: [])!
+#endif
+
     uni.label = "uniform"
     uniformBuffer = uni
 
@@ -544,7 +550,7 @@ class T3ShaderSCNScene : T3SCNScene {
 
     await setupPipelines()
 
-    if let a = (pipelinePasses[0] as? RenderPipelinePass)?.metadata.fragmentArguments {
+    if let a = pipelinePasses[0].metadata.fragmentArguments {
       processTextures(a)
     }
     getClearColor(inbuf)

@@ -6,14 +6,14 @@
 constant int REPEAT = 32;
 
 struct InputBuffer {
-  float4 clearColor;
+//  float4 clearColor;
   struct {
     int4 _1;
   } pipeline;
 };
 
 initialize() {
-  in.clearColor = {1, 1, 1, 1};
+//  in.clearColor = {1, 1, 1, 1};
   in.pipeline._1 = {0, 1, REPEAT, 0};
 }
 

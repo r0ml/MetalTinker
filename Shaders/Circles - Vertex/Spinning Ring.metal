@@ -6,7 +6,7 @@
 constant const int ringSides = 200;
 
 struct InputBuffer {
-  float4 clearColor = 0;
+//  float4 clearColor = 0;
   struct {
     int4 _1;
   } pipeline;

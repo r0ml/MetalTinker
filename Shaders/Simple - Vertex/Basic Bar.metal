@@ -4,13 +4,13 @@
 #include "Common.h" 
 
 struct InputBuffer {
-  float4 clearColor;
+//  float4 clearColor;
   struct {
     int3 _1;
   } pipeline;
 };
 initialize() {
-  in.clearColor = {1,1,1,0.1};
+//  in.clearColor = {1,1,1,0.1};
   in.pipeline._1 = {3, 6, 2};
 }
 

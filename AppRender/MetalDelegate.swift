@@ -121,6 +121,7 @@ class MetalDelegate<T : Shader> : NSObject, MTKViewDelegate, ObservableObject {
   
   func stop() {
     isRunning = false
+    shader.stopRunning()
     
     // config.webcam?.stopCapture()
     // config.videoNames.forEach { $0.pause() }

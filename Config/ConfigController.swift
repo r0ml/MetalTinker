@@ -11,8 +11,11 @@ import MetalKit
 import os
 import SwiftUI
 
+/// A VideoStream is either a VideoSupport (for playing video files)  or a WebcamSupport (for playing the live camera)
 protocol VideoStream {
   func readBuffer(_ nVSync : TimeInterval) -> MTLTexture?
+  func stopVideo()
+  func startVideo()
 }
 
 /** This class processes the initializer and sets up the shader parameters based on the shader defaults and user defaults */

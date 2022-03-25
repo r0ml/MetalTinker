@@ -7,13 +7,13 @@
  the second number is number of vertices.   The third number is number of instances.  The fourth is reserved for flags.
  */
 struct InputBuffer {
-  float4 clearColor = 0;
+//  float4 clearColor = 0;
   struct {
     int4 _1;
   } pipeline;
 };
 initialize() {
-  in.clearColor = {0, 0, 0, 1};
+//  in.clearColor = {0, 0, 0, 1};
   in.pipeline._1 = {4, 6, 6, 0};  // 6 squares
 }
 

@@ -4,14 +4,14 @@
 #include "Common.h" 
 
 struct InputBuffer {
-  float4 clearColor = {0, 0, 0, 1.};
+//  float4 clearColor = {0, 0, 0, 1.};
   struct {
     int4 _1;
   } pipeline;
 };
 
 initialize() {
-  in.clearColor = {0, 0, 0, 1.};
+//  in.clearColor = {0, 0, 0, 1.};
   in.pipeline._1 = {3, 6, 3, 1}; // triangles, vertices, instances
 }
 

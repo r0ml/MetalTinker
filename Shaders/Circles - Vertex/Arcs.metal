@@ -6,7 +6,7 @@
 constant const int arcSides = 25;
 
 struct InputBuffer {
-  float4 clearColor = 0;
+//  float4 clearColor = 0;
   struct {
     int4 _1;
   } pipeline;
@@ -17,7 +17,7 @@ struct InputBuffer {
 initialize() {
   in.pipeline._1 = {3, 6 * arcSides, 3, 1};
 
-  in.clearColor = {0, 0, 0, 1};
+//  in.clearColor = {0, 0, 0, 1};
   in.thickness = { 0.01, 0.05, 0.1};
   in.radius = {0.2, 0.3, 0.5};
 }

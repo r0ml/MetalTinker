@@ -19,24 +19,33 @@ class VideoSupport : VideoStream {
   private var video : AVAsset
   private var url : URL
 
-  // This is my thumbnail
   // FIXME: make private again?
   /* private */ var myTexture : MTLTexture?
-  // private var thumbnail : NSImage?
   private var reader : AVAssetReader?
   private var player : AVQueuePlayer
   private var textureQ = DispatchQueue(label: "videoTextureQ")
   private var looper : AVPlayerLooper
   private var observation: NSKeyValueObservation?
 
-  init( _ u : URL ) {
+  init( url u : URL ) {
     url = u
     video = AVAsset(url: u)
-
-    let pi = AVPlayerItem.init(asset: video )
     player = AVQueuePlayer()
+    let pi = AVPlayerItem.init(asset: video )
     looper = AVPlayerLooper(player: player, templateItem: pi)
+    doInit(asset: video)
+  }
 
+  init( asset v : AVURLAsset ) {
+    url = v.url
+    video = v
+    player = AVQueuePlayer()
+    let pi = AVPlayerItem.init(asset: video )
+    looper = AVPlayerLooper(player: player, templateItem: pi)
+    doInit(asset: video)
+  }
+
+  private func doInit(asset video : AVAsset) {
     observation = looper.observe(\AVPlayerLooper.status, options: .new) { object, change in
       let status = self.looper.status
       // Switch over status value
@@ -65,24 +74,24 @@ class VideoSupport : VideoStream {
     player.pause()
   }
   
-  var vq = DispatchQueue.global()
   func start() {
     player.play()
     return
   }
   
   var loop : Bool = false
+
+  func startVideo() {
+  }
   
-  func endProcessing() {
+  func stopVideo() {
     player.pause()
-//    print("end processing")
   }
 
   func getPixels(_ currentTime : CMTime) -> MTLTexture? {
     let pivo = player.currentItem!.outputs[0] as! AVPlayerItemVideoOutput
     // let currentTime = pivo.itemTime(forHostTime: nextVSync)
     
-   //  var ttt : CMTime = CMTime()
     if pivo.hasNewPixelBuffer(forItemTime: currentTime),
        let pixelBuffer = pivo.copyPixelBuffer(forItemTime: currentTime, itemTimeForDisplay: nil)  {
       
@@ -111,8 +120,7 @@ class VideoSupport : VideoStream {
       let mtd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat:
         .bgra8Unorm, width:CVPixelBufferGetWidth(pixelBuffer),
                      height: CVPixelBufferGetHeight(pixelBuffer), mipmapped: true)
-      // mtd.sampleCount = 1
-      
+
       let tx = device.makeTexture(descriptor: mtd)
       tx?.label = "video frame"
       let region = MTLRegionMake2D(0, 0, mtd.width, mtd.height)
@@ -125,18 +133,14 @@ class VideoSupport : VideoStream {
       CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
       return tx
     } else {
-    //  print("does not have pixel buffer")
       return myTexture
-//      return nil
     }
   }
   
   func readBuffer(_ nVSync : TimeInterval) -> MTLTexture? {
-    // player.currentItem!.status ==
     var nextVSync = nVSync
 
     if player.timeControlStatus == .paused {
-      //  paused = true
       player.play()
       nextVSync += 10
       return nil
@@ -156,13 +160,13 @@ class VideoSupport : VideoStream {
     let tx = getPixels(currentTime)
     self.myTexture = tx
     return tx
-    // if paused { player.pause() }
-//    return textureQ.sync(flags: .barrier) { myTexture }
   }
 
+  // FIXME: I could cache the thumbnail for future reference
   func getThumbnail(_ f : @escaping (CGImage) -> ()) {
     video.getThumbnailImage(f)
   }
+
   var observer : NSObject?
 
 }

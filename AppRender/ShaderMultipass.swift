@@ -10,6 +10,10 @@ final class ShaderMultipass : Shader {
   
   func startRunning() {
   }
+
+  func stopRunning() {
+    
+  }
   
     //  typealias Config = ConfigController
   

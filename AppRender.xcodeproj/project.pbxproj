@@ -208,7 +208,7 @@
 		E7E9D6FD27DD06AD00431EB0 /* ImageStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6FC27DD06AD00431EB0 /* ImageStrip.swift */; };
 		E7E9D6FF27DE4DCD00431EB0 /* ShaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6FE27DE4DCD00431EB0 /* ShaderView.swift */; };
 		E7E9D70127DE4E7D00431EB0 /* SceneWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D70027DE4E7D00431EB0 /* SceneWrapperView.swift */; };
-		E7ED18F7257E903A0075DD2E /* Simple_Scenes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */; };
+		E7ED18F7257E903A0075DD2E /* Simple_Scenes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E7ED18F8257E903A0075DD2E /* Simple_Scenes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E7ED19D9257E909E0075DD2E /* Simple4.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A46642578488400639F19 /* Simple4.swift */; };
 		E7ED1A19257E909E0075DD2E /* Simple.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A41CE2576B53800639F19 /* Simple.swift */; };

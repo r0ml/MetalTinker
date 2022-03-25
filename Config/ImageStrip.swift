@@ -9,7 +9,32 @@ import AVFoundation
 
 struct ImageStrip : View {
   @Binding var texes : [TextureParameter]
+
+  // This is to force redrawing the ImageStrip when one of the images changes
   @State var uuid = UUID()
+
+  func menu( _ jj : Int ) -> some View {
+    return VStack {
+      ForEach(CameraPicker.cameraList, id: \.self) { n in
+      Button(action: {
+        let z = WebcamSupport(camera: n)
+        z.startVideo()
+        texes[jj].video = z // WebcamSupport()
+        texes[jj].image = XImage(named: "webcam_still")!
+//               texes[jj.id].texture = z.frameTexture
+        uuid = UUID()
+
+      } ) {
+        Text(n)
+      }
+      }
+      Button(action: {
+        print("open file")
+      }) {
+        Text("Open File")
+      }
+    }
+  }
 
   var body : some View {
     HStack {
@@ -19,10 +44,14 @@ struct ImageStrip : View {
       ForEach(texes) { (jj) in
 
         // FIXME: i windws up out of range -- must be from resetting texes
-        Image.init(xImage: texes[jj.id].image).resizable().scaledToFit()
-          .onDrop(of: [UTType.fileURL, UTType.plainText, UTType.image, UTType.video, UTType.movie], isTargeted: nil, perform: { (y) in
+        AnyView(Image.init(xImage: texes[jj.id].image).resizable()
+          .scaledToFit())
+        .contextMenu(menuItems: {
+          menu(jj.id)
+        })
 
-            var res = false
+          .onDrop(of: [UTType.fileURL, UTType.text, UTType.utf8PlainText, UTType.image, UTType.video, UTType.movie], isTargeted: nil, perform: { (y) in
+
             //          var sem = DispatchSemaphore(value: 0)
 
             //          DispatchQueue.global().async {
@@ -91,7 +120,6 @@ struct ImageStrip : View {
                     texes[jj.id].image = k
                     texes[jj.id].texture = k.getTexture(MTKTextureLoader(device: device))
                     uuid = UUID()
-                    res = true
                   }
                 } else if uti[0].conforms(to: .movie) {
                   let vs = VideoSupport(j)
@@ -101,7 +129,6 @@ struct ImageStrip : View {
                     }
                   texes[jj.id].texture = vs.myTexture
                   uuid = UUID()
-                  res = true
                 }
                 #endif
               }
@@ -110,6 +137,24 @@ struct ImageStrip : View {
               return true
             }
 
+            if y[0].canLoadObject(ofClass: NSString.self) {
+              y[0].loadObject(ofClass: NSString.self) { (s, e) in
+                if let e = e {
+                  print(e.localizedDescription)
+                  return
+                }
+                if let s = s as? String, s == "webcam" {
+                  let z = WebcamSupport(camera: "FIXME:")
+                  z.startVideo()
+                  texes[jj.id].video = z // WebcamSupport()
+                  texes[jj.id].image = XImage(named: "webcam_still")!
+   //               texes[jj.id].texture = z.frameTexture
+                  uuid = UUID()
+
+                }
+              }
+              return true
+            }
 
             if y[0].hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
               y[0].loadItem(forTypeIdentifier: UTType.movie.identifier) {
@@ -118,10 +163,19 @@ struct ImageStrip : View {
                   print(e.localizedDescription)
                   return
                 }
+
+                #if os(iOS)
                 if let vv = v as? NSURL {
                   let k = AVURLAsset(url: vv as URL)
-                  print(k)
+                  let vs = VideoSupport(asset: k)
+                  texes[jj.id].video = vs
+                  vs.getThumbnail { g in
+                    texes[jj.id].image = XImage.init(cgImage: g) // , size: CGSize(width: $0.width, height: $0.height))
+                  }
+                  texes[jj.id].texture = vs.myTexture
+                  uuid = UUID()
                 }
+                #endif
               }
               return true
             }
@@ -132,11 +186,11 @@ struct ImageStrip : View {
               if let d = data as? Data, let s = String(data: d, encoding: .utf8), s == "webcam" {
                 // I guess I should initialize the webcam here?
                 // and also grab a thumbnail frame
-                let z = WebcamSupport()
-                z.startRunning()
+                let z = WebcamSupport(camera: "FIXME")
+                z.startVideo()
                 texes[jj.id].video = z // WebcamSupport()
                 texes[jj.id].image = XImage(named: "webcam_still")!
-                texes[jj.id].texture = z.frameTexture
+ //               texes[jj.id].texture = z.frameTexture
                 uuid = UUID()
               }
             }
@@ -213,17 +267,27 @@ struct ImageStrip : View {
   }
 }
 
-
+/*
 struct SourceStrip : View {
 
-  var body: some View {
-    let z = NSItemProvider(item: "webcam".data(using: .utf8)as NSSecureCoding?, typeIdentifier: UTType.plainText.identifier)
 
+  var body: some View {
     return HStack {
-      Image(systemName: "video.circle" ).onDrag {
+      AnyView(
+      Image(systemName: "video.circle" )
+        ).onDrag {
+          #if os(macOS)
+        let z = NSItemProvider(object: "webcam" as NSString )
+        z.loadObject(ofClass: NSString.self) { (x, e) in print(x, e) }
+          #else
+          let z = NSItemProvider(object: UIImage(systemName: "video.circle")! )
+          #endif
+          print("dragged")
         return z
       }
+      Spacer()
     }
   }
 }
+*/
 

@@ -19,13 +19,23 @@ final class ShaderTwo : Shader {
   func startRunning() {
     
   }
+
+  func stopRunning() {
+    
+  }
   
   required init(_ s : String ) {
     print("ShaderTwo init \(s)")
     self.myName = s
 //    self.config = ConfigController(s)
     let uniformSize : Int = MemoryLayout<Uniform>.stride
-    let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
+
+#if os(macOS) || targetEnvironment(macCatalyst)
+let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
+#else
+let uni = device.makeBuffer(length: uniformSize, options: [])!
+#endif
+
     uni.label = "uniform"
     uniformBuffer = uni
 
@@ -289,9 +299,9 @@ final class ShaderTwo : Shader {
         let a = DynamicPreferences.init(myName)
         dynPref = a
         let c = buildImageWells()
-        let d = IdentifiableView(id: "sources", view: AnyView(SourceStrip()))
+//        let d = IdentifiableView(id: "sources", view: AnyView(SourceStrip()))
 
-        cached = [d] + c + a.buildOptionsPane(mo)
+        cached = c + a.buildOptionsPane(mo)
         return cached!
       }
       return []
@@ -305,7 +315,7 @@ final class ShaderTwo : Shader {
 
     func processWebcam(_ bst : MyMTLStruct ) {
      if let _ = bst["webcam"] {
-     webcam = WebcamSupport()
+       webcam = WebcamSupport(camera: "FIXME")
      }
      }
 

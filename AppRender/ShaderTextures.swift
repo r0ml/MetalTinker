@@ -27,7 +27,10 @@ final class ShaderTextures : Shader {
 
   func startRunning() {
   }
-  
+
+  func stopRunning() {
+  }
+
   func buildPrefView() -> [IdentifiableView] {
     return []
   }

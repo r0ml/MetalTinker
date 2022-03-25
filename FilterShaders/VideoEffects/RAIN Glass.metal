@@ -3,7 +3,6 @@
 
 #include "Common.h" 
 
-// FIXME: should be webcam??
 struct InputBuffer {
 };
 

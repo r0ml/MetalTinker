@@ -4,7 +4,7 @@
 #include "Common.h" 
 
 struct InputBuffer {
-  float4 clearColor;
+//  float4 clearColor;
   bool monotonic = false;
   float3 thickness;
   bool fade;
@@ -14,7 +14,7 @@ struct InputBuffer {
 };
 
 initialize() {
-  in.clearColor = float4(24, 13, 140, 255)/255.;
+//  in.clearColor = float4(24, 13, 140, 255)/255.;
   in.pipeline._1 = {3, 600, 1, 0};
   in.thickness = { 0.01, 0.03, 0.1};
 }

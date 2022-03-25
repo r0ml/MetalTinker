@@ -42,6 +42,7 @@ protocol Shader : Identifiable {
   init(_ s : String)
   func draw(in viewx: MTKView, delegate : MetalDelegate<Self>)
   func startRunning()
+  func stopRunning()
   func buildPrefView() -> [IdentifiableView]
 }
 

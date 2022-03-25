@@ -4,7 +4,7 @@
 #include "Common.h" 
 
 struct InputBuffer {
-  float4 clearColor = {0,0,0,0};
+//  float4 clearColor = {0,0,0,0};
   struct {
     int4 _1;
   } pipeline;

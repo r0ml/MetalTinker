@@ -78,6 +78,8 @@ class RenderSetup {
     }
     
     // Done.  Sync with GPU
+    #if os(macOS) || targetEnvironment(macCatalyst)
     uni.didModifyRange(0..<uni.length)
+    #endif
   }
 }
