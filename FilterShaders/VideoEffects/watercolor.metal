@@ -9,11 +9,7 @@ struct InputBuffer {
 };
 
 initialize() {
-//  setTex(0, asset::rust);
-//  setTex(1, asset::diving); // vandamme);
 }
-
- 
 
 float4 getCol(float2 pos, texture2d<float> vid0)
 {
@@ -50,12 +46,6 @@ float2 getGrad2(float2 pos,float delta, texture2d<float> vid0)
               dot((getCol2(pos+d.yx, vid0)-getCol2(pos-d.yx, vid0)).xyz,float3(.333))
               )/delta;
 }
-
-/*float4 getRand(float2 pos)
-{
-  float2 uv=pos/textureSize(texture[0]);
-  return texture[0].sample(iChannel0,uv);
-}*/
 
 float htPattern(float2 pos) {
   float r=interporand(pos / 256. *.4/.7).x;

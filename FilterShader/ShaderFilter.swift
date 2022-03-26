@@ -6,14 +6,21 @@ import MetalKit
 import os
 import SwiftUI
 
+#if targetEnvironment(macCatalyst)
+import UIKit
+#endif
+
 /* TODO:
  1) There is a flicker when resuming after pause (on macCatalyst).  The first frame after pause seems to (someetimes) be frame 0 -- not the current frame
  2) Can I update the thumbnail as the video plays?
  3) Single step is not working
  4) recording and snapshotting is not working
  5) instead of using a separate initialization function in the shader, I could use the fragment function (which also has the "in" parameter) and have the shader macro call initialize() on frame 0
- 6) need a dropdown to pick the camera (like in Librorum)
- 7) camera icon drag'n'drop for the webcam doesn't work on macCatalyst
+ 6) Camera sometimes doesn't shut off when moving to different shader.
+ 7) Need to set the zoom explicitly (it stays set to previous user -- so Librorum altered it -- for MacOS only it seems
+ 8) aspect ratio seems off for MacOS on second camera
+ 9) Switching cameras doesn't turn off the one being switched away from (macOS)
+ 10) Snapshot icon doesn't show up for MacCatalyst
  */
 
 final class ShaderFilter : Shader {
@@ -203,25 +210,43 @@ final class ShaderFilter : Shader {
 
 
       // FIXME: what is this in iOS land?  What is it in mac land?
-      /*
+
+      var scale : CGFloat = 1
        #if os(macOS)
        let eml = NSEvent.mouseLocation
-       let wp = viewx.window!.convertPoint(fromScreen: eml)
-       let ml = viewx.convert(wp, from: nil)
+       let wp = xview.window!.convertPoint(fromScreen: eml)
+       let ml = xview.convert(wp, from: nil)
 
-       if xview.isMousePoint(ml, in: viewx.bounds) {
+      if xview.isMousePoint(ml, in: xview.bounds) {
        delegate.setup.mouseLoc = ml
        }
 
-       scale = xview?.window?.screen?.backingScaleFactor ?? 1
+       scale = xview.window?.screen?.backingScaleFactor ?? 1
        #endif
-       */
+
+      #if targetEnvironment(macCatalyst)
+
+      let ourEvent = CGEvent(source: nil)!
+      let point = ourEvent.location
+      let xscale =  xview.window!.screen.scale
+//      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
+//
+
+
+      let offs = (NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])!
+      let offy = xview.window!.screen.bounds.height - (offs[0].minY + offs[0].height)
+      let ptx = CGPoint(x: point.x - offs[0].minX, y: point.y - offy)
+      let lpoint = xview.convert(ptx , from: xview.window!)
+      scale = xscale
+      // flip y (again)
+      let zlpoint = CGPoint(x: lpoint.x, y: xview.bounds.height - lpoint.y)
+      delegate.setup.mouseLoc = zlpoint
+      #endif
 
       // Set up the command buffer for this frame
       let commandBuffer = commandQueue.makeCommandBuffer()!
       commandBuffer.label = "Render command buffer for \(self.myName)"
 
-      let scale : CGFloat = 1
       makeEncoder(commandBuffer, scale, rpd, delegate: delegate)
 
       // =========================================================================

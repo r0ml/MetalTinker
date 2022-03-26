@@ -122,7 +122,7 @@ struct ImageStrip : View {
                     uuid = UUID()
                   }
                 } else if uti[0].conforms(to: .movie) {
-                  let vs = VideoSupport(j)
+                  let vs = VideoSupport(url: j)
                     texes[jj.id].video = vs
                     vs.getThumbnail {
                       texes[jj.id].image = XImage.init(cgImage: $0, size: CGSize(width: $0.width, height: $0.height))

@@ -40,7 +40,7 @@ class MetalDelegate<T : Shader> : NSObject, MTKViewDelegate, ObservableObject {
     self.setup.mouseLoc = CGPoint(x: size.width / 2.0, y: size.height/2.0 )
     self.mySize = size;
   }
-  
+
   func draw(in view: MTKView) {
 //    shader.metalView = view
     
