@@ -25,14 +25,14 @@ fragmentFn() {
   float2 m = (uni.iMouse - 0.5) * aspectRatio + 0.5;
   float2 lt = (uni.lastTouch - 0.5) * aspectRatio + 0.5;
 
-  if (uni.mouseButtons) {
+//  if (uni.mouseButtons) {
     float d = distanceToSegment( m , lt, p, aspect );
     col = mix( col, yellow, 1.0-smoothstep(.004,0.008, d) );
     col = mix( col, red , 1.0-smoothstep(0.03,0.035, length((p-m)*aspect) ));
     col = mix( col, blue, 1.0-smoothstep(0.03,0.035, length((p-lt)*aspect) ));
-  } else {
-    col = mix(0, blue,1.0-smoothstep(0.03,0.035, length((p-m)*aspect) ));
-  }
+//  } else {
+//    col = mix(0, blue,1.0-smoothstep(0.03,0.035, length((p-m)*aspect) ));
+//  }
   
   return float4( col, 1.0 );
 }

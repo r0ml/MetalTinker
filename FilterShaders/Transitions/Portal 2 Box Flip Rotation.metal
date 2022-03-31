@@ -6,8 +6,6 @@ struct InputBuffer {
 };
 
 initialize() {
-//  setTex(0, asset::london);
-//  setTex(1, asset::wood);
 }
 
 static float2 plane(float3 p, float3 d, float3 normal)

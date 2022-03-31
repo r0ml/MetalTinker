@@ -37,7 +37,7 @@ final class ShaderFilter : Shader {
   }
   
   required init(_ s : String ) {
-    print("ShaderFilter init \(s)")
+//    print("ShaderFilter init \(s)")
     myName = s
     self.doInitialization()
   }
@@ -227,20 +227,28 @@ final class ShaderFilter : Shader {
       #if targetEnvironment(macCatalyst)
 
       let ourEvent = CGEvent(source: nil)!
-      let point = ourEvent.location
+      let point = ourEvent.unflippedLocation
       let xscale =  xview.window!.screen.scale
 //      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
 //
 
 
-      let offs = (NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])!
-      let offy = xview.window!.screen.bounds.height - (offs[0].minY + offs[0].height)
-      let ptx = CGPoint(x: point.x - offs[0].minX, y: point.y - offy)
-      let lpoint = xview.convert(ptx , from: xview.window!)
+      let offs = (NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
+
+//      let offs = ws.value(forKeyPath: "_frame") as! CGRect
+//      let soff = ws.value(forKeyPath: "screen._frame") as! CGRect
+
+      let loff = xview.convert(CGPoint.zero, to: xview.window!)
+      let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
+      let lpoint = CGPoint(x: ptx.x - loff.x, y: ptx.y - loff.y)
+
       scale = xscale
-      // flip y (again)
-      let zlpoint = CGPoint(x: lpoint.x, y: xview.bounds.height - lpoint.y)
-      delegate.setup.mouseLoc = zlpoint
+
+      // I don't know why the 40 is needed -- but it seems to work
+      let zlpoint = CGPoint(x: lpoint.x, y: lpoint.y - xview.bounds.height - 40 )
+      if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xview.bounds.width && zlpoint.y < xview.bounds.height {
+        delegate.setup.mouseLoc = zlpoint
+      }
       #endif
 
       // Set up the command buffer for this frame

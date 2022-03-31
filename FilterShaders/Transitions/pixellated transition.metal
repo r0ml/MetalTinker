@@ -2,25 +2,20 @@
 #define shaderName pixellated_transition
 
 #include "Common.h" 
+
 struct InputBuffer {
+  int3 squares;
 };
 
 initialize() {
-//  setTex(0, asset::wood);
-//  setTex(1, asset::london);
+  in.squares = {10, 16, 25};
 }
-
- 
-
-
-constant const float squares = 16.0;
-// constant const float amt = 0.1;
 
 fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
   float2 uv = textureCoord;
 
   float2 tc = worldCoordAspectAdjusted / 2.;
-  tc = floor(tc * squares + 0.5) / squares;  // pixellate
+  tc = floor(tc * in.squares.y + 0.5) / in.squares.y;  // pixellate
   float mask = length(tc);   // create the circle mask
   mask = mod(mask - uni.iTime*0.2, 2.0);     // mod the mask so that we get alternating rings
   mask = step(mask, 1.0);     // step the mask to threshold it to black and white

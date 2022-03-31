@@ -25,7 +25,7 @@ vertexPass(_1) {
 //  v.where.xy -= sin(uni.iTime) * 0.1 * ix;
   v.where.zw = {0, 1};
 
-  float2 off = /*float2(0.2 * ix, 0) + */ ( float2(cos(phase), sin(phase)) * 0.15) * ix /* - sin(uni.iTime) * 0.1 * ix */ +  toWorld(uni.iMouse) * aspectRatio * (uni.mouseButtons != 0) ;
+  float2 off = /*float2(0.2 * ix, 0) + */ ( float2(cos(phase), sin(phase)) * 0.15) * ix /* - sin(uni.iTime) * 0.1 * ix */ +  toWorld(uni.iMouse) * aspectRatio ; // * (uni.mouseButtons != 0) ;
 //  off /= aspectRatio;
   v.where =   scale(1 / aspectRatio.x, 1 / aspectRatio.y, 1)  * translation( off.x, off.y, 0) * v.where ;
 

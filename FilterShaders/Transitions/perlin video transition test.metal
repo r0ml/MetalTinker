@@ -4,44 +4,16 @@
 #include "Common.h" 
 
 struct InputBuffer {
-//  float2 lastClick;
-//  int clickFrame = 0;
 };
 
 initialize() {
-//  in.lastClick = {0,0};
 }
-
-/*
-computeFn() {
-  if (!uni.mouseButtons) {
-    in.clickFrame = uni.iFrame;
-  } else {
-    if (in.clickFrame == uni.iFrame - 1) {
-      in.lastClick = uni.iMouse;
-    }
-  }
-}
-*/
-
-#define ANIM true
 
 constant const float3x3 m = float3x3( 0.00,  0.80,  0.60,
                                      -0.80,  0.36, -0.48,
                                      -0.60, -0.48,  0.64 );
 
-float fbm( float3 p )
-{
-  float f;
-  f  = 0.5000*noisePerlin( p ); p = m*p*2.02;
-  f += 0.2500*noisePerlin( p ); p = m*p*2.03;
-  f += 0.1250*noisePerlin( p ); p = m*p*2.01;
-  f += 0.0625*noisePerlin( p );
-  return f;
-}
-// --- End of: Created by inigo quilez --------------------
-
-float myfbm( float3 p )
+static float myfbm( float3 p )
 {
   float f;
   f  = 0.5000*noisePerlin( p ); p = m*p*2.02;
@@ -53,31 +25,9 @@ float myfbm( float3 p )
   return f;
 }
 
-float3 noise3( float3 p, float time )
-{
-  if (ANIM) p += time;
-  float fx = noisePerlin(p);
-  float fy = noisePerlin(p+float3(1345.67,0,45.67));
-  float fz = noisePerlin(p+float3(0,4567.8,-123.4));
-  return float3(fx,fy,fz);
-}
-float3 fbm3( float3 p, float time )
-{
-  if (ANIM) p += time;
-  float fx = fbm(p);
-  float fy = fbm(p+float3(1345.67,0,45.67));
-  float fz = fbm(p+float3(0,4567.8,-123.4));
-  return float3(fx,fy,fz);
-}
-float3 perturb3(float3 p, float scaleX, float scaleI, float time)
-{
-  scaleX *= 2.;
-  return scaleI*scaleX*fbm3(p/scaleX, time); // usually, to be added to p
-}
-
 // --- sliders and mouse widgets
 
-bool affMouse(float2 FragCoord, float2 reso, float2 mouse, Uniform in, thread float4& FragColor)
+static bool affMouse(float2 FragCoord, float2 reso, float2 mouse, Uniform in, thread float4& FragColor)
 {
   float R=5.;
   float2 pix = FragCoord.xy/reso.y;
@@ -105,7 +55,7 @@ bool affMouse(float2 FragCoord, float2 reso, float2 mouse, Uniform in, thread fl
 
   return false;
 }
-bool affSlider(float2 p0, float2 dp, float v, float2 winCoord, float2 reso, thread float4& FragColor)
+static bool affSlider(float2 p0, float2 dp, float v, float2 winCoord, float2 reso, thread float4& FragColor)
 {
   float R=5.;
   float2 pix = winCoord/reso.y;
@@ -133,15 +83,15 @@ fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
   FragCoord=thisVertex.where.xy;
   // --- events
 
-  float2 uv  = textureCoord * aspectRatio;
+  float2 uv  = textureCoord;
   float2 val = uni.iMouse.xy;
 
   if (affMouse(FragCoord, uni.iResolution, uni.iMouse, uni, FragColor)) return FragColor;
-  if (!uni.mouseButtons) // auto-tuning if no user tuning
-  {
+//  if (!uni.mouseButtons) // auto-tuning if no user tuning
+//  {
     float t = uni.iTime;
     val = float2(.95,.5) + float2(.04,.3)*float2(cos(t),sin(t));
-  }
+//  }
   if (affSlider(float2(.05,.02),float2(.4,0),val.x, FragCoord, uni.iResolution, FragColor)) {return FragColor;}
   if (affSlider(float2(.02,.05),float2(0,.4),val.y, FragCoord, uni.iResolution, FragColor)) {return FragColor;}
 

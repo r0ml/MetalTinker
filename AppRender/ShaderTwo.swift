@@ -25,7 +25,7 @@ final class ShaderTwo : Shader {
   }
   
   required init(_ s : String ) {
-    print("ShaderTwo init \(s)")
+//    print("ShaderTwo init \(s)")
     self.myName = s
 //    self.config = ConfigController(s)
     let uniformSize : Int = MemoryLayout<Uniform>.stride

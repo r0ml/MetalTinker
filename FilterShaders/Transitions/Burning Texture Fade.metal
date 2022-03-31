@@ -6,8 +6,6 @@ struct InputBuffer {
 };
 
 initialize() {
-//  setTex(0, asset::flagstones);
-//  setTex(1, asset::rust);
 }
 
 static float r(const float2 p)
@@ -65,12 +63,5 @@ fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
   
   // fancy background under burned texture
   fragColor.rgb = fragColor.rgb * step(.01, fragColor.a) + background(.1 * uv, uni.iTime, tex1) * step(fragColor.a, .01);
-  
-  // alternatively
-  //  if(fragColor.a < .01)
-  //     fragColor = background(.1 * uv);
-  
-  // plain burn-to-black
-  // fragColor.rgb *= step(.01, fragColor.a);
   return fragColor;
 }

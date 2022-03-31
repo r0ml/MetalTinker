@@ -22,7 +22,7 @@ public let commandQueue = device.makeCommandQueue()!
 public var textureLoader = MTKTextureLoader(device: device)
 
 
-let thePixelFormat = MTLPixelFormat.bgra8Unorm_srgb // could be bgra8Unorm_srgb
+let thePixelFormat = MTLPixelFormat.bgra8Unorm // could be bgra8Unorm_srgb
                                                     // let theOtherPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
 
 let multisampleCount = 4

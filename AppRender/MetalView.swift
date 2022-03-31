@@ -44,7 +44,7 @@ class MetalViewController<T : Shader> : XViewController {
     
     mtkView.sampleCount = multisampleCount
     mtkView.colorPixelFormat = thePixelFormat
-    
+
     // depth stuff
     // FIXME: this needs to be added in if depth needed?
     // mtkView.depthStencilPixelFormat = .depth32Float

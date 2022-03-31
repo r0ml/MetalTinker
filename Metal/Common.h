@@ -56,7 +56,7 @@ typedef struct {
   int   iFrame;                       // shader playback frame
   float iTime;                        // shader playback time (in seconds)
   float iTimeDelta;                   // time (in seconds) since last frame
-  int mouseButtons;
+  int wasMouseButtons;
   int eventModifiers;
 } Uniform;
 

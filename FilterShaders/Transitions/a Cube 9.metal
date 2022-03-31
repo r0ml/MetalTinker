@@ -7,8 +7,6 @@ struct InputBuffer {
 };
 
 initialize() {
-//  setTex(0, asset::dancing);
-//  setTex(1, asset::diving); // vandamme
 }
 
 constant const float persp = .7;
@@ -59,8 +57,8 @@ static float2 xskew (float2 p, float persp, float center)
 }
 
 fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
-  float progress = sin(uni.iTime*0.6+10.)*.5+.5;
-  if (uni.mouseButtons) progress = uni.iMouse.x;;
+//  float progress = sin(uni.iTime*0.6+10.)*.5+.5;
+  float progress = uni.iMouse.x;;
 
   float2 op = textureCoord;
   float uz = unzoom * 2.0*(0.5-distance(0.5, progress));

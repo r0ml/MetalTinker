@@ -8,11 +8,6 @@ struct InputBuffer {
 initialize() {
 }
 
-/*static float r(const float2 p)
-{
-  return fract(cos(p.x*42.98 + p.y*43.23) * 1127.53);
-}*/
-
 static float noise(const float2 p)
 {
   return noisePerlin(p/32.) * 0.58 +
@@ -24,7 +19,7 @@ static float noise(const float2 p)
 }
 
 fragmentFn(texture2d<float> tex) {
-  float2 uv = textureCoord * aspectRatio;
+  float2 uv = textureCoord;
   float t = abs(sin(uni.iTime));
   
   // fade to black

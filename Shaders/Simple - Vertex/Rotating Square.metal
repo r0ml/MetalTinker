@@ -40,9 +40,9 @@ vertexPass(_1) {
   }
   v.where.y *= uni.iResolution.x / uni.iResolution.y; // aspect ratio
   
-  if (uni.mouseButtons) {
+//  if (uni.mouseButtons) {
     v.where.xy += 2 * uni.iMouse.xy - 1;
-  }
+//  }
   
   return v;
 }

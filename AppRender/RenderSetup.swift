@@ -43,7 +43,7 @@ class RenderSetup {
     
 #if os(macOS)
     let modifierFlags = NSEvent.modifierFlags
-    //   let mouseButtons = NSEvent.pressedMouseButtons
+    let mouseButtons = NSEvent.pressedMouseButtons
 #endif
     
     let w = Float(size.width)
