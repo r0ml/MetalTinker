@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constant const float GAMMA = 2.2;
 
 fragmentFn(texture2d<float> tex) {

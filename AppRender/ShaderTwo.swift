@@ -7,12 +7,10 @@ import SwiftUI
 import os
 
 final class ShaderTwo : Shader {
-//  typealias Config = ConfigController
-  
-  var myName : String
 
   static var function = Function("Shaders")
-  
+  var myName : String
+
   func setupFrame(_ t : Times) {
   }
   
@@ -27,7 +25,10 @@ final class ShaderTwo : Shader {
   required init(_ s : String ) {
 //    print("ShaderTwo init \(s)")
     self.myName = s
-//    self.config = ConfigController(s)
+    self.doInitialization()
+  }
+
+  private func doInitialization() {
     let uniformSize : Int = MemoryLayout<Uniform>.stride
 
 #if os(macOS) || targetEnvironment(macCatalyst)
@@ -39,7 +40,8 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
     uni.label = "uniform"
     uniformBuffer = uni
 
-    
+
+    // FIXME: I will need Depth for vertex shaders
     /*
     let depthStencilDescriptor = MTLDepthStencilDescriptor()
     depthStencilDescriptor.depthCompareFunction = .less

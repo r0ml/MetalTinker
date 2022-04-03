@@ -2,11 +2,6 @@
 #define shaderName mirror
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 #define MIR_VER
 //#define MIR_VER_REVERSE

@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex) {
   // get % coords
   float2 r = textureCoord;

@@ -41,7 +41,7 @@ vertexPointPass(_1) {
   return v;
 }
 
-// the cananical "make it a circle"
+// the canonical "make it a circle"
 fragmentPointPass(_1) {
   float2 h = pointCoord;
   if ( distance(h, 0.5) > 0.5) {

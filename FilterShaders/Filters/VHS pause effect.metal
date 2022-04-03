@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex) {
   float4 texColor = float4(0);
   // get position to sample

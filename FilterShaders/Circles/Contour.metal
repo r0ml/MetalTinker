@@ -3,9 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {  };
-initialize() {}
-
 static float4 FakeStencil(float2 pos, float time, float2 mouse) {
   float shape = 1. - smoothstep(.13,.16,distance(pos,float2(0.5)));
   float t = time;

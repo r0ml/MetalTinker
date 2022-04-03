@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex) {
   float boost = uni.iMouse.x < 0.01 ? 1.5 : uni.iMouse.x * 2.0;
   float reduction = uni.iMouse.y < 0.01 ? 2.0 : uni.iMouse.y * 4.0;

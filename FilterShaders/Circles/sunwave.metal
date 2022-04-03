@@ -3,10 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {};
-
-initialize() {}
-
 fragmentFn() {  
   float2 v = worldCoordAspectAdjusted / 2;
   float t = fract((uni.iDate.w * .07 + v.y)*17.);

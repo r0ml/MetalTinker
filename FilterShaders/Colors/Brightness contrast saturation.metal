@@ -2,11 +2,6 @@
 #define shaderName Brightness_contrast_saturation
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float4x4 brightnessMatrix( float brightness ) {
   return float4x4( 1, 0, 0, 0,

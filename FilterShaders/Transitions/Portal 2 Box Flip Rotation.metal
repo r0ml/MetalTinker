@@ -2,11 +2,6 @@
 #define shaderName Portal_2_Box_Flip_Rotation
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float2 plane(float3 p, float3 d, float3 normal)
 {

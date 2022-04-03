@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex) {
   float2 xy = thisVertex.where.xy / uni.iResolution.yy;
   

@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constant const float reflection = .4;
 constant const float perspectivex = .2;
 constant const float depth = 3.;

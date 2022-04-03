@@ -2,12 +2,6 @@
 #define shaderName simple_chromatic_abberation
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 
 fragmentFn(texture2d<float> tex) {
   float2 uv = textureCoord;

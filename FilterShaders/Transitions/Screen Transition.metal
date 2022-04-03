@@ -2,15 +2,6 @@
 #define shaderName screen_transition
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
- 
-
-
 
 fragmentFn(texture2d<float> tex) {
   // Convert gametime to a rotating value between 0 and 1

@@ -3,10 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {};
-initialize() {}
-
-
 static float2 even(float2 x) {
   return (mod(x, 2.0) - 0.5) * 2.0;
 }

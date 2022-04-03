@@ -2,11 +2,6 @@
 #define shaderName Posterize_with_noise_cleanup
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 #define stepH 1.
 #define stepV 1.

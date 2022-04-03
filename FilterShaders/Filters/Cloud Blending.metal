@@ -2,11 +2,6 @@
 #define shaderName Cloud_Blending
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float fbm(const float2 p) {
   return  .5000 * noisePerlin(p) +.2500 * noisePerlin(p * 2.) +.1250 * noisePerlin(p * 4.) +.0625 * noisePerlin(p * 8.);

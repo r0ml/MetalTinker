@@ -3,9 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer { };
-initialize() {}
-
 fragmentFn() {
   float2 U  = textureCoord * aspectRatio * float2x2(1,-1./1.73, 0,2./1.73) *5.;  // conversion to
   float3 g = float3(U, 1.-U.x-U.y), g2;                     // hexagonal coordinates

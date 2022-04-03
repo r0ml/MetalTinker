@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 //Darken
 static float3 darken (float3 target, float3 blend){
     

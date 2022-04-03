@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constant const int ITERATION = 3;
 
 fragmentFn(texture2d<float> tex) {

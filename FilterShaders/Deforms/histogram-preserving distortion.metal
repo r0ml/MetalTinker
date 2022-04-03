@@ -2,11 +2,6 @@
 #define shaderName histogram_preserving_distortion
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float turb(  float2 uv ) {
   float f = 0.0;

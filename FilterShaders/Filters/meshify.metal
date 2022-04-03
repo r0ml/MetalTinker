@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 #define L 8.  // interline distance
 #define A 4.  // amplification factor
 #define P 6.  // thickness

@@ -3,10 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-initialize() {}
-
 static float2  hash2( float p ) { float2 q = float2( p, p+123.123 ); return fract(sin(q)*43758.5453); }
 static float3  hash3( float n ) { return fract(sin(float3(n,n+1.0,n+2.0))*43758.5453123); }
 

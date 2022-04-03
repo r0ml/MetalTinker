@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constexpr sampler smp(coord::normalized, address::repeat, filter::linear, mip_filter::linear);
 
 fragmentFn(texture2d<float> tex) {

@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 #define COLOR float4(1.0,0.0,0.0,0.5)
 #define SPEED 0.25
 

@@ -2,11 +2,6 @@
 #define shaderName circle_dithering
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 constant const float L = 8.,                   // L*T = neightborhood size
 T = 4.,                   // grid step for circle centers

@@ -3,9 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {};
-initialize() {}
-
 fragmentFn() {
   float2 p = worldCoordAspectAdjusted / 2;
     p.y += 0.45;

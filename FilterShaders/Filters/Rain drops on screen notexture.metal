@@ -3,14 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
-
-
 static float2 randx(float2 c){
   float2x2 m = float2x2(12.9898,.16180,78.233,.31415);
   return fract(sin(m * c) * float2(43758.5453, 14142.1));

@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 static float3 hueRotation(float3 c, float hueRotationAngle){ // <= this is the two lines hue rotation routine
     // By Benjamin 'BeRo' Rosseaux, CC0 licensed 
     float3 hueRotationValues = float3(0.57735, sin(float2(radians(hueRotationAngle)) + float2(0.0, 1.57079632679)));

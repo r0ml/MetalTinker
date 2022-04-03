@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {}
-
-
 static float4 C( float2 U, float D, float d, float e, float a, float T, float r, int iR,int iG,int iB, float time, float2 reso ) {
   float Rx = (D+d)/2.;               // major radius
   float t = TAU*time/T/2.;

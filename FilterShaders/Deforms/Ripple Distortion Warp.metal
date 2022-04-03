@@ -2,11 +2,6 @@
 #define shaderName ripple_distortion_warp
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 //CONTROL VARIABLES
 constant const float uPower = 0.2; // barrel power - (values between 0-1 work well)

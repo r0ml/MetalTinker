@@ -3,16 +3,8 @@
 
 #include "Common.h"
 
-struct InputBuffer {
-};
 
-initialize() {
-}
-
-
-
-
-float HueToRGB(float f1, float f2, float hue)
+static float HueToRGB(float f1, float f2, float hue)
 {
   if (hue < 0.0)
     hue += 1.0;
@@ -30,7 +22,7 @@ float HueToRGB(float f1, float f2, float hue)
   return res;
 }
 
-float3 RGBToHSL(float3 color)
+static float3 RGBToHSL(float3 color)
 {
   float3 hsl; // init to 0 to avoid warnings ? (and reverse if + remove first part)
   
@@ -72,7 +64,7 @@ float3 RGBToHSL(float3 color)
   return hsl;
 }
 
-float3 HSLToRGB(float3 hsl)
+static float3 HSLToRGB(float3 hsl)
 {
   float3 rgb;
   
@@ -97,25 +89,25 @@ float3 HSLToRGB(float3 hsl)
   return rgb;
 }
 
-float _sind( const float _a) {
+static float _sind( const float _a) {
   {
     return sin((_a * 0.017453292));;
   }
 }
 
-float _cosd( const float _a) {
+static float _cosd( const float _a) {
   {
     return cos((_a * 0.017453292));;
   }
 }
 
-float _added( const float2 _sh, const float _sa, const float _ca, const float2 _c, const float _d) {
+static float _added( const float2 _sh, const float _sa, const float _ca, const float2 _c, const float _d) {
   {
     return ((0.5 + (0.25 * cos(((((_sh.x * _sa) + (_sh.y * _ca)) + _c.x) * _d)))) + (0.25 * cos(((((_sh.x * _ca) - (_sh.y * _sa)) + _c.y) * _d))));;
   }
 }
 
-float4 Halftone(const float2 _fragCoord, float2 reso, texture2d<float> vid0) {
+static float4 Halftone(const float2 _fragCoord, float2 reso, texture2d<float> vid0) {
   {
     float _threshold = 0.8;
     float _ratio = (reso.y / reso.x);

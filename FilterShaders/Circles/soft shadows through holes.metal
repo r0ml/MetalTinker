@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn() {
   float h = .01 + .6*(.5+.5*sin(uni.iTime));    // distance occluder-screen
   float r = .3;                             // holes radius

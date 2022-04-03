@@ -2,11 +2,6 @@
 #define shaderName sin_wavey_van_damme
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 fragmentFn(texture2d<float> tex) {
   // Normalised pixel position

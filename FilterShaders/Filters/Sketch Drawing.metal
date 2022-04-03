@@ -8,6 +8,7 @@ struct InputBuffer {
 };
 
 initialize() {
+  
 }
 
 #define RANGE 16.

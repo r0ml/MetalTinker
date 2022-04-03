@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constant const float3x3 m = float3x3( 0.00,  0.80,  0.60,
                                      -0.80,  0.36, -0.48,
                                      -0.60, -0.48,  0.64 );

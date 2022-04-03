@@ -3,10 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {  };
-initialize() {}
-
-
 fragmentFn() {
   float time = uni.iTime * 1.;									// adjust time
   float2 uv = worldCoordAspectAdjusted;

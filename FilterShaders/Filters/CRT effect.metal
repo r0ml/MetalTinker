@@ -2,11 +2,6 @@
 #define shaderName CRT_effect
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float2 crt_coords(float2 uv, float bend) {
   uv -= 0.5;

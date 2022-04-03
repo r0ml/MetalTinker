@@ -2,11 +2,6 @@
 #define shaderName rotate_your_image
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float exponentialInOut(float t) {
   return t == 0.0 || t == 1.0

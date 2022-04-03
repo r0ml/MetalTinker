@@ -2,11 +2,6 @@
 #define shaderName emboss_video_texture
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 fragmentFn(texture2d<float> tex) {
   float4 fragColor = tex.sample(iChannel0, textureCoord);

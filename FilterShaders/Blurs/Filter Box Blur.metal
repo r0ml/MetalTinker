@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constant const float RADIUS = 0.03;
 constant const int SAMPLES = 20;
 

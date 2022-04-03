@@ -3,19 +3,9 @@
 
 #include "Common.h"
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
-
 constant const float EPSILON = 1e-10;
 
-class shaderName {
-public:
-
-float3 HUEtoRGB(const float hue)
+static float3 HUEtoRGB(const float hue)
 {
   // Hue [0..1] to RGB [0..1]
   // See http://www.chilliant.com/rgb2hsv.html
@@ -23,7 +13,7 @@ float3 HUEtoRGB(const float hue)
   return saturate(rgb);
 }
 
-float3 RGBtoHCV(const float3 rgb)
+static float3 RGBtoHCV(const float3 rgb)
 {
   // RGB [0..1] to Hue-Chroma-Value [0..1]
   // Based on work by Sam Hocevar and Emil Persson
@@ -34,7 +24,7 @@ float3 RGBtoHCV(const float3 rgb)
   return float3(h, c, q.x);
 }
 
-float3 HSLtoRGB(const float3 hsl)
+static float3 HSLtoRGB(const float3 hsl)
 {
   // Hue-Saturation-Lightness [0..1] to RGB [0..1]
   float3 rgb = HUEtoRGB(hsl.x);
@@ -42,7 +32,7 @@ float3 HSLtoRGB(const float3 hsl)
   return (rgb - 0.5) * c + hsl.z;
 }
 
-float3 RGBtoHSL(const float3 rgb)
+static float3 RGBtoHSL(const float3 rgb)
 {
   // RGB [0..1] to Hue-Saturation-Lightness [0..1]
   float3 hcv = RGBtoHCV(rgb);
@@ -53,16 +43,16 @@ float3 RGBtoHSL(const float3 rgb)
 
 // RGB
 
-float3 image0(float3 rgb) {
+static float3 image0(float3 rgb) {
   // Just return the raw image value
   return rgb;
 }
 
-float3 image1(float3 rgb) {
+static float3 image1(float3 rgb) {
   return float3(grayscale(rgb));
 }
 
-float3 image2(float3 rgb) {
+static float3 image2(float3 rgb) {
   // Return the exaggerated hue of the image
   float hue = RGBtoHCV(rgb).x;
   return HUEtoRGB(hue);
@@ -70,21 +60,21 @@ float3 image2(float3 rgb) {
 
 // HSL
 
-float3 image3(float3 rgb, float time) {
+static float3 image3(float3 rgb, float time) {
   // Round-trip RGB->HSL->RGB with time-dependent hue shift
   float3 hsl = RGBtoHSL(rgb);
   hsl.x = fract(hsl.x + time * 0.15);
   return HSLtoRGB(hsl);
 }
 
-float3 image4(float3 rgb, float time) {
+static float3 image4(float3 rgb, float time) {
   // Round-trip RGB->HSL->RGB with time-dependent lightness
   float3 hsl = RGBtoHSL(rgb);
   hsl.z = pow(hsl.z, sin(time) + 1.5);
   return HSLtoRGB(hsl);
 }
 
-float3 image5(float3 rgb) {
+static float3 image5(float3 rgb) {
   // Round-trip RGB->HSL->RGB and display exaggerated errors
   float3 hsl = RGBtoHSL(rgb);
   return abs(rgb - HSLtoRGB(hsl)) * 10000000.;
@@ -92,21 +82,21 @@ float3 image5(float3 rgb) {
 
 // HSV
 
-float3 image6(float3 rgb, float time) {
+static float3 image6(float3 rgb, float time) {
   // Round-trip RGB->HSV->RGB with time-dependent lightness
   float3 hsv = rgb2hsv(rgb);
   hsv.y = saturate(hsv.y * (1. + sin(time * 1.5)));
   return hsv2rgb(hsv);
 }
 
-float3 image7(float3 rgb, float time) {
+static float3 image7(float3 rgb, float time) {
   // Round-trip RGB->HSV->RGB with time-dependent value
   float3 hsv = rgb2hsv(rgb);
   hsv.z = pow(hsv.z, sin(time) + 1.5);
   return hsv2rgb(hsv);
 }
 
-float3 image8(float3 rgb) {
+static float3 image8(float3 rgb) {
   // Round-trip RGB->HSV->RGB and display exaggerated errors
   float3 hsv = rgb2hsv(rgb);
   return abs(rgb - hsv2rgb(hsv)) * 10000000.;
@@ -114,18 +104,18 @@ float3 image8(float3 rgb) {
 
 // sRGB
 
-float3 SRGBtoRGB(float3 srgb) {
+static float3 SRGBtoRGB(float3 srgb) {
   // See http://chilliant.blogspot.co.uk/2012/08/srgb-approximations-for-hlsl.html
   // This is a better approximation than the common "pow(rgb, 2.2)"
   return pow(srgb, float3(2.1632601288));
 }
 
-float3 RGBtoSRGB(float3 rgb) {
+static float3 RGBtoSRGB(float3 rgb) {
   // This is a better approximation than the common "pow(rgb, 0.45454545)"
   return pow(rgb, float3(0.46226525728));
 }
 
-float3 image(int panel, float2 uv, float time, texture2d<float> tex0) {
+static float3 image(int panel, float2 uv, float time, texture2d<float> tex0) {
   float3 rgb = SRGBtoRGB(tex0.sample(iChannel0, uv).rgb);
   switch (panel) {
     case 0: return RGBtoSRGB(image0(rgb));
@@ -140,10 +130,9 @@ float3 image(int panel, float2 uv, float time, texture2d<float> tex0) {
   }
   return float3(0);
 }
-};
 
 fragmentFn(texture2d<float> tex) {
-  shaderName shad;
+//  shaderName shad;
   
   const float ROWS = 3.;
   const float COLUMNS = 3.;
@@ -171,7 +160,7 @@ fragmentFn(texture2d<float> tex) {
     {
       // We're inside one of the panels
       int panel = iuv.x + iuv.y * int(COLUMNS);
-      srgb = shad.image(panel, uv, uni.iTime, tex);
+      srgb = image(panel, uv, uni.iTime, tex);
     }
   }
   

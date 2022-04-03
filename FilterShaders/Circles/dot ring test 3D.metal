@@ -3,9 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {  };
-initialize() {}
-
 static float2 polarRep(float2 U, float n) {
   n = TAU/n;
   float a = atan2(U.y, U.x),

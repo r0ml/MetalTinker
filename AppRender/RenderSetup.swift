@@ -9,6 +9,12 @@ import AppKit
 import MetalKit
 import os
 
+struct ControlBuffer {
+  var topology : Int32;
+  var vertexCount : Int32;
+  var instanceCount : Int32;
+}
+
 struct Uniform {
   var iDate : SIMD4<Float> = SIMD4<Float>(0,0,0,0)  // (year, month, day, time in seconds)
   var iMouse : SIMD2<Float> = SIMD2<Float>(0,0)     // mouse pixel coords

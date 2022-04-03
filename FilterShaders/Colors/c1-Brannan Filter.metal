@@ -3,12 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 static float3 overlay(const float3 s, const float3 d ) {
     float3 l = 2 * s * d;
     float3 r = 1 - 2 * (1-s) * (1-d);

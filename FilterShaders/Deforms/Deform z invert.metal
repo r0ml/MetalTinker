@@ -2,11 +2,6 @@
 #define shaderName deform_z_invert
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 fragmentFn(texture2d<float> tex) {
   

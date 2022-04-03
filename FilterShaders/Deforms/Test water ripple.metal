@@ -13,9 +13,6 @@ struct InputBuffer {
 initialize() {
 }
 
-
-
-
 constant const float TEXTURE_DOWNSCALE = 2.0;
 
 

@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constexpr sampler smp(coord::normalized, address::repeat, mip_filter::linear);
 
 // #define a(p) textureLod(texture[0], iChannel0, p, 2.5)

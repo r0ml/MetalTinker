@@ -2,12 +2,6 @@
 #define shaderName image_cel_shade
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
  
 float3 lerp(float3 colorone, float3 colortwo, float value) {
   return (colorone + value*(colortwo-colorone));

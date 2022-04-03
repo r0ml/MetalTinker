@@ -10,9 +10,6 @@ struct InputBuffer {
 initialize() {
 }
 
-
-
-
 // Color temperature (sRGB) stuff
 
 constant const float LuminancePreservationFactor = 1.0;

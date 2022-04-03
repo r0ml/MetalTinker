@@ -2,12 +2,6 @@
 #define shaderName isovalues_video
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 
 static float4 T(float2 uv, float i, float j, float2 reso, texture2d<float>vid) {
   return vid.sample(iChannel0, uv/reso + float2(i,j)/textureSize(vid));

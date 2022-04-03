@@ -35,7 +35,13 @@ class T3SCNScene : T1SCNScene {
   func zoom(_ n : CGFloat) {
     //    print("zoomed \(n)")
     zoom = n
-    self.rootNode.childNodes[1].position.z = XFloat(min(999, max(0.1, dist / max(n, 0.1))))
+
+    if self.rootNode.childNodes.count < 2 {
+      // FIXME: don't know why this fails -- works on Simple4 -- fails on Simple6
+      print("zoom failed")
+    } else {
+      self.rootNode.childNodes[1].position.z = XFloat(min(999, max(0.1, dist / max(n, 0.1))))
+    }
     //    print("\(self.rootNode.childNodes[1].position.z)")
   }
   

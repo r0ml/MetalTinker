@@ -2,11 +2,6 @@
 #define shaderName burning
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float fbm(float2 p) {
   float v = 0.0;

@@ -3,10 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {};
-
-initialize() {}
-
 static float rds(float x) {
   return -1 + 2 * step(0.5,rand(x));
 }

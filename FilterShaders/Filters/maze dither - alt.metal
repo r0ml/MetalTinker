@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex) {
   float2 U = thisVertex.where.xy + ( 8.*fwidth(tex.sample(iChannel0, thisVertex.where.xy / uni.iResolution.xy).r) -.5) ;
   //U += 8.*length(fwidth(texture(iChannel0, U / uni.iResolution.xy))) -.5;  // variants

@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constant const float persp = .7;
 constant const float unzoom = .3;
 constant const float reflection = .4;

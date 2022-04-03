@@ -3,9 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer { };
-initialize() {}
-
 static float2 conj(float2 a) {
   return float2(a.x, -a.y);
 }

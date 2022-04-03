@@ -3,10 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {  };
-initialize() {}
-
-
 static float4 rect(float2 uv, float2 start, float2 size, float4 inputColor, float4 color) {
   float2 end = start + size;
   return (uv.x >= start.x && uv.y >= start.y && uv.x <= end.x && uv.y <= end.y) ? color : inputColor;

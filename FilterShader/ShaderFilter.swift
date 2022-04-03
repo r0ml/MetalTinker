@@ -23,38 +23,64 @@ import UIKit
  10) Snapshot icon doesn't show up for MacCatalyst
  */
 
+let ctrlBuffId = 4
+
 final class ShaderFilter : Shader {
 
   static var function = Function("Filters")
   var myName : String
 
-  func setupFrame(_ t : Times) {
-    for (i,v) in fragmentTextures.enumerated() {
-      if let vs = v.video {
-        fragmentTextures[i].texture = vs.readBuffer(t.currentTime) //     v.prepare(stat, currentTime - startTime)
-      }
-    }
-  }
-  
-  required init(_ s : String ) {
-//    print("ShaderFilter init \(s)")
-    myName = s
-    self.doInitialization()
-  }
+  private var frameInitializeReflection : MTLComputePipelineReflection?
+  private var frameInitializePipelineState : MTLComputePipelineState?
+
+  private var initializeReflection : MTLComputePipelineReflection?
+  private var initializePipelineState : MTLComputePipelineState?
+
+  // Config Controller
+  /// This buffer is known as in on the metal side
+  private var initializationBuffer : MTLBuffer!
+  /// This is the CPU overlay on the initialization buffer
+  private var inbuf : MyMTLStruct!
+
+  /// this is the clear color for alpha blending?
+  private var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 0.1 )
+  private var cached : [IdentifiableView]?
+
+  private var fragmentTextures : [TextureParameter] = []
+
+  private var myOptions : MyMTLStruct!
+  private var dynPref : DynamicPreferences? // need to hold on to this for the callback
+  private var computeBuffer : MTLBuffer?
+
+  private var uniformBuffer : MTLBuffer?
+  private var controlBuffer : MTLBuffer!
+
+  private var _renderPassDescriptor : MTLRenderPassDescriptor?
+  private var _mySize : CGSize?
+
+  private var pipelineState : MTLRenderPipelineState!
+  private var metadata : MTLRenderPipelineReflection!
+  private var renderInput : [(MTLTexture, MTLTexture, MTLTexture)] = []
 
   private func doInitialization( ) {
     let uniformSize : Int = MemoryLayout<Uniform>.stride
-    #if os(macOS) || targetEnvironment(macCatalyst)
+#if os(macOS) || targetEnvironment(macCatalyst)
     let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
-    #else
+#else
     let uni = device.makeBuffer(length: uniformSize, options: [])!
-    #endif
+#endif
+
+    controlBuffer = device.makeBuffer(length: MemoryLayout<ControlBuffer>.stride, options: [.storageModeShared] )!
+    let c = controlBuffer.contents().assumingMemoryBound(to: ControlBuffer.self)
+    c.pointee.topology = 3
+    c.pointee.vertexCount = 4
+    c.pointee.instanceCount = 1
 
     uni.label = "uniform"
     uniformBuffer = uni
     fragmentTextures = []
 
-    let vertexProgram = Self.function.find("flatVertexFn")
+    let vertexProgram = currentVertexFn()
     let fragmentProgram = currentFragmentFn()
 
     if let rpp = setupRenderPipeline(vertexFunction: vertexProgram, fragmentFunction: fragmentProgram) {
@@ -70,65 +96,165 @@ final class ShaderFilter : Shader {
       processTextures(a)
     }
 
-    getClearColor(inbuf)
+    frameInitialize()
+
   }
 
-  private func justInitialization() {
+  func setupFrame(_ t : Times) {
+    for (i,v) in fragmentTextures.enumerated() {
+      if let vs = v.video {
+        fragmentTextures[i].texture = vs.readBuffer(t.currentTime) //     v.prepare(stat, currentTime - startTime)
+      }
+    }
+  }
+
+  required init(_ s : String ) {
+    //    print("ShaderFilter init \(s)")
+    myName = s
+    //    print("init \(s)")
+    self.doInitialization()
+  }
+
+  private func frameInitialize() {
     // await super.justInitialization()
-    let nam = myName + "InitializeOptions"
+    let nam = myName + "FrameInitialize"
     guard let initializationProgram = Self.function.find( nam ) else {
-      print("no initialization program for \(self.myName)")
+      //      print("no frame initialization program for \(self.myName)")
       return
     }
     let cpld = MTLComputePipelineDescriptor()
     cpld.computeFunction = initializationProgram
 
-    let commandBuffer = commandQueue.makeCommandBuffer()!
-    commandBuffer.label = "Initialize command buffer for \(self.myName) "
-
-
-    var cpr : MTLComputePipelineReflection?
     do {
-      let initializePipelineState = try device.makeComputePipelineState(function: initializationProgram,
-                                                                        options:[.argumentInfo, .bufferTypeInfo], reflection: &cpr)
+      frameInitializePipelineState = try device.makeComputePipelineState(function: initializationProgram,
+                                                                         options:[.argumentInfo, .bufferTypeInfo], reflection: &frameInitializeReflection)
+    } catch(let e) {
+      print("failed to create frame initialization pipeline state for \(myName): \(e.localizedDescription)")
+    }
 
-      // FIXME: I want the render pipeline metadata
+  }
 
-      if let gg = cpr?.arguments.first(where: { $0.name == "in" }),
+
+  func beginFrame() {
+    //        print("start \(#function)")
+
+    /*      // FIXME: I want the render pipeline metadata
+
+     if let gg = cpr?.arguments.first(where: { $0.name == "in" }),
+     let ib = device.makeBuffer(length: gg.bufferDataSize, options: [.storageModeShared ]) {
+     ib.label = "defaults buffer for \(self.myName)"
+     ib.contents().storeBytes(of: 0, as: Int.self)
+     initializationBuffer = ib
+     } else if let ib = device.makeBuffer(length: 8, options: [.storageModeShared]) {
+     ib.label = "empty kernel compute buffer for \(self.myName)"
+     initializationBuffer = ib
+     } else {
+     os_log("failed to allocate initialization MTLBuffer", type: .fault)
+     return
+     }
+     */
+
+
+    if let commandBuffer = commandQueue.makeCommandBuffer(),
+       let fips = frameInitializePipelineState,
+       let computeEncoder = commandBuffer.makeComputeCommandEncoder()
+    {
+      commandBuffer.label = "Frame Initialize command buffer for \(self.myName)"
+      computeEncoder.label = "frame initialization and defaults encoder \(self.myName)"
+      computeEncoder.setComputePipelineState(fips)
+      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
+      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
+      computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
+
+      let ms = MTLSize(width: 1, height: 1, depth: 1);
+      computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
+      computeEncoder.endEncoding()
+
+      commandBuffer.commit()
+      commandBuffer.waitUntilCompleted() // I need these values to proceed
+    }
+
+    // at this point, the frame initialization (ctrl) buffer has been set
+    // FIXME: I should probably add a compute buffer to hold values across frames?
+
+    /*    if let gg = cpr?.arguments.first(where: { $0.name == "in" }) {
+     inbuf = MyMTLStruct.init(initializationBuffer, gg)
+     processArguments(inbuf)
+     }
+     */
+
+
+  }
+
+
+
+  private func justInitialization() {
+    // await super.justInitialization()
+    let nam = myName + "InitializeOptions"
+    guard let initializationProgram = Self.function.find( nam ) else {
+//      print("no initialization program for \(self.myName)")
+      if let ib = device.makeBuffer(length: 8, options: [.storageModeShared]) {
+        ib.label = "empty kernel compute buffer for \(self.myName)"
+        initializationBuffer = ib
+      }
+      return
+    }
+    let cpld = MTLComputePipelineDescriptor()
+    cpld.computeFunction = initializationProgram
+
+    do {
+      initializePipelineState = try device.makeComputePipelineState(function: initializationProgram,
+                                                                    options:[.argumentInfo, .bufferTypeInfo], reflection: &initializeReflection)
+      if let gg = initializeReflection?.arguments.first(where: { $0.name == "in" }),
          let ib = device.makeBuffer(length: gg.bufferDataSize, options: [.storageModeShared ]) {
         ib.label = "defaults buffer for \(self.myName)"
         ib.contents().storeBytes(of: 0, as: Int.self)
-        initializationBuffer = ib
-      } else if let ib = device.makeBuffer(length: 8, options: [.storageModeShared]) {
-        ib.label = "empty kernel compute buffer for \(self.myName)"
         initializationBuffer = ib
       } else {
         os_log("failed to allocate initialization MTLBuffer", type: .fault)
         return
       }
-
-      if let computeEncoder = commandBuffer.makeComputeCommandEncoder() {
-        computeEncoder.label = "initialization and defaults encoder \(self.myName)"
-        computeEncoder.setComputePipelineState(initializePipelineState)
-        //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
-        computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
-
-        let ms = MTLSize(width: 1, height: 1, depth: 1);
-        computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
-        computeEncoder.endEncoding()
-      }
-      commandBuffer.commit()
-      commandBuffer.waitUntilCompleted() // I need these values to proceed
     } catch {
       os_log("%s", type:.fault, "failed to initialize pipeline state for \(myName): \(error)")
       return
     }
+  }
 
-    // at this point, the initialization (preferences) buffer has been set
-    if let gg = cpr?.arguments.first(where: { $0.name == "in" }) {
-      inbuf = MyMTLStruct.init(initializationBuffer, gg)
-      processArguments(inbuf)
+  private func beginShader() {
+    //    print("start \(#function)")
+
+    if let ips = initializePipelineState,
+       let commandBuffer = commandQueue.makeCommandBuffer(),
+       let computeEncoder = commandBuffer.makeComputeCommandEncoder() {
+      commandBuffer.label = "Initialize command buffer for \(self.myName) "
+      computeEncoder.label = "initialization and defaults encoder \(self.myName)"
+      computeEncoder.setComputePipelineState(ips)
+      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
+      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
+      computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
+
+      let ms = MTLSize(width: 1, height: 1, depth: 1);
+      computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
+      computeEncoder.endEncoding()
+
+      commandBuffer.commit()
+      commandBuffer.waitUntilCompleted() // I need these values to proceed
+
+
+      // at this point, the initialization (preferences) buffer has been set
+      if let gg = initializeReflection?.arguments.first(where: { $0.name == "in" }) {
+        inbuf = MyMTLStruct.init(initializationBuffer, gg)
+        processArguments(inbuf)
+      }
+
+      getClearColor(inbuf)
     }
+  }
+
+  private func currentVertexFn() -> MTLFunction? {
+    let lun = "\(myName)______Vertex"
+    if let z = Self.function.find(lun) { return z }
+    return Self.function.find("flatVertexFn")!
   }
 
 
@@ -141,6 +267,7 @@ final class ShaderFilter : Shader {
 
   // this is getting called during onTapGesture in LibraryView -- when I'm launching the ShaderView
   func buildPrefView() -> [IdentifiableView] {
+    beginShader()
     if let z = cached { return z }
     if let mo = myOptions {
       let a = DynamicPreferences.init(myName)
@@ -212,31 +339,31 @@ final class ShaderFilter : Shader {
       // FIXME: what is this in iOS land?  What is it in mac land?
 
       var scale : CGFloat = 1
-       #if os(macOS)
-       let eml = NSEvent.mouseLocation
-       let wp = xview.window!.convertPoint(fromScreen: eml)
-       let ml = xview.convert(wp, from: nil)
+#if os(macOS)
+      let eml = NSEvent.mouseLocation
+      let wp = xview.window!.convertPoint(fromScreen: eml)
+      let ml = xview.convert(wp, from: nil)
 
       if xview.isMousePoint(ml, in: xview.bounds) {
-       delegate.setup.mouseLoc = ml
-       }
+        delegate.setup.mouseLoc = ml
+      }
 
-       scale = xview.window?.screen?.backingScaleFactor ?? 1
-       #endif
+      scale = xview.window?.screen?.backingScaleFactor ?? 1
+#endif
 
-      #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
 
       let ourEvent = CGEvent(source: nil)!
       let point = ourEvent.unflippedLocation
       let xscale =  xview.window!.screen.scale
-//      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
-//
+      //      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
+      //
 
 
       let offs = (NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
 
-//      let offs = ws.value(forKeyPath: "_frame") as! CGRect
-//      let soff = ws.value(forKeyPath: "screen._frame") as! CGRect
+      //      let offs = ws.value(forKeyPath: "_frame") as! CGRect
+      //      let soff = ws.value(forKeyPath: "screen._frame") as! CGRect
 
       let loff = xview.convert(CGPoint.zero, to: xview.window!)
       let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
@@ -249,7 +376,9 @@ final class ShaderFilter : Shader {
       if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xview.bounds.width && zlpoint.y < xview.bounds.height {
         delegate.setup.mouseLoc = zlpoint
       }
-      #endif
+#endif
+
+      beginFrame()
 
       // Set up the command buffer for this frame
       let commandBuffer = commandQueue.makeCommandBuffer()!
@@ -287,9 +416,6 @@ final class ShaderFilter : Shader {
     return k
   }
   
-  private var _renderPassDescriptor : MTLRenderPassDescriptor?
-  private var _mySize : CGSize?
-
 
   private func makeEncoder(_ commandBuffer : MTLCommandBuffer,
                            _ scale : CGFloat,
@@ -320,17 +446,27 @@ final class ShaderFilter : Shader {
         renderEncoder.setFragmentTexture( config.fragmentTextures[i].texture, index: config.fragmentTextures[i].index)
       }
 
+      // added this for Vertex functions
+      renderEncoder.setVertexBuffer(config.uniformBuffer, offset: 0, index: uniformId)
+      renderEncoder.setVertexBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
+      renderEncoder.setVertexBuffer(config.controlBuffer, offset: 0, index: ctrlBuffId)
+      // end of vertex add
+
       renderEncoder.setRenderPipelineState(pipelineState)
 
+      let c = controlBuffer.contents().assumingMemoryBound(to: ControlBuffer.self)
+
+
       // A filter render encoder takes a single instance of a rectangle (4 vertices) which covers the input.
-      renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4, instanceCount: 1)
+      let t = Int(c.pointee.topology)
+      if t >= 0 && t <= 3 {
+        let topo : MTLPrimitiveType = [.point, .line, .triangle, .triangleStrip][t]
+
+        renderEncoder.drawPrimitives(type: topo, vertexStart: 0, vertexCount: Int(c.pointee.vertexCount), instanceCount: Int(c.pointee.instanceCount) )
+      }
       renderEncoder.endEncoding()
     }
   }
-
-  private var pipelineState : MTLRenderPipelineState!
-  private var metadata : MTLRenderPipelineReflection!
-  private var renderInput : [(MTLTexture, MTLTexture, MTLTexture)] = []
 
   private func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
     // ============================================
@@ -372,23 +508,6 @@ final class ShaderFilter : Shader {
     return nil
   }
 
-  // Config Controller
-  /// This buffer is known as in on the metal side
-  private var initializationBuffer : MTLBuffer!
-  /// This is the CPU overlay on the initialization buffer
-  private var inbuf : MyMTLStruct!
-
-  /// this is the clear color for alpha blending?
-  private var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 0.1 )
-  private var cached : [IdentifiableView]?
-
-  private var fragmentTextures : [TextureParameter] = []
-
-  private var myOptions : MyMTLStruct!
-  private var dynPref : DynamicPreferences? // need to hold on to this for the callback
-  private var computeBuffer : MTLBuffer?
-
-  private var uniformBuffer : MTLBuffer?
 
   /** This sets up the initializer by finding the function in the shader,
    using reflection to analyze the types of the argument

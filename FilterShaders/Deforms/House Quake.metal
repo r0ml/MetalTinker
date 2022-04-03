@@ -4,11 +4,6 @@
 #define shaderName House_Quake
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float fbm(const float2 p)
 {

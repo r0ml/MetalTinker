@@ -2,11 +2,6 @@
 #define shaderName screen_chromatic_aberration
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 constant const float redShift = 100.0;
 constant const float greenShift = 50.0;

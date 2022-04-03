@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 #define s2(a, b)				temp = a; a = min(a, b); b = max(temp, b);
 #define mn3(a, b, c)			s2(a, b); s2(a, c);
 #define mx3(a, b, c)			s2(b, c); s2(a, c);

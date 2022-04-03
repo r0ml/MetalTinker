@@ -3,12 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex) {
   const int   c_samplesX    = 15;  // must be odd
   const int   c_samplesY    = 15;  // must be odd

@@ -3,13 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
-
 fragmentFn() {
   float4 fragColor = 0;
   for (float i=.1; i<1.01; i+=.1) {

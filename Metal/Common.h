@@ -9,6 +9,7 @@ constant int uniformId = 2;
 constant int kbuffId = 3;
 constant int inputTextureId = 0;
 constant int computeBuffId = 15;
+constant int ctrlBuffId = 4;
 
 struct string { char name[256]; } ;
 
@@ -60,6 +61,12 @@ typedef struct {
   int eventModifiers;
 } Uniform;
 
+typedef struct {
+  int topology;
+  int vertexCount;
+  int instanceCount;
+} ControlBuffer;
+
 struct InputBuffer;
 
 float2 textureSize(texture2d<float> t);
@@ -98,7 +105,8 @@ uint iid [[ instance_id ]], \
 constant Uniform &uni [[ buffer(uniformId) ]], \
 constant SCNSceneBuffer& scn_frame  [[buffer(0)]], \
 constant PerNodeData& scn_node [[buffer(1)]], \
-constant InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__ )
+constant InputBuffer &in [[ buffer(kbuffId) ]], \
+constant ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )
 
 // -------
 
@@ -154,19 +162,39 @@ device InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__)
 #define initialize() ___initialize(shaderName)
 #define ___initialize(n) __initialize(n)
 #define __initialize(n) \
-static void _initialize(/* constant Uniform& uni, */ device InputBuffer& in); \
+static void _initialize(/* constant Uniform& uni, */ device InputBuffer& in, device ControlBuffer& ctrl ); \
 \
 kernel void n##InitializeOptions ( \
 /* constant Uniform &uni [[ buffer(uniformId) ]], */ \
-  device InputBuffer &in [[ buffer(kbuffId) ]] \
+  device InputBuffer &in [[ buffer(kbuffId) ]], \
+  device ControlBuffer &ctrl [[buffer(ctrlBuffId) ]] \
 ) { \
   in = InputBuffer(); \
-  _initialize( /* uni, */ in ); \
+  _initialize( /* uni, */ in, ctrl ); \
 } \
 \
-void _initialize(/* constant Uniform &uni, */ device InputBuffer& in)
+void _initialize(/* constant Uniform &uni, */ device InputBuffer& in, device ControlBuffer& ctrl )
 
 // ==================================================
+
+// this is required for pre-scanning calls to this macro
+#define frameInitialize() ___frameInitialize(shaderName)
+#define ___frameInitialize(n) __frameInitialize(n)
+#define __frameInitialize(n) \
+static void _frameInitialize(/* constant Uniform& uni, */ device InputBuffer& in, device ControlBuffer& ctrl ); \
+\
+kernel void n##FrameInitialize ( \
+/* constant Uniform &uni [[ buffer(uniformId) ]], */ \
+  device InputBuffer &in [[ buffer(kbuffId) ]], \
+  device ControlBuffer &ctrl [[buffer(ctrlBuffId) ]] \
+) { \
+  _frameInitialize( /* uni, */ in, ctrl ); \
+} \
+\
+void _frameInitialize(/* constant Uniform &uni, */ device InputBuffer& in, device ControlBuffer& ctrl )
+
+// =================================================
+
 
 #define stringSet(a, b) {\
   char unb[] = b; \

@@ -3,10 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {};
-
-initialize() {}
-
 fragmentFn() {
   float t = uni.iTime*2;
   float x=cos(t);

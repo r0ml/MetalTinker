@@ -3,12 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 #define FROSTYNESS 0.5
 //#define RANDNERF 2.5
 

@@ -34,14 +34,20 @@ class ShaderLib<T : Shader> : Identifiable, Equatable, Hashable {
   lazy var items : [T] = {
     // FIXME: need some other way to identify the list of "shaders"
     //    if cache != nil { return cache! }
+    let a = try! NSRegularExpression(pattern: #"^(?<name>.*?)___(?<pass>.*?)___(?<suffix>.*?)$"#)
+
     let res = lib.functionNames.compactMap { (nam) -> String? in
-      var pnam : String
-      if nam.hasSuffix("InitializeOptions") {
-        pnam = String(nam.dropLast(17))
-      } else {
-        return nil
+      let b = a.matches(in: nam, range: NSRange(location: 0, length: nam.count))
+      if let c = b.first {
+        let d = c.range(withName: "name")
+        if d.length == 0 {
+          return nil
+        }
+        let j = nam.index(nam.startIndex, offsetBy: d.location)
+        let k = nam.index(j, offsetBy: d.length)
+        return String(nam[j..<k])
       }
-      return pnam
+      return nil
     }
     return Set(res).sorted { $0.lowercased() < $1.lowercased() }.map { T.init($0) }
     //    return cache!

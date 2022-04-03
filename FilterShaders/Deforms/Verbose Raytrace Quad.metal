@@ -5,12 +5,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 static float plane( float3 norm, float3 po, float3 ro, float3 rd ) {
   float de = dot(norm, rd);
   de = sign(de)*max( abs(de), 0.001);

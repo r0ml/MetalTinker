@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 #define AngNum 6
 //#define AngNum 2   /* only horizontal and vertical */
 //#define AngNum 4   /* horizontal, vertical, and 2 x diagonal */

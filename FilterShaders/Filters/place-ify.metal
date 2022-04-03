@@ -4,12 +4,6 @@
 #define shaderName place_ify
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 
 #define rgb(r,g,b) float3(r,g,b)/255.
 

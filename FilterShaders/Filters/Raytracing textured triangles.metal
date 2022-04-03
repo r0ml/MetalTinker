@@ -3,14 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {
-};
-
-initialize() {
-//  setTex(0, asset::rust);
-//  setTex(1, asset::dancing);
-}
-
 constant const float EPSILON = 0.0000001;
 constant const float4 BG_COLOR = float4(0.0, 0.0, 0.0, 1.0);
 

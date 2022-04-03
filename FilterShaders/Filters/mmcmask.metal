@@ -2,12 +2,6 @@
 #define shaderName mmcmask
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
  
 static float squircle(float2 pos, float radius, float power, const float2 uv){
   float2 p = abs(pos - uv) / radius;

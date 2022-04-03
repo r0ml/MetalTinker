@@ -2,11 +2,6 @@
 #define shaderName Procedural_Noise_Fade
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float noise(const float2 p)
 {

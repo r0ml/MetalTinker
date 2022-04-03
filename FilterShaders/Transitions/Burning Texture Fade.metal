@@ -2,11 +2,6 @@
 #define shaderName Burning_Texture_Fade
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float r(const float2 p)
 {

@@ -2,9 +2,6 @@
 #define shaderName Radar_2
 
 #include "Common.h"
-struct InputBuffer {};
-initialize() {}
-
 
 static float mark(int n,float ang2,float2 uv,float mn,float mx, float2 reso) {
   float aa=1/reso.y;

@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 static float radial(float2 pos, float radius)
 {
   float result = length(pos)-radius;

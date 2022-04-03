@@ -30,7 +30,10 @@ struct XSlider : View {
   var body : some View {
     HStack {
       Text("\(config.name!) ( \(val.x) )")
-      Slider(value: $val.x, in: minVal...(minVal >= maxVal ? minVal + 1 : maxVal), step: isFloat ? max(0.1, (maxVal - minVal) / 20) : 1)
+      let a = minVal >= maxVal ? minVal + 1 : maxVal
+      let b = isFloat ? max(0.1, (a - minVal) / 20) : 1
+      let c = max(minVal + 2 * b, a)
+      Slider(value: $val.x, in: minVal...c, step: b)
     }
   }
 }

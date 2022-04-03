@@ -2,11 +2,6 @@
 #define shaderName pixel_transition
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
   float2 pixel_count = max(floor(uni.iResolution * (cos(uni.iTime) + 1.0) / 2.0), 1.0);

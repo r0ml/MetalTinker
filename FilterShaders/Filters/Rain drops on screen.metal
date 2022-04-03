@@ -9,9 +9,6 @@ struct InputBuffer {
 initialize() {
 }
 
-
-
-
 fragmentFn(texture2d<float> tex) {
   constexpr sampler chan(coord::normalized, address::repeat, filter::linear, mip_filter::linear);
   

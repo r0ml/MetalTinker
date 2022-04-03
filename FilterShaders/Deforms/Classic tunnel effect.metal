@@ -2,11 +2,6 @@
 #define shaderName classic_tunnel_effect
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 static float2 tunnel(const float2 pix, float2 reso, float time, thread float& z) {
   float aspect = reso.x / reso.y;

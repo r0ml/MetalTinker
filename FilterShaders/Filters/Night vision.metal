@@ -2,12 +2,6 @@
 #define shaderName night_vision
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 
 fragmentFn(texture2d<float> tex) {
   float2 p = textureCoord;

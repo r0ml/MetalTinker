@@ -3,9 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {};
-initialize() {}
-
 static float map(float3 p, float tim) {
   float R=3.;
   float d=abs(length(p.xy)-R)-.1;

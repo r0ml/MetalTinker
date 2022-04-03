@@ -4,12 +4,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 struct C_Ray {
   float3 vOrigin;
   float3 vDir;

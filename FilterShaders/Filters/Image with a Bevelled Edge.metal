@@ -3,14 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
-
-
 fragmentFn(texture2d<float> tex) {
   float imh = 0.8 ;
   float imw = imh;

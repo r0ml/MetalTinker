@@ -3,10 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {};
-initialize() {}
-
-
 fragmentFn() {
   float2 uv = textureCoord;
   

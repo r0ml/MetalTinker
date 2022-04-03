@@ -5,12 +5,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 static float normalDistribution(const float mean, const float deviation, const float x)
 {
   // 2.50662827463 = sqrt(2 * pi)

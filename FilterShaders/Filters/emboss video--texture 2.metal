@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex) {
   float4 fragColor = tex.sample(iChannel0, textureCoord);
   // extract wavelengths

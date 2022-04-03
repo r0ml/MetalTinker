@@ -5,12 +5,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constant const int SampNum = 24;
 
 static float4 getCol(float2 pos, texture2d<float> vid0)

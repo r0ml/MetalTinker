@@ -2,11 +2,6 @@
 #define shaderName rgb_grid
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 fragmentFn(texture2d<float> tex) {
   float2 u = 2.*textureCoord;

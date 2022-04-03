@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
   float2 uv = textureCoord;
   float2 uv1= float2(uv.y*0.1-uni.iTime*0.095,uv.x*2.);

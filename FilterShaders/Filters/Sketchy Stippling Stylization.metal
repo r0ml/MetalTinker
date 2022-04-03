@@ -8,6 +8,7 @@ struct InputBuffer {
 };
 
 initialize() {
+  in.compare = true;
 }
 
 static constant int mSize = 9;

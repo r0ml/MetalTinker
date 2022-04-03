@@ -3,9 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {};
-initialize() {}
-
 static float2 ortho(float2 v)
 {
   return float2(v.y, -v.x);

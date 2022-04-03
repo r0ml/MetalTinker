@@ -3,12 +3,6 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
 constant const float3 THRESHOLD = float3(1.,.92,.1);
 
 fragmentFn(texture2d<float> tex) {

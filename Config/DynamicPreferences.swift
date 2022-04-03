@@ -12,6 +12,8 @@ fileprivate let LEFT_LABEL_WIDTH = CGFloat(70)   // width of all left labels
 fileprivate let LINE_SPACING = CGFloat(10)   // leading between each line
 fileprivate let FONT_SIZE = 17   // Magic hardcoded UITableView font size.
 
+// let inputBufferReservedNames = ["vertexCount", "instanceCount", "topology"]
+
 class DynamicPreferences {
 //  private let config : ConfigController
   private let title : String
@@ -31,6 +33,9 @@ class DynamicPreferences {
     
     for bstm in bst.children {
       // let offs = bst.offset + bstm.offset
+//      if inputBufferReservedNames.contains(bstm.name) { continue }
+
+
       let dnam = "\(self.title).\(bstm.name!)"
       // if this key already has a value, ignore the initialization value
       let dd =  UserDefaults.standard.object(forKey: dnam)

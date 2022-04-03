@@ -3,13 +3,7 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-};
-
-initialize() {
-}
-
-constant const float4x4 rgba2sepia = 
+constant const float4x4 rgba2sepia =
 float4x4
 (
 0.393, 0.349, 0.272, 0,

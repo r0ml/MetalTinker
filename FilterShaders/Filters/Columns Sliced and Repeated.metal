@@ -2,11 +2,6 @@
 #define shaderName Columns_Sliced_and_Repeated
 
 #include "Common.h"
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 fragmentFn(texture2d<float> tex) {
   float columns = 6.;//4. + 3.5 * sin(uni.iTime);

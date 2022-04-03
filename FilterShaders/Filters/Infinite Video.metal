@@ -2,11 +2,6 @@
 #define shaderName infinite_video
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 fragmentFn(texture2d<float> tex) {
   float2 u = worldCoordAspectAdjusted / 2;

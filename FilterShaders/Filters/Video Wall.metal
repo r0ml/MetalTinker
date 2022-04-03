@@ -2,11 +2,6 @@
 #define shaderName video_wall
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 constant const float BOXES = 10.;
 constant const float MIN_BRIGHTNESS = 0.3;

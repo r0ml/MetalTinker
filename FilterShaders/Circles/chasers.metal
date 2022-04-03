@@ -3,10 +3,6 @@
 
 #include "Common.h"
 
-struct InputBuffer {  };
-
-initialize() {}
-
 static float2 thingPosition(float t, float aspect) {
   float tx = t / aspect;
   float2 p = float2(sin(2.2 * tx) - cos(1.4 * tx), cos(1.3 * t) + sin(-1.9 * t));

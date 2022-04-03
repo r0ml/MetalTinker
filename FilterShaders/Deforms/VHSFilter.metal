@@ -2,11 +2,6 @@
 #define shaderName vhsfilter
 
 #include "Common.h" 
-struct InputBuffer {
-};
-
-initialize() {
-}
 
 fragmentFn(texture2d<float> tex) {
   
