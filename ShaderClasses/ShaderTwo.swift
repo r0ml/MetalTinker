@@ -6,29 +6,14 @@ import MetalKit
 import SwiftUI
 import os
 
-final class ShaderTwo : Shader {
 
-  static var function = Function("Shaders")
-  var myName : String
+var functionMaps = ["Shaders" : Function("Shaders"),
+                    "Generators" : Function("Generators"),
+                    "Filters" : Function("Filters") ]
 
-  func setupFrame(_ t : Times) {
-  }
-  
-  func startRunning() {
-    
-  }
+class ShaderTwo : GenericShader {
 
-  func stopRunning() {
-    
-  }
-  
-  required init(_ s : String ) {
-//    print("ShaderTwo init \(s)")
-    self.myName = s
-    self.doInitialization()
-  }
-
-  private func doInitialization() {
+  override func doInitialization() {
     let uniformSize : Int = MemoryLayout<Uniform>.stride
 
 #if os(macOS) || targetEnvironment(macCatalyst)
@@ -55,9 +40,9 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
 
       setupPipelines()
 
-      if let a = pipelinePasses[0].metadata.fragmentArguments {
-        processTextures(a)
-      }
+//      if let a = pipelinePasses[0].metadata.fragmentArguments {
+//        processTextures(a)
+//      }
       getClearColor(inbuf)
 // }
  
@@ -140,7 +125,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
      */
     
     // this draws the current frame
-    func draw(in viewx: MTKView, delegate : MetalDelegate<ShaderTwo>) {
+    override func draw(in viewx: MTKView, delegate : MetalDelegate) {
         // FIXME: set the clear color
         //      viewx.clearColor = MTLClearColor(red: Double(c[0]), green: Double(c[1]), blue: Double(c[2]), alpha: Double(c[3]))
         
@@ -167,9 +152,9 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
   
   // this sets up the GPU for evaluating the frame
   // gets called both for on and off-screen rendering
-  func doRenderEncoder(
+  override func doRenderEncoder(
     _ xview : MTKView?,               // the MTKView if this is rendering to a view, otherwise I need the MTLRenderPassDescriptor
-    delegate : MetalDelegate<ShaderTwo>,
+    delegate : MetalDelegate,
     _ f : ((MTLTexture?) -> ())? ) { // for off-screen renderings, use a callback function instead of a semaphore?
             
       var scale : CGFloat = 1
@@ -204,9 +189,9 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
       }
     */
       
-      for (x, mm) in pipelinePasses.enumerated() {
-        mm.makeEncoder(commandBuffer, scale, x == 0, delegate: delegate)
-      }
+//      for (x, mm) in pipelinePasses.enumerated() {
+//        mm.makeEncoder(commandBuffer, scale, x == 0, delegate: delegate)
+//      }
       
       // =========================================================================
       
@@ -247,38 +232,26 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
  
   
   
-  
-  
-  
-  
-  
-  
-  
-  
 
-    /// This buffer is known as in on the metal side
-    public var initializationBuffer : MTLBuffer!
     /// This is the CPU overlay on the initialization buffer
-    var inbuf : MyMTLStruct!
+//    var inbuf : MyMTLStruct!
 
     /// this is the clear color for alpha blending?
-    var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 0.1 )
+//    var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 0.1 )
 
-    /* private */ var cached : [IdentifiableView]?
+//    /* private */ var cached : [IdentifiableView]?
     //  private var renderManager : RenderManager
 
-    var pipelinePasses : [RenderPipelinePass] = []
+//    var pipelinePasses : [RenderPipelinePass] = []
     var fragmentTextures : [TextureParameter] = []
 
-    /* private */ var myOptions : MyMTLStruct!
-    /* private  */ var dynPref : DynamicPreferences? // need to hold on to this for the callback
+//    /* private */ var myOptions : MyMTLStruct!
+//    /* private  */ var dynPref : DynamicPreferences? // need to hold on to this for the callback
     /* internal */ /* private */ // var shaderName : String
     private var computeBuffer : MTLBuffer?
 
     //  var videoNames : [VideoSupport] = []
     var webcam : WebcamSupport?
-
-    var uniformBuffer : MTLBuffer?
 
     /** This sets up the initializer by finding the function in the shader,
      using reflection to analyze the types of the argument
@@ -295,7 +268,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
     }
 
     // this is getting called during onTapGesture in LibraryView -- when I'm launching the ShaderView
-    func buildPrefView() -> [IdentifiableView] {
+    override func buildPrefView() -> [IdentifiableView] {
       if let z = cached { return z }
       if let mo = myOptions {
         let a = DynamicPreferences.init(myName)
@@ -309,7 +282,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
       return []
     }
     
-    func getClearColor(_ bst : MyMTLStruct) {
+    override func getClearColor(_ bst : MyMTLStruct) {
       guard let bb = bst["clearColor"] else { return }
       let v : SIMD4<Float> = bb.getValue()
       self.clearColor = v
@@ -330,7 +303,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
      }
      */
     
-    func processArguments(_ bst : MyMTLStruct ) {
+    override func processArguments(_ bst : MyMTLStruct ) {
 
       myOptions = bst
       
@@ -393,56 +366,15 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
 
     func processTextures(_ bst : [MTLArgument] ) {
       for a in bst {
-        if let b = TextureParameter(a, id: fragmentTextures.count) {
+        if let b = TextureParameter(a, 0, id: fragmentTextures.count) {
           fragmentTextures.append(b)
         }
       }
     }
     
-    func segmented( _ t:String, _ items : [MyMTLStruct]) {
-      let iv = UserDefaults.standard.integer(forKey: "\(self.myName).\(t)")
-      setPickS(iv, items)
-    }
-    
-    // FIXME: this is a duplicate of the one in DynamicPreferences
-    func setPickS(_ a : Int, _ items : [MyMTLStruct] ) {
-      for (i, tt) in items.enumerated() {
-        tt.setValue(i == a ? 1 : 0 )
-      }
-    }
-    
-    func boolean(_ arg : MyMTLStruct) {
-      arg.setValue( UserDefaults.standard.bool(forKey: "\(self.myName).\(arg.name!)") )
-    }
-    
-    func colorPicker(_ arg : MyMTLStruct) {
-      if let iv = UserDefaults.standard.color(forKey: "\(self.myName).\(arg.name!)") {
-        arg.setValue(iv.asFloat4())
-      }
-    }
-    
-    func numberSliderInt(_ arg : MyMTLStruct) {
-      let iv = UserDefaults.standard.integer(forKey: "\(self.myName).\(arg.name!)")
-      // note the ".y"
-      if var z : SIMD3<Int32> = arg.value as? SIMD3<Int32> {
-        z.y = Int32(iv)
-        arg.setValue(z)
-      }
-    }
-    
-    func numberSliderFloat(_ arg : MyMTLStruct) {
-      let iv = UserDefaults.standard.float(forKey: "\(self.myName).\(arg.name!)")
-      // note the ".y"
-      if var z : SIMD3<Float> = arg.value as? SIMD3<Float> {
-        z.y = iv
-        arg.setValue(z)
-      }
-    }
-
-
-    func justInitialization() {
+    override  func justInitialization() {
       let nam = myName + "InitializeOptions"
-      guard let initializationProgram = Self.function.find( nam ) else {
+      guard let initializationProgram = functionMaps["Shaders"]!.find( nam ) else {
         print("no initialization program for \(self.myName)")
         return
       }
@@ -506,17 +438,17 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
      */
 
     func resetTarget() {
-      pipelinePasses = []
+//      pipelinePasses = []
       fragmentTextures = []
     }
 
     func setupPipelines() {
-      pipelinePasses = []
+//      pipelinePasses = []
 
 
       fragmentTextures = []
 
-      if let vertexProgram = currentVertexFn(""),
+/*      if let vertexProgram = currentVertexFn(""),
          let fragmentProgram = currentFragmentFn(""),
          let p = RenderPipelinePass(
           label: "\(myName)",
@@ -534,19 +466,92 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
         os_log("failed to create render pipeline pass for %s", type:.error, myName)
         return
       }
+ */
     }
     
     private func currentVertexFn(_ sfx : String) -> MTLFunction? {
       let lun = "\(myName)___\(sfx)___Vertex"
-      if let z = Self.function.find(lun) { return z }
-      return Self.function.find("flatVertexFn")!
+      if let z = functionMaps["Shaders"]!.find(lun) { return z }
+      return functionMaps["Shaders"]!.find("flatVertexFn")!
     }
 
     private func currentFragmentFn(_ sfx : String) -> MTLFunction? {
       let lun = "\(myName)___\(sfx)___Fragment"
-      if let z = Self.function.find(lun) { return z }
-      return Self.function.find("passthruFragmentFn")!
+      if let z = functionMaps["Shaders"]!.find(lun) { return z }
+      return functionMaps["Shaders"]!.find("passthruFragmentFn")!
     }
   
     
+}
+
+// FIXME: This can be moved up to Shader if I also take fragmentTextures
+extension ShaderTwo {
+  // FIXME: when I fix RenderPassPipeline -- move this out of the class
+  func makeRenderPassTexture(_ nam : String, size: CGSize) -> (MTLTexture, MTLTexture)? {
+    let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+    texd.textureType = .type2DMultisample
+    texd.usage = [.renderTarget]
+    texd.sampleCount = multisampleCount
+    texd.resourceOptions = .storageModePrivate
+
+    /*
+    let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
+    texi.textureType = .type2D
+    texi.usage = [.shaderRead]
+    texi.resourceOptions = .storageModePrivate
+*/
+    let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+    texo.textureType = .type2D
+    texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
+    texo.resourceOptions = .storageModePrivate
+
+
+    let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+    texl.textureType = .type2D
+    texl.usage = [.shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
+    texl.resourceOptions = .storageModePrivate
+
+
+    if let p = device.makeTexture(descriptor: texd),
+//       let q = device.makeTexture(descriptor: texi),
+       let r = device.makeTexture(descriptor: texo),
+       let s = device.makeTexture(descriptor: texl) {
+      p.label = "render pass \(nam) multisample"
+//      q.label = "render pass \(nam) input"
+      r.label = "render pass \(nam) output"
+      s.label = "render pass \(nam) last frame"
+      //        swapQ.async {
+
+      for k in fragmentTextures {
+        if k.name == "lastFrame" {
+          k.texture = s
+        }
+      }
+      return (p, r)
+    }
+    return nil
+  }
+
+  func makeRenderPassDescriptor(label : String, size canvasSize: CGSize) -> MTLRenderPassDescriptor {
+    //------------------------------------------------------------
+    // texture on device to be written to..
+    //------------------------------------------------------------
+    let ts = makeRenderPassTexture(label, size: canvasSize)!
+    let texture = ts.0
+    let resolveTexture = ts.1
+
+    let renderPassDescriptor = MTLRenderPassDescriptor()
+    renderPassDescriptor.colorAttachments[0].texture = texture
+    renderPassDescriptor.colorAttachments[0].storeAction = .storeAndMultisampleResolve
+    renderPassDescriptor.colorAttachments[0].resolveLevel = 0
+    renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTexture //  device.makeTexture(descriptor: xostd)
+    renderPassDescriptor.colorAttachments[0].loadAction = .clear // .clear // .load
+                                                                 //      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
+
+
+    // only if I need depthing?
+    // renderPassDescriptor.depthAttachment = RenderPipelinePass.makeDepthAttachmentDescriptor(size: canvasSize)
+
+    return renderPassDescriptor
+  }
 }

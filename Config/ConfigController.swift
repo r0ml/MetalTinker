@@ -19,7 +19,7 @@ protocol VideoStream {
 }
 
 /** This class processes the initializer and sets up the shader parameters based on the shader defaults and user defaults */
-struct TextureParameter : Identifiable {
+class TextureParameter : Identifiable {
   typealias ObjectIdentifier = Int
   var id : ObjectIdentifier
 
@@ -30,11 +30,13 @@ struct TextureParameter : Identifiable {
   var image : XImage
   var video : VideoStream?
   var texture : MTLTexture?
+  var name : String
 
-  init?(_ a : MTLArgument, id: Int) {
+  init?(_ a : MTLArgument, _ n : Int, id: Int) {
     self.id = id
     if a.type == .texture {
-      index = a.index
+      name = a.name
+      index = a.index + n
       type = a.textureType
       access = a.access
       data = a.textureDataType
@@ -42,6 +44,15 @@ struct TextureParameter : Identifiable {
     } else {
       return nil
     }
+
+//    if a.name == "lastFrame" {
+//      print("lastFrame texture")
+//    }
+
+  }
+
+  func setTexture(_ t : MTLTexture) {
+    texture = t
   }
 }
 

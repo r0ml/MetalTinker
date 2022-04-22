@@ -84,7 +84,7 @@ class T3ShaderSCNScene : T3SCNScene {
     p.vertexFunctionName = "vertex_function"
     
     // FIXME: this is broken -- need to split out the SceneKit shaders
-    p.library = ShaderTwo.function.libs.first(where: {$0.label == self.library })!
+    p.library = functionMaps["Shaders"]!.libs.first(where: {$0.label == self.library })!
     
 //    Task {
       justInitialization()
@@ -427,7 +427,7 @@ class T3ShaderSCNScene : T3SCNScene {
 
   func processTextures(_ bst : [MTLArgument] ) {
     for a in bst {
-      if let b = TextureParameter(a, id: fragmentTextures.count) {
+      if let b = TextureParameter(a, 0, id: fragmentTextures.count) {
         fragmentTextures.append(b)
       }
     }
@@ -476,7 +476,7 @@ class T3ShaderSCNScene : T3SCNScene {
 
   func justInitialization() {
     let nam = shaderName + "InitializeOptions"
-    guard let initializationProgram = ShaderTwo.function.find( nam ) else {
+    guard let initializationProgram = functionMaps["Shaders"]!.find( nam ) else {
       print("no initialization program for \(self.shaderName)")
       return
     }
@@ -595,14 +595,14 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
   
   private func currentVertexFn(_ sfx : String) -> MTLFunction? {
     let lun = "\(shaderName)___\(sfx)___Vertex"
-    if let z = ShaderTwo.function.find(lun) { return z }
-    return ShaderTwo.function.find("flatVertexFn")!
+    if let z = functionMaps["Shaders"]!.find(lun) { return z }
+    return functionMaps["Shaders"]!.find("flatVertexFn")!
   }
 
   private func currentFragmentFn(_ sfx : String) -> MTLFunction? {
     let lun = "\(shaderName)___\(sfx)___Fragment"
-    if let z = ShaderTwo.function.find(lun) { return z }
-    return ShaderTwo.function.find("passthruFragmentFn")!
+    if let z = functionMaps["Shaders"]!.find(lun) { return z }
+    return functionMaps["Shaders"]!.find("passthruFragmentFn")!
   }
 }
 

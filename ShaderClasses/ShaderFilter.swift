@@ -1,0 +1,590 @@
+
+// Copyright (c) 1868 Charles Babbage
+// Found amongst his effects by r0ml
+
+import MetalKit
+import os
+import SwiftUI
+
+#if targetEnvironment(macCatalyst)
+import UIKit
+#endif
+
+/* TODO:
+ 1) There is a flicker when resuming after pause (on macCatalyst).  The first frame after pause seems to (someetimes) be frame 0 -- not the current frame
+ 2) Can I update the thumbnail as the video plays?
+ 3) Single step is not working
+ 4) recording and snapshotting is not working
+ 5) instead of using a separate initialization function in the shader, I could use the fragment function (which also has the "in" parameter) and have the shader macro call initialize() on frame 0
+ 6) Camera sometimes doesn't shut off when moving to different shader.
+ 7) Need to set the zoom explicitly (it stays set to previous user -- so Librorum altered it -- for MacOS only it seems
+ 8) aspect ratio seems off for MacOS on second camera
+ 9) Switching cameras doesn't turn off the one being switched away from (macOS)
+ 10) Snapshot icon doesn't show up for MacCatalyst
+ */
+
+let ctrlBuffId = 4
+
+final class ShaderFilter : GenericShader {
+
+  private var metadata : MTLRenderPipelineReflection!
+
+
+  var fragmentTextures : [TextureParameter] = []
+
+  private var computeBuffer : MTLBuffer?
+
+  private var controlBuffer : MTLBuffer!
+
+  private var _renderPassDescriptor : MTLRenderPassDescriptor?
+  private var _mySize : CGSize?
+
+
+  private var renderInput : [(MTLTexture, MTLTexture, MTLTexture)] = []
+
+  private var lastFrameTextures : [MTLTexture]?
+  //  private var shadowFrameTexture : MTLTexture?
+
+
+  required init(_ s : String ) {
+    //    print("ShaderFilter init \(s)")
+    super.init(s)
+    function = Function("Filters")
+  }
+
+
+  override func setupFrame(_ t : Times) {
+    for (i,v) in fragmentTextures.enumerated() {
+      if let vs = v.video {
+        fragmentTextures[i].texture = vs.readBuffer(t.currentTime) //     v.prepare(stat, currentTime - startTime)
+      }
+    }
+  }
+
+
+  override func specialInitialization() {
+    let aa = metadata
+    if let bb = aa?.fragmentArguments {
+      processTextures(bb)
+    }
+  }
+
+
+  override func doInitialization( ) {
+    let uniformSize : Int = MemoryLayout<Uniform>.stride
+#if os(macOS) || targetEnvironment(macCatalyst)
+    let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
+#else
+    let uni = device.makeBuffer(length: uniformSize, options: [])!
+#endif
+
+/*    controlBuffer = device.makeBuffer(length: MemoryLayout<ControlBuffer>.stride, options: [.storageModeShared] )!
+    let c = controlBuffer.contents().assumingMemoryBound(to: ControlBuffer.self)
+    c.pointee.topology = 3
+    c.pointee.vertexCount = 4
+    c.pointee.instanceCount = 1
+*/
+    uni.label = "uniform"
+    uniformBuffer = uni
+
+    let vertexProgram = currentVertexFn()
+    let fragmentProgram = currentFragmentFn()
+
+    if let rpp = setupRenderPipeline(vertexFunction: vertexProgram, fragmentFunction: fragmentProgram) {
+      (self.pipelineState, self.metadata) = rpp
+    }
+
+    justInitialization()
+
+    self.specialInitialization()
+
+    frameInitialize()
+
+  }
+
+
+
+
+  // let's assume this is where the shader starts running, so shader initialization should happen here.
+  override func startRunning() {
+    for v in fragmentTextures {
+      if let vs = v.video {
+        vs.startVideo()
+      }
+    }
+  }
+
+  override func stopRunning() {
+    for v in fragmentTextures {
+      if let vs = v.video {
+        vs.stopVideo()
+      }
+    }
+  }
+
+
+
+
+  /*
+   private func renderPassDescriptor(_ mySize : CGSize) -> MTLRenderPassDescriptor {
+   if let rr = _renderPassDescriptor,
+   mySize == _mySize {
+   return rr }
+
+   let k = makeRenderPassDescriptor(label: "render output", size: mySize)
+   _renderPassDescriptor = k
+   _mySize = mySize
+
+   /*
+    if let t = k.colorAttachments[0].resolveTexture {
+    self.fragmentTextures.forEach { if $0.name == "lastFrame" { $0.setTexture(t) } }
+    }
+    */
+
+   return k
+   }
+   */
+
+
+  override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
+    // ============================================
+    // this is the actual rendering fragment shader
+
+    let psd = MTLRenderPipelineDescriptor()
+
+    psd.vertexFunction = vertexFunction
+    psd.fragmentFunction = fragmentFunction
+    psd.colorAttachments[0].pixelFormat = thePixelFormat
+    psd.isAlphaToOneEnabled = false
+    psd.colorAttachments[0].isBlendingEnabled = true
+    psd.colorAttachments[0].alphaBlendOperation = .add
+    psd.colorAttachments[0].rgbBlendOperation = .add
+    psd.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha // I would like to set this to   .one   for some cases
+    psd.colorAttachments[0].sourceAlphaBlendFactor = .sourceAlpha
+    psd.colorAttachments[0].destinationRGBBlendFactor =  .destinationAlpha //   doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
+    psd.colorAttachments[0].destinationAlphaBlendFactor = .destinationAlpha //   doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
+
+    psd.sampleCount = multisampleCount
+    psd.inputPrimitiveTopology = .triangle
+
+    if psd.vertexFunction != nil && psd.fragmentFunction != nil {
+      do {
+        var metadata : MTLRenderPipelineReflection?
+        let res = try device.makeRenderPipelineState(descriptor: psd, options: [.argumentInfo, .bufferTypeInfo], reflection: &metadata)
+        if let m = metadata {
+          return (res, m)
+        }
+      } catch let er {
+        // let m = "Failed to create render render pipeline state for \(self.label), error \(er.localizedDescription)"
+        os_log("%s", type:.error, er.localizedDescription)
+        return nil
+      }
+    } else {
+      os_log("vertex or fragment function missing for \(self.myName)")
+    }
+    return nil
+  }
+
+
+  /** This sets up the initializer by finding the function in the shader,
+   using reflection to analyze the types of the argument
+   then setting up the buffer which will be the "preferences" buffer.
+   It would be the "Uniform" buffer, but that one is fixed, whereas this one is variable -- so it's
+   just easier to make it a separate buffer
+   */
+
+  private func buildImageWells() -> some View {
+
+    // I believe this is where the ImageStrip sets the images as texture inputs.
+    // It is also where the webcam and video support should be assigned
+    ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: {
+      self.fragmentTextures = $0 }))
+  }
+
+
+  private func processTextures(_ bst : [MTLArgument] ) {
+    for a in bst {
+      if a.type == .texture {
+        for z in 0..<a.arrayLength {
+          if let b = TextureParameter(a, z, id: fragmentTextures.count) {
+            fragmentTextures.append(b)
+          }
+        }
+      }
+    }
+  }
+
+
+
+  override func finishCommandEncoding(_ renderEncoder : MTLRenderCommandEncoder, _ config : GenericShader ) {
+
+    renderEncoder.setVertexBuffer( (config as! Self).controlBuffer, offset: 0, index: ctrlBuffId)
+    // end of vertex add
+
+    renderEncoder.setRenderPipelineState(pipelineState)
+
+    let c = controlBuffer.contents().assumingMemoryBound(to: ControlBuffer.self)
+
+
+
+    // A filter render encoder takes a single instance of a rectangle (4 vertices) which covers the input.
+    let t = Int(c.pointee.topology)
+    if t >= 0 && t <= 3 {
+      let topo : MTLPrimitiveType = [.point, .line, .triangle, .triangleStrip][t]
+
+      renderEncoder.drawPrimitives(type: topo, vertexStart: 0, vertexCount: Int(c.pointee.vertexCount), instanceCount: Int(c.pointee.instanceCount) )
+    }
+
+  }
+
+  
+  // FIXME: when I fix RenderPassPipeline -- move this out of the class
+  func makeLastFrameTextures(size: CGSize) {
+    /*    let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+     texd.textureType = .type2DMultisample
+     texd.usage = [.renderTarget]
+     texd.sampleCount = multisampleCount
+     texd.resourceOptions = .storageModePrivate
+     */
+    /*
+     let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
+     texi.textureType = .type2D
+     texi.usage = [.shaderRead]
+     texi.resourceOptions = .storageModePrivate
+     */
+    /*
+     let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+     texo.textureType = .type2D
+     texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
+     texo.resourceOptions = .storageModePrivate
+     */
+    if let lf = lastFrameTextures,
+       lf[0].width == Int(size.width),
+       lf[0].height == Int(size.height) {
+    } else {
+
+      lastFrameTextures = []
+
+      let z = fragmentTextures.filter { $0.name == "lastFrame" }
+      if z.count == 0 {
+
+      } else {
+
+        let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+        texl.textureType = .type2D
+        texl.usage = [.shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
+        texl.resourceOptions = .storageModeManaged
+
+        for k in z {
+        //  if let p = device.makeTexture(descriptor: texd),
+        //       let q = device.makeTexture(descriptor: texi),
+        //       let r = device.makeTexture(descriptor: texo),
+        if  let s = device.makeTexture(descriptor: texl) {
+          //      p.label = "render pass \(nam) multisample"
+          //      q.label = "render pass \(nam) input"
+          //      r.label = "render pass \(nam) output"
+          s.label = "render pass last frame"
+          //        swapQ.async {
+
+          lastFrameTextures!.append(s)
+          k.texture = s
+        }
+        }
+      }
+
+    }
+
+    /*
+     if let lf = shadowFrameTexture,
+     lf.width == Int(size.width),
+     lf.height == Int(size.height) {
+     } else {
+     let z = fragmentTextures.filter { $0.name == "shadowFrame" }
+     if z.count == 0 {
+
+     } else {
+     let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+     texl.textureType = .type2D
+     texl.usage = [.shaderRead, .shaderWrite] // or just renderTarget -- the read is in case the texture is used in a filter
+     texl.resourceOptions = .storageModeManaged
+
+     if let s = device.makeTexture(descriptor: texl) {
+     s.label = "render pass shadow frame"
+     shadowFrameTexture = s
+     for k in z {
+     k.texture = s
+     }
+     }
+     }
+     }
+     */
+
+
+    //    return (p, r)
+    //    }
+    //    return nil
+  }
+
+  /*
+   func makeRenderPassDescriptor(label : String, size canvasSize: CGSize) -> MTLRenderPassDescriptor {
+   //------------------------------------------------------------
+   // texture on device to be written to..
+   //------------------------------------------------------------
+   let ts = makeRenderPassTexture(label, size: canvasSize)!
+   let texture = ts.0
+   let resolveTexture = ts.1
+
+   let renderPassDescriptor = MTLRenderPassDescriptor()
+   renderPassDescriptor.colorAttachments[0].texture = texture
+   renderPassDescriptor.colorAttachments[0].storeAction = .storeAndMultisampleResolve
+   renderPassDescriptor.colorAttachments[0].resolveLevel = 0
+   renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTexture //  device.makeTexture(descriptor: xostd)
+   renderPassDescriptor.colorAttachments[0].loadAction = .clear // .clear // .load
+   //      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
+
+
+   // only if I need depthing?
+   // renderPassDescriptor.depthAttachment = RenderPipelinePass.makeDepthAttachmentDescriptor(size: canvasSize)
+
+   return renderPassDescriptor
+   }
+   */
+
+
+  override func beginFrame() {
+    //        print("start \(#function)")
+
+    /*      // FIXME: I want the render pipeline metadata
+
+     if let gg = cpr?.arguments.first(where: { $0.name == "in" }),
+     let ib = device.makeBuffer(length: gg.bufferDataSize, options: [.storageModeShared ]) {
+     ib.label = "defaults buffer for \(self.myName)"
+     ib.contents().storeBytes(of: 0, as: Int.self)
+     initializationBuffer = ib
+     } else if let ib = device.makeBuffer(length: 8, options: [.storageModeShared]) {
+     ib.label = "empty kernel compute buffer for \(self.myName)"
+     initializationBuffer = ib
+     } else {
+     os_log("failed to allocate initialization MTLBuffer", type: .fault)
+     return
+     }
+     */
+
+
+    if let commandBuffer = commandQueue.makeCommandBuffer(),
+       let fips = frameInitializePipelineState,
+       let computeEncoder = commandBuffer.makeComputeCommandEncoder()
+    {
+      commandBuffer.label = "Frame Initialize command buffer for \(self.myName)"
+      computeEncoder.label = "frame initialization and defaults encoder \(self.myName)"
+      computeEncoder.setComputePipelineState(fips)
+      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
+      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
+      computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
+
+      let ms = MTLSize(width: 1, height: 1, depth: 1);
+      computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
+      computeEncoder.endEncoding()
+
+      commandBuffer.commit()
+      commandBuffer.waitUntilCompleted() // I need these values to proceed
+    }
+
+    // at this point, the frame initialization (ctrl) buffer has been set
+    // FIXME: I should probably add a compute buffer to hold values across frames?
+
+    /*    if let gg = cpr?.arguments.first(where: { $0.name == "in" }) {
+     inbuf = MyMTLStruct.init(initializationBuffer, gg)
+     processArguments(inbuf)
+     }
+     */
+
+
+  }
+
+  override func beginShader() {
+    //    print("start \(#function)")
+
+    if let ips = initializePipelineState,
+       let commandBuffer = commandQueue.makeCommandBuffer(),
+       let computeEncoder = commandBuffer.makeComputeCommandEncoder() {
+      commandBuffer.label = "Initialize command buffer for \(self.myName) "
+      computeEncoder.label = "initialization and defaults encoder \(self.myName)"
+      computeEncoder.setComputePipelineState(ips)
+      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
+      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
+      computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
+
+      let ms = MTLSize(width: 1, height: 1, depth: 1);
+      computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
+      computeEncoder.endEncoding()
+
+      commandBuffer.commit()
+      commandBuffer.waitUntilCompleted() // I need these values to proceed
+
+
+      // at this point, the initialization (preferences) buffer has been set
+      if let gg = initializeReflection?.arguments.first(where: { $0.name == "in" }) {
+        inbuf = MyMTLStruct.init(initializationBuffer, gg)
+        processArguments(inbuf)
+      }
+
+      getClearColor(inbuf)
+    }
+  }
+
+
+  // this sets up the GPU for evaluating the frame
+  // gets called both for on and off-screen rendering
+  override func doRenderEncoder(
+    _ xview : MTKView,               // the MTKView if this is rendering to a view, otherwise I need the MTLRenderPassDescriptor
+//    _ rpd : MTLRenderPassDescriptor,
+    delegate : MetalDelegate,
+    _ f : ((MTLTexture?) -> ())? ) { // for off-screen renderings, use a callback function instead of a semaphore?
+
+
+      // FIXME: what is this in iOS land?  What is it in mac land?
+
+      var scale : CGFloat = 1
+#if os(macOS)
+      let eml = NSEvent.mouseLocation
+      let wp = xview.window!.convertPoint(fromScreen: eml)
+      let ml = xview.convert(wp, from: nil)
+
+      if xview.isMousePoint(ml, in: xview.bounds) {
+        delegate.setup.mouseLoc = ml
+      }
+
+      scale = xview.window?.screen?.backingScaleFactor ?? 1
+#endif
+
+#if targetEnvironment(macCatalyst)
+
+      let ourEvent = CGEvent(source: nil)!
+      let point = ourEvent.unflippedLocation
+      let xscale =  xview.window!.screen.scale
+      //      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
+      //
+
+
+      let offs = (NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
+
+      //      let offs = ws.value(forKeyPath: "_frame") as! CGRect
+      //      let soff = ws.value(forKeyPath: "screen._frame") as! CGRect
+
+      let loff = xview.convert(CGPoint.zero, to: xview.window!)
+      let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
+      let lpoint = CGPoint(x: ptx.x - loff.x, y: ptx.y - loff.y)
+
+      scale = xscale
+
+      // I don't know why the 40 is needed -- but it seems to work
+      let zlpoint = CGPoint(x: lpoint.x, y: lpoint.y - xview.bounds.height - 40 )
+      if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xview.bounds.width && zlpoint.y < xview.bounds.height {
+        delegate.setup.mouseLoc = zlpoint
+      }
+#endif
+
+      beginFrame()
+
+      // Set up the command buffer for this frame
+      let commandBuffer = commandQueue.makeCommandBuffer()!
+      commandBuffer.label = "Render command buffer for \(self.myName)"
+
+
+// At this point:
+      // If I am doing a multi-pass, then I must:
+      // 1) create the render textures for the multiple passes
+      // 2) create multiple render passes
+      // 3) blit the outputs to inputs for the next frame (or swap the inputs and outputs
+
+      makeEncoder(commandBuffer, scale, xview.currentRenderPassDescriptor!, delegate: delegate)
+
+      if let c = xview.currentDrawable {
+
+        let kk = xview.currentRenderPassDescriptor!
+
+        //      let rt = self.renderPassDescriptor(delegate.mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
+
+        // =========================================================================
+        // if feeding back output from previous frame to next frame:
+
+        makeLastFrameTextures( size: CGSize(width: c.texture.width, height: c.texture.height))
+
+        if let kt = lastFrameTextures,
+           let be = commandBuffer.makeBlitCommandEncoder() {
+          for i in 0 ..< kt.count {
+             if let rt = kk.colorAttachments[i].resolveTexture {
+              be.copy(from: rt, to: kt[i])
+              //          be.generateMipmaps(for: ri.1)
+              //          be.synchronize(resource: kt)
+            }
+          }
+          be.endEncoding()
+        }
+        // ========================================================================
+
+        // what I want here is the resolve texture of the last pipeline pass
+        commandBuffer.addCompletedHandler{ commandBuffer in
+          if let f = f {
+            // print("resolved texture")
+            //         f( rpd.colorAttachments[0].resolveTexture  )
+            f(c.texture)
+          }
+        }
+        commandBuffer.present(c)
+      }
+      commandBuffer.commit()
+      //      commandBuffer.waitUntilCompleted()
+    }
+
+
+
+  override func makeEncoder(_ commandBuffer : MTLCommandBuffer,
+                           _ scale : CGFloat,
+                           _ rpd : MTLRenderPassDescriptor,
+                           delegate : MetalDelegate) {
+
+    // to get the running shader to match the preview?
+    // FIXME: do I have clearColor?
+    //    if let cc = rm.metalView?.clearColor {
+    //      rpd.colorAttachments[0].clearColor = cc
+
+
+    // FIXME: should this be a clear or load?
+    rpd.colorAttachments[0].loadAction = .clear // .load
+    rpd.colorAttachments[0].storeAction = .multisampleResolve
+    //    }
+
+    let sz = CGSize(width : rpd.colorAttachments[0].texture!.width, height: rpd.colorAttachments[0].texture!.height )
+    delegate.setup.setupUniform( size: sz, scale: Int(scale), uniform: delegate.shader.uniformBuffer!, times: delegate.times )
+
+    // texture and resolveTexture size mismatch    during resize
+    if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
+      renderEncoder.label = "render encoder"
+
+      let config = delegate.shader as! ShaderFilter
+      renderEncoder.setFragmentBuffer(config.uniformBuffer, offset: 0, index: uniformId)
+      renderEncoder.setFragmentBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
+      for i in 0..<config.fragmentTextures.count {
+        if config.fragmentTextures[i].texture == nil && config.fragmentTextures[i].name != "lastFrame" && config.fragmentTextures[i].name != "shadowFrame" {
+          config.fragmentTextures[i].texture = config.fragmentTextures[i].image.getTexture(textureLoader, mipmaps: true)
+        }
+        renderEncoder.setFragmentTexture( config.fragmentTextures[i].texture, index: config.fragmentTextures[i].index)
+      }
+
+      // added this for Vertex functions
+      renderEncoder.setVertexBuffer(config.uniformBuffer, offset: 0, index: uniformId)
+      renderEncoder.setVertexBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
+
+
+      self.finishCommandEncoding(renderEncoder, config)
+
+      renderEncoder.endEncoding()
+    }
+  }
+
+
+
+
+}

@@ -15,6 +15,9 @@ struct string { char name[256]; } ;
 
 using namespace metal;
 
+namespace apprender {
+
+}
 struct VertexOut {
   float4 where [[position]];   // this is in the range -1 -> 1 in the vertex shader,  0 -> viewSize in the fragment shader
   float4 color;
@@ -69,6 +72,36 @@ typedef struct {
 
 struct InputBuffer;
 
+#ifndef SHADOWS
+typedef float4 FragmentOutput;
+#define LastFrame() constant Uniform &uni [[ buffer(uniformId)]]
+
+#else
+
+#define LastFrame() constant Uniform &uni [[ buffer(uniformId)]], array<texture2d<float>, SHADOWS> lastFrame
+
+typedef struct {
+#if SHADOWS > 0
+  float4 color0 [[color(0)]];
+#endif
+#if SHADOWS > 1
+  float4 color1 [[color(1)]];
+#endif
+#if SHADOWS > 2
+  float4 color2 [[color(2)]]
+#endif
+#if SHADOWS > 3
+  float4 color3 [[color(3)]]
+#endif
+#if SHADOWS > 4
+  float4 color4 [[color(4)]]
+#endif
+
+} FragmentOutput;
+
+#endif
+
+
 float2 textureSize(texture2d<float> t);
 
 #ifndef shaderName
@@ -114,12 +147,14 @@ constant ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )
 
 #define fragmentPass(a, ...) _fragmentPass( a, shaderName, ##__VA_ARGS__ )
 #define _fragmentPass(a, b, ... ) __fragmentPass(a, b, ##__VA_ARGS__ )
-#define __fragmentPass(a, b, ... ) fragment float4 b##___##a##___Fragment ( \
+#define __fragmentPass(a, b, ... ) fragment FragmentOutput b##___##a##___Fragment ( \
 VertexOut thisVertex [[stage_in]], \
 /* constant SCNSceneBuffer& scn_frame  [[buffer(0)]], */ \
 /* constant PerNodeData& scn_node [[buffer(1)]], */ \
-constant Uniform &uni [[ buffer(uniformId)]], \
-device InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__)
+device InputBuffer &in [[ buffer(kbuffId) ]], \
+LastFrame(), \
+##__VA_ARGS__)
+
 //array<texture2d<float>, numberOfTextures> texture [[ texture(inputTextureId) ]] )
 
 // =========================================================================================

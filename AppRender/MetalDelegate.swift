@@ -11,8 +11,8 @@ class FrameTimer : ObservableObject {
 }
 
 
-class MetalDelegate<T : Shader> : NSObject, MTKViewDelegate, ObservableObject {
-  var shader : T
+class MetalDelegate : NSObject, MTKViewDelegate, ObservableObject {
+  var shader : GenericShader
   
   // Don't start out running
   @Published var isRunning : Bool = false
@@ -30,7 +30,7 @@ class MetalDelegate<T : Shader> : NSObject, MTKViewDelegate, ObservableObject {
   let semCount = 1
   var gpuSemaphore : DispatchSemaphore = DispatchSemaphore(value: 1)
   
-  init(shader: T) {
+  init(shader: GenericShader) {
     self.shader = shader
   }
   

@@ -9,10 +9,10 @@ import MetalKit
  1) Add custom application activity for macCatalyst to save to file
  2) reposition the menu for macCatalyst (and maybe iOS)
  */
-struct ControlsView<T:Shader>: View {
+struct ControlsView : View {
   // @ObservedObject var shader : Shader
   @ObservedObject var frameTimer : FrameTimer
-  @ObservedObject var delegate : MetalDelegate<T>
+  @ObservedObject var delegate : MetalDelegate
   var metalView : MTKView
 
   #if os(iOS)

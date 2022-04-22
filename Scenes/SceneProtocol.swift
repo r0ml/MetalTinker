@@ -17,7 +17,7 @@ var scenery : Dictionary<String, Dictionary<String, T1SCNScene>> = {
   let j = getSubclassesOf(T1SCNScene.self).filter { ($0 as? T3ShaderSCNScene.Type) == nil }
 
   // FIXME: this is broken -- need to split out the "SceneKit" shaders
-  let m = ShaderTwo.function.libs.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }
+  let m = functionMaps["Shaders"]!.libs.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }
   // m are the libraries
 
   for lib in m {

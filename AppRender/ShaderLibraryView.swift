@@ -5,7 +5,7 @@
 import os
 import SwiftUI
 
-struct FoldersListView<T : Shader> : View {
+struct FoldersListView<T : GenericShader> : View {
   var folders : [ShaderLib<T>]
   //  var initialSelection : String
   @State var selectedItem : String?
@@ -37,7 +37,7 @@ struct FoldersListView<T : Shader> : View {
   }
 }
 
-struct ShaderListView<T: Shader>: View {
+struct ShaderListView<T: GenericShader>: View {
   var items : [T]
   @State var sel : String?
   

@@ -4,8 +4,8 @@
 
 import SwiftUI
 
-struct ShaderView<T : Shader> : View {
-  var delegate : MetalDelegate<T>
+struct ShaderView : View {
+  var delegate : MetalDelegate
   
   var body : some View {
     let j = MetalViewC(delegate: delegate)
@@ -23,7 +23,7 @@ struct ShaderView<T : Shader> : View {
           }
         ControlsView( frameTimer: delegate.frameTimer, delegate: delegate, metalView: j.mtkView).frame(minWidth: 300)
       }
-      PreferencesView<T>(shdr: delegate.shader)
+      PreferencesView(shdr: delegate.shader)
     }
   }
 }

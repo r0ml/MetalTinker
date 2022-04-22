@@ -9,10 +9,10 @@ struct IdentifiableView : Identifiable {
   var view : AnyView
 }
 
-struct PreferencesView<T : Shader>: View {
-  var shader : T
+struct PreferencesView : View {
+  var shader : GenericShader
 
-  init(shdr: T) {
+  init(shdr: GenericShader) {
     self.shader = shdr
   }
 

@@ -114,10 +114,10 @@ class RenderPipelinePass {
   
   func makeEncoder(_ commandBuffer : MTLCommandBuffer,
                    _ scale : CGFloat,
-                   _ isFirst : Bool, delegate : MetalDelegate<ShaderTwo>) {
+                   _ isFirst : Bool, delegate : MetalDelegate) {
 
 
-     let config = delegate.shader 
+     let config = delegate.shader as! ShaderTwo
 
     // This statement overrides the render pass descriptor with the onscreen frameBuffer if one exists -- otherwise it is using the offscreen texture
     var rpd : MTLRenderPassDescriptor
@@ -127,7 +127,7 @@ class RenderPipelinePass {
 //    rpd = delegate.shader.metalView?.currentRenderPassDescriptor ?? delegate.shader.renderPassDescriptor(delegate.mySize!)
  //   rpd = delegate.shader._renderPassDescriptor!
     
-    rpd = delegate.shader.renderPassDescriptor(delegate.mySize!)
+    rpd = config.renderPassDescriptor(delegate.mySize!)
     
     
 //    } else {
@@ -294,6 +294,18 @@ static func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: 
   psd.colorAttachments[0].sourceAlphaBlendFactor = .sourceAlpha
   psd.colorAttachments[0].destinationRGBBlendFactor = doesBlend ? .destinationAlpha : .oneMinusSourceAlpha 
   psd.colorAttachments[0].destinationAlphaBlendFactor = doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
+
+
+
+/*
+  psd.colorAttachments[1].isBlendingEnabled = true
+  psd.colorAttachments[1].alphaBlendOperation = .add
+  psd.colorAttachments[1].rgbBlendOperation = .add
+  psd.colorAttachments[1].sourceRGBBlendFactor = .sourceAlpha // I would like to set this to   .one   for some cases
+  psd.colorAttachments[1].sourceAlphaBlendFactor = .sourceAlpha
+  psd.colorAttachments[1].destinationRGBBlendFactor = doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
+  psd.colorAttachments[1].destinationAlphaBlendFactor = doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
+*/
 
 //  psd.depthAttachmentPixelFormat =  .depth32Float   // metalView.depthStencilPixelFormat
 

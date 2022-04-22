@@ -4,7 +4,7 @@
 
 import MetalKit
 
-class ShaderLib<T : Shader> : Identifiable, Equatable, Hashable {
+class ShaderLib<T : GenericShader> : Identifiable, Equatable, Hashable {
   static func == (lhs: ShaderLib, rhs: ShaderLib) -> Bool {
     return lhs.lib.label == rhs.lib.label
   }
@@ -24,12 +24,18 @@ class ShaderLib<T : Shader> : Identifiable, Equatable, Hashable {
   }
   
   static func folderList() -> [ShaderLib<ShaderTwo>] {
-    return ShaderTwo.function.shaderLib()
+    return functionMaps["Shaders"]!.shaderLib()
   }
 
   static func filterList() -> [ShaderLib<ShaderFilter>] {
-    return ShaderFilter.function.shaderLib()
+    return functionMaps["Filters"]!.shaderLib()
   }
+
+  static func generatorList() -> [ShaderLib<GenericShader>] {
+    return functionMaps["Generators"]!.shaderLib()
+  }
+
+
 
   lazy var items : [T] = {
     // FIXME: need some other way to identify the list of "shaders"

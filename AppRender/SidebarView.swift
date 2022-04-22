@@ -25,6 +25,8 @@ struct SidebarView : View {
   var body: some View {
     NavigationView {
       List {
+        FoldersListView("Generators", folders: ShaderLib<GenericShader>.generatorList())
+        
         FoldersListView("Shaders", folders : ShaderLib<ShaderTwo>.folderList()) // selectedItem: $selectedItem)
       
         SceneSidebarView(folderList: SceneShaderLib.folderList)

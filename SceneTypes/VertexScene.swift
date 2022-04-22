@@ -17,7 +17,7 @@ class VertexNode : SCNNode {
     p.vertexFunctionName = String("\(s)___\(pp)___Vertex")
 
     // FIXME: this is broken -- need to split out the SceneKit shaders
-    p.library = ShaderTwo.function.libs.first(where: {$0.label == l })!
+    p.library = functionMaps["Shaders"]!.libs.first(where: {$0.label == l })!
 
     let planeSize = CGSize(width: 16, height: 9)
     var ttt = Times()
