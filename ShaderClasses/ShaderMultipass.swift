@@ -3,6 +3,7 @@
 // Found amongst his effects by r0ml
 
 import MetalKit
+import SceneKit
 
 final class ShaderMultipass : GenericShader {
  
@@ -17,7 +18,7 @@ final class ShaderMultipass : GenericShader {
 //    config = Config(s)
   }
 
-  override func draw(in viewx: MTKView, delegate : MetalDelegate) {
+  override func ddraw(_ cq : MTLCommandQueue?,  _ viewx: MTKView?, _ scene : SCNScene?) {
     
   }
   

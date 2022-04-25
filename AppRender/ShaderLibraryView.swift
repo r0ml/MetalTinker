@@ -44,7 +44,7 @@ struct ShaderListView<T: GenericShader>: View {
   var body: some View {
     List {
       ForEach( items ) { li  in
-        NavigationLink(destination: ShaderView(delegate: MetalDelegate(shader: li)),
+        NavigationLink(destination: ShaderMetalView(shader: li),
                        tag: li.id,
                        selection: $sel
         ) {

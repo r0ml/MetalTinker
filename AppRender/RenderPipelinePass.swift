@@ -114,10 +114,8 @@ class RenderPipelinePass {
   
   func makeEncoder(_ commandBuffer : MTLCommandBuffer,
                    _ scale : CGFloat,
-                   _ isFirst : Bool, delegate : MetalDelegate) {
+                   _ isFirst : Bool, delegate : ShaderTwo) {
 
-
-     let config = delegate.shader as! ShaderTwo
 
     // This statement overrides the render pass descriptor with the onscreen frameBuffer if one exists -- otherwise it is using the offscreen texture
     var rpd : MTLRenderPassDescriptor
@@ -127,7 +125,7 @@ class RenderPipelinePass {
 //    rpd = delegate.shader.metalView?.currentRenderPassDescriptor ?? delegate.shader.renderPassDescriptor(delegate.mySize!)
  //   rpd = delegate.shader._renderPassDescriptor!
     
-    rpd = config.renderPassDescriptor(delegate.mySize!)
+    rpd = delegate.renderPassDescriptor(delegate.mySize!)
     
     
 //    } else {
@@ -187,7 +185,7 @@ class RenderPipelinePass {
     var sz = CGSize(width : rpd.colorAttachments[0].texture!.width /* / scale */ ,
       height: rpd.colorAttachments[0].texture!.height /* / scale */ )
 
-    delegate.setup.setupUniform( size: sz, scale: Int(scale), uniform: delegate.shader.uniformBuffer!, times: delegate.times )
+    delegate.setup.setupUniform( size: sz, scale: Int(scale), uniform: delegate.uniformBuffer!, times: delegate.times )
 
     // I do this to clear out the renderInput textures
     if (delegate.setup.iFrame < 1) {
@@ -224,20 +222,20 @@ class RenderPipelinePass {
       } else {
    //     renderEncoder.setDepthStencilState(delegate.shader.depthStencilState)
       }
-      renderEncoder.setVertexBuffer(config.uniformBuffer, offset: 0, index: uniformId)
-      renderEncoder.setVertexBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
-      renderEncoder.setVertexBuffer(computeBuffer, offset: 0, index:computeBuffId)
+      renderEncoder.setVertexBuffer(delegate.uniformBuffer, offset: 0, index: uniformId)
+      renderEncoder.setVertexBuffer(delegate.initializationBuffer, offset: 0, index: kbuffId)
+      renderEncoder.setVertexBuffer(delegate.computeBuffer, offset: 0, index:computeBuffId)
 
-      renderEncoder.setFragmentBuffer(config.uniformBuffer, offset: 0, index: uniformId)
-      renderEncoder.setFragmentBuffer(config.initializationBuffer, offset: 0, index: kbuffId)
-      for i in 0..<config.fragmentTextures.count {
-        if config.fragmentTextures[i].texture == nil {
-          config.fragmentTextures[i].texture = config.fragmentTextures[i].image.getTexture(textureLoader, mipmaps: true)
+      renderEncoder.setFragmentBuffer(delegate.uniformBuffer, offset: 0, index: uniformId)
+      renderEncoder.setFragmentBuffer(delegate.initializationBuffer, offset: 0, index: kbuffId)
+      for i in 0..<delegate.fragmentTextures.count {
+        if delegate.fragmentTextures[i].texture == nil {
+          delegate.fragmentTextures[i].texture = delegate.fragmentTextures[i].image.getTexture(textureLoader, mipmaps: true)
         }
-        renderEncoder.setFragmentTexture( config.fragmentTextures[i].texture, index: config.fragmentTextures[i].index)
+        renderEncoder.setFragmentTexture( delegate.fragmentTextures[i].texture, index: delegate.fragmentTextures[i].index)
       }
 
-      renderEncoder.setFragmentBuffer(computeBuffer, offset: 0, index:computeBuffId)
+      renderEncoder.setFragmentBuffer(delegate.computeBuffer, offset: 0, index: computeBuffId)
 
       renderEncoder.setRenderPipelineState(pipelineState)
 

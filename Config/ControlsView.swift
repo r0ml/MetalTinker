@@ -12,8 +12,7 @@ import MetalKit
 struct ControlsView : View {
   // @ObservedObject var shader : Shader
   @ObservedObject var frameTimer : FrameTimer
-  @ObservedObject var delegate : MetalDelegate
-  var metalView : MTKView
+  @ObservedObject var shader : GenericShader
 
   #if os(iOS)
   func shareSheet(image: UIImage) {
@@ -76,27 +75,28 @@ struct ControlsView : View {
 #endif
 
   var body: some View {
+    
     HStack.init(alignment: .center, spacing: 20) {
       Image( "rewind", bundle: nil, label: Text("Rewind")).resizable().scaledToFit()
         .frame(width: 64, height: 64).onTapGesture {
-          self.delegate.rewind()
+          self.shader.rewind()
       }
 
-      if self.delegate.isRunning {
+      if self.shader.isRunning {
         Image("pause", bundle: nil, label: Text("Pause")).resizable().scaledToFit()
           .frame(width: 64, height: 64).onTapGesture {
-            self.delegate.stop()
+            self.shader.stop()
         }
       } else {
         HStack() {
           Image("play", bundle: nil, label: Text("Play")).resizable().scaledToFit()
             .frame(width: 64, height: 64).onTapGesture {
-              self.delegate.play()
+              self.shader.play()
           }
           
           Image("single_step").resizable().scaledToFit()
             .frame(width: 64, height: 64).onTapGesture {
-              self.delegate.singleStep(metalView: metalView)
+              self.shader.singleStep()
               
           }
         }
@@ -110,9 +110,11 @@ struct ControlsView : View {
 
       // FIXME: change this to use SwiftUI version of Save panel
       #if os(macOS)
+      
+      /*
       Image("camera", bundle: nil, label: Text("Snapshot")).resizable().scaledToFit()
         .frame(width: 64, height: 64).onTapGesture {
-          let lastDrawableDisplayed = self.metalView.currentDrawable?.texture
+          let lastDrawableDisplayed = metalView.currentDrawable?.texture
           
           if let ldd = lastDrawableDisplayed,
             let imageOfView = CIImage.init(mtlTexture: ldd, options: nil)?.nsImage {
@@ -123,7 +125,7 @@ struct ControlsView : View {
             let savePanel = NSSavePanel()
             savePanel.canCreateDirectories = true
             savePanel.showsTagField = true
-            savePanel.nameFieldStringValue = "\(self.delegate.shader.myName).png"
+            savePanel.nameFieldStringValue = "\(self.shader.myName).png"
             savePanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.modalPanelWindow)))
             savePanel.begin { (result) in
               if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
@@ -133,6 +135,7 @@ struct ControlsView : View {
           }
           
       }
+       */
       #else
       Image("camera", bundle: nil, label: Text("Snapshot")).resizable().scaledToFit()
         .frame(width: 64, height: 64).onTapGesture {
@@ -150,13 +153,14 @@ struct ControlsView : View {
 
       Image("videocam", bundle: nil, label: Text("Record")).resizable().scaledToFit()
         .frame(width:64, height: 64).onTapGesture {
-          if let v = self.delegate.videoRecorder {
+          if let v = self.shader.videoRecorder {
             v.endRecording {
               print("recording ended")
             }
-            self.delegate.videoRecorder = nil
+            self.shader.videoRecorder = nil
           } else {
-            
+            // FIXME: put me back
+ /*
             let directory = NSTemporaryDirectory()
             let fileName = NSUUID().uuidString
             // This returns a URL? even though it is an NSURL class method
@@ -164,9 +168,10 @@ struct ControlsView : View {
             
             print(fullURL!.absoluteURL)
             
-            self.delegate.videoRecorder = MetalVideoRecorder(outputURL: fullURL!, size: self.metalView.drawableSize)
-            self.delegate.videoRecorder?.startRecording()
+            self.shader.videoRecorder = MetalVideoRecorder(outputURL: fullURL!, size: metalView.drawableSize)
+            self.shader.videoRecorder?.startRecording()
             // os_log("videocam click not implemented yet", type: .debug)
+  */
           }
       }
       

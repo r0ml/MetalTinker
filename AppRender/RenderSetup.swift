@@ -29,6 +29,10 @@ struct Uniform {
   var eventModifiers : Int32 = 0
 }
 
+// FIXME: make this an actor -- because when initializing a new shading render, vs setting up a frame
+// from the previous render I get a data race.
+// Contrariwise -- is there a way to make sure previous rendering is finished before switching the
+// metal rendering engine.
 class RenderSetup {
   var iFrame = -1
   var keyPress : SIMD2<UInt32> = [0,0]

@@ -5,7 +5,7 @@
 import MetalKit
 import SwiftUI
 import os
-
+import SceneKit
 
 var functionMaps = ["Shaders" : Function("Shaders"),
                     "Generators" : Function("Generators"),
@@ -55,7 +55,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
     if let rr = _renderPassDescriptor,
        mySize == _mySize {
       return rr }
-    let k = makeRenderPassDescriptor(label: "render output", size: mySize)
+    let k = makeRenderPassDescriptor(label: "render output", scale: 1,size: mySize, nil)
     _renderPassDescriptor = k
     _mySize = mySize
     return k
@@ -125,22 +125,22 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
      */
     
     // this draws the current frame
-    override func draw(in viewx: MTKView, delegate : MetalDelegate) {
+  override func ddraw(_ cq : MTLCommandQueue?, _ viewx:  MTKView?, _ scene : SCNScene? ) {
         // FIXME: set the clear color
         //      viewx.clearColor = MTLClearColor(red: Double(c[0]), green: Double(c[1]), blue: Double(c[2]), alpha: Double(c[3]))
         
         // FIXME: abort the whole execution if ....
         // if I get an error "Execution of then command buffer was aborted due to an error during execution"
         // in here, any calculations based on difference between this time and last time?
-        if let _ = viewx.currentRenderPassDescriptor {
+        if let _ = viewx?.currentRenderPassDescriptor {
           
           // to get the running shader to match the preview?
           // rpd.colorAttachments[0].clearColor = viewx.clearColor
           
-          self.doRenderEncoder(viewx, delegate : delegate ) { _ in
+          self.doRenderEncoder(cq, viewx, scene ) { _ in
             // FIXME: this is the thing that will record the video frame
             // self.videoRecorder?.writeFrame(forTexture: viewx.currentDrawable!.texture)
-            delegate.gpuSemaphore.signal()
+            self.gpuSemaphore.signal()
           }
   //      } else {
           //        self.isRunning = false // if I'm not going to set up the gpuSemaphore signal -- time to admit that I must be bailed
@@ -153,8 +153,10 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
   // this sets up the GPU for evaluating the frame
   // gets called both for on and off-screen rendering
   override func doRenderEncoder(
+    _ cq : MTLCommandQueue?,
     _ xview : MTKView?,               // the MTKView if this is rendering to a view, otherwise I need the MTLRenderPassDescriptor
-    delegate : MetalDelegate,
+    _ scene : SCNScene?,
+    //    delegate : MetalDelegate,
     _ f : ((MTLTexture?) -> ())? ) { // for off-screen renderings, use a callback function instead of a semaphore?
             
       var scale : CGFloat = 1
@@ -166,7 +168,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
         let ml = viewx.convert(wp, from: nil)
         
         if viewx.isMousePoint(ml, in: viewx.bounds) {
-          delegate.setup.mouseLoc = ml
+          setup.mouseLoc = ml
         }
         
         scale = xview?.window?.screen?.backingScaleFactor ?? 1
@@ -201,7 +203,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
       var rt : MTLTexture?
       
       //    if let frpp = config.pipelinePasses.last as? RenderPipelinePass {
-      rt = self.renderPassDescriptor(delegate.mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
+      rt = self.renderPassDescriptor(mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
       
       // FIXME: what about a filter?
       //  } else if let frpp = config.pipelinePasses.last as? FilterPipelinePass {
@@ -248,7 +250,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
 //    /* private */ var myOptions : MyMTLStruct!
 //    /* private  */ var dynPref : DynamicPreferences? // need to hold on to this for the callback
     /* internal */ /* private */ // var shaderName : String
-    private var computeBuffer : MTLBuffer?
+    var computeBuffer : MTLBuffer?
 
     //  var videoNames : [VideoSupport] = []
     var webcam : WebcamSupport?
@@ -487,71 +489,5 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
 // FIXME: This can be moved up to Shader if I also take fragmentTextures
 extension ShaderTwo {
   // FIXME: when I fix RenderPassPipeline -- move this out of the class
-  func makeRenderPassTexture(_ nam : String, size: CGSize) -> (MTLTexture, MTLTexture)? {
-    let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-    texd.textureType = .type2DMultisample
-    texd.usage = [.renderTarget]
-    texd.sampleCount = multisampleCount
-    texd.resourceOptions = .storageModePrivate
 
-    /*
-    let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
-    texi.textureType = .type2D
-    texi.usage = [.shaderRead]
-    texi.resourceOptions = .storageModePrivate
-*/
-    let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-    texo.textureType = .type2D
-    texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-    texo.resourceOptions = .storageModePrivate
-
-
-    let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-    texl.textureType = .type2D
-    texl.usage = [.shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-    texl.resourceOptions = .storageModePrivate
-
-
-    if let p = device.makeTexture(descriptor: texd),
-//       let q = device.makeTexture(descriptor: texi),
-       let r = device.makeTexture(descriptor: texo),
-       let s = device.makeTexture(descriptor: texl) {
-      p.label = "render pass \(nam) multisample"
-//      q.label = "render pass \(nam) input"
-      r.label = "render pass \(nam) output"
-      s.label = "render pass \(nam) last frame"
-      //        swapQ.async {
-
-      for k in fragmentTextures {
-        if k.name == "lastFrame" {
-          k.texture = s
-        }
-      }
-      return (p, r)
-    }
-    return nil
-  }
-
-  func makeRenderPassDescriptor(label : String, size canvasSize: CGSize) -> MTLRenderPassDescriptor {
-    //------------------------------------------------------------
-    // texture on device to be written to..
-    //------------------------------------------------------------
-    let ts = makeRenderPassTexture(label, size: canvasSize)!
-    let texture = ts.0
-    let resolveTexture = ts.1
-
-    let renderPassDescriptor = MTLRenderPassDescriptor()
-    renderPassDescriptor.colorAttachments[0].texture = texture
-    renderPassDescriptor.colorAttachments[0].storeAction = .storeAndMultisampleResolve
-    renderPassDescriptor.colorAttachments[0].resolveLevel = 0
-    renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTexture //  device.makeTexture(descriptor: xostd)
-    renderPassDescriptor.colorAttachments[0].loadAction = .clear // .clear // .load
-                                                                 //      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
-
-
-    // only if I need depthing?
-    // renderPassDescriptor.depthAttachment = RenderPipelinePass.makeDepthAttachmentDescriptor(size: canvasSize)
-
-    return renderPassDescriptor
-  }
 }

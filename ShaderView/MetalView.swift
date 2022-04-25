@@ -15,10 +15,10 @@ typealias XViewControllerRepresentableContext = UIViewControllerRepresentableCon
 
 class MetalViewController : XViewController {
   var mtkView : MTKView
-  var delegate : MetalDelegate
+  var delegate : GenericShader
   var context : XViewControllerRepresentableContext<MetalViewC>
   
-  init( delegate: MetalDelegate, context x: XViewControllerRepresentableContext<MetalViewC>, mtkView mtkv : MTKView) {
+  init( delegate: GenericShader, context x: XViewControllerRepresentableContext<MetalViewC>, mtkView mtkv : MTKView) {
     context = x
     mtkView = mtkv
     self.delegate = delegate
@@ -107,7 +107,7 @@ class MetalViewController : XViewController {
 struct MetalViewC : NSViewControllerRepresentable {
   typealias NSViewControllerType = MetalViewController
   var mtkView : MTKView = MTKView()
-  var delegate : MetalDelegate
+  var delegate : GenericShader
 
   func makeNSViewController(context: NSViewControllerRepresentableContext<MetalViewC>) -> MetalViewController {
     return MetalViewController( delegate: delegate, context: context, mtkView: mtkView)

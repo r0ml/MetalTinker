@@ -17,6 +17,10 @@ import SwiftUI
       .commands {
         SidebarCommands()
       }
+      
+      Settings {
+        SettingsView()
+      }
     }
   }
 }
