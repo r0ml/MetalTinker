@@ -16,7 +16,6 @@ static float4 sampleTexture(const texture2d<float> smp, const float2 winCoord, c
   const float textureEdgeOffset = 0.005;
 
   float2 textureCoordinates = (winCoord + uvOffsets) / reso.xy;
-  textureCoordinates.y = 1.0 - textureCoordinates.y;
   textureCoordinates = clamp(textureCoordinates, 0.0 + textureEdgeOffset, 1.0 - textureEdgeOffset);
   return smp.sample(iChannel0, textureCoordinates);
 }

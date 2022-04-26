@@ -32,8 +32,10 @@ struct ShaderSceneView : View {
   @GestureState var magnifyBy : CGFloat = 1
   @GestureState var dragger : CGPoint = .zero
 
+  @State var overImg = false
   @State var paused = false
   var shader : GenericShader
+  var mouseLocation : NSPoint { NSEvent.mouseLocation }
   
   init(delegate: GenericShader) {
     self.shader = delegate
@@ -94,6 +96,65 @@ struct ShaderSceneView : View {
         )
           .gesture(mag)
           .gesture(drag)
+          .onHover { over in
+            overImg = over
+          }
+          .onAppear {
+//            print("addLocalMonitoring")
+            NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved ]) { arg in
+//              if overImg {
+                let zz = arg.locationInWindow
+                let z = arg.cgEvent!.unflippedLocation
+
+              let offs = NSApplication.shared.windows[0].frame
+
+
+  //              if let b = arg.window?.screen?.backingScaleFactor {
+                  let bb : CGFloat = CGFloat(multisampleCount)
+                let k = g.frame(in: .global)
+
+              let q = offs.height - k.maxY
+
+              if (k.minX != 0) {
+                let j = CGPoint(x: (zz.x - k.minX) / bb  , y: (zz.y - k.minY ) / bb  )
+
+              let jj = CGPoint(x: (z.x - offs.minX - k.minX) / bb, y: (z.y - offs.minY - q /* k.minY */ ) / bb )
+
+//              print(k, g.safeAreaInsets, offs, g, z, zz)
+//              print(jj, j)
+                self.shader.setup.mouseLoc = jj // mouseLocation
+
+//                }
+
+
+//                let offs = NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
+
+  //              let loff = xvv.convert(CGPoint.zero, to: xvv.window!)
+//                let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
+  //              let lpoint = CGPoint(x: ptx.x - loff.x, y: ptx.y - loff.y)
+
+//                scale = xscale
+
+                // I don't know why the 40 is needed -- but it seems to work
+//                let zlpoint = CGPoint(x: lpoint.x, y: lpoint.y - xvv.bounds.height - 40 )
+//                if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xvv.bounds.width && zlpoint.y < xvv.bounds.height {
+//                  delegate.setup.mouseLoc = zlpoint
+//                }
+
+
+
+
+
+
+
+
+//              }}
+              } else {
+    //            print("hunh?")
+              }
+              return arg
+            }
+          }
       }
 //      SceneControlsView(scene: delegate.scene, paused: $paused ).frame(minWidth: 600)
     }

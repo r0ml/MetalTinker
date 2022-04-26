@@ -261,7 +261,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     if let xvv = xview {
     let ourEvent = CGEvent(source: nil)!
     let point = ourEvent.unflippedLocation
-    let xscale =  xvv.window!.screen.scale
+      let xscale =  xvv.window!.screen?.backingScaleFactor // was scale
     //      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
     //
     

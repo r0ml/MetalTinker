@@ -7,7 +7,7 @@ static float4 FakeStencil(float2 pos, float time, float2 mouse) {
   float shape = 1. - smoothstep(.13,.16,distance(pos,float2(0.5)));
   float t = time;
   shape = max(shape,1. - smoothstep(.05,.09,distance(pos,float2(cos(t)*1.1,sin(t)*.8) * .15 + float2(.5))));
-  shape = max(shape, 1. - smoothstep(.025,.04,distance(pos,mouse * float2(1.,.5) + float2(0.,.25))));
+  shape = max(shape, 1. - smoothstep(.025,.04,distance(pos,mouse)));
   return float4(1.) * shape;
 }
 
