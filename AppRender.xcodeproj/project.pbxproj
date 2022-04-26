@@ -226,6 +226,7 @@
 		E773D5542812256B00AD2173 /* GenericShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773D5532812256B00AD2173 /* GenericShader.swift */; };
 		E773D5552812377C00AD2173 /* RenderPipelinePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD74323E9377D00DAB04A /* RenderPipelinePass.swift */; };
 		E774DE0E2816E524007998EA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774DE0D2816E524007998EA /* SettingsView.swift */; };
+		E774DE102816F8B0007998EA /* ShaderVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774DE0F2816F8B0007998EA /* ShaderVertex.swift */; };
 		E77675D82283786000614B7B /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E785E2E525AA46E600511B0C /* SKSCNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E785E2E425AA46E600511B0C /* SKSCNScene.swift */; };
 		E79A10E222CF9B4D004FD5E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E79A10E122CF9B4D004FD5E2 /* README.md */; };
@@ -802,6 +803,7 @@
 		E7722C16253FD69A006EDEB1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E773D5532812256B00AD2173 /* GenericShader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericShader.swift; sourceTree = "<group>"; };
 		E774DE0D2816E524007998EA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E774DE0F2816F8B0007998EA /* ShaderVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderVertex.swift; sourceTree = "<group>"; };
 		E77675D4228347A800614B7B /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		E77675D72283786000614B7B /* glsl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = glsl.metal; sourceTree = "<group>"; };
 		E77675DA2283791A00614B7B /* glsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glsl.h; sourceTree = "<group>"; };
@@ -1533,6 +1535,7 @@
 			isa = PBXGroup;
 			children = (
 				E7E9D6EB27DC363B00431EB0 /* ShaderFilter.swift */,
+				E774DE0F2816F8B0007998EA /* ShaderVertex.swift */,
 				E7500791216B181100FABE79 /* Shader.swift */,
 				E773D5532812256B00AD2173 /* GenericShader.swift */,
 				E7E9D6F027DC603100431EB0 /* ShaderMultipass.swift */,
@@ -2738,6 +2741,7 @@
 				E7A5A43425B00CA10051A69A /* Linear Motion.swift in Sources */,
 				E7C75A0B2815C13A003D906D /* ShaderSceneView.swift in Sources */,
 				E7B5728925B40B9F00DF1452 /* Simple_Circle_AA.swift in Sources */,
+				E774DE102816F8B0007998EA /* ShaderVertex.swift in Sources */,
 				E7A5A47225B0D1530051A69A /* Loopless Dots Along Circle.swift in Sources */,
 				E7B5728125B40B8000DF1452 /* Simple_Eclipse.swift in Sources */,
 				E7ED629821779685007ABB53 /* support.metal in Sources */,

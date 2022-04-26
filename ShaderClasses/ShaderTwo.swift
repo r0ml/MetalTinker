@@ -471,18 +471,20 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
  */
     }
     
-    private func currentVertexFn(_ sfx : String) -> MTLFunction? {
+    // s should be "Shaders"
+  /*
+  private func currentVertexFn(_ s : String, _ sfx : String) -> MTLFunction? {
       let lun = "\(myName)___\(sfx)___Vertex"
-      if let z = functionMaps["Shaders"]!.find(lun) { return z }
-      return functionMaps["Shaders"]!.find("flatVertexFn")!
+      if let z = functionMaps[s]!.find(lun) { return z }
+      return functionMaps[s]!.find("flatVertexFn")!
     }
 
-    private func currentFragmentFn(_ sfx : String) -> MTLFunction? {
+  private func currentFragmentFn(_ s : String, _ sfx : String) -> MTLFunction? {
       let lun = "\(myName)___\(sfx)___Fragment"
-      if let z = functionMaps["Shaders"]!.find(lun) { return z }
-      return functionMaps["Shaders"]!.find("passthruFragmentFn")!
+      if let z = functionMaps[s]!.find(lun) { return z }
+      return functionMaps[s]!.find("passthruFragmentFn")!
     }
-  
+  */
     
 }
 

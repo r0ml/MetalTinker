@@ -24,24 +24,25 @@ import UIKit
  10) Snapshot icon doesn't show up for MacCatalyst
  */
 
-class ShaderFilter : GenericShader {
+let ctrlBuffId = 4
 
-  var fragmentTextures : [TextureParameter] = []
+final class ShaderVertex : ShaderFilter {
+
+  private var computeBuffer : MTLBuffer?
+  private var controlBuffer : MTLBuffer!
 
   private var _renderPassDescriptor : MTLRenderPassDescriptor?
   private var _mySize : CGSize?
 
-  private var lastFrameTextures : [MTLTexture]?
-  //  private var shadowFrameTexture : MTLTexture?
-
   override var myGroup : String {
-    get { "Filters" }
+    get { "Vertex" }
   }
   
 
   required init(_ s : String ) {
+    //    print("ShaderFilter init \(s)")
     super.init(s)
-//   function = Function(myGroup)
+//    function = Function(myGroup)
   }
 
 
@@ -53,13 +54,40 @@ class ShaderFilter : GenericShader {
     }
   }
 
+  override func doInitialization( ) {
+    let uniformSize : Int = MemoryLayout<Uniform>.stride
+#if os(macOS) || targetEnvironment(macCatalyst)
+    let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
+#else
+    let uni = device.makeBuffer(length: uniformSize, options: [])!
+#endif
 
-  override func specialInitialization() {
-    let aa = metadata
-    if let bb = aa?.fragmentArguments {
-      processTextures(bb)
+    controlBuffer = device.makeBuffer(length: MemoryLayout<ControlBuffer>.stride, options: [.storageModeShared] )!
+    let c = controlBuffer.contents().assumingMemoryBound(to: ControlBuffer.self)
+    c.pointee.topology = 3
+    c.pointee.vertexCount = 4
+    c.pointee.instanceCount = 1
+
+    uni.label = "uniform"
+    uniformBuffer = uni
+
+    let vertexProgram = currentVertexFn(myGroup)
+    let fragmentProgram = currentFragmentFn(myGroup)
+
+    if let rpp = setupRenderPipeline(vertexFunction: vertexProgram, fragmentFunction: fragmentProgram) {
+      (self.pipelineState, self.metadata) = rpp
     }
+
+    justInitialization()
+
+    self.specialInitialization()
+
+    frameInitialize()
+
   }
+
+
+
 
   // let's assume this is where the shader starts running, so shader initialization should happen here.
   override func startRunning() {
@@ -156,131 +184,110 @@ class ShaderFilter : GenericShader {
     ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: {
       self.fragmentTextures = $0 }))
   }
-
-
-  private func processTextures(_ bst : [MTLArgument] ) {
-    for a in bst {
-      if a.type == .texture {
-        for z in 0..<a.arrayLength {
-          if let b = TextureParameter(a, z, id: fragmentTextures.count) {
-            fragmentTextures.append(b)
-          }
-        }
-      }
-    }
-  }
   
-  // FIXME: when I fix RenderPassPipeline -- move this out of the class
-  func makeLastFrameTextures(size: CGSize) {
-    /*    let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-     texd.textureType = .type2DMultisample
-     texd.usage = [.renderTarget]
-     texd.sampleCount = multisampleCount
-     texd.resourceOptions = .storageModePrivate
-     */
-    /*
-     let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
-     texi.textureType = .type2D
-     texi.usage = [.shaderRead]
-     texi.resourceOptions = .storageModePrivate
-     */
-    /*
-     let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-     texo.textureType = .type2D
-     texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-     texo.resourceOptions = .storageModePrivate
-     */
-    if let lf = lastFrameTextures,
-       lf.count > 0,
-       lf[0].width == Int(size.width),
-       lf[0].height == Int(size.height) {
-    } else {
 
-      lastFrameTextures = []
+  override func finishCommandEncoding(_ renderEncoder : MTLRenderCommandEncoder ) {
 
-      let z = fragmentTextures.filter { $0.name == "lastFrame" }
-      if z.count == 0 {
+    renderEncoder.setVertexBuffer( controlBuffer, offset: 0, index: ctrlBuffId)
+    // end of vertex add
 
-      } else {
+    renderEncoder.setRenderPipelineState(pipelineState)
 
-        let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-        texl.textureType = .type2D
-        texl.usage = [.shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-        texl.resourceOptions = .storageModeManaged
+    let c = controlBuffer.contents().assumingMemoryBound(to: ControlBuffer.self)
 
-        for k in z {
-        //  if let p = device.makeTexture(descriptor: texd),
-        //       let q = device.makeTexture(descriptor: texi),
-        //       let r = device.makeTexture(descriptor: texo),
-        if  let s = device.makeTexture(descriptor: texl) {
-          //      p.label = "render pass \(nam) multisample"
-          //      q.label = "render pass \(nam) input"
-          //      r.label = "render pass \(nam) output"
-          s.label = "render pass last frame"
-          //        swapQ.async {
 
-          lastFrameTextures!.append(s)
-          k.texture = s
-        }
-        }
-      }
 
+    // A filter render encoder takes a single instance of a rectangle (4 vertices) which covers the input.
+    let t = Int(c.pointee.topology)
+    if t >= 0 && t <= 3 {
+      let topo : MTLPrimitiveType = [.point, .line, .triangle, .triangleStrip][t]
+
+      renderEncoder.drawPrimitives(type: topo, vertexStart: 0, vertexCount: Int(c.pointee.vertexCount), instanceCount: Int(c.pointee.instanceCount) )
     }
 
-    /*
-     if let lf = shadowFrameTexture,
-     lf.width == Int(size.width),
-     lf.height == Int(size.height) {
-     } else {
-     let z = fragmentTextures.filter { $0.name == "shadowFrame" }
-     if z.count == 0 {
-
-     } else {
-     let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-     texl.textureType = .type2D
-     texl.usage = [.shaderRead, .shaderWrite] // or just renderTarget -- the read is in case the texture is used in a filter
-     texl.resourceOptions = .storageModeManaged
-
-     if let s = device.makeTexture(descriptor: texl) {
-     s.label = "render pass shadow frame"
-     shadowFrameTexture = s
-     for k in z {
-     k.texture = s
-     }
-     }
-     }
-     }
-     */
-
-
-    //    return (p, r)
-    //    }
-    //    return nil
   }
 
+  override func beginFrame(_ cqq : MTLCommandQueue) {
+    //        print("start \(#function)")
 
-  // this sets up the GPU for evaluating the frame
-  // gets called both for on and off-screen rendering
-  override func doRenderEncoder4(_ commandBuffer : MTLCommandBuffer, _ size : CGSize, _ kk : MTLRenderPassDescriptor) {
+    /*      // FIXME: I want the render pipeline metadata
 
-//    makeLastFrameTextures( size: CGSize(width: c.texture.width, height: c.texture.height))
-    makeLastFrameTextures( size: size )
-    
-        if let kt = lastFrameTextures,
-           kt.count > 0,
-           let be = commandBuffer.makeBlitCommandEncoder() {
-          for i in 0 ..< kt.count {
-             if let rt = kk.colorAttachments[i].resolveTexture {
-              be.copy(from: rt, to: kt[i])
-              //          be.generateMipmaps(for: ri.1)
-              //          be.synchronize(resource: kt)
-            }
-          }
-          be.endEncoding()
-        }
-        // ========================================================================
+     if let gg = cpr?.arguments.first(where: { $0.name == "in" }),
+     let ib = device.makeBuffer(length: gg.bufferDataSize, options: [.storageModeShared ]) {
+     ib.label = "defaults buffer for \(self.myName)"
+     ib.contents().storeBytes(of: 0, as: Int.self)
+     initializationBuffer = ib
+     } else if let ib = device.makeBuffer(length: 8, options: [.storageModeShared]) {
+     ib.label = "empty kernel compute buffer for \(self.myName)"
+     initializationBuffer = ib
+     } else {
+     os_log("failed to allocate initialization MTLBuffer", type: .fault)
+     return
+     }
+     */
+
+
+    if let fips = frameInitializePipelineState,
+       let commandBuffer = cqq.makeCommandBuffer(),
+       let computeEncoder = commandBuffer.makeComputeCommandEncoder()
+    {
+      commandBuffer.label = "Frame Initialize command buffer for \(self.myName)"
+      computeEncoder.label = "frame initialization and defaults encoder \(self.myName)"
+      computeEncoder.setComputePipelineState(fips)
+      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
+      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
+      computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
+
+      let ms = MTLSize(width: 1, height: 1, depth: 1);
+      computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
+      computeEncoder.endEncoding()
+
+      commandBuffer.commit()
+      commandBuffer.waitUntilCompleted() // I need these values to proceed
     }
 
+    // at this point, the frame initialization (ctrl) buffer has been set
+    // FIXME: I should probably add a compute buffer to hold values across frames?
+
+    /*    if let gg = cpr?.arguments.first(where: { $0.name == "in" }) {
+     inbuf = MyMTLStruct.init(initializationBuffer, gg)
+     processArguments(inbuf)
+     }
+     */
+
+
+  }
+
+  override func beginShader() {
+    //    print("start \(#function)")
+
+    if let ips = initializePipelineState,
+       let commandBuffer = commandQueue.makeCommandBuffer(),
+       let computeEncoder = commandBuffer.makeComputeCommandEncoder() {
+      commandBuffer.label = "Initialize command buffer for \(self.myName) "
+      computeEncoder.label = "initialization and defaults encoder \(self.myName)"
+      computeEncoder.setComputePipelineState(ips)
+      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
+      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
+      computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
+
+      let ms = MTLSize(width: 1, height: 1, depth: 1);
+      computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
+      computeEncoder.endEncoding()
+
+      commandBuffer.commit()
+      commandBuffer.waitUntilCompleted() // I need these values to proceed
+
+
+      // at this point, the initialization (preferences) buffer has been set
+      if let gg = initializeReflection?.arguments.first(where: { $0.name == "in" }) {
+        inbuf = MyMTLStruct.init(initializationBuffer, gg)
+        processArguments(inbuf)
+      }
+
+      getClearColor(inbuf)
+    }
+  }
 
 
   override func makeEncoder(_ commandBuffer : MTLCommandBuffer,
@@ -310,7 +317,7 @@ class ShaderFilter : GenericShader {
       renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setFragmentBuffer(initializationBuffer, offset: 0, index: kbuffId)
       for i in 0..<fragmentTextures.count {
-        if fragmentTextures[i].texture == nil && fragmentTextures[i].name != "lastFrame" {
+        if fragmentTextures[i].texture == nil && fragmentTextures[i].name != "lastFrame" && fragmentTextures[i].name != "shadowFrame" {
           fragmentTextures[i].texture = fragmentTextures[i].image.getTexture(textureLoader, mipmaps: true)
         }
         renderEncoder.setFragmentTexture( fragmentTextures[i].texture, index: fragmentTextures[i].index)
@@ -327,10 +334,7 @@ class ShaderFilter : GenericShader {
     }
   }
 
-  override func morePrefs() -> [IdentifiableView] {
-    let c = buildImageWells()
-     let d = IdentifiableView(id: "sources", view: AnyView(c))
-    return [d]
-  }
+
+
 
 }

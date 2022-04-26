@@ -16,7 +16,7 @@ class MyMTLStruct {
   // notion of array
   init( _ buf : MTLBuffer, _ struc : MTLArgument) {
     buffer = buf
-    structure = struc.bufferStructType!
+    structure = struc.bufferStructType
     offset = 0
     datatype = .struct
     name = struc.name

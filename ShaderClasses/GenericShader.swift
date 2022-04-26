@@ -12,6 +12,10 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   @Published var isRunning : Bool = false
   var isStepping : Bool = false
   
+  var metadata : MTLRenderPipelineReflection!
+
+
+  
   /// This is the CPU overlay on the initialization buffer
   var inbuf : MyMTLStruct!
   
@@ -23,6 +27,9 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   var myOptions : MyMTLStruct!
   var dynPref : DynamicPreferences? // need to hold on to this for the callback
   
+  var myGroup : String {
+    get { "Generators" }
+  }
   
   public var id : String {
     return myName
@@ -87,7 +94,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   }
   
   
-  var function = Function("Generators")
+//  var function = Function(myGroup)
   
   
   func finishCommandEncoding(_ renderEncoder : MTLRenderCommandEncoder ) {
@@ -129,11 +136,11 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     uni.label = "uniform"
     uniformBuffer = uni
     
-    let vertexProgram = currentVertexFn()
-    let fragmentProgram = currentFragmentFn()
+    let vertexProgram = currentVertexFn(myGroup)
+    let fragmentProgram = currentFragmentFn(myGroup)
     
     if let rpp = setupRenderPipeline(vertexFunction: vertexProgram, fragmentFunction: fragmentProgram) {
-      (self.pipelineState, _) = rpp
+      (self.pipelineState, self.metadata) = rpp
     }
     
     justInitialization()
@@ -148,7 +155,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   func frameInitialize() {
     // await super.justInitialization()
     let nam = myName + "FrameInitialize"
-    guard let initializationProgram = functionMaps["Generators"]!.find( nam ) else {
+    guard let initializationProgram = functionMaps[myGroup]!.find( nam ) else {
       //      print("no frame initialization program for \(self.myName)")
       return
     }
@@ -166,30 +173,33 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   
   func justInitialization() {
     // await super.justInitialization()
+    
+    var ibl = 8
+    if let aa = (self.metadata.fragmentArguments?.filter { $0.name == "in" })?.first {
+      ibl = aa.bufferDataSize
+    } else if let bb = (self.metadata.vertexArguments?.filter { $0.name == "in" })?.first {
+      ibl = bb.bufferDataSize
+    }
+    if ibl == 0 { ibl = 8 }
+    
+    if let ib = device.makeBuffer(length: ibl, options: [.storageModeShared ]) {
+      ib.label = "defaults buffer for \(self.myName)"
+      ib.contents().storeBytes(of: 0, as: Int.self)
+      self.initializationBuffer = ib
+    }
+    
     let nam = myName + "InitializeOptions"
-    guard let initializationProgram = functionMaps["Generators"]!.find( nam ) else {
-      //      print("no initialization program for \(self.myName)")
-      if let ib = device.makeBuffer(length: 8, options: [.storageModeShared]) {
-        ib.label = "empty kernel compute buffer for \(self.myName)"
-        initializationBuffer = ib
-      }
+    guard let initializationProgram = functionMaps[self.myGroup]!.find( nam ) else {
       return
     }
     let cpld = MTLComputePipelineDescriptor()
     cpld.computeFunction = initializationProgram
     
+    
+  
     do {
       initializePipelineState = try device.makeComputePipelineState(function: initializationProgram,
                                                                     options:[.argumentInfo, .bufferTypeInfo], reflection: &initializeReflection)
-      if let gg = initializeReflection?.arguments.first(where: { $0.name == "in" }),
-         let ib = device.makeBuffer(length: gg.bufferDataSize, options: [.storageModeShared ]) {
-        ib.label = "defaults buffer for \(self.myName)"
-        ib.contents().storeBytes(of: 0, as: Int.self)
-        initializationBuffer = ib
-      } else {
-        os_log("failed to allocate initialization MTLBuffer", type: .fault)
-        return
-      }
     } catch {
       os_log("%s", type:.fault, "failed to initialize pipeline state for \(myName): \(error)")
       return
@@ -197,17 +207,17 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   }
   
   
-  func currentVertexFn() -> MTLFunction? {
+  func currentVertexFn(_ s : String) -> MTLFunction? {
     let lun = "\(myName)______Vertex"
-    if let z = functionMaps["Generators"]!.find(lun) { return z }
-    return functionMaps["Generators"]!.find("flatVertexFn")!
+    if let z = functionMaps[s]!.find(lun) { return z }
+    return functionMaps[s]!.find("flatVertexFn")!
   }
   
   
-  func currentFragmentFn() -> MTLFunction? {
+  func currentFragmentFn(_ s : String) -> MTLFunction? {
     let lun = "\(myName)______Fragment"
-    if let z = functionMaps["Generators"]!.find(lun) { return z }
-    return functionMaps["Generators"]!.find("passthruFragmentFn")!
+    if let z = functionMaps[s]!.find(lun) { return z }
+    return functionMaps[s]!.find("passthruFragmentFn")!
   }
   
   
@@ -354,7 +364,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     // 2) create multiple render passes
     // 3) blit the outputs to inputs for the next frame (or swap the inputs and outputs
     
-    let rpd = xvv.currentRenderPassDescriptor!
+    if let rpd = xvv.currentRenderPassDescriptor {
     
     // the rpd color attachments should have the right textures in them
     makeEncoder(commandBuffer, multisampleCount, rpd)
@@ -387,6 +397,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       }
     }
     commandBuffer.present( c )
+    }
     }
     commandBuffer.commit()
     //      commandBuffer.waitUntilCompleted()
@@ -544,11 +555,18 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     if let mo = myOptions {
       let a = DynamicPreferences.init(myName)
       dynPref = a
+      
+      
+      let jj = self.morePrefs()
       //      let c = ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: { self.fragmentTextures = $0 }))
-      let k = /* [IdentifiableView(id: "sources", view: AnyView(c))] + */ a.buildOptionsPane(mo)
+      let k = jj + /* [IdentifiableView(id: "sources", view: AnyView(c))] + */ a.buildOptionsPane(mo)
       cached = k
       return k
     }
+    return []
+  }
+  
+  func morePrefs() -> [IdentifiableView] {
     return []
   }
   
@@ -570,13 +588,13 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       
       commandBuffer.commit()
       commandBuffer.waitUntilCompleted() // I need these values to proceed
-      
+    }
       
       // at this point, the initialization (preferences) buffer has been set
-      if let gg = initializeReflection?.arguments.first(where: { $0.name == "in" }) {
+//      if let gg = initializeReflection?.arguments.first(where: { $0.name == "in" }) {
+    if let gg = metadata.fragmentArguments?.first(where: {$0.name == "in" } ) {
         inbuf = MyMTLStruct.init(initializationBuffer, gg)
         processArguments(inbuf)
-      }
       
       getClearColor(inbuf)
     }

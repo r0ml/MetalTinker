@@ -65,7 +65,7 @@ extension NSImage {
       let j = try t.newTexture(data: data,
                               options: [
                                 .origin :  flipped ? MTKTextureLoader.Origin.topLeft : MTKTextureLoader.Origin.bottomLeft,
-                                .SRGB: NSNumber(value: false),
+                                .SRGB: NSNumber(value: true),
                                 .generateMipmaps : NSNumber(value: mipmaps)])
       return j
     } catch let e {
@@ -87,7 +87,7 @@ extension NSImage {
                               options: [
                                 // FIXME: This was already commented.  Should I flip vertically here (are 3D images strange?
                                 // .origin : MTKTextureLoader.Origin.flippedVertically,
-                                .SRGB: NSNumber(value: false),
+                                .SRGB: NSNumber(value: true),
                                 .textureUsage : NSNumber(value: 0),
                                 .cubeLayout : MTKTextureLoader.CubeLayout.vertical,
                                 .generateMipmaps : NSNumber(value: true)
@@ -164,7 +164,7 @@ func getTexture(_ t : MTKTextureLoader, flipped: Bool = true, mipmaps : Bool = f
     let j = try t.newTexture(data: data,
                             options: [
                               .origin :  flipped ? MTKTextureLoader.Origin.topLeft : MTKTextureLoader.Origin.bottomLeft,
-                              .SRGB: NSNumber(value: false),
+                              .SRGB: NSNumber(value: true),
                               .generateMipmaps : NSNumber(value: mipmaps)])
     return j
   } catch let e {

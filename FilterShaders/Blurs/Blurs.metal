@@ -10,9 +10,6 @@ struct InputBuffer {
     } value;
 };
 
-initialize() {
-}
-
 fragmentFn(texture2d<float> tex) {
 
   float2 uv = textureCoord;
