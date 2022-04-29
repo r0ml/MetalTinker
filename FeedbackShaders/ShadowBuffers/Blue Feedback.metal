@@ -1,5 +1,6 @@
 
 #define shaderName Blue_Feedback
+#define SHADOWS 1
 
 #include "Common.h" 
 
@@ -15,7 +16,8 @@ static float drawPoint(float2 uv){
   return max(1.0-length(uv)*192.0,0.0);
 }
 
-fragmentFn(texture2d<float> lastFrame) {
+fragmentFn() {
+  FragmentOutput f;
 
   float2 uv=uni.iResolution.xy;
   float2 winCoord = thisVertex.where.xy;
@@ -32,8 +34,9 @@ fragmentFn(texture2d<float> lastFrame) {
   uv= winCoord/uni.iResolution.xy-0.5;
   uv*=0.8+sin(uni.iTime*0.2)*0.2;
   uv+=0.5;
-  float3 back=lastFrame.sample(iChannel0,uv).xyz;
+  float3 back=lastFrame[0].sample(iChannel0,uv).xyz;
   
   //mix lastframe + points
-  return float4(back*0.8+dots,1.0);
+  f.color0 = float4(back*0.8+dots,1.0);
+  return f;
 }

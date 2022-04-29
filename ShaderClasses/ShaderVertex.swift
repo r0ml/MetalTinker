@@ -75,7 +75,7 @@ final class ShaderVertex : ShaderFilter {
     let fragmentProgram = currentFragmentFn(myGroup)
 
     if let rpp = setupRenderPipeline(vertexFunction: vertexProgram, fragmentFunction: fragmentProgram) {
-      (self.pipelineState, self.metadata) = rpp
+      (self.pipelineState, self.metadata, _) = rpp
     }
 
     justInitialization()
@@ -130,7 +130,7 @@ final class ShaderVertex : ShaderFilter {
    */
 
 
-  override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
+  override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection, MTLRenderPipelineDescriptor)? {
     // ============================================
     // this is the actual rendering fragment shader
 
@@ -156,7 +156,7 @@ final class ShaderVertex : ShaderFilter {
         var metadata : MTLRenderPipelineReflection?
         let res = try device.makeRenderPipelineState(descriptor: psd, options: [.argumentInfo, .bufferTypeInfo], reflection: &metadata)
         if let m = metadata {
-          return (res, m)
+          return (res, m, psd)
         }
       } catch let er {
         // let m = "Failed to create render render pipeline state for \(self.label), error \(er.localizedDescription)"
@@ -177,7 +177,7 @@ final class ShaderVertex : ShaderFilter {
    just easier to make it a separate buffer
    */
 
-  private func buildImageWells() -> some View {
+  func buildImageWells() -> some View {
 
     // I believe this is where the ImageStrip sets the images as texture inputs.
     // It is also where the webcam and video support should be assigned

@@ -44,7 +44,7 @@ struct ImageStrip : View {
       ForEach(texes) { (jj) in
 
         // FIXME: i windws up out of range -- must be from resetting texes
-        AnyView(Image.init(xImage: texes[jj.id].image).resizable()
+        AnyView(Image.init(xImage: jj.image).resizable()
           .scaledToFit())
         .contextMenu(menuItems: {
           menu(jj.id)

@@ -23,18 +23,18 @@ class ShaderLib<T : GenericShader> : Identifiable, Equatable, Hashable {
     return lib.label ?? "none"
   }
   
-  static func folderList() -> [ShaderLib<ShaderTwo>] {
-    return functionMaps["Shaders"]!.shaderLib()
+  static func getList(_ s : String) -> [ShaderLib<T>] {
+    return functionMaps[s]!.shaderLib()
   }
 
-  static func filterList() -> [ShaderLib<ShaderFilter>] {
+/*  static func filterList() -> [ShaderLib<ShaderFilter>] {
     return functionMaps["Filters"]!.shaderLib()
   }
 
   static func generatorList() -> [ShaderLib<GenericShader>] {
     return functionMaps["Generators"]!.shaderLib()
   }
-
+*/
 
 
   lazy var items : [T] = {

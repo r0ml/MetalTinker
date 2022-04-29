@@ -19,9 +19,12 @@
  The frame initializer could maybe take an array of control structures -- one for each pipeline pass.
  */
 
+static constexpr sampler smplr(coord::normalized, address::clamp_to_zero, filter::linear);
+
 fragmentFn() {
   FragmentOutput f;
 
+  
 //  FragmentOutput f;
 //  float2 g = thisVertex.where.xy;
 //  g.y = uni.iResolution.y-g.y;
@@ -32,19 +35,21 @@ fragmentFn() {
 //    return 0;
 //  }
 
-  float2 Uz = ( thisVertex.where.xy * 2 - uni.iResolution ) / uni.iResolution.y;
+  float2 Uz = textureCoord;
+//  Uz.y = 1-Uz.y;
 
-  uint2 z =  uint2(thisVertex.where.xy); // - uint2(0, 1);
-  z.y = uni.iResolution.y - z.y;
-  float4 Ox = lastFrame[1].read( z );
-  float4 Oy = Ox;
+  float2 Ut = 2 * Uz - 1;
 
-  float Rx = uni.iTime/uni.iResolution.y*uni.iResolution.x; // was 360 -- speed of motion
+//  uint2 z =  uint2(thisVertex.where.xy); // - uint2(0, 1);
+//  z.y = uni.iResolution.y - z.y;
+  float4 Ox = lastFrame[1].sample( smplr, Uz - float2(0, 1/uni.iResolution.y) );
+
+  float Rx = uni.iTime/uni.iResolution.y * 360; // was 360 -- speed of motion
 
   for(uint i=0;i<3;i++) {
     Rx += 2.1;
     float4 p = float4( 1.4, 1.2, 1, .5*sin(Rx+Rx)+.5 );
-    float2 q = float2(.4*cos(Rx), -.7) - Uz;
+    float2 q = float2(.4*cos(Rx), -.7) - Ut;
     float t = length(q) - 0.2;  // 0.2 is the diameter of the glowing circle
     float r = smoothstep(0.1, -0.1, t); // 0.1, -0.1 is the fuzziness of the edge
     float4 V = r * p ;
@@ -53,8 +58,8 @@ fragmentFn() {
       Ox = V;
     }
   }
-//  out[0].write(O, uint2(thisVertex.where.xy));
-  f.color0 = Oy;
+
+  f.color0 = lastFrame[1].sample( iChannel0, Uz );
   f.color1 = saturate(Ox);
   return f;
 }

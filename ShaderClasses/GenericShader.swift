@@ -140,11 +140,14 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     let fragmentProgram = currentFragmentFn(myGroup)
     
     if let rpp = setupRenderPipeline(vertexFunction: vertexProgram, fragmentFunction: fragmentProgram) {
-      (self.pipelineState, self.metadata) = rpp
+      (self.pipelineState, self.metadata, _) = rpp
     }
     
     justInitialization()
-    
+
+    // This has to come after the setupRenderPipeline -- because that is where the metadata comes from.
+    // but if the specialInitialization needs to add more colorAttachments for lastFrame processing,
+    // the pipelineState needs to be regenerated -- for which it would need the functions again -- or the renderPipelineDescriptor
     self.specialInitialization()
     
     frameInitialize()
@@ -309,7 +312,10 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     let msiz = mySize ?? CGSize(width: 100, height: 100)
     let rpd = makeRenderPassDescriptor(label: "appRenderPass", scale: multisampleCount, size: msiz, scene)
     // the rpd color attachments should have the right textures in them
-    makeEncoder(commandBuffer, multisampleCount, rpd)
+
+    doRenderEncoder4(commandBuffer, msiz, rpd)
+
+
     
     //    if let c = xview.currentDrawable {
     
@@ -322,7 +328,6 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     // ========================================================================
     
-    doRenderEncoder4(commandBuffer, msiz, rpd)
     // makeLastFrameTextures went here:
     // so I can
     // a) create the output texture (or have it passed in)
@@ -341,8 +346,8 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     //      commandBuffer.waitUntilCompleted()
   }
   
-  func doRenderEncoder4(_ commandBuffer : MTLCommandBuffer, _ size : CGSize, _ kk : MTLRenderPassDescriptor) {
-    
+  func doRenderEncoder4(_ commandBuffer : MTLCommandBuffer, _ size : CGSize, _ rpd : MTLRenderPassDescriptor) {
+    makeEncoder(commandBuffer, multisampleCount, rpd)
   }
   
   func doRenderEncoder3( _ xvv: MTKView, _ f : ((MTLTexture?) -> ())? )  {
@@ -421,8 +426,9 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       renderPassDescriptor.colorAttachments[0].storeAction = .storeAndMultisampleResolve
       renderPassDescriptor.colorAttachments[0].resolveLevel = 0
       renderPassDescriptor.colorAttachments[0].resolveTexture = resolveTexture //  device.makeTexture(descriptor: xostd)
-      renderPassDescriptor.colorAttachments[0].loadAction = .clear // .clear // .load
-      //      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
+      renderPassDescriptor.colorAttachments[0].loadAction = loadAction(0) // .clear // .load
+      renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 1, alpha: 1)
+
       self.renderPassDescriptor = renderPassDescriptor
     }
     
@@ -431,49 +437,31 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     return renderPassDescriptor!
   }
-  
+
+  func loadAction(_ : Int) -> MTLLoadAction {
+    return .clear
+  }
   
   func makeRenderPassTexture(_ nam : String, scale: Int, size: CGSize) -> (MTLTexture, MTLTexture)? {
+
+    // If I don't use multisampling, I only need one texture
+    // This is the output texture
     let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
     texd.textureType = .type2DMultisample
     texd.usage = [.renderTarget]
     texd.sampleCount = scale
     texd.resourceOptions = .storageModePrivate
     
-    /*
-     let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
-     texi.textureType = .type2D
-     texi.usage = [.shaderRead]
-     texi.resourceOptions = .storageModePrivate
-     */
+    // This is the resolve texture
     let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
     texo.textureType = .type2D
-    texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
+    texo.usage = [ /* .renderTarget, .shaderWrite, */ .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
     texo.resourceOptions = .storageModePrivate
     
-    
-    let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-    texl.textureType = .type2D
-    texl.usage = [.shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-    texl.resourceOptions = .storageModePrivate
-    
-    
     if let p = device.makeTexture(descriptor: texd),
-       //       let q = device.makeTexture(descriptor: texi),
-       let r = device.makeTexture(descriptor: texo),
-       let s = device.makeTexture(descriptor: texl) {
+       let r = device.makeTexture(descriptor: texo) {
       p.label = "render pass \(nam) multisample"
-      //      q.label = "render pass \(nam) input"
       r.label = "render pass \(nam) output"
-      s.label = "render pass \(nam) last frame"
-      //        swapQ.async {
-      
-      /*     for k in fragmentTextures {
-       if k.name == "lastFrame" {
-       k.texture = s
-       }
-       }
-       */
       return (p, r)
     }
     return nil
@@ -500,8 +488,10 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     
     // FIXME: should this be a clear or load?
-    rpd.colorAttachments[0].loadAction = .clear // .load
+    rpd.colorAttachments[0].loadAction = loadAction(0) // .load
     rpd.colorAttachments[0].storeAction = .multisampleResolve
+    rpd.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 1, blue: 0, alpha: 1)
+
     //    }
     
     let sz = CGSize(width : rpd.colorAttachments[0].texture!.width, height: rpd.colorAttachments[0].texture!.height )
@@ -650,9 +640,8 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     
   }
-  
-  
-  func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
+
+  func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection, MTLRenderPipelineDescriptor)? {
     // ============================================
     // this is the actual rendering fragment shader
     
@@ -678,7 +667,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
         var metadata : MTLRenderPipelineReflection?
         let res = try device.makeRenderPipelineState(descriptor: psd, options: [.argumentInfo, .bufferTypeInfo], reflection: &metadata)
         if let m = metadata {
-          return (res, m)
+          return (res, m, psd)
         }
       } catch let er {
         // let m = "Failed to create render render pipeline state for \(self.label), error \(er.localizedDescription)"
@@ -789,7 +778,6 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     let v : SIMD4<Float> = bb.getValue()
     self.clearColor = v
   }
-  
   
 }
 

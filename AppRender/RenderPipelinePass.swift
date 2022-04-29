@@ -158,7 +158,8 @@ class RenderPipelinePass {
       rpd.colorAttachments[i+1].resolveTexture = renderInput[i].2
       rpd.colorAttachments[i+1].loadAction =  delegate.setup.iFrame < 1 ? .clear : .load // xx == 0 ? .clear : .load
       rpd.colorAttachments[i+1].storeAction = .storeAndMultisampleResolve
-      
+      rpd.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+
       // FIXME: put me back
    //   rpd.colorAttachments[i+1].clearColor =  ccc
 

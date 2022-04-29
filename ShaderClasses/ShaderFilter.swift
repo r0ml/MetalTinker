@@ -31,7 +31,6 @@ class ShaderFilter : GenericShader {
   private var _renderPassDescriptor : MTLRenderPassDescriptor?
   private var _mySize : CGSize?
 
-  private var lastFrameTextures : [MTLTexture]?
   //  private var shadowFrameTexture : MTLTexture?
 
   override var myGroup : String {
@@ -59,6 +58,7 @@ class ShaderFilter : GenericShader {
     if let bb = aa?.fragmentArguments {
       processTextures(bb)
     }
+
   }
 
   // let's assume this is where the shader starts running, so shader initialization should happen here.
@@ -79,30 +79,7 @@ class ShaderFilter : GenericShader {
   }
 
 
-
-
-  /*
-   private func renderPassDescriptor(_ mySize : CGSize) -> MTLRenderPassDescriptor {
-   if let rr = _renderPassDescriptor,
-   mySize == _mySize {
-   return rr }
-
-   let k = makeRenderPassDescriptor(label: "render output", size: mySize)
-   _renderPassDescriptor = k
-   _mySize = mySize
-
-   /*
-    if let t = k.colorAttachments[0].resolveTexture {
-    self.fragmentTextures.forEach { if $0.name == "lastFrame" { $0.setTexture(t) } }
-    }
-    */
-
-   return k
-   }
-   */
-
-
-  override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection)? {
+  override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection, MTLRenderPipelineDescriptor)? {
     // ============================================
     // this is the actual rendering fragment shader
 
@@ -123,12 +100,13 @@ class ShaderFilter : GenericShader {
     psd.sampleCount = multisampleCount
     psd.inputPrimitiveTopology = .triangle
 
+
     if psd.vertexFunction != nil && psd.fragmentFunction != nil {
       do {
         var metadata : MTLRenderPipelineReflection?
         let res = try device.makeRenderPipelineState(descriptor: psd, options: [.argumentInfo, .bufferTypeInfo], reflection: &metadata)
         if let m = metadata {
-          return (res, m)
+          return (res, m, psd)
         }
       } catch let er {
         // let m = "Failed to create render render pipeline state for \(self.label), error \(er.localizedDescription)"
@@ -149,14 +127,6 @@ class ShaderFilter : GenericShader {
    just easier to make it a separate buffer
    */
 
-  private func buildImageWells() -> some View {
-
-    // I believe this is where the ImageStrip sets the images as texture inputs.
-    // It is also where the webcam and video support should be assigned
-    ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: {
-      self.fragmentTextures = $0 }))
-  }
-
 
   private func processTextures(_ bst : [MTLArgument] ) {
     for a in bst {
@@ -170,117 +140,6 @@ class ShaderFilter : GenericShader {
     }
   }
   
-  // FIXME: when I fix RenderPassPipeline -- move this out of the class
-  func makeLastFrameTextures(size: CGSize) {
-    /*    let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-     texd.textureType = .type2DMultisample
-     texd.usage = [.renderTarget]
-     texd.sampleCount = multisampleCount
-     texd.resourceOptions = .storageModePrivate
-     */
-    /*
-     let texi = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */ , width: Int(size.width), height: Int(size.height), mipmapped: true)
-     texi.textureType = .type2D
-     texi.usage = [.shaderRead]
-     texi.resourceOptions = .storageModePrivate
-     */
-    /*
-     let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-     texo.textureType = .type2D
-     texo.usage = [.renderTarget, .shaderWrite, .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-     texo.resourceOptions = .storageModePrivate
-     */
-    if let lf = lastFrameTextures,
-       lf.count > 0,
-       lf[0].width == Int(size.width),
-       lf[0].height == Int(size.height) {
-    } else {
-
-      lastFrameTextures = []
-
-      let z = fragmentTextures.filter { $0.name == "lastFrame" }
-      if z.count == 0 {
-
-      } else {
-
-        let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-        texl.textureType = .type2D
-        texl.usage = [.shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
-        texl.resourceOptions = .storageModeManaged
-
-        for k in z {
-        //  if let p = device.makeTexture(descriptor: texd),
-        //       let q = device.makeTexture(descriptor: texi),
-        //       let r = device.makeTexture(descriptor: texo),
-        if  let s = device.makeTexture(descriptor: texl) {
-          //      p.label = "render pass \(nam) multisample"
-          //      q.label = "render pass \(nam) input"
-          //      r.label = "render pass \(nam) output"
-          s.label = "render pass last frame"
-          //        swapQ.async {
-
-          lastFrameTextures!.append(s)
-          k.texture = s
-        }
-        }
-      }
-
-    }
-
-    /*
-     if let lf = shadowFrameTexture,
-     lf.width == Int(size.width),
-     lf.height == Int(size.height) {
-     } else {
-     let z = fragmentTextures.filter { $0.name == "shadowFrame" }
-     if z.count == 0 {
-
-     } else {
-     let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
-     texl.textureType = .type2D
-     texl.usage = [.shaderRead, .shaderWrite] // or just renderTarget -- the read is in case the texture is used in a filter
-     texl.resourceOptions = .storageModeManaged
-
-     if let s = device.makeTexture(descriptor: texl) {
-     s.label = "render pass shadow frame"
-     shadowFrameTexture = s
-     for k in z {
-     k.texture = s
-     }
-     }
-     }
-     }
-     */
-
-
-    //    return (p, r)
-    //    }
-    //    return nil
-  }
-
-
-  // this sets up the GPU for evaluating the frame
-  // gets called both for on and off-screen rendering
-  override func doRenderEncoder4(_ commandBuffer : MTLCommandBuffer, _ size : CGSize, _ kk : MTLRenderPassDescriptor) {
-
-//    makeLastFrameTextures( size: CGSize(width: c.texture.width, height: c.texture.height))
-    makeLastFrameTextures( size: size )
-    
-        if let kt = lastFrameTextures,
-           kt.count > 0,
-           let be = commandBuffer.makeBlitCommandEncoder() {
-          for i in 0 ..< kt.count {
-             if let rt = kk.colorAttachments[i].resolveTexture {
-              be.copy(from: rt, to: kt[i])
-              //          be.generateMipmaps(for: ri.1)
-              //          be.synchronize(resource: kt)
-            }
-          }
-          be.endEncoding()
-        }
-        // ========================================================================
-    }
-
 
 
   override func makeEncoder(_ commandBuffer : MTLCommandBuffer,
@@ -296,23 +155,24 @@ class ShaderFilter : GenericShader {
 
 
     // FIXME: should this be a clear or load?
-    rpd.colorAttachments[0].loadAction = .clear // .load
+    rpd.colorAttachments[0].loadAction = loadAction(0) // .load
     rpd.colorAttachments[0].storeAction = .multisampleResolve
+    rpd.colorAttachments[0].clearColor = MTLClearColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1) // this seems to be the clear color for subsequent invocations
+
+
     //    }
 
     let sz = CGSize(width : rpd.colorAttachments[0].texture!.width, height: rpd.colorAttachments[0].texture!.height )
     setup.setupUniform( size: sz, scale: Int(scale), uniform: uniformBuffer!, times: times )
 
     // texture and resolveTexture size mismatch    during resize
-    if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
+    if        let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
       renderEncoder.label = "render encoder"
 
       renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setFragmentBuffer(initializationBuffer, offset: 0, index: kbuffId)
       for i in 0..<fragmentTextures.count {
-        if fragmentTextures[i].texture == nil && fragmentTextures[i].name != "lastFrame" {
-          fragmentTextures[i].texture = fragmentTextures[i].image.getTexture(textureLoader, mipmaps: true)
-        }
+        setFragmentTexture(i)
         renderEncoder.setFragmentTexture( fragmentTextures[i].texture, index: fragmentTextures[i].index)
       }
 
@@ -320,17 +180,33 @@ class ShaderFilter : GenericShader {
       renderEncoder.setVertexBuffer(uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setVertexBuffer(initializationBuffer, offset: 0, index: kbuffId)
 
+      if setup.iFrame > 0 {
 
       self.finishCommandEncoding(renderEncoder)
+      }
+      
+        renderEncoder.endEncoding()
+    }
+  }
 
-      renderEncoder.endEncoding()
+  func setFragmentTexture(_ i : Int) {
+    if fragmentTextures[i].texture == nil {
+      fragmentTextures[i].texture = fragmentTextures[i].image.getTexture(textureLoader, mipmaps: true)
     }
   }
 
   override func morePrefs() -> [IdentifiableView] {
-    let c = buildImageWells()
+    let c = self.buildImageWells()
      let d = IdentifiableView(id: "sources", view: AnyView(c))
     return [d]
   }
+
+  func buildImageWells() -> AnyView {
+    return AnyView(
+      ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: {
+      self.fragmentTextures = $0 }))
+      )
+  }
+
 
 }

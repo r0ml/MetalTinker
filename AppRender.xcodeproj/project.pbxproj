@@ -11,6 +11,10 @@
 		E704CC8E25638FFB00FB8C5F /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
 		E70EC64E25B8D7DE00A204C3 /* VertexNode.metal in Sources */ = {isa = PBXBuildFile; fileRef = E70EC64525B8CBD400A204C3 /* VertexNode.metal */; };
 		E70EC67225BA100E00A204C3 /* Arcs.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A79A25B256960051A69A /* Arcs.metal */; };
+		E717167F2818EAF9006A916C /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E71716802818EAF9006A916C /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
+		E71716A72818EC8D006A916C /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E71716A82818EC8D006A916C /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E71A02C62366847600A88C16 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C52366847600A88C16 /* ViewModel.swift */; };
 		E71A02C82367397B00A88C16 /* NSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C72367397B00A88C16 /* NSImageView.swift */; };
 		E71A02CA23673C2400A88C16 /* CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C923673C2400A88C16 /* CIImage.swift */; };
@@ -43,8 +47,6 @@
 		E74A42532576B7C500639F19 /* SceneProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A42522576B7C500639F19 /* SceneProtocol.swift */; };
 		E74A43972576EC1A00639F19 /* SceneLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A43962576EC1A00639F19 /* SceneLibraryView.swift */; };
 		E74A445C257804AC00639F19 /* Simple3.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A445B257804AC00639F19 /* Simple3.swift */; };
-		E74A49EB27F917510056E09D /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
-		E74A49EC27F917510056E09D /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E74F94592256A05900706CBF /* MetalVideoRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74F94582256A05800706CBF /* MetalVideoRecorder.swift */; };
 		E7539442257AD22F00642C36 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
 		E7539F87257C19EE00642C36 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
@@ -221,29 +223,50 @@
 		E76DDD4B27DA71E1006BEBB2 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E76DDD4C27DA71E6006BEBB2 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E7722C17253FD69A006EDEB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7722C16253FD69A006EDEB1 /* Images.xcassets */; };
-		E773D5512811F55000AD2173 /* Sphere Distribution.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458C280DC561000EC2DE /* Sphere Distribution.metal */; };
-		E773D5522811F6F000AD2173 /* braid.metal in Sources */ = {isa = PBXBuildFile; fileRef = E74A49F227F917B10056E09D /* braid.metal */; };
 		E773D5542812256B00AD2173 /* GenericShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773D5532812256B00AD2173 /* GenericShader.swift */; };
 		E773D5552812377C00AD2173 /* RenderPipelinePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DD74323E9377D00DAB04A /* RenderPipelinePass.swift */; };
 		E774DE0E2816E524007998EA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774DE0D2816E524007998EA /* SettingsView.swift */; };
 		E774DE102816F8B0007998EA /* ShaderVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774DE0F2816F8B0007998EA /* ShaderVertex.swift */; };
 		E77675D82283786000614B7B /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E785E2E525AA46E600511B0C /* SKSCNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E785E2E425AA46E600511B0C /* SKSCNScene.swift */; };
+		E7971B4E281B8B8800C15C5B /* ShaderFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7971B4D281B8B8800C15C5B /* ShaderFeedback.swift */; };
+		E7971B4F281B8BE600C15C5B /* GLSL smallpt multipass.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB85280E0BCB005E3A87 /* GLSL smallpt multipass.metal */; };
+		E7971B50281B8BE600C15C5B /* Starburst.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457B280DC55F000EC2DE /* Starburst.metal */; };
+		E7971B51281B8BE600C15C5B /* Mezmerizer.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4585280DC560000EC2DE /* Mezmerizer.metal */; };
+		E7971B52281B8BE600C15C5B /* IFS 2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457E280DC560000EC2DE /* IFS 2.metal */; };
+		E7971B53281B8BE600C15C5B /* IFS fern direct.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD459A280DC563000EC2DE /* IFS fern direct.metal */; };
+		E7971B54281B8BE600C15C5B /* Feedback Circles.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4582280DC560000EC2DE /* Feedback Circles.metal */; };
+		E7971B55281B8BE600C15C5B /* Descent by Macau Exports.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB7B280E0BCA005E3A87 /* Descent by Macau Exports.metal */; };
+		E7971B56281B8BE600C15C5B /* Belousov-Zhabotinsky Reaction.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457F280DC560000EC2DE /* Belousov-Zhabotinsky Reaction.metal */; };
+		E7971B57281B8BE600C15C5B /* Another Particles Motion Blur.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4587280DC561000EC2DE /* Another Particles Motion Blur.metal */; };
+		E7971B58281B8BE600C15C5B /* Every Line is Straight.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB87280E0BCB005E3A87 /* Every Line is Straight.metal */; };
+		E7971B59281B8BE600C15C5B /* Particle Experiment 6.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458E280DC562000EC2DE /* Particle Experiment 6.metal */; };
+		E7971B5A281B8BE600C15C5B /* Particle Experiment 8.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458F280DC562000EC2DE /* Particle Experiment 8.metal */; };
+		E7971B5B281B8BE600C15C5B /* Cut and Project.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB78280E0BCA005E3A87 /* Cut and Project.metal */; };
+		E7971B5C281B8BE600C15C5B /* Stop Motion.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB74280E0BC9005E3A87 /* Stop Motion.metal */; };
+		E7971B5D281B8BE600C15C5B /* Filter Motion Blur multipass.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB84280E0BCB005E3A87 /* Filter Motion Blur multipass.metal */; };
+		E7971B5E281B8BE600C15C5B /* IFS fern short cumulated.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4581280DC560000EC2DE /* IFS fern short cumulated.metal */; };
+		E7971B5F281B8BE600C15C5B /* Infinite sierpinski.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB82280E0BCA005E3A87 /* Infinite sierpinski.metal */; };
+		E7971B60281B8BE600C15C5B /* PastelStorm.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4597280DC563000EC2DE /* PastelStorm.metal */; };
+		E7971B61281B8BE600C15C5B /* Automated Automata.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB86280E0BCB005E3A87 /* Automated Automata.metal */; };
+		E7971B62281B8BE600C15C5B /* Cornell box 5367.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB83280E0BCA005E3A87 /* Cornell box 5367.metal */; };
+		E7971B63281B8BE600C15C5B /* Foggy Road.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB76280E0BCA005E3A87 /* Foggy Road.metal */; };
+		E7971B64281B8BE600C15C5B /* KIFS 2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458D280DC561000EC2DE /* KIFS 2.metal */; };
+		E7971B65281B8BE600C15C5B /* boreal plasma.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB7A280E0BCA005E3A87 /* boreal plasma.metal */; };
+		E7971B66281B8BE600C15C5B /* Black and White Spheres.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB8B280E0BCB005E3A87 /* Black and White Spheres.metal */; };
+		E7971B67281B8BE600C15C5B /* Feedback tunnel experiment.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4584280DC560000EC2DE /* Feedback tunnel experiment.metal */; };
+		E7971B68281B8BE600C15C5B /* Basic Conway Game of Life.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB8A280E0BCB005E3A87 /* Basic Conway Game of Life.metal */; };
+		E7971B69281B8BE600C15C5B /* isovalues 3.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB88280E0BCB005E3A87 /* isovalues 3.metal */; };
+		E7971B6A281B8BE600C15C5B /* moreSpirograph.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4578280DB796000EC2DE /* moreSpirograph.metal */; };
+		E7971B6E281B8C2900C15C5B /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E7971B7D281B8C2900C15C5B /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
+		E7971B90281B8C5900C15C5B /* a 1tweet fluid.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4580280DC560000EC2DE /* a 1tweet fluid.metal */; };
+		E7971B91281B8C5900C15C5B /* braid.metal in Sources */ = {isa = PBXBuildFile; fileRef = E74A49F227F917B10056E09D /* braid.metal */; };
+		E7971B92281B8C5900C15C5B /* Sphere Distribution.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458C280DC561000EC2DE /* Sphere Distribution.metal */; };
+		E7971B95281BBF0D00C15C5B /* Binary 1D Cellular Automata.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB7F280E0BCA005E3A87 /* Binary 1D Cellular Automata.metal */; };
+		E7971B96281BC18B00C15C5B /* Blue Feedback.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB7E280E0BCA005E3A87 /* Blue Feedback.metal */; };
+		E7971B97281BC3A500C15C5B /* Buffer computed points.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4599280DC563000EC2DE /* Buffer computed points.metal */; };
 		E79A10E222CF9B4D004FD5E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E79A10E122CF9B4D004FD5E2 /* README.md */; };
-		E79BDB8F280E0BCB005E3A87 /* Stop Motion.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB74280E0BC9005E3A87 /* Stop Motion.metal */; };
-		E79BDB91280E0BCB005E3A87 /* Foggy Road.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB76280E0BCA005E3A87 /* Foggy Road.metal */; };
-		E79BDB93280E0BCB005E3A87 /* Cut and Project.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB78280E0BCA005E3A87 /* Cut and Project.metal */; };
-		E79BDB95280E0BCB005E3A87 /* boreal plasma.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB7A280E0BCA005E3A87 /* boreal plasma.metal */; };
-		E79BDB96280E0BCB005E3A87 /* Descent by Macau Exports.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB7B280E0BCA005E3A87 /* Descent by Macau Exports.metal */; };
-		E79BDB9D280E0BCB005E3A87 /* Infinite sierpinski.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB82280E0BCA005E3A87 /* Infinite sierpinski.metal */; };
-		E79BDB9E280E0BCB005E3A87 /* Cornell box 5367.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB83280E0BCA005E3A87 /* Cornell box 5367.metal */; };
-		E79BDB9F280E0BCB005E3A87 /* Filter Motion Blur multipass.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB84280E0BCB005E3A87 /* Filter Motion Blur multipass.metal */; };
-		E79BDBA0280E0BCB005E3A87 /* GLSL smallpt multipass.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB85280E0BCB005E3A87 /* GLSL smallpt multipass.metal */; };
-		E79BDBA1280E0BCB005E3A87 /* Automated Automata.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB86280E0BCB005E3A87 /* Automated Automata.metal */; };
-		E79BDBA2280E0BCB005E3A87 /* Every Line is Straight.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB87280E0BCB005E3A87 /* Every Line is Straight.metal */; };
-		E79BDBA3280E0BCB005E3A87 /* isovalues 3.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB88280E0BCB005E3A87 /* isovalues 3.metal */; };
-		E79BDBA5280E0BCB005E3A87 /* Basic Conway Game of Life.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB8A280E0BCB005E3A87 /* Basic Conway Game of Life.metal */; };
-		E79BDBA6280E0BCB005E3A87 /* Black and White Spheres.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB8B280E0BCB005E3A87 /* Black and White Spheres.metal */; };
 		E79BDBB0280E2C35005E3A87 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E79BDBB1280E2C35005E3A87 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E79BDBB8280E2C36005E3A87 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
@@ -252,7 +275,6 @@
 		E79BDBC1280E2C67005E3A87 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E79BDBCE280E2CC6005E3A87 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E79BDBCF280E2CC6005E3A87 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
-		E79BDC17280E7DD8005E3A87 /* a 1tweet fluid.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4580280DC560000EC2DE /* a 1tweet fluid.metal */; };
 		E7A3A16A21A7E07500742611 /* Common.h in Sources */ = {isa = PBXBuildFile; fileRef = E701A3F12171573F00FC9795 /* Common.h */; };
 		E7A5A3A025AD15B80051A69A /* PointScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A39F25AD15B80051A69A /* PointScene.swift */; };
 		E7A5A3A725AD4EBD0051A69A /* Vogels Distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3A625AD4EBD0051A69A /* Vogels Distribution.swift */; };
@@ -360,20 +382,6 @@
 		E7B573B025B7F0F500DF1452 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B573AF25B7F0F500DF1452 /* CGPoint.swift */; };
 		E7B573B925B80A3B00DF1452 /* VertexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B573B825B80A3B00DF1452 /* VertexScene.swift */; };
 		E7C75A0B2815C13A003D906D /* ShaderSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C75A0A2815C13A003D906D /* ShaderSceneView.swift */; };
-		E7CD4579280DB796000EC2DE /* moreSpirograph.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4578280DB796000EC2DE /* moreSpirograph.metal */; };
-		E7CD45BD280DC7A8000EC2DE /* Another Particles Motion Blur.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4587280DC561000EC2DE /* Another Particles Motion Blur.metal */; };
-		E7CD45BE280DC94A000EC2DE /* Belousov-Zhabotinsky Reaction.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457F280DC560000EC2DE /* Belousov-Zhabotinsky Reaction.metal */; };
-		E7CD45BF280DC972000EC2DE /* Feedback Circles.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4582280DC560000EC2DE /* Feedback Circles.metal */; };
-		E7CD45C0280DC9AA000EC2DE /* Feedback tunnel experiment.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4584280DC560000EC2DE /* Feedback tunnel experiment.metal */; };
-		E7CD45C1280DC9EC000EC2DE /* IFS 2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457E280DC560000EC2DE /* IFS 2.metal */; };
-		E7CD45C2280DC9F7000EC2DE /* IFS fern direct.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD459A280DC563000EC2DE /* IFS fern direct.metal */; };
-		E7CD45C3280DC9FE000EC2DE /* IFS fern short cumulated.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4581280DC560000EC2DE /* IFS fern short cumulated.metal */; };
-		E7CD45C4280DCA12000EC2DE /* KIFS 2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458D280DC561000EC2DE /* KIFS 2.metal */; };
-		E7CD45CB280DCA61000EC2DE /* Mezmerizer.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4585280DC560000EC2DE /* Mezmerizer.metal */; };
-		E7CD45CD280DCAC4000EC2DE /* Particle Experiment 6.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458E280DC562000EC2DE /* Particle Experiment 6.metal */; };
-		E7CD45CE280DCACA000EC2DE /* Particle Experiment 8.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458F280DC562000EC2DE /* Particle Experiment 8.metal */; };
-		E7CD45CF280DCADB000EC2DE /* PastelStorm.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4597280DC563000EC2DE /* PastelStorm.metal */; };
-		E7CD45D0280DCAFB000EC2DE /* Starburst.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457B280DC55F000EC2DE /* Starburst.metal */; };
 		E7CF9BCD227F425400413280 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCC227F425400413280 /* NSColor.swift */; };
 		E7CF9BCF227F429A00413280 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCE227F429A00413280 /* UserDefaults.swift */; };
 		E7CF9BD1227F42BF00413280 /* MTLTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BD0227F42BF00413280 /* MTLTexture.swift */; };
@@ -435,19 +443,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E71716A32818EBEA006A916C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E717167D2818EAF9006A916C;
+			remoteInfo = Feedback.Simple;
+		};
+		E71716C92818ECBC006A916C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E71716A52818EC8D006A916C;
+			remoteInfo = Filters.Feedback;
+		};
 		E74307A827F8DF4200BECBD0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E743079A27F8DF1200BECBD0;
 			remoteInfo = Shaders.Multipass;
-		};
-		E74A49F427F917C20056E09D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E74A49E927F917510056E09D;
-			remoteInfo = Filters.Working;
 		};
 		E75A1B1E27EE829700779D64 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -490,6 +505,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E76DDD4127DA7191006BEBB2;
 			remoteInfo = "Edge Detection";
+		};
+		E7971B93281B8D4100C15C5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7971B6C281B8C2900C15C5B;
+			remoteInfo = Feedback.Multiple;
 		};
 		E79BDBC6280E2CAC005E3A87 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -592,6 +614,8 @@
 		E704CC0E25638FBA00FB8C5F /* shapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shapes.h; sourceTree = "<group>"; };
 		E70DAB43226056E5009B02CD /* DynamicPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPreferences.swift; sourceTree = "<group>"; };
 		E70EC64525B8CBD400A204C3 /* VertexNode.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = VertexNode.metal; sourceTree = "<group>"; };
+		E71716842818EAF9006A916C /* Feedback.Simple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Feedback.Simple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E71716AC2818EC8D006A916C /* Filters.Feedback.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Filters.Feedback.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E71A02C12366511A00A88C16 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		E71A02C32366512B00A88C16 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		E71A02C52366847600A88C16 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -628,7 +652,6 @@
 		E74A46642578488400639F19 /* Simple4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple4.swift; sourceTree = "<group>"; };
 		E74A46DE257AAA0300639F19 /* Simple6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple6.swift; sourceTree = "<group>"; };
 		E74A4820257AB32500639F19 /* Simple7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple7.swift; sourceTree = "<group>"; };
-		E74A49F027F917510056E09D /* Filters.Working.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Filters.Working.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74A49F227F917B10056E09D /* braid.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = braid.metal; sourceTree = "<group>"; };
 		E74F94582256A05800706CBF /* MetalVideoRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalVideoRecorder.swift; sourceTree = "<group>"; };
 		E7500791216B181100FABE79 /* Shader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
@@ -808,6 +831,8 @@
 		E77675D72283786000614B7B /* glsl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = glsl.metal; sourceTree = "<group>"; };
 		E77675DA2283791A00614B7B /* glsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glsl.h; sourceTree = "<group>"; };
 		E785E2E425AA46E600511B0C /* SKSCNScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSCNScene.swift; sourceTree = "<group>"; };
+		E7971B4D281B8B8800C15C5B /* ShaderFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderFeedback.swift; sourceTree = "<group>"; };
+		E7971B8F281B8C2900C15C5B /* Feedback.Multiple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Feedback.Multiple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E79A10E122CF9B4D004FD5E2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E79BDB74280E0BC9005E3A87 /* Stop Motion.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Stop Motion.metal"; sourceTree = "<group>"; };
 		E79BDB75280E0BC9005E3A87 /* Linearly Transformed Cosines X.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Linearly Transformed Cosines X.metal"; sourceTree = "<group>"; };
@@ -1059,6 +1084,15 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		E71716DE281B5BC3006A916C /* FeedbackShaders */ = {
+			isa = PBXGroup;
+			children = (
+				E74A49F127F917650056E09D /* Feedback */,
+				E7CD45D1280DCB0F000EC2DE /* ShadowBuffers */,
+			);
+			path = FeedbackShaders;
+			sourceTree = "<group>";
+		};
 		E72A7FFC23C2C3F7008C642A /* Metal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1119,7 +1153,7 @@
 			path = Sprites;
 			sourceTree = "<group>";
 		};
-		E74A49F127F917650056E09D /* Working */ = {
+		E74A49F127F917650056E09D /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
 				E7CD4587280DC561000EC2DE /* Another Particles Motion Blur.metal */,
@@ -1151,7 +1185,7 @@
 				E7CD4597280DC563000EC2DE /* PastelStorm.metal */,
 				E7CD457B280DC55F000EC2DE /* Starburst.metal */,
 			);
-			path = Working;
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		E75A1B4D27F175AE00779D64 /* Colors */ = {
@@ -1275,11 +1309,9 @@
 				E75A1B6927F1793D00779D64 /* Deforms */,
 				E76DDCF727DA7141006BEBB2 /* Filters */,
 				E79BDBAB280E0FCD005E3A87 /* NotWorking */,
-				E7CD45D1280DCB0F000EC2DE /* ShadowBuffers */,
 				E7D7C1B725ACBD1F004D75CD /* Shapes Vertex */,
 				E7D7C0A325ABB410004D75CD /* Simple Vertex */,
 				E76DDCD927DA7141006BEBB2 /* Transitions */,
-				E74A49F127F917650056E09D /* Working */,
 			);
 			path = FilterShaders;
 			sourceTree = "<group>";
@@ -1535,6 +1567,7 @@
 			isa = PBXGroup;
 			children = (
 				E7E9D6EB27DC363B00431EB0 /* ShaderFilter.swift */,
+				E7971B4D281B8B8800C15C5B /* ShaderFeedback.swift */,
 				E774DE0F2816F8B0007998EA /* ShaderVertex.swift */,
 				E7500791216B181100FABE79 /* Shader.swift */,
 				E773D5532812256B00AD2173 /* GenericShader.swift */,
@@ -1712,9 +1745,10 @@
 				E72A7FFC23C2C3F7008C642A /* Metal */,
 				E7B5733525B6B1FD00DF1452 /* CIFilters */,
 				E7D7C0A425ABB410004D75CD /* Shaders */,
-				E773D5562812390800AD2173 /* GeneratorShaders */,
 				E74A445A2578043700639F19 /* Sprites */,
 				E74A41CC2576B4F600639F19 /* Scenes */,
+				E773D5562812390800AD2173 /* GeneratorShaders */,
+				E71716DE281B5BC3006A916C /* FeedbackShaders */,
 				E76DDCA227DA646B006BEBB2 /* FilterShaders */,
 				E7FCB467212A2B1000CED4FA /* Products */,
 			);
@@ -1732,11 +1766,13 @@
 				E75A1B6827F1791800779D64 /* Filters.Deforms.metallib */,
 				E75A20AC27F25BA900779D64 /* Generators.Circles.metallib */,
 				E74307A427F8DF1200BECBD0 /* Shaders.Multipass.metallib */,
-				E74A49F027F917510056E09D /* Filters.Working.metallib */,
 				E79BDBB5280E2C35005E3A87 /* Filters.ShadowBuffers.metallib */,
 				E79BDBBD280E2C36005E3A87 /* Filters.NotWorking.metallib */,
 				E79BDBC5280E2C67005E3A87 /* Filters.Generators.metallib */,
 				E79BDBD3280E2CC6005E3A87 /* Filters.Patterns.metallib */,
+				E71716842818EAF9006A916C /* Feedback.Simple.metallib */,
+				E71716AC2818EC8D006A916C /* Filters.Feedback.metallib */,
+				E7971B8F281B8C2900C15C5B /* Feedback.Multiple.metallib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1773,6 +1809,36 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		E717167D2818EAF9006A916C /* Feedback.Simple */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E71716812818EAF9006A916C /* Build configuration list for PBXNativeTarget "Feedback.Simple" */;
+			buildPhases = (
+				E717167E2818EAF9006A916C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Feedback.Simple;
+			productName = "Edge Detection";
+			productReference = E71716842818EAF9006A916C /* Feedback.Simple.metallib */;
+			productType = "com.apple.product-type.metal-library";
+		};
+		E71716A52818EC8D006A916C /* Filters.Feedback */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E71716A92818EC8D006A916C /* Build configuration list for PBXNativeTarget "Filters.Feedback" */;
+			buildPhases = (
+				E71716A62818EC8D006A916C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Filters.Feedback;
+			productName = "Edge Detection";
+			productReference = E71716AC2818EC8D006A916C /* Filters.Feedback.metallib */;
+			productType = "com.apple.product-type.metal-library";
+		};
 		E743079A27F8DF1200BECBD0 /* Shaders.Multipass */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E74307A127F8DF1200BECBD0 /* Build configuration list for PBXNativeTarget "Shaders.Multipass" */;
@@ -1800,21 +1866,6 @@
 			);
 			name = Template;
 			productName = Simple;
-			productType = "com.apple.product-type.metal-library";
-		};
-		E74A49E927F917510056E09D /* Filters.Working */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E74A49ED27F917510056E09D /* Build configuration list for PBXNativeTarget "Filters.Working" */;
-			buildPhases = (
-				E74A49EA27F917510056E09D /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Filters.Working;
-			productName = "Edge Detection";
-			productReference = E74A49F027F917510056E09D /* Filters.Working.metallib */;
 			productType = "com.apple.product-type.metal-library";
 		};
 		E75A1AB327EE81B400779D64 /* Filters.Transitions */ = {
@@ -1919,6 +1970,21 @@
 			);
 			name = Filters.Blurs;
 			productName = "Edge Detection";
+			productType = "com.apple.product-type.metal-library";
+		};
+		E7971B6C281B8C2900C15C5B /* Feedback.Multiple */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7971B8C281B8C2900C15C5B /* Build configuration list for PBXNativeTarget "Feedback.Multiple" */;
+			buildPhases = (
+				E7971B6D281B8C2900C15C5B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Feedback.Multiple;
+			productName = "Edge Detection";
+			productReference = E7971B8F281B8C2900C15C5B /* Feedback.Multiple.metallib */;
 			productType = "com.apple.product-type.metal-library";
 		};
 		E79BDBAE280E2C35005E3A87 /* Filters.ShadowBuffers */ = {
@@ -2081,10 +2147,14 @@
 				E7D7C06A25ABB333004D75CD /* Run Script Copy Shaders */,
 				E7E9D6E427DA731F00431EB0 /* Run Script Copy Filters */,
 				E773D5582812D83300AD2173 /* Run Script Copy Generators */,
+				E71716862818EB6E006A916C /* Run Script Copy Feedback */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E7971B94281B8D4100C15C5B /* PBXTargetDependency */,
+				E71716A42818EBEA006A916C /* PBXTargetDependency */,
+				E71716CA2818ECBC006A916C /* PBXTargetDependency */,
 				E79BDBD5280E2CD8005E3A87 /* PBXTargetDependency */,
 				E79BDBC7280E2CAC005E3A87 /* PBXTargetDependency */,
 				E79BDBC9280E2CAC005E3A87 /* PBXTargetDependency */,
@@ -2101,7 +2171,6 @@
 				E7A5A7E225B257080051A69A /* PBXTargetDependency */,
 				E7D7C1C925ACBD4C004D75CD /* PBXTargetDependency */,
 				E7D7C07C25ABB36F004D75CD /* PBXTargetDependency */,
-				E74A49F527F917C20056E09D /* PBXTargetDependency */,
 				E7ED18F6257E903A0075DD2E /* PBXTargetDependency */,
 			);
 			name = AppRender;
@@ -2162,6 +2231,8 @@
 				E7ED18EF257E903A0075DD2E /* Simple Scenes */,
 				E7B5734D25B6B2AD00DF1452 /* CIFilters */,
 				E75A20A527F25BA900779D64 /* Generators.Circles */,
+				E717167D2818EAF9006A916C /* Feedback.Simple */,
+				E7971B6C281B8C2900C15C5B /* Feedback.Multiple */,
 				E76DDD4127DA7191006BEBB2 /* Filters.Blurs */,
 				E7A5A7A025B256A90051A69A /* Filters.CirclesVertex */,
 				E75A1B4527F1759100779D64 /* Filters.Colors */,
@@ -2174,7 +2245,7 @@
 				E7D7C1A525ACBCE6004D75CD /* Filters.ShapesVertex */,
 				E7D7C06B25ABB355004D75CD /* Filters.SimpleVertex */,
 				E75A1AB327EE81B400779D64 /* Filters.Transitions */,
-				E74A49E927F917510056E09D /* Filters.Working */,
+				E71716A52818EC8D006A916C /* Filters.Feedback */,
 				E75A1AE227EE825500779D64 /* Template2 */,
 			);
 		};
@@ -2204,6 +2275,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		E71716862818EB6E006A916C /* Run Script Copy Feedback */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script Copy Feedback";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/Feedback\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/Feedback.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/Feedback.*.metallib ${OD}/\ncd ${OD}\nzmv -f 'Feedback.(*).metallib' '$1.metallib'\n";
+		};
 		E773D5582812D83300AD2173 /* Run Script Copy Generators */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2261,6 +2350,52 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E717167E2818EAF9006A916C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E717167F2818EAF9006A916C /* support.metal in Sources */,
+				E7971B5F281B8BE600C15C5B /* Infinite sierpinski.metal in Sources */,
+				E7971B68281B8BE600C15C5B /* Basic Conway Game of Life.metal in Sources */,
+				E7971B57281B8BE600C15C5B /* Another Particles Motion Blur.metal in Sources */,
+				E7971B58281B8BE600C15C5B /* Every Line is Straight.metal in Sources */,
+				E7971B60281B8BE600C15C5B /* PastelStorm.metal in Sources */,
+				E7971B54281B8BE600C15C5B /* Feedback Circles.metal in Sources */,
+				E7971B53281B8BE600C15C5B /* IFS fern direct.metal in Sources */,
+				E7971B63281B8BE600C15C5B /* Foggy Road.metal in Sources */,
+				E7971B5A281B8BE600C15C5B /* Particle Experiment 8.metal in Sources */,
+				E7971B62281B8BE600C15C5B /* Cornell box 5367.metal in Sources */,
+				E7971B6A281B8BE600C15C5B /* moreSpirograph.metal in Sources */,
+				E7971B5B281B8BE600C15C5B /* Cut and Project.metal in Sources */,
+				E7971B51281B8BE600C15C5B /* Mezmerizer.metal in Sources */,
+				E7971B5E281B8BE600C15C5B /* IFS fern short cumulated.metal in Sources */,
+				E71716802818EAF9006A916C /* glsl.metal in Sources */,
+				E7971B65281B8BE600C15C5B /* boreal plasma.metal in Sources */,
+				E7971B56281B8BE600C15C5B /* Belousov-Zhabotinsky Reaction.metal in Sources */,
+				E7971B69281B8BE600C15C5B /* isovalues 3.metal in Sources */,
+				E7971B5D281B8BE600C15C5B /* Filter Motion Blur multipass.metal in Sources */,
+				E7971B66281B8BE600C15C5B /* Black and White Spheres.metal in Sources */,
+				E7971B59281B8BE600C15C5B /* Particle Experiment 6.metal in Sources */,
+				E7971B50281B8BE600C15C5B /* Starburst.metal in Sources */,
+				E7971B52281B8BE600C15C5B /* IFS 2.metal in Sources */,
+				E7971B4F281B8BE600C15C5B /* GLSL smallpt multipass.metal in Sources */,
+				E7971B64281B8BE600C15C5B /* KIFS 2.metal in Sources */,
+				E7971B61281B8BE600C15C5B /* Automated Automata.metal in Sources */,
+				E7971B5C281B8BE600C15C5B /* Stop Motion.metal in Sources */,
+				E7971B55281B8BE600C15C5B /* Descent by Macau Exports.metal in Sources */,
+				E7971B67281B8BE600C15C5B /* Feedback tunnel experiment.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E71716A62818EC8D006A916C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E71716A72818EC8D006A916C /* support.metal in Sources */,
+				E71716A82818EC8D006A916C /* glsl.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E743079B27F8DF1200BECBD0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2285,43 +2420,6 @@
 				E704CC8E25638FFB00FB8C5F /* shapes.metal in Sources */,
 				E746F31923F0D9AC003598F6 /* sdf.metal in Sources */,
 				E743D707236C83FE00EB81BC /* support.metal in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E74A49EA27F917510056E09D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E79BDB9E280E0BCB005E3A87 /* Cornell box 5367.metal in Sources */,
-				E79BDBA2280E0BCB005E3A87 /* Every Line is Straight.metal in Sources */,
-				E7CD45BF280DC972000EC2DE /* Feedback Circles.metal in Sources */,
-				E7CD45CD280DCAC4000EC2DE /* Particle Experiment 6.metal in Sources */,
-				E74A49EB27F917510056E09D /* support.metal in Sources */,
-				E79BDB96280E0BCB005E3A87 /* Descent by Macau Exports.metal in Sources */,
-				E7CD45D0280DCAFB000EC2DE /* Starburst.metal in Sources */,
-				E79BDB8F280E0BCB005E3A87 /* Stop Motion.metal in Sources */,
-				E79BDB9D280E0BCB005E3A87 /* Infinite sierpinski.metal in Sources */,
-				E79BDBA3280E0BCB005E3A87 /* isovalues 3.metal in Sources */,
-				E79BDB93280E0BCB005E3A87 /* Cut and Project.metal in Sources */,
-				E7CD45C0280DC9AA000EC2DE /* Feedback tunnel experiment.metal in Sources */,
-				E79BDB91280E0BCB005E3A87 /* Foggy Road.metal in Sources */,
-				E79BDBA5280E0BCB005E3A87 /* Basic Conway Game of Life.metal in Sources */,
-				E79BDBA1280E0BCB005E3A87 /* Automated Automata.metal in Sources */,
-				E74A49EC27F917510056E09D /* glsl.metal in Sources */,
-				E79BDB9F280E0BCB005E3A87 /* Filter Motion Blur multipass.metal in Sources */,
-				E7CD45C2280DC9F7000EC2DE /* IFS fern direct.metal in Sources */,
-				E7CD45C1280DC9EC000EC2DE /* IFS 2.metal in Sources */,
-				E79BDBA6280E0BCB005E3A87 /* Black and White Spheres.metal in Sources */,
-				E7CD45CF280DCADB000EC2DE /* PastelStorm.metal in Sources */,
-				E79BDB95280E0BCB005E3A87 /* boreal plasma.metal in Sources */,
-				E7CD45C3280DC9FE000EC2DE /* IFS fern short cumulated.metal in Sources */,
-				E7CD45CB280DCA61000EC2DE /* Mezmerizer.metal in Sources */,
-				E7CD45C4280DCA12000EC2DE /* KIFS 2.metal in Sources */,
-				E7CD45BE280DC94A000EC2DE /* Belousov-Zhabotinsky Reaction.metal in Sources */,
-				E7CD45CE280DCACA000EC2DE /* Particle Experiment 8.metal in Sources */,
-				E79BDBA0280E0BCB005E3A87 /* GLSL smallpt multipass.metal in Sources */,
-				E7CD45BD280DC7A8000EC2DE /* Another Particles Motion Blur.metal in Sources */,
-				E7CD4579280DB796000EC2DE /* moreSpirograph.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2544,14 +2642,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7971B6D281B8C2900C15C5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7971B96281BC18B00C15C5B /* Blue Feedback.metal in Sources */,
+				E7971B6E281B8C2900C15C5B /* support.metal in Sources */,
+				E7971B90281B8C5900C15C5B /* a 1tweet fluid.metal in Sources */,
+				E7971B92281B8C5900C15C5B /* Sphere Distribution.metal in Sources */,
+				E7971B91281B8C5900C15C5B /* braid.metal in Sources */,
+				E7971B97281BC3A500C15C5B /* Buffer computed points.metal in Sources */,
+				E7971B95281BBF0D00C15C5B /* Binary 1D Cellular Automata.metal in Sources */,
+				E7971B7D281B8C2900C15C5B /* glsl.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E79BDBAF280E2C35005E3A87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E79BDBB0280E2C35005E3A87 /* support.metal in Sources */,
-				E773D5512811F55000AD2173 /* Sphere Distribution.metal in Sources */,
-				E773D5522811F6F000AD2173 /* braid.metal in Sources */,
-				E79BDC17280E7DD8005E3A87 /* a 1tweet fluid.metal in Sources */,
 				E79BDBB1280E2C35005E3A87 /* glsl.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2810,6 +2920,7 @@
 				E7E9D6FD27DD06AD00431EB0 /* ImageStrip.swift in Sources */,
 				E704CBCE25638F6100FB8C5F /* shapes.metal in Sources */,
 				E7CF9BCF227F429A00413280 /* UserDefaults.swift in Sources */,
+				E7971B4E281B8B8800C15C5B /* ShaderFeedback.swift in Sources */,
 				E7D7C0D125ABB55F004D75CD /* Shader.swift in Sources */,
 				E7B572A925B40C0800DF1452 /* Magic_Ring.swift in Sources */,
 				E7AB8E0125A8497F00E464F9 /* MetalX.swift in Sources */,
@@ -2828,15 +2939,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E71716A42818EBEA006A916C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E717167D2818EAF9006A916C /* Feedback.Simple */;
+			targetProxy = E71716A32818EBEA006A916C /* PBXContainerItemProxy */;
+		};
+		E71716CA2818ECBC006A916C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E71716A52818EC8D006A916C /* Filters.Feedback */;
+			targetProxy = E71716C92818ECBC006A916C /* PBXContainerItemProxy */;
+		};
 		E74307A927F8DF4200BECBD0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E743079A27F8DF1200BECBD0 /* Shaders.Multipass */;
 			targetProxy = E74307A827F8DF4200BECBD0 /* PBXContainerItemProxy */;
-		};
-		E74A49F527F917C20056E09D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E74A49E927F917510056E09D /* Filters.Working */;
-			targetProxy = E74A49F427F917C20056E09D /* PBXContainerItemProxy */;
 		};
 		E75A1B1F27EE829700779D64 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2867,6 +2983,11 @@
 			isa = PBXTargetDependency;
 			target = E76DDD4127DA7191006BEBB2 /* Filters.Blurs */;
 			targetProxy = E76DDD4D27DA71FD006BEBB2 /* PBXContainerItemProxy */;
+		};
+		E7971B94281B8D4100C15C5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7971B6C281B8C2900C15C5B /* Feedback.Multiple */;
+			targetProxy = E7971B93281B8D4100C15C5B /* PBXContainerItemProxy */;
 		};
 		E79BDBC7280E2CAC005E3A87 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2921,6 +3042,46 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		E71716822818EAF9006A916C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E71716832818EAF9006A916C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E71716AA2818EC8D006A916C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E71716AB2818EC8D006A916C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		E74307A227F8DF1200BECBD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2966,26 +3127,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
-			};
-			name = Release;
-		};
-		E74A49EE27F917510056E09D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		E74A49EF27F917510056E09D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -3120,6 +3261,26 @@
 			name = Debug;
 		};
 		E76DDD4727DA7191006BEBB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E7971B8D281B8C2900C15C5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E7971B8E281B8C2900C15C5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -3599,6 +3760,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E71716812818EAF9006A916C /* Build configuration list for PBXNativeTarget "Feedback.Simple" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E71716822818EAF9006A916C /* Debug */,
+				E71716832818EAF9006A916C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E71716A92818EC8D006A916C /* Build configuration list for PBXNativeTarget "Filters.Feedback" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E71716AA2818EC8D006A916C /* Debug */,
+				E71716AB2818EC8D006A916C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E74307A127F8DF1200BECBD0 /* Build configuration list for PBXNativeTarget "Shaders.Multipass" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3613,15 +3792,6 @@
 			buildConfigurations = (
 				E743D709236C83FE00EB81BC /* Debug */,
 				E743D70A236C83FE00EB81BC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E74A49ED27F917510056E09D /* Build configuration list for PBXNativeTarget "Filters.Working" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E74A49EE27F917510056E09D /* Debug */,
-				E74A49EF27F917510056E09D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3685,6 +3855,15 @@
 			buildConfigurations = (
 				E76DDD4627DA7191006BEBB2 /* Debug */,
 				E76DDD4727DA7191006BEBB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7971B8C281B8C2900C15C5B /* Build configuration list for PBXNativeTarget "Feedback.Multiple" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7971B8D281B8C2900C15C5B /* Debug */,
+				E7971B8E281B8C2900C15C5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
