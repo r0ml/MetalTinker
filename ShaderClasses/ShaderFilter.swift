@@ -154,6 +154,7 @@ class ShaderFilter : GenericShader {
 
 
   override func finishCommandEncoding( _ renderEncoder : MTLRenderCommandEncoder) {
+    // FIXME: I need to figure out how to clear the render textures at the beginning of a render.
 //    if setup.iFrame > 0 {
 
 

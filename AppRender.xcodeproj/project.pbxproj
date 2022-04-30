@@ -646,7 +646,6 @@
 		E746F31723F0D11E003598F6 /* sdf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sdf.h; sourceTree = "<group>"; };
 		E74711E5238442D700FF2A77 /* support.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = support.h; sourceTree = "<group>"; };
 		E748C459239809E100AD7A64 /* RenderSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderSetup.swift; sourceTree = "<group>"; };
-		E7494E31255256D8000930BB /* ComputePipelinePass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputePipelinePass.swift; sourceTree = "<group>"; };
 		E749D2B5254F19D3000930BB /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
 		E74A41CE2576B53800639F19 /* Simple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple.swift; sourceTree = "<group>"; };
 		E74A42102576B75100639F19 /* Simple2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple2.swift; sourceTree = "<group>"; };
@@ -655,8 +654,6 @@
 		E74A44182578002F00639F19 /* SpriteLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteLibraryView.swift; sourceTree = "<group>"; };
 		E74A445B257804AC00639F19 /* Simple3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple3.swift; sourceTree = "<group>"; };
 		E74A451E25780EC400639F19 /* SpriteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteProtocol.swift; sourceTree = "<group>"; };
-		E74A45A02578458100639F19 /* BlitPipelinePass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlitPipelinePass.swift; sourceTree = "<group>"; };
-		E74A45E22578462700639F19 /* OffscreenPipelinePass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffscreenPipelinePass.swift; sourceTree = "<group>"; };
 		E74A46642578488400639F19 /* Simple4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple4.swift; sourceTree = "<group>"; };
 		E74A46DE257AAA0300639F19 /* Simple6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple6.swift; sourceTree = "<group>"; };
 		E74A4820257AB32500639F19 /* Simple7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple7.swift; sourceTree = "<group>"; };
@@ -971,7 +968,6 @@
 		E7CB0EBB27DEAE3D00235E64 /* OrigConfigController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrigConfigController.swift; sourceTree = "<group>"; };
 		E7CB0EBD27DEEBA900235E64 /* OrigRenderStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrigRenderStuff.swift; sourceTree = "<group>"; };
 		E7CB0EBE27DEED7D00235E64 /* OrigShader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrigShader.swift; sourceTree = "<group>"; };
-		E7CB0EC127DEEE6A00235E64 /* FilterPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPipeline.swift; sourceTree = "<group>"; };
 		E7CD4578280DB796000EC2DE /* moreSpirograph.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = moreSpirograph.metal; sourceTree = "<group>"; };
 		E7CD457A280DC55F000EC2DE /* Noise 1D.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Noise 1D.metal"; sourceTree = "<group>"; };
 		E7CD457B280DC55F000EC2DE /* Starburst.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Starburst.metal; sourceTree = "<group>"; };
@@ -1032,7 +1028,6 @@
 		E7E9D6ED27DC365E00431EB0 /* ShaderTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderTwo.swift; sourceTree = "<group>"; };
 		E7E9D6F027DC603100431EB0 /* ShaderMultipass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderMultipass.swift; sourceTree = "<group>"; };
 		E7E9D6F627DD01F500431EB0 /* ShaderLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLib.swift; sourceTree = "<group>"; };
-		E7E9D6FA27DD048C00431EB0 /* ConfigControllerFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigControllerFilter.swift; sourceTree = "<group>"; };
 		E7E9D6FC27DD06AD00431EB0 /* ImageStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStrip.swift; sourceTree = "<group>"; };
 		E7E9D6FE27DE4DCD00431EB0 /* ShaderMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderMetalView.swift; sourceTree = "<group>"; };
 		E7E9D70027DE4E7D00431EB0 /* SceneWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneWrapperView.swift; sourceTree = "<group>"; };
@@ -1671,14 +1666,9 @@
 		E7E9D6EF27DC5AD200431EB0 /* Unused */ = {
 			isa = PBXGroup;
 			children = (
-				E74A45A02578458100639F19 /* BlitPipelinePass.swift */,
-				E74A45E22578462700639F19 /* OffscreenPipelinePass.swift */,
 				E749D2B5254F19D3000930BB /* KeyEventHandling.swift */,
 				E7CB0EBD27DEEBA900235E64 /* OrigRenderStuff.swift */,
-				E7494E31255256D8000930BB /* ComputePipelinePass.swift */,
 				E7CB0EBE27DEED7D00235E64 /* OrigShader.swift */,
-				E7E9D6FA27DD048C00431EB0 /* ConfigControllerFilter.swift */,
-				E7CB0EC127DEEE6A00235E64 /* FilterPipeline.swift */,
 			);
 			path = Unused;
 			sourceTree = "<group>";
