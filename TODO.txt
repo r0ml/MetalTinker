@@ -35,3 +35,9 @@ Use an interface to Photos as a picker
 
 Initial load does not show the preferences window -- even though a shader is picked and can be run.
 Initial load doesn't pick up the preference values.
+
+
+The MetalKit version hangs something fierce if the renderer is slow -- but the SceneKit version seems OK with it.  Not sure what's going on, but need to find out.
+Anti-aliasing seems to work with the MetalKit version, but not the SceneKit version.
+
+

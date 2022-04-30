@@ -1,9 +1,3 @@
-/** 
- Author: FabriceNeyret2
- some worms are drawing mazes under bark on in the silt above marine stones.
- These correspond to very simple exploration rules. Here is an artificial example.
- Change parameters, uncomment choices, try fullscreen.
- */
 
 #define shaderName maze_worms_graffitis_3
 
@@ -17,13 +11,12 @@ constant const float r = 1.5, N = 50. // width , number of worms , turn angle at
 
 
 fragmentFn( texture2d<float> lastFrame ) {
-
-// ============================================== buffers ============================= 
-
   float2 U = thisVertex.where.xy;
   float4 O = 0;
   float2 R = uni.iResolution;
-  
+
+
+
   if (T(R).x==0.) { U = abs(U/R*2.-1.); O  = float4(max(U.x,U.y)>1.-r/R.y); O.w=0.;
     return O;
   }
@@ -59,4 +52,3 @@ fragmentFn( texture2d<float> lastFrame ) {
   }
   return O;
 }
-

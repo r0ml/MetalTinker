@@ -119,14 +119,16 @@ class ShaderFeedback : ShaderFilter {
 
 
   override func fixme(_ rpd : MTLRenderPassDescriptor) {
-    if let ca = rpd.colorAttachments[1] {
+    for i in 0..<shadows.count {
+    if let ca = rpd.colorAttachments[i+1] {
 
 //    ca.pixelFormat = .rgba32Float
-    ca.texture = shadows[0].0
-      ca.resolveTexture = self.shadows[0].1
+    ca.texture = shadows[i].0
+      ca.resolveTexture = self.shadows[i].1
     ca.storeAction = .storeAndMultisampleResolve
     ca.loadAction = .clear
     ca.clearColor = MTLClearColor.init(red:0, green: 0, blue: 0, alpha: 1)
+    }
     }
   }
 

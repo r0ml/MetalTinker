@@ -1,29 +1,23 @@
-/** 
- This must have been one of the first fractals I coded (copied from a magazine) in 1994.
-*/
 
 #define shaderName ifs_fern
+#define SHADOWS 2
 
 #include "Common.h" 
 
-struct KBuffer {
-};
-initialize() {}
 
-
-float hash( float n )
+/*float hash( float n )
 {
     return fract(sin(n)*987.654321);
-}
+}*/
 
  
-fragmentFn1() {
+fragmentFn() {
   FragmentOutput fff;
 
 
     float2 uv = thisVertex.where.xy/uni.iResolution.xy;
     
-    float4 data = renderInput[0].read(uint2(thisVertex.where.xy) );
+    float4 data = lastFrame[1].read(uint2(thisVertex.where.xy) );
     
     float f = data.x;
     float e2 = data.y / data.z;
@@ -32,9 +26,8 @@ fragmentFn1() {
     
     col *= 0.5 + 0.5*pow( 16.0*uv.x*uv.y*(1.0-uv.x)*(1.0-uv.y), 0.2 );
     
-    fff.fragColor = float4( col, 1.0 );
+    fff.color0 = float4( col, 1.0 );
 
- // ============================================== buffers =============================
 
   if( uni.iFrame==0 ) {
     data = float4(0.0);
@@ -46,12 +39,11 @@ fragmentFn1() {
     
     float2 z = uv;
     
-    float p = hash(uni.iTime + thisVertex.where.x*113.1 + thisVertex.where.y*7.3 );
+    float p = rand(uni.iTime + thisVertex.where.x*113.1 + thisVertex.where.y*7.3 );
     
     float d = data.x;
     float e3 = data.y;
-    for( int i=0; i<256; i++ )
-    {
+    for( int i=0; i<256; i++ ) {
         // generate a random number (this should be uniform, but ....)
         p = fract( p + cos(p*6283.1) );
             
@@ -67,6 +59,6 @@ fragmentFn1() {
         e3 += exp(-100.0*r*r);
     }
     
-    fff.pass1 = float4( d, e3, data.z + 1.0, 1 );
+    fff.color1 = float4( d, e3, data.z + 1.0, 1 );
   return fff;
 }

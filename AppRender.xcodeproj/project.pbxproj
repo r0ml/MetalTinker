@@ -229,6 +229,12 @@
 		E774DE102816F8B0007998EA /* ShaderVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774DE0F2816F8B0007998EA /* ShaderVertex.swift */; };
 		E77675D82283786000614B7B /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E785E2E525AA46E600511B0C /* SKSCNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E785E2E425AA46E600511B0C /* SKSCNScene.swift */; };
+		E78BD1F3281CC8B9000B44F0 /* Particle Field.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4586280DC561000EC2DE /* Particle Field.metal */; };
+		E78BD1F6281CD9FE000B44F0 /* Fractal Feedback.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB89280E0BCB005E3A87 /* Fractal Feedback.metal */; };
+		E78BD1F7281CDF24000B44F0 /* IFS Fern.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4595280DC562000EC2DE /* IFS Fern.metal */; };
+		E78BD1F8281CE22B000B44F0 /* Noise 1D.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457A280DC55F000EC2DE /* Noise 1D.metal */; };
+		E78BD1FA281CEAA6000B44F0 /* maze worms graffitis 3.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4590280DC562000EC2DE /* maze worms graffitis 3.metal */; };
+		E78BD1FC281CEFB5000B44F0 /* maze worms graffitis 1.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD458B280DC561000EC2DE /* maze worms graffitis 1.metal */; };
 		E7971B4E281B8B8800C15C5B /* ShaderFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7971B4D281B8B8800C15C5B /* ShaderFeedback.swift */; };
 		E7971B4F281B8BE600C15C5B /* GLSL smallpt multipass.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB85280E0BCB005E3A87 /* GLSL smallpt multipass.metal */; };
 		E7971B50281B8BE600C15C5B /* Starburst.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457B280DC55F000EC2DE /* Starburst.metal */; };
@@ -837,18 +843,14 @@
 		E7971B8F281B8C2900C15C5B /* Feedback.Multiple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Feedback.Multiple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E79A10E122CF9B4D004FD5E2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E79BDB74280E0BC9005E3A87 /* Stop Motion.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Stop Motion.metal"; sourceTree = "<group>"; };
-		E79BDB75280E0BC9005E3A87 /* Linearly Transformed Cosines X.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Linearly Transformed Cosines X.metal"; sourceTree = "<group>"; };
 		E79BDB76280E0BCA005E3A87 /* Foggy Road.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Foggy Road.metal"; sourceTree = "<group>"; };
-		E79BDB77280E0BCA005E3A87 /* BloOoOoOoOoOom.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BloOoOoOoOoOom.metal; sourceTree = "<group>"; };
 		E79BDB78280E0BCA005E3A87 /* Cut and Project.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Cut and Project.metal"; sourceTree = "<group>"; };
 		E79BDB79280E0BCA005E3A87 /* GameOfLife.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = GameOfLife.metal; sourceTree = "<group>"; };
 		E79BDB7A280E0BCA005E3A87 /* boreal plasma.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "boreal plasma.metal"; sourceTree = "<group>"; };
 		E79BDB7B280E0BCA005E3A87 /* Descent by Macau Exports.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Descent by Macau Exports.metal"; sourceTree = "<group>"; };
 		E79BDB7C280E0BCA005E3A87 /* game of life.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "game of life.metal"; sourceTree = "<group>"; };
-		E79BDB7D280E0BCA005E3A87 /* Contained.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Contained.metal; sourceTree = "<group>"; };
 		E79BDB7E280E0BCA005E3A87 /* Blue Feedback.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Blue Feedback.metal"; sourceTree = "<group>"; };
 		E79BDB7F280E0BCA005E3A87 /* Binary 1D Cellular Automata.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Binary 1D Cellular Automata.metal"; sourceTree = "<group>"; };
-		E79BDB80280E0BCA005E3A87 /* EOT Grid scene.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "EOT Grid scene.metal"; sourceTree = "<group>"; };
 		E79BDB81280E0BCA005E3A87 /* game of life 3.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "game of life 3.metal"; sourceTree = "<group>"; };
 		E79BDB82280E0BCA005E3A87 /* Infinite sierpinski.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Infinite sierpinski.metal"; sourceTree = "<group>"; };
 		E79BDB83280E0BCA005E3A87 /* Cornell box 5367.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Cornell box 5367.metal"; sourceTree = "<group>"; };
@@ -861,7 +863,6 @@
 		E79BDB8A280E0BCB005E3A87 /* Basic Conway Game of Life.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Basic Conway Game of Life.metal"; sourceTree = "<group>"; };
 		E79BDB8B280E0BCB005E3A87 /* Black and White Spheres.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Black and White Spheres.metal"; sourceTree = "<group>"; };
 		E79BDB8D280E0BCB005E3A87 /* Light painting.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Light painting.metal"; sourceTree = "<group>"; };
-		E79BDB8E280E0BCB005E3A87 /* Floating Bands.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Floating Bands.metal"; sourceTree = "<group>"; };
 		E79BDBB5280E2C35005E3A87 /* Filters.ShadowBuffers.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Filters.ShadowBuffers.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E79BDBBD280E2C36005E3A87 /* Filters.NotWorking.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Filters.NotWorking.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E79BDBC5280E2C67005E3A87 /* Filters.Generators.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Filters.Generators.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -986,16 +987,13 @@
 		E7CD4585280DC560000EC2DE /* Mezmerizer.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Mezmerizer.metal; sourceTree = "<group>"; };
 		E7CD4586280DC561000EC2DE /* Particle Field.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Particle Field.metal"; sourceTree = "<group>"; };
 		E7CD4587280DC561000EC2DE /* Another Particles Motion Blur.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Another Particles Motion Blur.metal"; sourceTree = "<group>"; };
-		E7CD4588280DC561000EC2DE /* MPass MBlur 4-Meteor.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "MPass MBlur 4-Meteor.metal"; sourceTree = "<group>"; };
 		E7CD4589280DC561000EC2DE /* mesh edit.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "mesh edit.metal"; sourceTree = "<group>"; };
-		E7CD458A280DC561000EC2DE /* Paint.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Paint.metal; sourceTree = "<group>"; };
 		E7CD458B280DC561000EC2DE /* maze worms graffitis 1.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "maze worms graffitis 1.metal"; sourceTree = "<group>"; };
 		E7CD458C280DC561000EC2DE /* Sphere Distribution.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Sphere Distribution.metal"; sourceTree = "<group>"; };
 		E7CD458D280DC561000EC2DE /* KIFS 2.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "KIFS 2.metal"; sourceTree = "<group>"; };
 		E7CD458E280DC562000EC2DE /* Particle Experiment 6.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Particle Experiment 6.metal"; sourceTree = "<group>"; };
 		E7CD458F280DC562000EC2DE /* Particle Experiment 8.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Particle Experiment 8.metal"; sourceTree = "<group>"; };
 		E7CD4590280DC562000EC2DE /* maze worms graffitis 3.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "maze worms graffitis 3.metal"; sourceTree = "<group>"; };
-		E7CD4591280DC562000EC2DE /* My attempt at reaction diffusion.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "My attempt at reaction diffusion.metal"; sourceTree = "<group>"; };
 		E7CD4592280DC562000EC2DE /* Gray-Scott Model MIP Laplacian.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Gray-Scott Model MIP Laplacian.metal"; sourceTree = "<group>"; };
 		E7CD4593280DC562000EC2DE /* feedback stripes.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "feedback stripes.metal"; sourceTree = "<group>"; };
 		E7CD4594280DC562000EC2DE /* maze worms graffitis 2b.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "maze worms graffitis 2b.metal"; sourceTree = "<group>"; };
@@ -1089,6 +1087,7 @@
 		E71716DE281B5BC3006A916C /* FeedbackShaders */ = {
 			isa = PBXGroup;
 			children = (
+				E79BDBAB280E0FCD005E3A87 /* NotWorking */,
 				E74A49F127F917650056E09D /* Feedback */,
 				E7CD45D1280DCB0F000EC2DE /* ShadowBuffers */,
 			);
@@ -1173,6 +1172,7 @@
 				E7CD4584280DC560000EC2DE /* Feedback tunnel experiment.metal */,
 				E79BDB84280E0BCB005E3A87 /* Filter Motion Blur multipass.metal */,
 				E79BDB76280E0BCA005E3A87 /* Foggy Road.metal */,
+				E79BDB89280E0BCB005E3A87 /* Fractal Feedback.metal */,
 				E79BDB85280E0BCB005E3A87 /* GLSL smallpt multipass.metal */,
 				E7CD457E280DC560000EC2DE /* IFS 2.metal */,
 				E7CD459A280DC563000EC2DE /* IFS fern direct.metal */,
@@ -1310,7 +1310,6 @@
 				E75A1B4D27F175AE00779D64 /* Colors */,
 				E75A1B6927F1793D00779D64 /* Deforms */,
 				E76DDCF727DA7141006BEBB2 /* Filters */,
-				E79BDBAB280E0FCD005E3A87 /* NotWorking */,
 				E7D7C1B725ACBD1F004D75CD /* Shapes Vertex */,
 				E7D7C0A325ABB410004D75CD /* Simple Vertex */,
 				E76DDCD927DA7141006BEBB2 /* Transitions */,
@@ -1446,7 +1445,11 @@
 		E79BDBAB280E0FCD005E3A87 /* NotWorking */ = {
 			isa = PBXGroup;
 			children = (
-				E79BDB75280E0BC9005E3A87 /* Linearly Transformed Cosines X.metal */,
+				E7CD4598280DC563000EC2DE /* Distance Field Painter.metal */,
+				E7CD4593280DC562000EC2DE /* feedback stripes.metal */,
+				E7CD4592280DC562000EC2DE /* Gray-Scott Model MIP Laplacian.metal */,
+				E79BDB8D280E0BCB005E3A87 /* Light painting.metal */,
+				E7CD4589280DC561000EC2DE /* mesh edit.metal */,
 			);
 			path = NotWorking;
 			sourceTree = "<group>";
@@ -1584,33 +1587,20 @@
 			children = (
 				E7CD4580280DC560000EC2DE /* a 1tweet fluid.metal */,
 				E79BDB7F280E0BCA005E3A87 /* Binary 1D Cellular Automata.metal */,
-				E79BDB77280E0BCA005E3A87 /* BloOoOoOoOoOom.metal */,
 				E79BDB7E280E0BCA005E3A87 /* Blue Feedback.metal */,
 				E74A49F227F917B10056E09D /* braid.metal */,
 				E7CD4599280DC563000EC2DE /* Buffer computed points.metal */,
-				E79BDB7D280E0BCA005E3A87 /* Contained.metal */,
-				E7CD4598280DC563000EC2DE /* Distance Field Painter.metal */,
-				E79BDB80280E0BCA005E3A87 /* EOT Grid scene.metal */,
-				E7CD4593280DC562000EC2DE /* feedback stripes.metal */,
-				E79BDB8E280E0BCB005E3A87 /* Floating Bands.metal */,
-				E79BDB89280E0BCB005E3A87 /* Fractal Feedback.metal */,
 				E79BDB81280E0BCA005E3A87 /* game of life 3.metal */,
 				E79BDB7C280E0BCA005E3A87 /* game of life.metal */,
 				E79BDB79280E0BCA005E3A87 /* GameOfLife.metal */,
-				E7CD4592280DC562000EC2DE /* Gray-Scott Model MIP Laplacian.metal */,
 				E7CD4595280DC562000EC2DE /* IFS Fern.metal */,
-				E79BDB8D280E0BCB005E3A87 /* Light painting.metal */,
 				E7CD458B280DC561000EC2DE /* maze worms graffitis 1.metal */,
 				E7CD4583280DC560000EC2DE /* maze worms graffitis 1b.metal */,
 				E7CD4594280DC562000EC2DE /* maze worms graffitis 2b.metal */,
 				E7CD4590280DC562000EC2DE /* maze worms graffitis 3.metal */,
 				E7CD457C280DC55F000EC2DE /* maze worms graffitis 3b.metal */,
 				E7CD4596280DC562000EC2DE /* maze worms graffitis 3d.metal */,
-				E7CD4589280DC561000EC2DE /* mesh edit.metal */,
-				E7CD4588280DC561000EC2DE /* MPass MBlur 4-Meteor.metal */,
-				E7CD4591280DC562000EC2DE /* My attempt at reaction diffusion.metal */,
 				E7CD457A280DC55F000EC2DE /* Noise 1D.metal */,
-				E7CD458A280DC561000EC2DE /* Paint.metal */,
 				E7CD4586280DC561000EC2DE /* Particle Field.metal */,
 				E7CD457D280DC560000EC2DE /* Post-Processing Toon Shading.metal */,
 				E7CD458C280DC561000EC2DE /* Sphere Distribution.metal */,
@@ -2369,12 +2359,14 @@
 				E7971B62281B8BE600C15C5B /* Cornell box 5367.metal in Sources */,
 				E7971B6A281B8BE600C15C5B /* moreSpirograph.metal in Sources */,
 				E7971B5B281B8BE600C15C5B /* Cut and Project.metal in Sources */,
+				E78BD1F6281CD9FE000B44F0 /* Fractal Feedback.metal in Sources */,
 				E7971B51281B8BE600C15C5B /* Mezmerizer.metal in Sources */,
 				E7971B5E281B8BE600C15C5B /* IFS fern short cumulated.metal in Sources */,
 				E71716802818EAF9006A916C /* glsl.metal in Sources */,
 				E7971B65281B8BE600C15C5B /* boreal plasma.metal in Sources */,
 				E7971B56281B8BE600C15C5B /* Belousov-Zhabotinsky Reaction.metal in Sources */,
 				E7971B69281B8BE600C15C5B /* isovalues 3.metal in Sources */,
+				E78BD1FA281CEAA6000B44F0 /* maze worms graffitis 3.metal in Sources */,
 				E7971B5D281B8BE600C15C5B /* Filter Motion Blur multipass.metal in Sources */,
 				E7971B66281B8BE600C15C5B /* Black and White Spheres.metal in Sources */,
 				E7971B59281B8BE600C15C5B /* Particle Experiment 6.metal in Sources */,
@@ -2648,16 +2640,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E78BD1FC281CEFB5000B44F0 /* maze worms graffitis 1.metal in Sources */,
+				E78BD1F7281CDF24000B44F0 /* IFS Fern.metal in Sources */,
 				E7971B99281CA86E00C15C5B /* sdf.metal in Sources */,
 				E7971B96281BC18B00C15C5B /* Blue Feedback.metal in Sources */,
 				E7971B6E281B8C2900C15C5B /* support.metal in Sources */,
 				E7971B90281B8C5900C15C5B /* a 1tweet fluid.metal in Sources */,
 				E7971B92281B8C5900C15C5B /* Sphere Distribution.metal in Sources */,
+				E78BD1F8281CE22B000B44F0 /* Noise 1D.metal in Sources */,
 				E7971B91281B8C5900C15C5B /* braid.metal in Sources */,
 				E7971B97281BC3A500C15C5B /* Buffer computed points.metal in Sources */,
 				E7971B95281BBF0D00C15C5B /* Binary 1D Cellular Automata.metal in Sources */,
 				E7971B7D281B8C2900C15C5B /* glsl.metal in Sources */,
 				E7971B98281CA7C900C15C5B /* Post-Processing Toon Shading.metal in Sources */,
+				E78BD1F3281CC8B9000B44F0 /* Particle Field.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
