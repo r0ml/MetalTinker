@@ -213,20 +213,14 @@ void _initialize(/* constant Uniform &uni, */ device InputBuffer& in, device Con
 // ==================================================
 
 // this is required for pre-scanning calls to this macro
-#define frameInitialize() ___frameInitialize(shaderName)
-#define ___frameInitialize(n) __frameInitialize(n)
-#define __frameInitialize(n) \
-static void _frameInitialize(/* constant Uniform& uni, */ device InputBuffer& in, device ControlBuffer& ctrl ); \
+#define frameInitialize(...) ___frameInitialize(shaderName, ##__VA_ARGS__)
+#define ___frameInitialize(n, ...) __frameInitialize(n, ##__VA_ARGS__)
+#define __frameInitialize(n, ...) \
 \
 kernel void n##FrameInitialize ( \
-/* constant Uniform &uni [[ buffer(uniformId) ]], */ \
+  constant Uniform &uni [[ buffer(uniformId) ]], \
   device InputBuffer &in [[ buffer(kbuffId) ]], \
-  device ControlBuffer &ctrl [[buffer(ctrlBuffId) ]] \
-) { \
-  _frameInitialize( /* uni, */ in, ctrl ); \
-} \
-\
-void _frameInitialize(/* constant Uniform &uni, */ device InputBuffer& in, device ControlBuffer& ctrl )
+  device ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )
 
 // =================================================
 

@@ -10,5 +10,6 @@ struct SettingsView : View {
         Text("Use MetalKit")
       }
     }.padding()
-    }
+    .frame(minWidth: 400, minHeight: 300)
+  }
 }

@@ -117,8 +117,24 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   }
   
   func specialInitialization() {
+    let aa = metadata
+    if let bb = aa?.fragmentArguments {
+      processBuffers(bb)
+    }
   }
-  
+
+
+  var fragmentBuffers : [BufferParameter] = []
+
+  func processBuffers(_ bst : [MTLArgument] ) {
+    for a in bst {
+      if a.name != "in" && a.name != "uni",
+          let b = BufferParameter(a, 0, id: fragmentBuffers.count + 10) {
+        fragmentBuffers.append(b)
+      }
+    }
+  }
+
   func doInitialization( ) {
     let uniformSize : Int = MemoryLayout<Uniform>.stride
 #if os(macOS) || targetEnvironment(macCatalyst)
@@ -236,7 +252,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       
       doRenderEncoder1(xview)
       if let xvv = xview {
-        doRenderEncoder3(xvv, f)
+        doRenderEncoder3(cq, xvv, f)
       } else {
         doRenderEncoder2(cq, scene, f)
       }
@@ -350,11 +366,11 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     makeEncoder(commandBuffer, multisampleCount, rpd)
   }
   
-  func doRenderEncoder3( _ xvv: MTKView, _ f : ((MTLTexture?) -> ())? )  {
+  func doRenderEncoder3(_ cq : MTLCommandQueue?, _ xvv: MTKView, _ f : ((MTLTexture?) -> ())? )  {
 
     // Set up the command buffer for this frame
 
-    let cqq = commandQueue
+    let cqq = cq ?? commandQueue
     beginFrame(cqq)
 
     let commandBuffer = cqq.makeCommandBuffer()!
@@ -368,11 +384,13 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     // 1) create the render textures for the multiple passes
     // 2) create multiple render passes
     // 3) blit the outputs to inputs for the next frame (or swap the inputs and outputs
-    
+
+
+
     if let rpd = xvv.currentRenderPassDescriptor {
     
     // the rpd color attachments should have the right textures in them
-    makeEncoder(commandBuffer, multisampleCount, rpd)
+//    makeEncoder(commandBuffer, multisampleCount, rpd)
     
     if let c = xvv.currentDrawable {
     
@@ -381,6 +399,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     //      let rt = self.renderPassDescriptor(delegate.mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
     
       let msiz = CGSize(width: c.texture.width, height: c.texture.height)
+
       doRenderEncoder4(commandBuffer, msiz, kk )
     // =========================================================================
     // if feeding back output from previous frame to next frame:
@@ -417,7 +436,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     } else {
       
       textureSize = canvasSize
-      let (texture, resolveTexture) = makeRenderPassTexture(label, scale: scale, size: canvasSize)!
+      let (texture, resolveTexture) = makeRenderPassTexture(label, format: thePixelFormat, scale: scale, size: canvasSize)!
       scene?.background.contents = nil
       scene?.background.contents = resolveTexture
       
@@ -442,22 +461,22 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     return .clear
   }
   
-  func makeRenderPassTexture(_ nam : String, scale: Int, size: CGSize) -> (MTLTexture, MTLTexture)? {
+  func makeRenderPassTexture(_ nam : String, format: MTLPixelFormat, scale: Int, size: CGSize) -> (MTLTexture, MTLTexture)? {
 
     // If I don't use multisampling, I only need one texture
     // This is the output texture
-    let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+    let texd = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: format /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
     texd.textureType = .type2DMultisample
     texd.usage = [.renderTarget]
     texd.sampleCount = scale
     texd.resourceOptions = .storageModePrivate
     
     // This is the resolve texture
-    let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+    let texo = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: format /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
     texo.textureType = .type2D
     texo.usage = [ /* .renderTarget, .shaderWrite, */ .shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
     texo.resourceOptions = .storageModePrivate
-    
+
     if let p = device.makeTexture(descriptor: texd),
        let r = device.makeTexture(descriptor: texo) {
       p.label = "render pass \(nam) multisample"
@@ -473,7 +492,13 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   
   
   /// =====================================================================================================================
-  
+  func setArguments(_ renderEncoder : MTLRenderCommandEncoder) {
+    for b in fragmentBuffers {
+      renderEncoder.setFragmentBuffer(b.buffer, offset: 0, index: b.index)
+    }
+
+  }
+
   func makeEncoder(_ commandBuffer : MTLCommandBuffer,
                    _ scale : Int,
                    _ rpd : MTLRenderPassDescriptor
@@ -490,25 +515,35 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     // FIXME: should this be a clear or load?
     rpd.colorAttachments[0].loadAction = loadAction(0) // .load
     rpd.colorAttachments[0].storeAction = .multisampleResolve
-    rpd.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 1, blue: 0, alpha: 1)
+    rpd.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 1)
 
     //    }
     
     let sz = CGSize(width : rpd.colorAttachments[0].texture!.width, height: rpd.colorAttachments[0].texture!.height )
     setup.setupUniform( size: sz, scale: scale, uniform: uniformBuffer!, times: times )
-    
+
+
+    fixme(rpd)
+
     // texture and resolveTexture size mismatch    during resize
     if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
       renderEncoder.label = "render encoder"
       
       renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: uniformId)
       renderEncoder.setFragmentBuffer(initializationBuffer, offset: 0, index: kbuffId)
+
+      setArguments(renderEncoder)
+
+
       self.finishCommandEncoding(renderEncoder)
-      
+
       renderEncoder.endEncoding()
     }
   }
-  
+
+  func fixme(_ rpd : MTLRenderPassDescriptor) {
+    
+  }
   
   // =============================================================================================================================================
   
@@ -618,9 +653,18 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       commandBuffer.label = "Frame Initialize command buffer for \(self.myName)"
       computeEncoder.label = "frame initialization and defaults encoder \(self.myName)"
       computeEncoder.setComputePipelineState(fips)
-      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
+      computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
       computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
-      
+
+
+      // FIXME: 1) I could have threadgroups to handle the buffer.
+      //  2) How do I sync up the frameInitializer arguments with the fragment arguments?
+      for b in fragmentBuffers {
+        computeEncoder.setBuffer(b.buffer, offset: 0, index: b.index)
+      }
+
+
+
       let ms = MTLSize(width: 1, height: 1, depth: 1);
       computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
       computeEncoder.endEncoding()
@@ -684,7 +728,11 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   func processArguments(_ bst : MyMTLStruct ) {
     
     myOptions = bst
-    
+
+//    if myName == "Buffer_computed_points" {
+//      print("hah")
+//    }
+
     for bstm in myOptions.children {
       let dnam = "\(self.myName).\(bstm.name!)"
       // if this key already has a value, ignore the initialization value

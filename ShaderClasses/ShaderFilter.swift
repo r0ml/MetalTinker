@@ -59,6 +59,7 @@ class ShaderFilter : GenericShader {
       processTextures(bb)
     }
 
+    super.specialInitialization()
   }
 
   // let's assume this is where the shader starts running, so shader initialization should happen here.
@@ -89,7 +90,7 @@ class ShaderFilter : GenericShader {
     psd.fragmentFunction = fragmentFunction
     psd.colorAttachments[0].pixelFormat = thePixelFormat
     psd.isAlphaToOneEnabled = false
-    psd.colorAttachments[0].isBlendingEnabled = true
+    psd.colorAttachments[0].isBlendingEnabled = false // true?
     psd.colorAttachments[0].alphaBlendOperation = .add
     psd.colorAttachments[0].rgbBlendOperation = .add
     psd.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha // I would like to set this to   .one   for some cases
@@ -142,51 +143,23 @@ class ShaderFilter : GenericShader {
   
 
 
-  override func makeEncoder(_ commandBuffer : MTLCommandBuffer,
-                           _ scale : Int,
-                           _ rpd : MTLRenderPassDescriptor
-//                            , delegate : MetalDelegate
-  ) {
+  override func setArguments(_ renderEncoder : MTLRenderCommandEncoder) {
+    super.setArguments(renderEncoder)
 
-    // to get the running shader to match the preview?
-    // FIXME: do I have clearColor?
-    //    if let cc = rm.metalView?.clearColor {
-    //      rpd.colorAttachments[0].clearColor = cc
-
-
-    // FIXME: should this be a clear or load?
-    rpd.colorAttachments[0].loadAction = loadAction(0) // .load
-    rpd.colorAttachments[0].storeAction = .multisampleResolve
-    rpd.colorAttachments[0].clearColor = MTLClearColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1) // this seems to be the clear color for subsequent invocations
-
-
-    //    }
-
-    let sz = CGSize(width : rpd.colorAttachments[0].texture!.width, height: rpd.colorAttachments[0].texture!.height )
-    setup.setupUniform( size: sz, scale: Int(scale), uniform: uniformBuffer!, times: times )
-
-    // texture and resolveTexture size mismatch    during resize
-    if        let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
-      renderEncoder.label = "render encoder"
-
-      renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: uniformId)
-      renderEncoder.setFragmentBuffer(initializationBuffer, offset: 0, index: kbuffId)
-      for i in 0..<fragmentTextures.count {
-        setFragmentTexture(i)
-        renderEncoder.setFragmentTexture( fragmentTextures[i].texture, index: fragmentTextures[i].index)
-      }
-
-      // added this for Vertex functions
-      renderEncoder.setVertexBuffer(uniformBuffer, offset: 0, index: uniformId)
-      renderEncoder.setVertexBuffer(initializationBuffer, offset: 0, index: kbuffId)
-
-      if setup.iFrame > 0 {
-
-      self.finishCommandEncoding(renderEncoder)
-      }
-      
-        renderEncoder.endEncoding()
+    for i in 0..<fragmentTextures.count {
+      setFragmentTexture(i)
+      renderEncoder.setFragmentTexture( fragmentTextures[i].texture, index: fragmentTextures[i].index)
     }
+  }
+
+
+  override func finishCommandEncoding( _ renderEncoder : MTLRenderCommandEncoder) {
+//    if setup.iFrame > 0 {
+
+
+      super.finishCommandEncoding(renderEncoder)
+//    }
+
   }
 
   func setFragmentTexture(_ i : Int) {

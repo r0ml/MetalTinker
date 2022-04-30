@@ -1,18 +1,10 @@
-/** 
- Author: hughsk
- Toon shading â€” outlines achieved using edge detection on normals/depth in post. The raymarching buffer stores normals in RGB, and depth in A.
- */
+
 #define shaderName Post_Processing_Toon_Shading
+#define SHADOWS 2
 
 #include "Common.h"
 
-struct KBuffer { };
-initialize() {}
-
-
-
-
-float3x3 calcLookAtMatrix(float3 origin, float3 target, float roll) {
+static float3x3 calcLookAtMatrix(float3 origin, float3 target, float roll) {
   float3 rr = float3(sin(roll), cos(roll), 0.0);
   float3 ww = normalize(target - origin);
   float3 uu = normalize(cross(ww, rr));
@@ -21,12 +13,12 @@ float3x3 calcLookAtMatrix(float3 origin, float3 target, float roll) {
   return float3x3(uu, vv, ww);
 }
 
-float3 getRay(float3 origin, float3 target, float2 screenPos, float lensLength) {
+static float3 getRay(float3 origin, float3 target, float2 screenPos, float lensLength) {
   float3x3 camMat = calcLookAtMatrix(origin, target, 0.0);
   return normalize(camMat * float3(screenPos, lensLength));
 }
 
-float2 getDeltas(texture2d<float> buffer, float2 uv, texture2d<float> rendin0, float2 reso) {
+static float2 getDeltas(float2 uv, texture2d<float> rendin0, float2 reso) {
   float2 pixel = float2(1. / reso);
   float3 pole = float3(-1, 0, +1);
   float dpos = 0.0;
@@ -60,7 +52,7 @@ float2 getDeltas(texture2d<float> buffer, float2 uv, texture2d<float> rendin0, f
   return float2(dpos, dnor);
 }
 
-float2 mirror(float2 p, float v) {
+static float2 mirror(float2 p, float v) {
   float hv = v * 0.5;
   float2  fl = mod(floor(p / v + 0.5), 2.0) * 2.0 - 1.0;
   float2  mp = mod(p + hv, v) - hv;
@@ -68,7 +60,7 @@ float2 mirror(float2 p, float v) {
   return fl * mp;
 }
 
-float map(float3 p, float time, int buttons, float2 mouse, float2 reso ) {
+static float map(float3 p, float time, int buttons, float2 mouse, float2 reso ) {
   float r = buttons ? mouse.x * reso.x / 100.0 : time * 0.9;
   p.xz = mirror(p.xz, 4.);
   p.xz = p.xz * rot2d(r);
@@ -78,7 +70,7 @@ float map(float3 p, float time, int buttons, float2 mouse, float2 reso ) {
   return d;
 }
 
-float calcRayIntersection(float3 rayOrigin, float3 rayDir, float maxd, float precis, float time, int buttons, float2 mouse, float2 reso ) {
+static float calcRayIntersection(float3 rayOrigin, float3 rayDir, float maxd, float precis, float time, int buttons, float2 mouse, float2 reso ) {
   float latest = precis * 2.0;
   float dist   = +0.0;
   // float type   = -1.0;
@@ -100,13 +92,13 @@ float calcRayIntersection(float3 rayOrigin, float3 rayDir, float maxd, float pre
   return res;
 }
 
-float2 squareFrame(float2 screenSize, float2 coord) {
+static float2 squareFrame(float2 screenSize, float2 coord) {
   float2 position = 2.0 * (coord.xy / screenSize.xy) - 1.0;
   position.x *= screenSize.x / screenSize.y;
   return position;
 }
 
-float3 calcNormal(float3 pos, float eps, float time, int buttons, float2 mouse, float2 reso) {
+static float3 calcNormal(float3 pos, float eps, float time, int buttons, float2 mouse, float2 reso) {
   const float3 v1 = float3( 1.0,-1.0,-1.0);
   const float3 v2 = float3(-1.0,-1.0, 1.0);
   const float3 v3 = float3(-1.0, 1.0,-1.0);
@@ -118,14 +110,14 @@ float3 calcNormal(float3 pos, float eps, float time, int buttons, float2 mouse, 
                     v4 * map( pos + v4*eps, time, buttons, mouse, reso ) );
 }
 
-float3 calcNormal(float3 pos, float time, int buttons, float2 mouse, float2 reso) {
+static float3 calcNormal(float3 pos, float time, int buttons, float2 mouse, float2 reso) {
   return calcNormal(pos, 0.002, time, buttons, mouse, reso);
 }
 
 
 
 
-fragmentFn1() {
+fragmentFn() {
   FragmentOutput fff;
 
 
@@ -133,14 +125,15 @@ fragmentFn1() {
   // float3 ta = float3(0, 0, 0);
   // float3 rd = getRay(ro, ta, squareFrame(uni.iResolution.xy, thisVertex.where.xy), 2.0);
   float2 uv2 = thisVertex.where.xy / uni.iResolution.xy;
+  uv2.y = 1 - uv2.y;
 
-  float4 buf = renderInput[0].sample(iChannel0, thisVertex.where.xy / uni.iResolution.xy);
+  float4 buf = lastFrame[1].sample(iChannel0, uv2);
   float t2 = buf.a;
   float3 nor2 = buf.rgb;
   // float3 pos = ro + rd * t;
 
   float3 col = float3(0.5, 0.8, 1);
-  float2 deltas = getDeltas(renderInput[0], uv2, renderInput[0], uni.iResolution);
+  float2 deltas = getDeltas(uv2, lastFrame[1], uni.iResolution);
   if (t2 > -0.5) {
     col = float3(1.0);
     col *= max(0.3, 0.3 + dot(nor2, normalize(float3(0, 1, 0.5))));
@@ -151,9 +144,8 @@ fragmentFn1() {
   col.b = smoothstep(-0.1, 1.0, col.b);
   col = pow(col, float3(1.1));
   col -= deltas.x - deltas.y;
-  
 
-  fff.fragColor = float4(col, 1);
+  fff.color0 = float4(col, 1);
 
   // ============================================== buffers =============================
 
@@ -163,11 +155,11 @@ fragmentFn1() {
   float3 ta = float3(0, 0, 0);
   float3 rd = getRay(ro, ta, uv, 2.0);
 
-  float t = calcRayIntersection(ro, rd, 20.0, 0.001, uni.iTime, uni.mouseButtons, uni.iMouse, uni.iResolution);
+  float t = calcRayIntersection(ro, rd, 20.0, 0.001, uni.iTime, uni.wasMouseButtons, uni.iMouse, uni.iResolution);
   float3 pos = ro + rd * t;
-  float3 nor = calcNormal(pos, uni.iTime, uni.mouseButtons, uni.iMouse, uni.iResolution);
+  float3 nor = calcNormal(pos, uni.iTime, uni.wasMouseButtons, uni.iMouse, uni.iResolution);
 
-  fff.pass1 = float4(nor, t);
+  fff.color1 = float4(nor, t);
 
   return fff;
 }

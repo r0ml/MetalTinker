@@ -18,6 +18,33 @@ protocol VideoStream {
   func startVideo()
 }
 
+
+class BufferParameter : Identifiable {
+  typealias ObjectIdentifier = Int
+  var id : ObjectIdentifier
+
+  var index : Int
+  var buffer : MTLBuffer?
+  var name : String
+  var type : MTLDataType
+
+  init?(_ a : MTLArgument, _ n : Int, id: Int) {
+    self.id = id
+    if a.type == .buffer {
+      name = a.name
+      index = a.index + n
+      type = a.bufferDataType
+      if let b = device.makeBuffer(length: a.bufferDataSize) {
+        buffer = b
+      } else {
+        return nil
+      }
+    } else {
+      return nil
+    }
+  }
+}
+
 /** This class processes the initializer and sets up the shader parameters based on the shader defaults and user defaults */
 class TextureParameter : Identifiable {
   typealias ObjectIdentifier = Int

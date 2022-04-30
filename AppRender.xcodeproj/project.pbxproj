@@ -266,6 +266,8 @@
 		E7971B95281BBF0D00C15C5B /* Binary 1D Cellular Automata.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB7F280E0BCA005E3A87 /* Binary 1D Cellular Automata.metal */; };
 		E7971B96281BC18B00C15C5B /* Blue Feedback.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB7E280E0BCA005E3A87 /* Blue Feedback.metal */; };
 		E7971B97281BC3A500C15C5B /* Buffer computed points.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD4599280DC563000EC2DE /* Buffer computed points.metal */; };
+		E7971B98281CA7C900C15C5B /* Post-Processing Toon Shading.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457D280DC560000EC2DE /* Post-Processing Toon Shading.metal */; };
+		E7971B99281CA86E00C15C5B /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
 		E79A10E222CF9B4D004FD5E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E79A10E122CF9B4D004FD5E2 /* README.md */; };
 		E79BDBB0280E2C35005E3A87 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E79BDBB1280E2C35005E3A87 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
@@ -2646,6 +2648,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7971B99281CA86E00C15C5B /* sdf.metal in Sources */,
 				E7971B96281BC18B00C15C5B /* Blue Feedback.metal in Sources */,
 				E7971B6E281B8C2900C15C5B /* support.metal in Sources */,
 				E7971B90281B8C5900C15C5B /* a 1tweet fluid.metal in Sources */,
@@ -2654,6 +2657,7 @@
 				E7971B97281BC3A500C15C5B /* Buffer computed points.metal in Sources */,
 				E7971B95281BBF0D00C15C5B /* Binary 1D Cellular Automata.metal in Sources */,
 				E7971B7D281B8C2900C15C5B /* glsl.metal in Sources */,
+				E7971B98281CA7C900C15C5B /* Post-Processing Toon Shading.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

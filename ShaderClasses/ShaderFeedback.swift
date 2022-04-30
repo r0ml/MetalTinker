@@ -39,7 +39,7 @@ class ShaderFeedback : ShaderFilter {
     let k = fragmentTextures.filter({ $0.name == "lastFrame" }).count
     if k > 1 {
       for j in 1..<k {
-        self.renderPipelineDescriptor?.colorAttachments[j].pixelFormat = thePixelFormat
+        self.renderPipelineDescriptor?.colorAttachments[j].pixelFormat = .rgba32Float
       }
       if let rs = self.renderPipelineDescriptor,
          let ps = try? device.makeRenderPipelineState(descriptor: rs) {
@@ -79,19 +79,27 @@ class ShaderFeedback : ShaderFilter {
       if z.count == 0 {
       } else {
 
-        let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+        let texl = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba32Float /* thePixelFormat */ /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
         texl.textureType = .type2D
         texl.usage = [.shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
         texl.resourceOptions = .storageModeManaged
 
+
+        let texlx = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: thePixelFormat /* theOtherPixelFormat */, width: Int(size.width), height: Int(size.height), mipmapped: false)
+        texlx.textureType = .type2D
+        texlx.usage = [.shaderRead] // or just renderTarget -- the read is in case the texture is used in a filter
+        texlx.resourceOptions = .storageModeManaged
+
+        // FIXME: should the feedback texture be the multisample size texture instead of the resolve texture?
+
         for (j, k) in z.enumerated() {
           if j > 0 {
-          if let pq = makeRenderPassTexture("last frame \(j)", scale: multisampleCount, size: size) {
+            if let pq = makeRenderPassTexture("last frame \(j)", format: .rgba32Float, scale: multisampleCount, size: size) {
             shadows.append(pq)
           }
           }
-          if  let s = device.makeTexture(descriptor: texl) {
-            s.label = "render pass last frame"
+          if  let s = device.makeTexture(descriptor: j == 0 ? texlx : texl) {
+            s.label = "render pass \(j) last frame"
             lastFrameTextures!.append(s)
             k.texture = s
           }
@@ -106,6 +114,19 @@ class ShaderFeedback : ShaderFilter {
         self.renderPassDescriptor?.colorAttachments[j+1].storeAction = .storeAndMultisampleResolve
       self.renderPassDescriptor?.colorAttachments[j+1].loadAction = .clear
       self.renderPassDescriptor?.colorAttachments[j+1].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+    }
+  }
+
+
+  override func fixme(_ rpd : MTLRenderPassDescriptor) {
+    if let ca = rpd.colorAttachments[1] {
+
+//    ca.pixelFormat = .rgba32Float
+    ca.texture = shadows[0].0
+      ca.resolveTexture = self.shadows[0].1
+    ca.storeAction = .storeAndMultisampleResolve
+    ca.loadAction = .clear
+    ca.clearColor = MTLClearColor.init(red:0, green: 0, blue: 0, alpha: 1)
     }
   }
 
