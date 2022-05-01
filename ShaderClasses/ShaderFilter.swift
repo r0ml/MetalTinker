@@ -24,7 +24,7 @@ import UIKit
  10) Snapshot icon doesn't show up for MacCatalyst
  */
 
-class ShaderFilter : GenericShader {
+class ShaderFilter : ParameterizedShader {
 
   var fragmentTextures : [TextureParameter] = []
 

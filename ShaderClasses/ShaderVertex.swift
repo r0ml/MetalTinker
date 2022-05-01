@@ -26,13 +26,9 @@ import UIKit
 
 let ctrlBuffId = 4
 
-final class ShaderVertex : ShaderFilter {
+final class ShaderVertex : ShaderFeedback {
 
-  private var computeBuffer : MTLBuffer?
   private var controlBuffer : MTLBuffer!
-
-  private var _renderPassDescriptor : MTLRenderPassDescriptor?
-  private var _mySize : CGSize?
 
   override var myGroup : String {
     get { "Vertex" }
@@ -55,80 +51,14 @@ final class ShaderVertex : ShaderFilter {
   }
 
   override func doInitialization( ) {
-    let uniformSize : Int = MemoryLayout<Uniform>.stride
-#if os(macOS) || targetEnvironment(macCatalyst)
-    let uni = device.makeBuffer(length: uniformSize, options: [.storageModeManaged])!
-#else
-    let uni = device.makeBuffer(length: uniformSize, options: [])!
-#endif
-
+    super.doInitialization()
     controlBuffer = device.makeBuffer(length: MemoryLayout<ControlBuffer>.stride, options: [.storageModeShared] )!
     let c = controlBuffer.contents().assumingMemoryBound(to: ControlBuffer.self)
     c.pointee.topology = 3
     c.pointee.vertexCount = 4
     c.pointee.instanceCount = 1
 
-    uni.label = "uniform"
-    uniformBuffer = uni
-
-    let vertexProgram = currentVertexFn(myGroup)
-    let fragmentProgram = currentFragmentFn(myGroup)
-
-    if let rpp = setupRenderPipeline(vertexFunction: vertexProgram, fragmentFunction: fragmentProgram) {
-      (self.pipelineState, self.metadata, _) = rpp
-    }
-
-    justInitialization()
-
-    self.specialInitialization()
-
-    frameInitialize()
-
   }
-
-
-
-
-  // let's assume this is where the shader starts running, so shader initialization should happen here.
-  override func startRunning() {
-    for v in fragmentTextures {
-      if let vs = v.video {
-        vs.startVideo()
-      }
-    }
-  }
-
-  override func stopRunning() {
-    for v in fragmentTextures {
-      if let vs = v.video {
-        vs.stopVideo()
-      }
-    }
-  }
-
-
-
-
-  /*
-   private func renderPassDescriptor(_ mySize : CGSize) -> MTLRenderPassDescriptor {
-   if let rr = _renderPassDescriptor,
-   mySize == _mySize {
-   return rr }
-
-   let k = makeRenderPassDescriptor(label: "render output", size: mySize)
-   _renderPassDescriptor = k
-   _mySize = mySize
-
-   /*
-    if let t = k.colorAttachments[0].resolveTexture {
-    self.fragmentTextures.forEach { if $0.name == "lastFrame" { $0.setTexture(t) } }
-    }
-    */
-
-   return k
-   }
-   */
-
 
   override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection, MTLRenderPipelineDescriptor)? {
     // ============================================
@@ -169,22 +99,6 @@ final class ShaderVertex : ShaderFilter {
     return nil
   }
 
-
-  /** This sets up the initializer by finding the function in the shader,
-   using reflection to analyze the types of the argument
-   then setting up the buffer which will be the "preferences" buffer.
-   It would be the "Uniform" buffer, but that one is fixed, whereas this one is variable -- so it's
-   just easier to make it a separate buffer
-   */
-
-  func buildImageWells() -> some View {
-
-    // I believe this is where the ImageStrip sets the images as texture inputs.
-    // It is also where the webcam and video support should be assigned
-    ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: {
-      self.fragmentTextures = $0 }))
-  }
-  
 
   override func finishCommandEncoding(_ renderEncoder : MTLRenderCommandEncoder ) {
 

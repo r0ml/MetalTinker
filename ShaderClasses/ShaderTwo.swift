@@ -10,7 +10,9 @@ import SceneKit
 var functionMaps = ["Shaders" : Function("Shaders"),
                     "Generators" : Function("Generators"),
                     "Filters" : Function("Filters"),
-                    "Feedback" : Function("Feedback")
+                    "Feedback" : Function("Feedback"),
+                    "Vertex" : Function("Vertex"),
+                    "Parameterized" : Function("Parameterized")
 ]
 
 class ShaderTwo : GenericShader {

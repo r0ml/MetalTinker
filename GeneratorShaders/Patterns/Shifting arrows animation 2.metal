@@ -3,8 +3,6 @@
 
 #include "Common.h"
 
-initialize() {}
-
 fragmentFn() {
   float  h = .5,
   t = uni.iTime / 1.5,

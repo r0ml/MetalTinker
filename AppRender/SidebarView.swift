@@ -26,10 +26,12 @@ struct SidebarView : View {
     NavigationView {
       List {
         FoldersListView("Generators", folders: ShaderLib<GenericShader>.getList("Generators"))
+        FoldersListView("Parameterized", folders: ShaderLib<ParameterizedShader>.getList("Parameterized"))
         FoldersListView("Filters", folders: ShaderLib<ShaderFilter>.getList("Filters"))
         FoldersListView("Feedback", folders: ShaderLib<ShaderFeedback>.getList("Feedback"))
         FoldersListView("Shaders", folders : ShaderLib<ShaderTwo>.getList("Shaders")) // selectedItem: $selectedItem)
-      
+        FoldersListView("Vertex", folders : ShaderLib<ShaderVertex>.getList("Vertex")) // selectedItem: $selectedItem)
+
         SceneSidebarView(folderList: SceneShaderLib.folderList)
         
 
