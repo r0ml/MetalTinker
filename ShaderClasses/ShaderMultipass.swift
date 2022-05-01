@@ -22,9 +22,4 @@ final class ShaderMultipass : GenericShader {
     
   }
   
-  override func buildPrefView() -> [IdentifiableView] {
-    return []
-  }
-
-
 }

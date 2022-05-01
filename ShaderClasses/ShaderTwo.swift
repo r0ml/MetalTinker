@@ -15,7 +15,7 @@ var functionMaps = ["Shaders" : Function("Shaders"),
                     "Parameterized" : Function("Parameterized")
 ]
 
-class ShaderTwo : GenericShader {
+class ShaderTwo : ParameterizedShader {
 
   override func doInitialization() {
     let uniformSize : Int = MemoryLayout<Uniform>.stride

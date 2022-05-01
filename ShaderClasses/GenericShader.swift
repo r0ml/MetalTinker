@@ -14,19 +14,11 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   
   var metadata : MTLRenderPipelineReflection!
 
-
-  
-  /// This is the CPU overlay on the initialization buffer
-  var inbuf : MyMTLStruct!
-  
   /// this is the clear color for alpha blending?
   var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 0.1 )
-  var cached : [IdentifiableView]?
+
   
-  
-  var myOptions : MyMTLStruct!
-  var dynPref : DynamicPreferences? // need to hold on to this for the callback
-  
+
   var myGroup : String {
     get { "Generators" }
   }
@@ -51,12 +43,9 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   private var frameInitializeReflection : MTLComputePipelineReflection?
   var frameInitializePipelineState : MTLComputePipelineState?
   
-  var initializeReflection : MTLComputePipelineReflection?
-  var initializePipelineState : MTLComputePipelineState?
-  
+
   // Config Controller
   /// This buffer is known as in on the metal side
-  var initializationBuffer : MTLBuffer!
   var uniformBuffer : MTLBuffer?
   
   var pipelineState : MTLRenderPipelineState!
@@ -77,13 +66,10 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   
   let semCount = 1
   var gpuSemaphore : DispatchSemaphore = DispatchSemaphore(value: 1)
-  
-  
-  
-  
-  
-  
-  
+
+  var fragmentBuffers : [BufferParameter] = []
+
+
   required init(_ s : String ) {
     //    print("ShaderFilter init \(s)")
     
@@ -124,7 +110,6 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   }
 
 
-  var fragmentBuffers : [BufferParameter] = []
 
   func processBuffers(_ bst : [MTLArgument] ) {
     for a in bst {
@@ -133,6 +118,9 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
         fragmentBuffers.append(b)
       }
     }
+  }
+
+  func justInitialization() {
   }
 
   func doInitialization( ) {
@@ -190,40 +178,6 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
   }
   
-  func justInitialization() {
-    // await super.justInitialization()
-    
-    var ibl = 8
-    if let aa = (self.metadata.fragmentArguments?.filter { $0.name == "in" })?.first {
-      ibl = aa.bufferDataSize
-    } else if let bb = (self.metadata.vertexArguments?.filter { $0.name == "in" })?.first {
-      ibl = bb.bufferDataSize
-    }
-    if ibl == 0 { ibl = 8 }
-    
-    if let ib = device.makeBuffer(length: ibl, options: [.storageModeShared ]) {
-      ib.label = "defaults buffer for \(self.myName)"
-      ib.contents().storeBytes(of: 0, as: Int.self)
-      self.initializationBuffer = ib
-    }
-    
-    let nam = myName + "InitializeOptions"
-    guard let initializationProgram = functionMaps[self.myGroup]!.find( nam ) else {
-      return
-    }
-    let cpld = MTLComputePipelineDescriptor()
-    cpld.computeFunction = initializationProgram
-    
-    
-  
-    do {
-      initializePipelineState = try device.makeComputePipelineState(function: initializationProgram,
-                                                                    options:[.argumentInfo, .bufferTypeInfo], reflection: &initializeReflection)
-    } catch {
-      os_log("%s", type:.fault, "failed to initialize pipeline state for \(myName): \(error)")
-      return
-    }
-  }
   
   
   func currentVertexFn(_ s : String) -> MTLFunction? {
@@ -530,7 +484,6 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       renderEncoder.label = "render encoder"
       
       renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: uniformId)
-      renderEncoder.setFragmentBuffer(initializationBuffer, offset: 0, index: kbuffId)
 
       setArguments(renderEncoder)
 
@@ -572,58 +525,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   
   
   // =============================================================================================================================================
-  
-  // this is getting called during onTapGesture in LibraryView -- when I'm launching the ShaderView
-  func buildPrefView() -> [IdentifiableView] {
-    beginShader()
-    if let z = cached { return z }
-    if let mo = myOptions {
-      let a = DynamicPreferences.init(myName)
-      dynPref = a
-      
-      
-      let jj = self.morePrefs()
-      //      let c = ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: { self.fragmentTextures = $0 }))
-      let k = jj + /* [IdentifiableView(id: "sources", view: AnyView(c))] + */ a.buildOptionsPane(mo)
-      cached = k
-      return k
-    }
-    return []
-  }
-  
-  func morePrefs() -> [IdentifiableView] {
-    return []
-  }
-  
-  func beginShader() {
-    //    print("start \(#function)")
-    
-    if let ips = initializePipelineState,
-       let commandBuffer = commandQueue.makeCommandBuffer(),
-       let computeEncoder = commandBuffer.makeComputeCommandEncoder() {
-      commandBuffer.label = "Initialize command buffer for \(self.myName) "
-      computeEncoder.label = "initialization and defaults encoder \(self.myName)"
-      computeEncoder.setComputePipelineState(ips)
-      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
-      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
-      
-      let ms = MTLSize(width: 1, height: 1, depth: 1);
-      computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
-      computeEncoder.endEncoding()
-      
-      commandBuffer.commit()
-      commandBuffer.waitUntilCompleted() // I need these values to proceed
-    }
-      
-      // at this point, the initialization (preferences) buffer has been set
-//      if let gg = initializeReflection?.arguments.first(where: { $0.name == "in" }) {
-    if let gg = metadata.fragmentArguments?.first(where: {$0.name == "in" } ) {
-        inbuf = MyMTLStruct.init(initializationBuffer, gg)
-        processArguments(inbuf)
-      
-      getClearColor(inbuf)
-    }
-  }
+
   
   func beginFrame(_ cqq : MTLCommandQueue) {
     //        print("start \(#function)")
@@ -654,15 +556,10 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       computeEncoder.label = "frame initialization and defaults encoder \(self.myName)"
       computeEncoder.setComputePipelineState(fips)
       computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
-      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
 
 
-      // FIXME: 1) I could have threadgroups to handle the buffer.
-      //  2) How do I sync up the frameInitializer arguments with the fragment arguments?
-      for b in fragmentBuffers {
-        computeEncoder.setBuffer(b.buffer, offset: 0, index: b.index)
-      }
 
+      setInitializationArguments(computeEncoder)
 
 
       let ms = MTLSize(width: 1, height: 1, depth: 1);
@@ -685,6 +582,14 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
   }
 
+  func setInitializationArguments(_ computeEncoder : MTLComputeCommandEncoder) {
+    // FIXME: 1) I could have threadgroups to handle the buffer.
+    //  2) How do I sync up the frameInitializer arguments with the fragment arguments?
+    for b in fragmentBuffers {
+      computeEncoder.setBuffer(b.buffer, offset: 0, index: b.index)
+    }
+  }
+  
   func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection, MTLRenderPipelineDescriptor)? {
     // ============================================
     // this is the actual rendering fragment shader
@@ -723,113 +628,12 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     }
     return nil
   }
-  
-  
-  func processArguments(_ bst : MyMTLStruct ) {
-    
-    myOptions = bst
 
-//    if myName == "Buffer_computed_points" {
-//      print("hah")
-//    }
+  func buildPrefView() -> [IdentifiableView] {
+    return []
+  }
 
-    for bstm in myOptions.children {
-      let dnam = "\(self.myName).\(bstm.name!)"
-      // if this key already has a value, ignore the initialization value
-      let dd =  UserDefaults.standard.object(forKey: dnam)
-      
-      if let _ = bstm.structure {
-        let ddm = bstm.children
-        if let kk = bstm.children.first?.datatype, kk == .int {
-          self.segmented(bstm.name, ddm)
-        }
-        // self.dropDown(bstm.name, ddm) } }
-        
-      } else {
-        
-        let dat = bstm.value
-        switch dat {
-        case is Bool:
-          let v = dat as! Bool
-          UserDefaults.standard.set(dd ?? v, forKey: dnam)
-          self.boolean(bstm);
-          
-        case is SIMD4<Float>:
-          let v = dat as! SIMD4<Float>
-          UserDefaults.standard.set(dd ?? v.y, forKey: dnam)
-          self.colorPicker( bstm)
-          
-        case is SIMD3<Float>:
-          let v = dat as! SIMD3<Float>
-          UserDefaults.standard.set(dd ?? v.y, forKey: dnam)
-          self.numberSliderFloat( bstm )
-          
-        case is SIMD3<Int32>:
-          let v = dat as! SIMD3<Int32>
-          UserDefaults.standard.set(dd ?? v.y, forKey: dnam)
-          self.numberSliderInt( bstm )
-          
-        default:
-          os_log("%s", type:.error, "\(bstm.name!) is \(bstm.datatype)")
-        }
-      }
-    }
-  }
-  
-  
-  
-  func segmented( _ t:String, _ items : [MyMTLStruct]) {
-    let iv = UserDefaults.standard.integer(forKey: "\(self.myName).\(t)")
-    setPickS(iv, items)
-  }
-  
-  // FIXME: this is a duplicate of the one in DynamicPreferences
-  func setPickS(_ a : Int, _ items : [MyMTLStruct] ) {
-    for (i, tt) in items.enumerated() {
-      tt.setValue(i == a ? 1 : 0 )
-    }
-  }
-  
-  func boolean(_ arg : MyMTLStruct) {
-    arg.setValue( UserDefaults.standard.bool(forKey: "\(self.myName).\(arg.name!)") )
-  }
-  
-  func colorPicker(_ arg : MyMTLStruct) {
-    if let iv = UserDefaults.standard.color(forKey: "\(self.myName).\(arg.name!)") {
-      arg.setValue(iv.asFloat4())
-    }
-  }
-  
-  func numberSliderInt(_ arg : MyMTLStruct) {
-    let iv = UserDefaults.standard.integer(forKey: "\(self.myName).\(arg.name!)")
-    // note the ".y"
-    if var z : SIMD3<Int32> = arg.value as? SIMD3<Int32> {
-      z.y = Int32(iv)
-      arg.setValue(z)
-    }
-  }
-  
-  func numberSliderFloat(_ arg : MyMTLStruct) {
-    let iv = UserDefaults.standard.float(forKey: "\(self.myName).\(arg.name!)")
-    // note the ".y"
-    if var z : SIMD3<Float> = arg.value as? SIMD3<Float> {
-      z.y = iv
-      arg.setValue(z)
-    }
-  }
-  
-  
-  
-  // FIXME: do I need this?
-  func getClearColor(_ bst : MyMTLStruct) {
-    guard let bb = bst["clearColor"] else { return }
-    let v : SIMD4<Float> = bb.getValue()
-    self.clearColor = v
-  }
-  
 }
-
-
 
 
 extension GenericShader { // was from MetalDelegate
