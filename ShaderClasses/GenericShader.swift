@@ -9,8 +9,8 @@ import SwiftUI
 import SceneKit
 
 class GenericShader : NSObject, Identifiable, ObservableObject {
-  @Published var isRunning : Bool = false
-  var isStepping : Bool = false
+  @Published var isRunningx : Bool = false
+  @Published var isSteppingx : Bool = false
   
   var metadata : MTLRenderPipelineReflection!
 
@@ -56,11 +56,12 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   var frameTimer = FrameTimer()
   var fpsSamples : [Double] = Array(repeating: 1.0/60.0 , count: 60)
   var fpsX : Int = 0
-  
+
+  var iFrame : Int = -1
+
   //  var uniformBuffer : MTLBuffer!
-  var setup = RenderSetup()
-  var mySize : CGSize?
-  
+  var setup = RenderSetup() // or RenderSetup
+
   var textureSize : CGSize?
   var renderPassDescriptor : MTLRenderPassDescriptor?
   
@@ -80,7 +81,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   }
   
   
-//  var function = Function(myGroup)
+  //  var function = Function(myGroup)
   
   
   func finishCommandEncoding(_ renderEncoder : MTLRenderCommandEncoder ) {
@@ -114,7 +115,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   func processBuffers(_ bst : [MTLArgument] ) {
     for a in bst {
       if a.name != "in" && a.name != "uni",
-          let b = BufferParameter(a, 0, id: fragmentBuffers.count + 10) {
+         let b = BufferParameter(a, 0, id: fragmentBuffers.count + 10) {
         fragmentBuffers.append(b)
       }
     }
@@ -197,6 +198,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   // this sets up the GPU for evaluating the frame
   // gets called both for on and off-screen rendering
   func doRenderEncoder(
+    _ kk : RSetup,
     _ cq : MTLCommandQueue?,
     _ xview : MTKView?,               // the MTKView if this is rendering to a view, otherwise I need the MTLRenderPassDescriptor
     _ scene : SCNScene?,
@@ -206,9 +208,9 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       
       doRenderEncoder1(xview)
       if let xvv = xview {
-        doRenderEncoder3(cq, xvv, f)
+        doRenderEncoder3(kk, cq, xvv, f)
       } else {
-        doRenderEncoder2(cq, scene, f)
+        doRenderEncoder2(kk, cq, scene, f)
       }
     }
   
@@ -219,47 +221,47 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     var scale : Int = 1
 #if os(macOS)
     if let xvv = xview {
-     let eml = NSEvent.mouseLocation
-     let wp = xvv.window!.convertPoint(fromScreen: eml)
-     let ml = xvv.convert(wp, from: nil)
-     
-     if xvv.isMousePoint(ml, in: xvv.bounds) {
-     setup.mouseLoc = ml
-     }
-     scale = Int(xvv.window?.screen?.backingScaleFactor ?? 1)
+      let eml = NSEvent.mouseLocation
+      let wp = xvv.window!.convertPoint(fromScreen: eml)
+      let ml = xvv.convert(wp, from: nil)
+
+      if xvv.isMousePoint(ml, in: xvv.bounds) {
+        Task { await setup.setTouch(ml) }
+      }
+      scale = Int(xvv.window?.screen?.backingScaleFactor ?? 1)
     }
 #endif
     
 #if targetEnvironment(macCatalyst)
     if let xvv = xview {
-    let ourEvent = CGEvent(source: nil)!
-    let point = ourEvent.unflippedLocation
-      let xscale =  xvv.window!.screen?.backingScaleFactor // was scale
-    //      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
-    //
-    
-    
-    let offs = (NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
-    
-    //      let offs = ws.value(forKeyPath: "_frame") as! CGRect
-    //      let soff = ws.value(forKeyPath: "screen._frame") as! CGRect
-    
-    let loff = xvv.convert(CGPoint.zero, to: xvv.window!)
-    let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
-    let lpoint = CGPoint(x: ptx.x - loff.x, y: ptx.y - loff.y)
-    
-    scale = xscale
-    
-    // I don't know why the 40 is needed -- but it seems to work
-    let zlpoint = CGPoint(x: lpoint.x, y: lpoint.y - xvv.bounds.height - 40 )
-    if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xvv.bounds.width && zlpoint.y < xvv.bounds.height {
-      delegate.setup.mouseLoc = zlpoint
-    }
+      let ourEvent = CGEvent(source: nil)!
+      let point = ourEvent.unflippedLocation
+      let xscale =  xvv.window!.screen.scale // was scale
+                                             //      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
+                                             //
+
+
+      let offs = (NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
+
+      //      let offs = ws.value(forKeyPath: "_frame") as! CGRect
+      //      let soff = ws.value(forKeyPath: "screen._frame") as! CGRect
+
+      let loff = xvv.convert(CGPoint.zero, to: xvv.window!)
+      let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
+      let lpoint = CGPoint(x: ptx.x - loff.x, y: ptx.y - loff.y)
+
+      scale = Int(xscale)
+
+      // I don't know why the 40 is needed -- but it seems to work
+      let zlpoint = CGPoint(x: lpoint.x, y: lpoint.y - xvv.bounds.height - 40 )
+      if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xvv.bounds.width && zlpoint.y < xvv.bounds.height {
+        Task { await setup.setTouch(zlpoint) }
+      }
     }
 #endif
   }
   
-  func doRenderEncoder2( _ cq : MTLCommandQueue?,  _ scene: SCNScene?, _ f : ((MTLTexture?) -> ())? )  {
+  func doRenderEncoder2( _ kk : RSetup, _ cq : MTLCommandQueue?,  _ scene: SCNScene?, _ f : ((MTLTexture?) -> ())? )  {
 
     // Set up the command buffer for this frame
     let cqq = cq ?? commandQueue
@@ -279,11 +281,11 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     
     // Reference to mySize here can trigger a data race with GenericShader.mtkView (when resizing / reinitializing a shader)
-    let msiz = mySize ?? CGSize(width: 100, height: 100)
+    let msiz = kk.mySize ?? CGSize(width: 100, height: 100)
     let rpd = makeRenderPassDescriptor(label: "appRenderPass", scale: multisampleCount, size: msiz, scene)
     // the rpd color attachments should have the right textures in them
 
-    doRenderEncoder4(commandBuffer, msiz, rpd)
+    doRenderEncoder4(kk, commandBuffer, msiz, rpd)
 
 
     
@@ -316,11 +318,11 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     //      commandBuffer.waitUntilCompleted()
   }
   
-  func doRenderEncoder4(_ commandBuffer : MTLCommandBuffer, _ size : CGSize, _ rpd : MTLRenderPassDescriptor) {
-    makeEncoder(commandBuffer, multisampleCount, rpd)
+  func doRenderEncoder4(_ kk : RSetup, _ commandBuffer : MTLCommandBuffer, _ size : CGSize, _ rpd : MTLRenderPassDescriptor) {
+    makeEncoder(kk, commandBuffer, multisampleCount, rpd)
   }
   
-  func doRenderEncoder3(_ cq : MTLCommandQueue?, _ xvv: MTKView, _ f : ((MTLTexture?) -> ())? )  {
+  func doRenderEncoder3(_ rsx : RSetup, _ cq : MTLCommandQueue?, _ xvv: MTKView, _ f : ((MTLTexture?) -> ())? )  {
 
     // Set up the command buffer for this frame
 
@@ -342,40 +344,40 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
 
 
     if let rpd = xvv.currentRenderPassDescriptor {
-    
-    // the rpd color attachments should have the right textures in them
-//    makeEncoder(commandBuffer, multisampleCount, rpd)
-    
-    if let c = xvv.currentDrawable {
-    
-      let kk = xvv.currentRenderPassDescriptor!
-    
-    //      let rt = self.renderPassDescriptor(delegate.mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
-    
-      let msiz = CGSize(width: c.texture.width, height: c.texture.height)
 
-      doRenderEncoder4(commandBuffer, msiz, kk )
-    // =========================================================================
-    // if feeding back output from previous frame to next frame:
-    
-    // ========================================================================
-    
-    
-    // makeLastFrameTextures went here:
-    // so I can
-    // a) create the output texture (or have it passed in)
-    // b) if I'm creating the texture then I have to assign it to the scene background or take it from the currentRnderPass / Drawable
-    
-    
-    // what I want here is the resolve texture of the last pipeline pass
-    commandBuffer.addCompletedHandler{ commandBuffer in
-      if let f = f {
-        // print("resolved texture")
-        f( rpd.colorAttachments[0].resolveTexture  )
+      // the rpd color attachments should have the right textures in them
+      //    makeEncoder(commandBuffer, multisampleCount, rpd)
+
+      if let c = xvv.currentDrawable {
+
+        let kk = xvv.currentRenderPassDescriptor!
+
+        //      let rt = self.renderPassDescriptor(delegate.mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
+
+        let msiz = CGSize(width: c.texture.width, height: c.texture.height)
+
+        doRenderEncoder4(rsx, commandBuffer, msiz, kk )
+        // =========================================================================
+        // if feeding back output from previous frame to next frame:
+
+        // ========================================================================
+
+
+        // makeLastFrameTextures went here:
+        // so I can
+        // a) create the output texture (or have it passed in)
+        // b) if I'm creating the texture then I have to assign it to the scene background or take it from the currentRnderPass / Drawable
+
+
+        // what I want here is the resolve texture of the last pipeline pass
+        commandBuffer.addCompletedHandler{ commandBuffer in
+          if let f = f {
+            // print("resolved texture")
+            f( rpd.colorAttachments[0].resolveTexture  )
+          }
+        }
+        commandBuffer.present( c )
       }
-    }
-    commandBuffer.present( c )
-    }
     }
     commandBuffer.commit()
     //      commandBuffer.waitUntilCompleted()
@@ -453,7 +455,8 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
 
   }
 
-  func makeEncoder(_ commandBuffer : MTLCommandBuffer,
+  func makeEncoder(_ kk : RSetup,
+                   _ commandBuffer : MTLCommandBuffer,
                    _ scale : Int,
                    _ rpd : MTLRenderPassDescriptor
                    //                           delegate : MetalDelegate
@@ -474,7 +477,9 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     //    }
     
     let sz = CGSize(width : rpd.colorAttachments[0].texture!.width, height: rpd.colorAttachments[0].texture!.height )
-    setup.setupUniform( size: sz, scale: scale, uniform: uniformBuffer!, times: times )
+    iFrame += 1
+
+    kk.setupUniform(iFrame: iFrame, size: sz, scale: scale, uniform: uniformBuffer!, times: times )
 
 
     fixme(rpd)
@@ -512,12 +517,16 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     // to get the running shader to match the preview?
     // rpd.colorAttachments[0].clearColor = viewx.clearColor
-    
-    self.doRenderEncoder( cq, viewx, scene)
-        { _ in
-      // FIXME: this is the thing that will record the video frame
-      // self.videoRecorder?.writeFrame(forTexture: viewx.currentDrawable!.texture)
-      self.gpuSemaphore.signal()
+
+    Task {
+      let kk = await RSetup(setup)
+
+      self.doRenderEncoder(kk, cq, viewx, scene)
+      { _ in
+        // FIXME: this is the thing that will record the video frame
+        // self.videoRecorder?.writeFrame(forTexture: viewx.currentDrawable!.texture)
+        self.gpuSemaphore.signal()
+      }
     }
     
     //  }
@@ -548,9 +557,9 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     
     if
-       let fips = frameInitializePipelineState,
-       let commandBuffer = cqq.makeCommandBuffer(),
-       let computeEncoder = commandBuffer.makeComputeCommandEncoder()
+      let fips = frameInitializePipelineState,
+      let commandBuffer = cqq.makeCommandBuffer(),
+      let computeEncoder = commandBuffer.makeComputeCommandEncoder()
     {
       commandBuffer.label = "Frame Initialize command buffer for \(self.myName)"
       computeEncoder.label = "frame initialization and defaults encoder \(self.myName)"
@@ -655,15 +664,19 @@ extension GenericShader { // was from MetalDelegate
     
     if shifted {
       paused += (1/60.0)
-      setup.iFrame -= 2;
+      iFrame -= 2
     } else {
       paused -= (1/60.0)
     }
     times.startTime += paused
     times.lastTime += paused
-    
-    isRunning = true
-    isStepping = true
+
+    Task {
+      await MainActor.run {
+        isRunningx = true
+        isSteppingx = true
+      }
+    }
     //    self.draw(in: metalView!)
   }
   
@@ -674,100 +687,111 @@ extension GenericShader { // was from MetalDelegate
     times.lastTime += paused
     
     //   shader.config.videoNames.forEach { $0.start() }
-    
-    isRunning = true
-    isStepping = false
-    
+
+    Task {
+      await MainActor.run {
+        isRunningx = true
+        isSteppingx = false
+      }
+    }
     startRunning()
   }
   
   func stop() {
-    isRunning = false
-    isStepping = true
-    stopRunning()
-    
-    // config.webcam?.stopCapture()
-    // config.videoNames.forEach { $0.pause() }
-    
-    NotificationCenter.default.removeObserver(self)
+    Task {
+      await MainActor.run {
+        isRunningx = false
+        isSteppingx = true
+        stopRunning()
+
+        // config.webcam?.stopCapture()
+        // config.videoNames.forEach { $0.pause() }
+
+        NotificationCenter.default.removeObserver(self)
+      }
+    }
   }
-  
+
   func rewind(_ sender : Any? = nil) {
     let n = now()
     times.lastTime = n
     times.currentTime = n
     times.startTime = n
-    setup.iFrame = -1
+    iFrame = -1
   }
-  
-  
-  func doRunning( /* _ view : MTKView */ ) {
-    
+
+  /// return false to abort
+  func doRunning( /* _ view : MTKView */ ) -> Bool {
+
     // FIXME: sometimes I get trapped here!
     //      print("in gpusem", terminator: "" )
     let gw = gpuSemaphore.wait(timeout: .now() + .microseconds(1) /*    .microseconds(1000/60) */ )
-    if gw == .timedOut { return }
-    
+    if gw == .timedOut {
+      print("GPU timed out")
+      return false }
+
     times.lastTime = times.currentTime
     times.currentTime = now()
-    
+
     // calculate and display the Frames Per Second
 
     // FIXME: put me back
     // just this doubles the CPU requirement.
     // can I make the frameTimer update be more efficient?
-    
-    
+
+
     fpsSamples[fpsX] = times.currentTime - times.lastTime
     fpsX += 1
     if fpsX == fpsSamples.count { fpsX = 0 }
 
-    if 0 == setup.iFrame % 60 {
+    if 0 == iFrame % 60 {
 
-    let zz = fpsSamples.reduce(0, +)
-    let t = Int(round(60.0 / zz))
-    Task {
-      await MainActor.run { frameTimer.shaderFPS = String(t) }
+      let zz = fpsSamples.reduce(0, +)
+      let t = Int(round(60.0 / zz))
+      Task {
+        await MainActor.run { frameTimer.shaderFPS = String(t) }
+      }
+
+
+      // format the time for display
+      let duration: TimeInterval = TimeInterval(times.currentTime - times.startTime)
+      _ = Int((duration.truncatingRemainder(dividingBy: 1)) * 100)
+      let d = Int(floor(duration))
+      let seconds = d % 60
+      let minutes = (d / 60) % 60
+      let fd = String(format: "%0.2d:%0.2d", minutes, seconds); //   "%0.2d:%0.2d.%0.2d", minutes, seconds, ms)
+      Task {
+        await MainActor.run { frameTimer.shaderPlayerTime = fd }
+      }
     }
-  
-    
-    // format the time for display
-    let duration: TimeInterval = TimeInterval(times.currentTime - times.startTime)
-    _ = Int((duration.truncatingRemainder(dividingBy: 1)) * 100)
-    let d = Int(floor(duration))
-    let seconds = d % 60
-    let minutes = (d / 60) % 60
-    let fd = String(format: "%0.2d:%0.2d", minutes, seconds); //   "%0.2d:%0.2d.%0.2d", minutes, seconds, ms)
-    Task {
-      await MainActor.run { frameTimer.shaderPlayerTime = fd }
-    }
-    }
-    
+
     setupFrame(times)
+    return true
   }
 }
 
 
 extension GenericShader : MTKViewDelegate {
   func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-    setup.mouseLoc = CGPoint(x: size.width / 2.0, y: size.height/2.0 )
-    mySize = size;
+    Task { await setup.setTouch( CGPoint(x: size.width / 2.0, y: size.height/2.0 ) )
+      await setup.setSize(size)
+    }
   }
-  
+
   func draw(in view: MTKView) {
     //    shader.metalView = view
-    
-    if isRunning {
-      
-      if isStepping {
-        isRunning = false
-        isStepping = false
+
+    if isRunningx {
+
+      if isSteppingx {
+        isRunningx = false
+        isSteppingx = false
       }
-      doRunning()
+      guard doRunning() else { return }
       ddraw( commandQueue, view, nil)
     }
   }
-  
+
 }
 
 class FrameTimer : ObservableObject {

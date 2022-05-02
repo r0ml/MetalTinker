@@ -204,7 +204,8 @@ final class ShaderVertex : ShaderFeedback {
   }
 
 
-  override func makeEncoder(_ commandBuffer : MTLCommandBuffer,
+  override func makeEncoder(_ kk : RSetup,
+                            _ commandBuffer : MTLCommandBuffer,
                            _ scale : Int,
                            _ rpd : MTLRenderPassDescriptor
 //                            , delegate : MetalDelegate
@@ -222,7 +223,8 @@ final class ShaderVertex : ShaderFeedback {
     //    }
 
     let sz = CGSize(width : rpd.colorAttachments[0].texture!.width, height: rpd.colorAttachments[0].texture!.height )
-    setup.setupUniform( size: sz, scale: Int(scale), uniform: uniformBuffer!, times: times )
+    iFrame += 1
+    kk.setupUniform(iFrame: iFrame, size: sz, scale: Int(scale), uniform: uniformBuffer!, times: times )
 
     // texture and resolveTexture size mismatch    during resize
     if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {

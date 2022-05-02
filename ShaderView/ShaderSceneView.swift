@@ -86,7 +86,9 @@ struct ShaderSceneView : View {
           let kk = SCNScene()
 //        let _ = { kk.background.contents =  }()
           let z = shader
-          let _ = (shader.mySize = g.size)
+        let _ = Task {
+          await z.setup.setSize(g.size)
+        }
         
         SceneView(scene: kk,
                   options: paused ? [] : [ .rendersContinuously ],
@@ -115,6 +117,10 @@ struct ShaderSceneView : View {
 
               let q = offs.height - k.maxY
 
+
+
+              Task {
+
               if (k.minX != 0) {
                 let j = CGPoint(x: (zz.x - k.minX) / bb  , y: (zz.y - k.minY ) / bb  )
 
@@ -122,7 +128,7 @@ struct ShaderSceneView : View {
 
 //              print(k, g.safeAreaInsets, offs, g, z, zz)
 //              print(jj, j)
-                self.shader.setup.mouseLoc = jj // mouseLocation
+                await self.shader.setup.setTouch(jj) // mouseLocation
 
 //                }
 
@@ -142,16 +148,11 @@ struct ShaderSceneView : View {
 //                }
 
 
-
-
-
-
-
-
 //              }}
               } else {
     //            print("hunh?")
               }
+            }
               return arg
             }
           }
@@ -166,14 +167,14 @@ extension GenericShader : SCNSceneRendererDelegate {
 //  Tells the delegate that the renderer has cleared the viewport and is about to render the scene.
 //    fatalError("I got here")
     // run the shader and output to the texture that is used by the scene background
-    
-    if isRunning {
+
+    if isRunningx {
       
-      if isStepping {
-        isRunning = false
-        isStepping = false
+      if isSteppingx {
+        isRunningx = false
+        isSteppingx = false
       }
-      doRunning()
+      guard doRunning() else { return }
       let cq = sr.commandQueue
       ddraw( cq , nil, willRenderScene  )
     }

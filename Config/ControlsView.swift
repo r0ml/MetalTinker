@@ -82,7 +82,7 @@ struct ControlsView : View {
           self.shader.rewind()
       }
 
-      if self.shader.isRunning {
+      if self.shader.isRunningx {
         Image("pause", bundle: nil, label: Text("Pause")).resizable().scaledToFit()
           .frame(width: 64, height: 64).onTapGesture {
             self.shader.stop()

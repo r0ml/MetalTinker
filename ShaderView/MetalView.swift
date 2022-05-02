@@ -64,17 +64,19 @@ class MetalViewController : XViewController {
     // FIXME: how to do this in iOS
     #if os(macOS)
     NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp, .leftMouseDown, .leftMouseUp, .leftMouseDragged]) { ev in
-      switch(ev.type) {
+
+      Task {
+        switch(ev.type) {
       case .leftMouseDown:
         let z = self.view.convert(ev.locationInWindow, from: nil)
 
         if self.view.isMousePoint(z, in: self.view.bounds) {
-          self.delegate.setup.lastTouch = z
-          self.delegate.setup.mouseButtons = 1
+          await self.delegate.setup.setLastTouch(z)
+          await self.delegate.setup.setMouseButtons(1)
         }
       case .leftMouseUp:
-        self.delegate.setup.lastTouch = CGPoint.zero
-        self.delegate.setup.mouseButtons = 0
+        await self.delegate.setup.setLastTouch(CGPoint.zero)
+        await self.delegate.setup.setMouseButtons(0)
       case .leftMouseDragged:
         // print("dragging")
         // when keydown happens, I indicate that an event happened,
@@ -83,7 +85,7 @@ class MetalViewController : XViewController {
         let _ = 0
       case .keyDown:
         if let t = ev.charactersIgnoringModifiers?.unicodeScalars.first {
-          self.delegate.setup.keyPress = [t.value, t.value]
+          await self.delegate.setup.setKeyPress([t.value, t.value])
         }
 
         // when keyup happens, we're not holding keys
@@ -91,11 +93,12 @@ class MetalViewController : XViewController {
 //              if let t = ev.charactersIgnoringModifiers?.unicodeScalars.first {
 
 //          if self.shader.setup.keyPress[0] == t.value {
-        self.delegate.setup.keyPress = [0, 0]
+        await self.delegate.setup.setKeyPress([0, 0])
 //          }
 //        }
       default:
         print("ignoring \(ev)")
+      }
       }
       return ev
     }
@@ -118,16 +121,16 @@ struct MetalViewC : NSViewControllerRepresentable {
   }
 }
 #else
-struct MetalViewC<T : Shader> : UIViewControllerRepresentable {
+struct MetalViewC : UIViewControllerRepresentable {
   typealias UIViewControllerType = MetalViewController
   var mtkView : MTKView = MTKView()
-  var delegate : MetalDelegate<T>
+  var delegate : GenericShader
 
-  func makeUIViewController(context: UIViewControllerRepresentableContext<MetalViewC<T>>) -> MetalViewController<T> {
+  func makeUIViewController(context: UIViewControllerRepresentableContext<MetalViewC>) -> MetalViewController {
     return MetalViewController( delegate: delegate, context: context, mtkView: mtkView)
   }
   
-  func updateUIViewController(_ uiViewController: MetalViewController<T>, context: UIViewControllerRepresentableContext<MetalViewC<T>>) {
+  func updateUIViewController(_ uiViewController: MetalViewController, context: UIViewControllerRepresentableContext<MetalViewC>) {
     // uiViewController.delegate.shader = self.shader
   }
 }

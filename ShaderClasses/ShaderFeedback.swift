@@ -135,10 +135,10 @@ class ShaderFeedback : ShaderFilter {
 
   // this sets up the GPU for evaluating the frame
   // gets called both for on and off-screen rendering
-  override func doRenderEncoder4(_ commandBuffer : MTLCommandBuffer, _ size : CGSize, _ rpd : MTLRenderPassDescriptor) {
+  override func doRenderEncoder4(_ kk : RSetup, _ commandBuffer : MTLCommandBuffer, _ size : CGSize, _ rpd : MTLRenderPassDescriptor) {
     makeLastFrameTextures( size: size )
 
-    makeEncoder(commandBuffer, multisampleCount, rpd)
+    makeEncoder(kk, commandBuffer, multisampleCount, rpd)
 
         if let kt = lastFrameTextures,
            kt.count > 0,

@@ -112,7 +112,8 @@ class RenderPipelinePass {
 */
 
   
-  func makeEncoder(_ commandBuffer : MTLCommandBuffer,
+  func makeEncoder(_ kk : RSetup,
+                   _ commandBuffer : MTLCommandBuffer,
                    _ scale : CGFloat,
                    _ isFirst : Bool, delegate : ShaderTwo) {
 
@@ -125,7 +126,7 @@ class RenderPipelinePass {
 //    rpd = delegate.shader.metalView?.currentRenderPassDescriptor ?? delegate.shader.renderPassDescriptor(delegate.mySize!)
  //   rpd = delegate.shader._renderPassDescriptor!
     
-    rpd = delegate.renderPassDescriptor(delegate.mySize!)
+    rpd = delegate.renderPassDescriptor(kk.mySize!)
     
     
 //    } else {
@@ -156,7 +157,7 @@ class RenderPipelinePass {
       // FIXME: here is where I look at rpp.flags
       rpd.colorAttachments[i+1].texture = renderInput[i].0
       rpd.colorAttachments[i+1].resolveTexture = renderInput[i].2
-      rpd.colorAttachments[i+1].loadAction =  delegate.setup.iFrame < 1 ? .clear : .load // xx == 0 ? .clear : .load
+      rpd.colorAttachments[i+1].loadAction =  .clear //  delegate.setup.iFrame < 1 ? .clear : .load // xx == 0 ? .clear : .load
       rpd.colorAttachments[i+1].storeAction = .storeAndMultisampleResolve
       rpd.colorAttachments[0].clearColor = MTLClearColor.init(red: 0, green: 0, blue: 0, alpha: 1)
 
@@ -186,10 +187,11 @@ class RenderPipelinePass {
     var sz = CGSize(width : rpd.colorAttachments[0].texture!.width /* / scale */ ,
       height: rpd.colorAttachments[0].texture!.height /* / scale */ )
 
-    delegate.setup.setupUniform( size: sz, scale: Int(scale), uniform: delegate.uniformBuffer!, times: delegate.times )
+    delegate.iFrame += 1
+    kk.setupUniform(iFrame: delegate.iFrame, size: sz, scale: Int(scale), uniform: delegate.uniformBuffer!, times: delegate.times )
 
     // I do this to clear out the renderInput textures
-    if (delegate.setup.iFrame < 1) {
+    if (delegate.iFrame < 1) {
 
       if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: rpd) {
         renderEncoder.setRenderPipelineState(pipelineState)

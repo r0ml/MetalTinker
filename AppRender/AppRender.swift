@@ -17,10 +17,13 @@ import SwiftUI
       .commands {
         SidebarCommands()
       }
-      
+
+      #if os(macOS)
       Settings {
         SettingsView()
       }
+      #endif
+      
     }
   }
 }

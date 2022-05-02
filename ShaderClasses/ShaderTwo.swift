@@ -140,8 +140,10 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
           
           // to get the running shader to match the preview?
           // rpd.colorAttachments[0].clearColor = viewx.clearColor
-          
-          self.doRenderEncoder(cq, viewx, scene ) { _ in
+
+          Task {
+            let kk = await RSetup(setup)
+          self.doRenderEncoder(kk, cq, viewx, scene ) { _ in
             // FIXME: this is the thing that will record the video frame
             // self.videoRecorder?.writeFrame(forTexture: viewx.currentDrawable!.texture)
             self.gpuSemaphore.signal()
@@ -150,6 +152,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
           //        self.isRunning = false // if I'm not going to set up the gpuSemaphore signal -- time to admit that I must be bailed
   //        delegate.gpuSemaphore.signal()
   //      }
+          }
       }
     }
   
@@ -157,6 +160,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
   // this sets up the GPU for evaluating the frame
   // gets called both for on and off-screen rendering
   override func doRenderEncoder(
+    _ kk : RSetup,
     _ cq : MTLCommandQueue?,
     _ xview : MTKView?,               // the MTKView if this is rendering to a view, otherwise I need the MTLRenderPassDescriptor
     _ scene : SCNScene?,
@@ -172,7 +176,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
         let ml = viewx.convert(wp, from: nil)
         
         if viewx.isMousePoint(ml, in: viewx.bounds) {
-          setup.mouseLoc = ml
+          Task { await setup.setTouch(ml) }
         }
         
         scale = xview?.window?.screen?.backingScaleFactor ?? 1
@@ -207,7 +211,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
       var rt : MTLTexture?
       
       //    if let frpp = config.pipelinePasses.last as? RenderPipelinePass {
-      rt = self.renderPassDescriptor(mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
+      rt = self.renderPassDescriptor(kk.mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
       
       // FIXME: what about a filter?
       //  } else if let frpp = config.pipelinePasses.last as? FilterPipelinePass {
