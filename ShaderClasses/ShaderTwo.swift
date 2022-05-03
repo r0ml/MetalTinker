@@ -7,13 +7,6 @@ import SwiftUI
 import os
 import SceneKit
 
-var functionMaps = ["Shaders" : Function("Shaders"),
-                    "Generators" : Function("Generators"),
-                    "Filters" : Function("Filters"),
-                    "Feedback" : Function("Feedback"),
-                    "Vertex" : Function("Vertex"),
-                    "Parameterized" : Function("Parameterized")
-]
 
 class ShaderTwo : ParameterizedShader {
 
@@ -159,6 +152,9 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
   
   // this sets up the GPU for evaluating the frame
   // gets called both for on and off-screen rendering
+
+
+  /*
   override func doRenderEncoder(
     _ kk : RSetup,
     _ cq : MTLCommandQueue?,
@@ -240,7 +236,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
       }
     }
  
-  
+  */
   
 
     /// This is the CPU overlay on the initialization buffer

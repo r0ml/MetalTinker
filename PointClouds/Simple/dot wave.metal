@@ -3,27 +3,25 @@
 
 #include "Common.h" 
 
-struct InputBuffer {
-  struct {
-    int4 _1;
-  } pipeline;
-};
-
-initialize() {
-  in.pipeline._1 = {0, 60, 30, 0};
+frameInitialize() {
+//  in.pipeline._1 = {0, 60, 30, 0};
+  ctrl.instanceCount = 30;
+  ctrl.vertexCount = 60;
+  ctrl.topology = 0;
 }
 
-vertexPointPass(_1) {
+vertexPointFn() {
   VertexOutPoint v;
   v.point_size = 12;
 
-  float2 b = (-0.5 + float2(vid, iid)) / float2(in.pipeline._1.yz - 2) ;
+  float2 vi = float2(ctrl.vertexCount, ctrl.instanceCount);
+  float2 b = (-0.5 + float2(vid, iid)) / (vi - 2) ;
 
   // fragmentFn() {
   //  float2 U = 20.* ( thisVertex.where.xy+thisVertex.where.xy - uni.iResolution.xy ) / uni.iResolution.y;
 
 
-  float2 oo = cos(.3 * float2(vid, in.pipeline._1.z - iid) - uni.iTime) / float2(in.pipeline._1.yz);
+  float2 oo = cos(.3 * float2(vid, ctrl.instanceCount - iid) - uni.iTime) / vi;
   float r = 30 * oo.x * oo.y;
 
   b += r;
@@ -40,7 +38,7 @@ vertexPointPass(_1) {
 }
 
 // the cananical "make it a circle"
-fragmentPointPass(_1) {
+fragmentPointFn() {
   float2 h = pointCoord;
   if ( distance(h, 0.5) > 0.5) {
     // fragColor.rgb = {1,0,0};

@@ -5,6 +5,15 @@
 import SwiftUI
 import MetalKit
 
+var functionMaps = [ // "Shaders" : Function("Shaders"),
+                    "Generators" : Function("Generators"),
+                    "Filters" : Function("Filters"),
+                    "Feedback" : Function("Feedback"),
+                    "Vertex" : Function("Vertex"),
+                    "Parameterized" : Function("Parameterized"),
+                    "PointCloud" : Function("PointClouds"),
+]
+
 struct SidebarView : View {
 
   //  @State var selectedItem : String?
@@ -25,14 +34,18 @@ struct SidebarView : View {
   var body: some View {
     NavigationView {
       List {
+
         FoldersListView("Generators", folders: ShaderLib<GenericShader>.getList("Generators"))
         FoldersListView("Parameterized", folders: ShaderLib<ParameterizedShader>.getList("Parameterized"))
         FoldersListView("Filters", folders: ShaderLib<ShaderFilter>.getList("Filters"))
         FoldersListView("Feedback", folders: ShaderLib<ShaderFeedback>.getList("Feedback"))
-        FoldersListView("Shaders", folders : ShaderLib<ShaderTwo>.getList("Shaders")) // selectedItem: $selectedItem)
+//        FoldersListView("Shaders", folders : ShaderLib<ShaderTwo>.getList("Shaders")) // selectedItem: $selectedItem)
         FoldersListView("Vertex", folders : ShaderLib<ShaderVertex>.getList("Vertex")) // selectedItem: $selectedItem)
+        FoldersListView("PointCloud", folders : ShaderLib<ShaderPointCloud>.getList("PointCloud")) // selectedItem: $selectedItem)
 
-        SceneSidebarView(folderList: SceneShaderLib.folderList)
+
+        // FIXME: put me back
+ //       SceneSidebarView(folderList: SceneShaderLib.folderList)
         
 
 //        SpriteListView(folderList: SpriteShaderLib.folderList) // see SpriteLibraryView

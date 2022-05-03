@@ -3,22 +3,24 @@
 
 #include "Common.h"
 
+
 struct InputBuffer {
   float4 clearColor = {0,0,0,1}; // the clearColor needs to have alpha = 1 to show up in the preview.
-  struct {
-    int3 _1;
-  } pipeline;
 };
 
 initialize() {
-  in.pipeline._1 = {0, 1, 6};
+  in.clearColor = {0, 0, 0, 1};
 }
 
-#undef VertexOut
-#define VertexOut VertexOutPoint
+frameInitialize() {
+  ctrl.instanceCount = 6;
+  ctrl.vertexCount = 1;
+  ctrl.topology = 0;
+//  in.pipeline._1 = {0, 1, 6};
+}
 
-vertexPointPass(_1) {
-  VertexOut v;
+vertexPointFn() {
+  VertexOutPoint v;
   
   switch(iid) {
   case 0:
@@ -56,7 +58,7 @@ vertexPointPass(_1) {
   return v;
 }
 
-fragmentPointPass(_1) {
+fragmentPointFn() {
   float2 h = pointCoord;
   float a = 1.0 - smoothstep(0, 0.005, distance(h, 0.5)-0.5);
   return mix(in.clearColor, thisVertex.color, a );

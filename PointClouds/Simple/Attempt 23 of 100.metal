@@ -4,9 +4,6 @@
 #include "Common.h" 
 struct InputBuffer {
 //  float4 clearColor = { 0.9, 0.8, 0.7, 1 };
-  struct {
-    int4 _1;
-  } pipeline;
     int3 SCALE;
     float3 SPEED;
     float3 FREQUENCY;
@@ -16,8 +13,14 @@ initialize() {
   in.SPEED = {2, 5, 10};
   in.FREQUENCY = {0.3, 0.7, 2};
   in.SCALE = {10, 25, 50};
-  in.pipeline._1 = {0, 60, 40, 0};
+//  in.pipeline._1 = {0, 60, 40, 0};
   // in.pipeline._1.yz = int2(floor(60 * uni.iResolution.y / uni.iResolution));
+}
+
+frameInitialize() {
+  ctrl.instanceCount = 40;
+  ctrl.vertexCount = 60;
+  ctrl.topology = 0;
 }
 
 /*computeFn() {
@@ -51,14 +54,16 @@ fragmentFn() {
 }
 */
 
-vertexPointPass(_1) {
+vertexPointFn() {
   VertexOutPoint v;
   v.point_size = uni.iResolution.x/220;
-  float2 b = (-0.5 + float2(vid, iid)) / float2(in.pipeline._1.yz - 2) ;
+  float2 vi = float2(ctrl.vertexCount, ctrl.instanceCount);
 
-  float2 t = (2 * float2(vid, iid) / float2(in.pipeline._1.yz) - 1) * in.SCALE.y;
+  float2 b = (-0.5 + float2(vid, iid)) / (vi - 2);
+
+  float2 t = (2 * float2(vid, iid) / vi - 1) * in.SCALE.y;
   float tt = length(t * uni.iResolution / uni.iResolution.y) * in.FREQUENCY.y + uni.iTime * in.SPEED.y;
-  float2 ttt = (float2(cos(tt), sin(tt)) * 0.4 + 0.5) / float2(in.pipeline._1.yz);
+  float2 ttt = (float2(cos(tt), sin(tt)) * 0.4 + 0.5) / vi;
 
   b += ttt * uni.iResolution.x / uni.iResolution;
 
@@ -70,7 +75,7 @@ vertexPointPass(_1) {
 }
 
 // the canonical "make it a circle"
-  fragmentPointPass(_1) {
+  fragmentPointFn() {
     float2 h = pointCoord;
     if ( distance(h, 0.5) > 0.5) {
       // fragColor.rgb = {1,0,0};

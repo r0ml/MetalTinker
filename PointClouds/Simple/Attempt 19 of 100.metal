@@ -4,21 +4,23 @@
 #include "Common.h"
 
 struct InputBuffer {
-  struct {
-    int4 _1;
-  } pipeline;
-  
   float3 velocity;
   float3 waviness;
 };
 
 initialize() {
-  in.pipeline._1 = {0, 33, 18, 0};
+//  in.pipeline._1 = {0, 33, 18, 0};
   in.velocity = {2, 5, 10};
   in.waviness = { 0.005, 0.01, 0.03 };
 }
 
-vertexPointPass(_1) {
+frameInitialize() {
+  ctrl.instanceCount = 18;
+  ctrl.vertexCount = 33;
+  ctrl.topology = 0;
+}
+
+vertexPointFn() {
   VertexOutPoint v;
   v.point_size = 16; // this is a pixel value, so needs to be adjusted for whether
                      // it is a retina display (static) or not
@@ -26,7 +28,7 @@ vertexPointPass(_1) {
 
   //  float2 st = thisVertex.where.xy/uni.iResolution;
   //  float2 frequency = float2(33.0, 18.0);
-  float2 frequency = float2(in.pipeline._1.yz);
+  float2 frequency = float2(ctrl.vertexCount, ctrl.instanceCount);
 
   float2 index = float2(vid, iid) / (frequency - 1); // floor(frequency * st)/frequency;
   float centerDist = 1.0-length(index-0.5 * (sin(uni.iTime)+1.));
@@ -42,7 +44,7 @@ vertexPointPass(_1) {
 }
 
 // the canonical "make it a circle"
-fragmentPointPass(_1) {
+fragmentPointFn() {
   float2 h = pointCoord;
   if ( distance(h, 0.5) > 0.5) {
     // fragColor.rgb = {1,0,0};

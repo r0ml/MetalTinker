@@ -7,6 +7,7 @@ using namespace metal;
 #include <SceneKit/scn_metal>
 
 
+// FIXME: what am I doing here?
 
 #define shaderName Arcs
 

@@ -4,19 +4,23 @@
 #include "Common.h"
 
 struct InputBuffer {
-  struct {
-    int4 _1;
-  } pipeline;
   int3 maxCircles;
   bool ellipse;
   float n;
 };
 
 initialize() {
-  in.pipeline._1 = {0, 5, 1, 0};
+//  in.pipeline._1 = {0, 5, 1, 0};
   in.maxCircles = {10, 30, 50};
   in.n = 1 + float(in.maxCircles.y);
-  in.pipeline._1.y = ceil(in.n);
+//  in.pipeline._1.y = ceil(in.n);
+}
+
+frameInitialize() {
+  in.n = 1 + float(in.maxCircles.y) * (0.5 + 0.5 * sin(uni.iTime));
+  ctrl.vertexCount = 5;
+  ctrl.instanceCount = ceil(in.n);
+  ctrl.topology = 0;
 }
 
 #undef VertexOut
@@ -27,12 +31,12 @@ float4 hue(float n) {
 }
 
 // this should be the last function in the pipeline
-computeFn() {
-  in.n = 1 + float(in.maxCircles.y) * (0.5 + 0.5 * sin(uni.iTime));
+/*computeFn() {
   in.pipeline._1.y = ceil(in.n);
 }
+*/
 
-vertexPointPass(_1) {
+vertexPointFn() {
   VertexOutPoint v;
   v.point_size = uni.iResolution.y / 40;
 
@@ -53,7 +57,7 @@ vertexPointPass(_1) {
 }
 
 // the canonical "make it a circle"
-  fragmentPointPass(_1) {
+  fragmentPointFn() {
     float2 h = pointCoord;
     if ( distance(h, 0.5) > 0.5) {
       // fragColor.rgb = {1,0,0};

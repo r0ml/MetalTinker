@@ -160,27 +160,25 @@ LastFrame(), \
 // =========================================================================================
 // New render
 
-#define pointFn(...) pointPass(, ##__VA_ARGS__ )
-
-#define vertexPointPass(a, ...) _vertexPointPass(a, shaderName, ##__VA_ARGS__ )
-#define _vertexPointPass(a, b, ...) __vertexPointPass(a, b, ##__VA_ARGS__ )
-#define __vertexPointPass(a, b, ...) vertex VertexOutPoint b##___##a##___Vertex ( \
+#define vertexPointFn(...) _vertexPointFn(shaderName, ##__VA_ARGS__ )
+#define _vertexPointFn(b, ...) __vertexPointFn(b, ##__VA_ARGS__ )
+#define __vertexPointFn(b, ...) vertex VertexOutPoint b##______Vertex ( \
 uint vid [[ vertex_id ]], \
 uint iid [[ instance_id ]], \
 constant Uniform &uni [[ buffer(uniformId) ]], \
-constant InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__ )
+constant InputBuffer &in [[ buffer(kbuffId) ]], \
+constant ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )
 
 // -------
 
-#define fragmentPointFn(...) fragmentPointPass(, ##__VA_ARGS__ )
-
-#define fragmentPointPass(a, ...) _fragmentPointPass( a, shaderName, ##__VA_ARGS__ )
-#define _fragmentPointPass(a, b, ... ) __fragmentPointPass(a, b, ##__VA_ARGS__ )
-#define __fragmentPointPass(a, b, ... ) fragment float4 b##___##a##___Fragment ( \
+#define fragmentPointFn(...) _fragmentPointFn(shaderName, ##__VA_ARGS__ )
+#define _fragmentPointFn(b, ... ) __fragmentPointFn(b, ##__VA_ARGS__ )
+#define __fragmentPointFn(b, ... ) fragment float4 b##______Fragment ( \
 VertexOutPoint thisVertex [[stage_in]], \
-constant Uniform &uni [[ buffer(uniformId)]], \
 float2 pointCoord [[point_coord]], \
-device InputBuffer &in [[ buffer(kbuffId) ]], ##__VA_ARGS__)
+device InputBuffer &in [[ buffer(kbuffId) ]], \
+LastFrame(), \
+##__VA_ARGS__)
 //array<texture2d<float>, numberOfTextures> texture [[ texture(inputTextureId) ]] )
 
 // ===========================================================================================================

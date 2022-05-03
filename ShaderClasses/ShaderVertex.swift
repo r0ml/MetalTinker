@@ -26,7 +26,7 @@ import UIKit
 
 let ctrlBuffId = 4
 
-final class ShaderVertex : ShaderFeedback {
+class ShaderVertex : ShaderFeedback {
 
   private var controlBuffer : MTLBuffer!
 
@@ -60,6 +60,8 @@ final class ShaderVertex : ShaderFeedback {
 
   }
 
+  var topology : MTLPrimitiveTopologyClass { get { .triangle } }
+
   override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection, MTLRenderPipelineDescriptor)? {
     // ============================================
     // this is the actual rendering fragment shader
@@ -79,7 +81,11 @@ final class ShaderVertex : ShaderFeedback {
     psd.colorAttachments[0].destinationAlphaBlendFactor = .destinationAlpha //   doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
 
     psd.sampleCount = multisampleCount
-    psd.inputPrimitiveTopology = .triangle
+
+    // if this is going to be a point cloud shader, the topology here has to be .point
+    // which means that it cannot be set on a "per frame" basis in frameInitialize
+    // 
+    psd.inputPrimitiveTopology = self.topology
 
     if psd.vertexFunction != nil && psd.fragmentFunction != nil {
       do {
@@ -121,6 +127,7 @@ final class ShaderVertex : ShaderFeedback {
 
   }
 
+  /*
   override func beginFrame(_ cqq : MTLCommandQueue) {
     //        print("start \(#function)")
 
@@ -171,6 +178,14 @@ final class ShaderVertex : ShaderFeedback {
 
 
   }
+   */
+
+  override func setInitializationArguments( _ computeEncoder : MTLComputeCommandEncoder) {
+    computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
+
+    super.setInitializationArguments(computeEncoder)
+  }
+
 
   override func beginShader() {
     //    print("start \(#function)")

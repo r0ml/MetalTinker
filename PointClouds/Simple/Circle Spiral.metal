@@ -3,25 +3,23 @@
 
 #include "Common.h"
 
-struct InputBuffer {
 //  float4 clearColor = {0,0.2,0.3,0.5};
-  struct {
-    int4 _1;
-  } pipeline;
-};
 
-initialize() {
-  in.pipeline._1 = {0, 1, 16 * 4 - 1, 0};
+frameInitialize() {
+  ctrl.vertexCount  = 1;
+  ctrl.instanceCount = 16 * 4 - 1;
+  ctrl.topology = 0;
+//  in.pipeline._1 = {0, 1, 16 * 4 - 1, 0};
 }
 
-vertexPointPass(_1) {
+vertexPointFn() {
   VertexOutPoint v;
   v.color = {0.5, 0.7, 0, 0.4};
   v.point_size = 5;
   v.where.z = 0;
   v.where.w = 1;
-  
-  float circleN = float(iid) / in.pipeline._1.z;
+
+  float circleN = float(iid) / ctrl.instanceCount;
   float t = fract( circleN + uni.iTime * 0.2 );
   
   float offset = 0.35 + 0.65 * t;
@@ -35,7 +33,7 @@ vertexPointPass(_1) {
   return v;
 }
 
-fragmentPointPass(_1) {
+fragmentPointFn() {
   float2 h = pointCoord;
   if ( distance(h, 0.5) > 0.5) {
     discard_fragment();

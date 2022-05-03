@@ -4,15 +4,18 @@
 #include "Common.h" 
 
 struct InputBuffer {
-  struct {
-    int4 _1;
-  } pipeline;
   float3 velocity;
 };
 
 initialize() {
-  in.pipeline._1 = {0, 16, 3, 0};
+//  in.pipeline._1 = {0, 16, 3, 0};
   in.velocity = {2, 5, 10};
+}
+
+frameInitialize() {
+  ctrl.vertexCount = 16;
+  ctrl.instanceCount = 3;
+  ctrl.topology = 0;
 }
 
 static float2 dot_pos(float angle, float t, float2 res, uint iid) {
@@ -28,13 +31,13 @@ static float3 dot_color(float angle) {
   return clamp(float3(abs(a-3)-1, 2-abs(a-2), 2-abs(a-4)), 0, 1);
 }
 
-vertexPointPass(_1) {
+vertexPointFn() {
   VertexOutPoint v;
   v.point_size = uni.iResolution.y / 50; // this is a pixel value, so needs to be adjusted for whether
                     // it is a retina display (static) or not
 
 
-  float angle = float(vid) / in.pipeline._1.y * tau;
+  float angle = float(vid) / ctrl.instanceCount * tau;
   float t = uni.iTime*2.;
 
   float2 pos = dot_pos(angle, t, uni.iResolution, iid);
@@ -58,7 +61,7 @@ vertexPointPass(_1) {
 }
 
 // the cananical "make it a circle"
-  fragmentPointPass(_1) {
+  fragmentPointFn() {
     float2 h = pointCoord;
     if ( distance(h, 0.5) > 0.5) {
       // fragColor.rgb = {1,0,0};

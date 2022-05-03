@@ -206,16 +206,15 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     //    delegate : MetalDelegate,
     _ f : ((MTLTexture?) -> ())? ) { // for off-screen renderings, use a callback function instead of a semaphore?
       
-      doRenderEncoder1(xview)
+      doMouseDetection(xview)
       if let xvv = xview {
         doRenderEncoder3(kk, cq, xvv, f)
       } else {
         doRenderEncoder2(kk, cq, scene, f)
       }
     }
-  
-  
-  func doRenderEncoder1(_ xview : MTKView?) {
+
+  func doMouseDetection(_ xview : MTKView?) {
     // FIXME: what is this in iOS land?  What is it in mac land?
     
     var scale : Int = 1
