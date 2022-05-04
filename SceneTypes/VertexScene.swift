@@ -6,7 +6,7 @@ import SceneKit
 
 class VertexNode : SCNNode {
   
-  static func make(_ s : String, _ l : String, _ pp : String, _ n : Int) -> SCNNode {
+  static func make(_ s : String, _ lll : String, _ pp : String, _ n : Int) -> SCNNode {
 
 //    super.init()
     
@@ -17,7 +17,7 @@ class VertexNode : SCNNode {
     p.vertexFunctionName = String("\(s)___\(pp)___Vertex")
 
     // FIXME: this is broken -- need to split out the SceneKit shaders
-    p.library = functionMaps["Shaders"]!.libs.first(where: {$0.label == l })!
+    p.library = functionMaps["SceneShaders"]!.libs.first(where: {$0.label == lll })!
 
     let planeSize = CGSize(width: 16, height: 9)
     var ttt = Times()
@@ -208,7 +208,7 @@ class VertexSCNScene : T3SCNScene {
     // I could also use key-value coding on an nsdata object
     // on geometry or material call  setValue: forKey: "uni"
 
-    let vx = VertexNode.make("Arcs", "Point Clouds", "", 50) // I want 3 of these?
+    let vx = VertexNode.make("Arcs", "SimpleScene", "", 50) // I want 3 of these?
     vx.position = SCNVector3(0.5, 0.5, 0.5)
     self.rootNode.addChildNode(vx)
 

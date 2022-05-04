@@ -279,7 +279,7 @@ public class ConfigController {
 
 
   func justInitialization() async {
-    let nam = shaderName + "InitializeOptions"
+    let nam = shaderName + "_InitializeOptions"
     guard let initializationProgram = await function.find( nam ) else {
       print("no initialization program for \(self.shaderName)")
       return

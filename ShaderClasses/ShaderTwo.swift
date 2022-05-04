@@ -379,7 +379,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
     }
     
     override  func justInitialization() {
-      let nam = myName + "InitializeOptions"
+      let nam = myName + "_InitializeOptions"
       guard let initializationProgram = functionMaps["Shaders"]!.find( nam ) else {
         print("no initialization program for \(self.myName)")
         return

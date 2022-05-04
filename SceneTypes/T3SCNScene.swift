@@ -84,7 +84,7 @@ class T3ShaderSCNScene : T3SCNScene {
     p.vertexFunctionName = "vertex_function"
     
     // FIXME: this is broken -- need to split out the SceneKit shaders
-    p.library = functionMaps["Shaders"]!.libs.first(where: {$0.label == self.library })!
+    p.library = functionMaps["SceneShaders"]!.libs.first(where: {$0.label == self.library })!
     
 //    Task {
       justInitialization()
@@ -475,8 +475,8 @@ class T3ShaderSCNScene : T3SCNScene {
 
 
   func justInitialization() {
-    let nam = shaderName + "InitializeOptions"
-    guard let initializationProgram = functionMaps["Shaders"]!.find( nam ) else {
+    let nam = shaderName + "_InitializeOptions"
+    guard let initializationProgram = functionMaps["SceneShaders"]!.find( nam ) else {
       print("no initialization program for \(self.shaderName)")
       return
     }

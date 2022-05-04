@@ -162,7 +162,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   
   func frameInitialize() {
     // await super.justInitialization()
-    let nam = myName + "FrameInitialize"
+    let nam = myName + "_FrameInitialize"
     guard let initializationProgram = functionMaps[myGroup]!.find( nam ) else {
       //      print("no frame initialization program for \(self.myName)")
       return

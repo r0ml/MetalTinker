@@ -1,5 +1,6 @@
 
 #define shaderName Animation_Test
+#define PASSES 2
 
 #include "Common.h"
 
@@ -21,8 +22,17 @@ struct InputBuffer {
 
 initialize() {
   in.animation.Quart = 1;
-  in.pipeline._1 = {3, 18, 1, 0};
-  in.pipeline._2 = {3, 150, 6, 0};
+
+//  in.pipeline._1 = {3, 18, 1, 0};
+//  in.pipeline._2 = {3, 150, 6, 0};
+}
+
+frameInitialize() {
+  ctrl.pass[0].vertexCount = 18;
+  ctrl.pass[0].instanceCount = 1;
+
+  ctrl.pass[1].vertexCount = 150;
+  ctrl.pass[1].instanceCount = 6;
 }
 
 //--- Animation Functions ---

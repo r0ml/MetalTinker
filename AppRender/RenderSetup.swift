@@ -9,6 +9,8 @@ import AppKit
 import MetalKit
 import os
 
+// FIXME: I have to get rid of the topology here -- it is controlled by the Shader class
+
 struct ControlBuffer {
   var topology : Int32;
   var vertexCount : Int32;

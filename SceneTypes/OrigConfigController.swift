@@ -239,7 +239,7 @@ public class OrigConfigController : ConfigController {
 
 
   func justInitialization() {
-    let nam = shaderName + "InitializeOptions"
+    let nam = shaderName + "_InitializeOptions"
     guard let initializationProgram = findFunction( nam ) else {
       print("no initialization program for \(self.shaderName)")
       return

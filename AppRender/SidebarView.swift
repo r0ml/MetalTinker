@@ -11,7 +11,9 @@ var functionMaps = [ // "Shaders" : Function("Shaders"),
                     "Feedback" : Function("Feedback"),
                     "Vertex" : Function("Vertex"),
                     "Parameterized" : Function("Parameterized"),
+                    "Multipass" : Function("Multipass"),
                     "PointCloud" : Function("PointClouds"),
+                    "SceneShaders" : Function("Scenes"),
 ]
 
 struct SidebarView : View {
@@ -42,10 +44,10 @@ struct SidebarView : View {
 //        FoldersListView("Shaders", folders : ShaderLib<ShaderTwo>.getList("Shaders")) // selectedItem: $selectedItem)
         FoldersListView("Vertex", folders : ShaderLib<ShaderVertex>.getList("Vertex")) // selectedItem: $selectedItem)
         FoldersListView("PointCloud", folders : ShaderLib<ShaderPointCloud>.getList("PointCloud")) // selectedItem: $selectedItem)
-
+        FoldersListView("Multipass", folders: ShaderLib<ShaderMultipass>.getList("Multipass"))
 
         // FIXME: put me back
- //       SceneSidebarView(folderList: SceneShaderLib.folderList)
+        SceneSidebarView(folderList: SceneShaderLib.folderList)
         
 
 //        SpriteListView(folderList: SpriteShaderLib.folderList) // see SpriteLibraryView

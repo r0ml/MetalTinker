@@ -4,9 +4,10 @@
 #include "Common.h" 
 
 // FIXME: for some reason this is the only pointcloud which has a noticeable (and it is very long) hang before rendering
+// The problem is caused by trying to initialize an  int3
 
 struct InputBuffer {
-  int3 samples;
+  float3 samples;
 };
 
 initialize() {
@@ -14,9 +15,10 @@ initialize() {
 //  in.pipeline._1 = { 0, 1, in.samples.y, 0};
 }
 
+
 frameInitialize() {
   ctrl.topology = 0;
-  ctrl.vertexCount = in.samples.y;
+  ctrl.vertexCount = int(in.samples.y);
   ctrl.instanceCount = 1;
 }
 

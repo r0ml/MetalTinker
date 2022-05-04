@@ -30,9 +30,6 @@
 		E743079E27F8DF1200BECBD0 /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
 		E743079F27F8DF1200BECBD0 /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
 		E74307A027F8DF1200BECBD0 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
-		E74307A527F8DF2900BECBD0 /* Animation Test.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C09D25ABB410004D75CD /* Animation Test.metal */; };
-		E74307A627F8DF2900BECBD0 /* a Cube.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C1BC25ACBD1F004D75CD /* a Cube.metal */; };
-		E74307A727F8DF2900BECBD0 /* Bello.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A81025B34F860051A69A /* Bello.metal */; };
 		E743D67D236BEEBB00EB81BC /* videos in Resources */ = {isa = PBXBuildFile; fileRef = E743D67C236BEEBB00EB81BC /* videos */; };
 		E743D68A236C081E00EB81BC /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = E743D689236C081E00EB81BC /* TODO.txt */; };
 		E743D706236C83FE00EB81BC /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
@@ -326,6 +323,17 @@
 		E78BD30B2820E5EF000B44F0 /* Attempt 23 of 100.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3CB25AD510B0051A69A /* Attempt 23 of 100.metal */; };
 		E78BD30C2820E5EF000B44F0 /* dot wave.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C425AD510A0051A69A /* dot wave.metal */; };
 		E78BD30D2820E5EF000B44F0 /* Static Points.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3C725AD510B0051A69A /* Static Points.metal */; };
+		E78BD31028221920000B44F0 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E78BD31128221920000B44F0 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
+		E78BD3162822196B000B44F0 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E78BD3172822198B000B44F0 /* VertexNode.metal in Sources */ = {isa = PBXBuildFile; fileRef = E70EC64525B8CBD400A204C3 /* VertexNode.metal */; };
+		E78BD31B28222892000B44F0 /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
+		E78BD31E28223DB6000B44F0 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
+		E78BD31F28223DB6000B44F0 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
+		E78BD32428223DD5000B44F0 /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
+		E78BD32528223DED000B44F0 /* Animation Test.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C09D25ABB410004D75CD /* Animation Test.metal */; };
+		E78BD32628223DED000B44F0 /* Bello.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A81025B34F860051A69A /* Bello.metal */; };
+		E78BD32728223DED000B44F0 /* a Cube.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C1BC25ACBD1F004D75CD /* a Cube.metal */; };
 		E7971B4E281B8B8800C15C5B /* ShaderFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7971B4D281B8B8800C15C5B /* ShaderFeedback.swift */; };
 		E7971B4F281B8BE600C15C5B /* GLSL smallpt multipass.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB85280E0BCB005E3A87 /* GLSL smallpt multipass.metal */; };
 		E7971B50281B8BE600C15C5B /* Starburst.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457B280DC55F000EC2DE /* Starburst.metal */; };
@@ -580,6 +588,20 @@
 			remoteGlobalIDString = E78BD2EE2820E545000B44F0;
 			remoteInfo = PointClouds.Simple;
 		};
+		E78BD31928221B93000B44F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E78BD30E28221920000B44F0;
+			remoteInfo = Scenes.SimpleScene;
+		};
+		E78BD32828223DFF000B44F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E78BD31C28223DB6000B44F0;
+			remoteInfo = Multipass.Simple;
+		};
 		E7971B93281B8D4100C15C5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
@@ -642,13 +664,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = E7D7C1A525ACBCE6004D75CD;
 			remoteInfo = "Shapes 3d Vertex";
-		};
-		E7ED18F5257E903A0075DD2E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E7ED18EF257E903A0075DD2E;
-			remoteInfo = "Simple Scenes";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -914,6 +929,8 @@
 		E78BD2CC281F29E0000B44F0 /* Parameterized.Simple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Parameterized.Simple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78BD2EB2820E3BE000B44F0 /* ShaderPointCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderPointCloud.swift; sourceTree = "<group>"; };
 		E78BD2FF2820E545000B44F0 /* PointClouds.Simple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = PointClouds.Simple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E78BD31528221920000B44F0 /* Scenes.SimpleScene.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Scenes.SimpleScene.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E78BD32328223DB6000B44F0 /* Multipass.Simple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Multipass.Simple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7971B4D281B8B8800C15C5B /* ShaderFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderFeedback.swift; sourceTree = "<group>"; };
 		E7971B8F281B8C2900C15C5B /* Feedback.Multiple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Feedback.Multiple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E79A10E122CF9B4D004FD5E2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -1876,6 +1893,8 @@
 				E78BD244281EEC1A000B44F0 /* Vertex.Simple.metallib */,
 				E78BD2CC281F29E0000B44F0 /* Parameterized.Simple.metallib */,
 				E78BD2FF2820E545000B44F0 /* PointClouds.Simple.metallib */,
+				E78BD31528221920000B44F0 /* Scenes.SimpleScene.metallib */,
+				E78BD32328223DB6000B44F0 /* Multipass.Simple.metallib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2165,6 +2184,36 @@
 			productReference = E78BD2FF2820E545000B44F0 /* PointClouds.Simple.metallib */;
 			productType = "com.apple.product-type.metal-library";
 		};
+		E78BD30E28221920000B44F0 /* Scenes.SimpleScene */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E78BD31228221920000B44F0 /* Build configuration list for PBXNativeTarget "Scenes.SimpleScene" */;
+			buildPhases = (
+				E78BD30F28221920000B44F0 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Scenes.SimpleScene;
+			productName = "Edge Detection";
+			productReference = E78BD31528221920000B44F0 /* Scenes.SimpleScene.metallib */;
+			productType = "com.apple.product-type.metal-library";
+		};
+		E78BD31C28223DB6000B44F0 /* Multipass.Simple */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E78BD32028223DB6000B44F0 /* Build configuration list for PBXNativeTarget "Multipass.Simple" */;
+			buildPhases = (
+				E78BD31D28223DB6000B44F0 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Multipass.Simple;
+			productName = "Edge Detection";
+			productReference = E78BD32328223DB6000B44F0 /* Multipass.Simple.metallib */;
+			productType = "com.apple.product-type.metal-library";
+		};
 		E7971B6C281B8C2900C15C5B /* Feedback.Multiple */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7971B8C281B8C2900C15C5B /* Build configuration list for PBXNativeTarget "Feedback.Multiple" */;
@@ -2330,10 +2379,14 @@
 				E78BD24B281EEC74000B44F0 /* Run Script Copy Vertex */,
 				E78BD2CD281F2A05000B44F0 /* Run Script Copy Parameterized */,
 				E78BD3002820E580000B44F0 /* Run Script Copy PointClouds */,
+				E78BD318282219E4000B44F0 /* Run Script Copy SceneShaders */,
+				E78BD32A28223E24000B44F0 /* Run Script Copy MultipassShaders */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E78BD32928223DFF000B44F0 /* PBXTargetDependency */,
+				E78BD31A28221B93000B44F0 /* PBXTargetDependency */,
 				E78BD3022820E5AB000B44F0 /* PBXTargetDependency */,
 				E78BD2CF281F2A2F000B44F0 /* PBXTargetDependency */,
 				E78BD246281EEC5B000B44F0 /* PBXTargetDependency */,
@@ -2358,7 +2411,6 @@
 				E7A5A7E225B257080051A69A /* PBXTargetDependency */,
 				E7D7C1C925ACBD4C004D75CD /* PBXTargetDependency */,
 				E7D7C07C25ABB36F004D75CD /* PBXTargetDependency */,
-				E7ED18F6257E903A0075DD2E /* PBXTargetDependency */,
 			);
 			name = AppRender;
 			productName = XDabble;
@@ -2433,8 +2485,10 @@
 				E7D7C06B25ABB355004D75CD /* Filters.SimpleVertex */,
 				E75A1AB327EE81B400779D64 /* Filters.Transitions */,
 				E71716A52818EC8D006A916C /* Filters.Feedback */,
+				E78BD31C28223DB6000B44F0 /* Multipass.Simple */,
 				E78BD29C281F29E0000B44F0 /* Parameterized.Simple */,
 				E78BD2EE2820E545000B44F0 /* PointClouds.Simple */,
+				E78BD30E28221920000B44F0 /* Scenes.SimpleScene */,
 				E78BD22D281EEC1A000B44F0 /* Vertex.Circles */,
 				E78BD235281EEC1A000B44F0 /* Vertex.Shapes */,
 				E78BD23D281EEC1A000B44F0 /* Vertex.Simple */,
@@ -2558,6 +2612,43 @@
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=PointClouds\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
 			showEnvVarsInLog = 0;
 		};
+		E78BD318282219E4000B44F0 /* Run Script Copy SceneShaders */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script Copy SceneShaders";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=Scenes\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
+			showEnvVarsInLog = 0;
+		};
+		E78BD32A28223E24000B44F0 /* Run Script Copy MultipassShaders */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script Copy MultipassShaders";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=Scenes\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
+		};
 		E7D7C06A25ABB333004D75CD /* Run Script Copy Shaders */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2650,11 +2741,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E743079C27F8DF1200BECBD0 /* glsl.metal in Sources */,
-				E74307A527F8DF2900BECBD0 /* Animation Test.metal in Sources */,
-				E74307A727F8DF2900BECBD0 /* Bello.metal in Sources */,
 				E743079D27F8DF1200BECBD0 /* scenetest.metal in Sources */,
 				E743079E27F8DF1200BECBD0 /* shapes.metal in Sources */,
-				E74307A627F8DF2900BECBD0 /* a Cube.metal in Sources */,
 				E743079F27F8DF1200BECBD0 /* sdf.metal in Sources */,
 				E74307A027F8DF1200BECBD0 /* support.metal in Sources */,
 			);
@@ -3026,6 +3114,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E78BD30F28221920000B44F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E78BD31B28222892000B44F0 /* shapes.metal in Sources */,
+				E78BD3172822198B000B44F0 /* VertexNode.metal in Sources */,
+				E78BD3162822196B000B44F0 /* scenetest.metal in Sources */,
+				E78BD31028221920000B44F0 /* support.metal in Sources */,
+				E78BD31128221920000B44F0 /* glsl.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E78BD31D28223DB6000B44F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E78BD32428223DD5000B44F0 /* shapes.metal in Sources */,
+				E78BD32528223DED000B44F0 /* Animation Test.metal in Sources */,
+				E78BD32628223DED000B44F0 /* Bello.metal in Sources */,
+				E78BD32728223DED000B44F0 /* a Cube.metal in Sources */,
+				E78BD31E28223DB6000B44F0 /* support.metal in Sources */,
+				E78BD31F28223DB6000B44F0 /* glsl.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7971B6D281B8C2900C15C5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3328,6 +3441,16 @@
 			target = E78BD2EE2820E545000B44F0 /* PointClouds.Simple */;
 			targetProxy = E78BD3012820E5AB000B44F0 /* PBXContainerItemProxy */;
 		};
+		E78BD31A28221B93000B44F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E78BD30E28221920000B44F0 /* Scenes.SimpleScene */;
+			targetProxy = E78BD31928221B93000B44F0 /* PBXContainerItemProxy */;
+		};
+		E78BD32928223DFF000B44F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E78BD31C28223DB6000B44F0 /* Multipass.Simple */;
+			targetProxy = E78BD32828223DFF000B44F0 /* PBXContainerItemProxy */;
+		};
 		E7971B94281B8D4100C15C5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E7971B6C281B8C2900C15C5B /* Feedback.Multiple */;
@@ -3372,11 +3495,6 @@
 			isa = PBXTargetDependency;
 			target = E7D7C1A525ACBCE6004D75CD /* Filters.ShapesVertex */;
 			targetProxy = E7D7C1C825ACBD4C004D75CD /* PBXContainerItemProxy */;
-		};
-		E7ED18F6257E903A0075DD2E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E7ED18EF257E903A0075DD2E /* Simple Scenes */;
-			targetProxy = E7ED18F5257E903A0075DD2E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3720,6 +3838,46 @@
 			name = Debug;
 		};
 		E78BD2FE2820E545000B44F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E78BD31328221920000B44F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E78BD31428221920000B44F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E78BD32128223DB6000B44F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MHEBPE6SV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E78BD32228223DB6000B44F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -4344,6 +4502,24 @@
 			buildConfigurations = (
 				E78BD2FD2820E545000B44F0 /* Debug */,
 				E78BD2FE2820E545000B44F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E78BD31228221920000B44F0 /* Build configuration list for PBXNativeTarget "Scenes.SimpleScene" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E78BD31328221920000B44F0 /* Debug */,
+				E78BD31428221920000B44F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E78BD32028223DB6000B44F0 /* Build configuration list for PBXNativeTarget "Multipass.Simple" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E78BD32128223DB6000B44F0 /* Debug */,
+				E78BD32228223DB6000B44F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

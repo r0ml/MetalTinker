@@ -18,8 +18,10 @@ final class ShaderMultipass : GenericShader {
 //    config = Config(s)
   }
 
-  override func ddraw(_ cq : MTLCommandQueue?,  _ viewx: MTKView?, _ scene : SCNScene?) {
-    
+  override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection, MTLRenderPipelineDescriptor)? {
+    print("hunh")
+
+    let a = super.setupRenderPipeline(vertexFunction: vertexFunction, fragmentFunction: fragmentFunction)
+    return a
   }
-  
 }

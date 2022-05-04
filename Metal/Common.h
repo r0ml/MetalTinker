@@ -50,6 +50,22 @@ typedef struct {
   float2x3 worldBoundingBox;
 } PerNodeData;
 
+#ifndef PASSES
+typedef struct {
+  int vertexCount;
+  int instanceCount;
+  int topology;
+} ControlBuffer;
+#else
+typedef struct {
+  struct {
+    int vertexCount;
+    int instanceCount;
+    int topology;
+  } pass[PASSES];
+} ControlBuffer;
+#endif
+
 typedef struct {
   float4 iDate;                        // (year, month, day, time in seconds)
   float2 iMouse;                       // mouse pixel coords
@@ -64,11 +80,6 @@ typedef struct {
   int eventModifiers;
 } Uniform;
 
-typedef struct {
-  int topology;
-  int vertexCount;
-  int instanceCount;
-} ControlBuffer;
 
 struct InputBuffer;
 
@@ -197,7 +208,7 @@ LastFrame(), \
 #define __initialize(n) \
 static void _initialize(/* constant Uniform& uni, */ device InputBuffer& in, device ControlBuffer& ctrl ); \
 \
-kernel void n##InitializeOptions ( \
+kernel void n##_InitializeOptions ( \
 /* constant Uniform &uni [[ buffer(uniformId) ]], */ \
   device InputBuffer &in [[ buffer(kbuffId) ]], \
   device ControlBuffer &ctrl [[buffer(ctrlBuffId) ]] \
@@ -215,7 +226,7 @@ void _initialize(/* constant Uniform &uni, */ device InputBuffer& in, device Con
 #define ___frameInitialize(n, ...) __frameInitialize(n, ##__VA_ARGS__)
 #define __frameInitialize(n, ...) \
 \
-kernel void n##FrameInitialize ( \
+kernel void n##_FrameInitialize ( \
   constant Uniform &uni [[ buffer(uniformId) ]], \
   device InputBuffer &in [[ buffer(kbuffId) ]], \
   device ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )

@@ -64,7 +64,7 @@ class ParameterizedShader : GenericShader {
       self.initializationBuffer = ib
     }
 
-    let nam = myName + "InitializeOptions"
+    let nam = myName + "_InitializeOptions"
     guard let initializationProgram = functionMaps[self.myGroup]!.find( nam ) else {
       return
     }
