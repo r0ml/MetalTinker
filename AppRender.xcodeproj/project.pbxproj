@@ -25,11 +25,6 @@
 		E72A7FF923C2C2AB008C642A /* XSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */; };
 		E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72D600A2391D948009CF90A /* MyMTLStruct.swift */; };
 		E73D807427E17A7300F25018 /* ConfigControllerT3SCN.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */; };
-		E743079C27F8DF1200BECBD0 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
-		E743079D27F8DF1200BECBD0 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
-		E743079E27F8DF1200BECBD0 /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
-		E743079F27F8DF1200BECBD0 /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
-		E74307A027F8DF1200BECBD0 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E743D67D236BEEBB00EB81BC /* videos in Resources */ = {isa = PBXBuildFile; fileRef = E743D67C236BEEBB00EB81BC /* videos */; };
 		E743D68A236C081E00EB81BC /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = E743D689236C081E00EB81BC /* TODO.txt */; };
 		E743D706236C83FE00EB81BC /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
@@ -334,6 +329,8 @@
 		E78BD32528223DED000B44F0 /* Animation Test.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C09D25ABB410004D75CD /* Animation Test.metal */; };
 		E78BD32628223DED000B44F0 /* Bello.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A81025B34F860051A69A /* Bello.metal */; };
 		E78BD32728223DED000B44F0 /* a Cube.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C1BC25ACBD1F004D75CD /* a Cube.metal */; };
+		E78BD32B2824710D000B44F0 /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
+		E78BD32D2824747B000B44F0 /* Bello2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E78BD32C2824747B000B44F0 /* Bello2.metal */; };
 		E7971B4E281B8B8800C15C5B /* ShaderFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7971B4D281B8B8800C15C5B /* ShaderFeedback.swift */; };
 		E7971B4F281B8BE600C15C5B /* GLSL smallpt multipass.metal in Sources */ = {isa = PBXBuildFile; fileRef = E79BDB85280E0BCB005E3A87 /* GLSL smallpt multipass.metal */; };
 		E7971B50281B8BE600C15C5B /* Starburst.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7CD457B280DC55F000EC2DE /* Starburst.metal */; };
@@ -496,13 +493,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = E71716A52818EC8D006A916C;
 			remoteInfo = Filters.Feedback;
-		};
-		E74307A827F8DF4200BECBD0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7FCB45E212A2B1000CED4FA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E743079A27F8DF1200BECBD0;
-			remoteInfo = Shaders.Multipass;
 		};
 		E75A1B1E27EE829700779D64 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -713,7 +703,6 @@
 		E731C35F21AF6847001D2345 /* VideoSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSupport.swift; sourceTree = "<group>"; };
 		E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigControllerT3SCN.swift; sourceTree = "<group>"; };
 		E743079927F8B4F200BECBD0 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		E74307A427F8DF1200BECBD0 /* Shaders.Multipass.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Shaders.Multipass.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E743D67C236BEEBB00EB81BC /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = videos; sourceTree = "<group>"; };
 		E743D689236C081E00EB81BC /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		E746F31423F0D107003598F6 /* sdf.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = sdf.metal; sourceTree = "<group>"; };
@@ -931,6 +920,7 @@
 		E78BD2FF2820E545000B44F0 /* PointClouds.Simple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = PointClouds.Simple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78BD31528221920000B44F0 /* Scenes.SimpleScene.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Scenes.SimpleScene.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78BD32328223DB6000B44F0 /* Multipass.Simple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Multipass.Simple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E78BD32C2824747B000B44F0 /* Bello2.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Bello2.metal; sourceTree = "<group>"; };
 		E7971B4D281B8B8800C15C5B /* ShaderFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderFeedback.swift; sourceTree = "<group>"; };
 		E7971B8F281B8C2900C15C5B /* Feedback.Multiple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Feedback.Multiple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E79A10E122CF9B4D004FD5E2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -1342,14 +1332,15 @@
 		E75A207C27F25B7B00779D64 /* Circles */ = {
 			isa = PBXGroup;
 			children = (
+				E75A209027F25B7B00779D64 /* Arcs 2.metal */,
+				E78BD32C2824747B000B44F0 /* Bello2.metal */,
+				E75A209B27F25B7B00779D64 /* Arcs.metal */,
 				E75A209627F25B7B00779D64 /* chasers.metal */,
 				E75A209A27F25B7B00779D64 /* Circles 1.metal */,
 				E75A209427F25B7B00779D64 /* Colored Circles.metal */,
 				E75A208427F25B7B00779D64 /* Combinatorial Shape Rendering.metal */,
 				E75A208927F25B7B00779D64 /* Concentric hex lines.metal */,
 				E75A20A227F25B7B00779D64 /* Contour.metal */,
-				E75A209027F25B7B00779D64 /* Arcs 2.metal */,
-				E75A209B27F25B7B00779D64 /* Arcs.metal */,
 				E75A207F27F25B7B00779D64 /* dot ring test 3D.metal */,
 				E75A209C27F25B7B00779D64 /* Dots On Planes.metal */,
 				E75A208F27F25B7B00779D64 /* first circle.metal */,
@@ -1772,14 +1763,6 @@
 			path = "Simple Vertex";
 			sourceTree = "<group>";
 		};
-		E7D7C0A425ABB410004D75CD /* Shaders */ = {
-			isa = PBXGroup;
-			children = (
-				E743079427F8002100BECBD0 /* Multipass */,
-			);
-			path = Shaders;
-			sourceTree = "<group>";
-		};
 		E7D7C1B725ACBD1F004D75CD /* Shapes Vertex */ = {
 			isa = PBXGroup;
 			children = (
@@ -1855,7 +1838,6 @@
 				E78F10152548E13100E76476 /* IO */,
 				E72A7FFC23C2C3F7008C642A /* Metal */,
 				E7B5733525B6B1FD00DF1452 /* CIFilters */,
-				E7D7C0A425ABB410004D75CD /* Shaders */,
 				E74A445A2578043700639F19 /* Sprites */,
 				E74A41CC2576B4F600639F19 /* Scenes */,
 				E773D5562812390800AD2173 /* GeneratorShaders */,
@@ -1864,6 +1846,7 @@
 				E76DDCA227DA646B006BEBB2 /* FilterShaders */,
 				E78BD2ED2820E524000B44F0 /* PointClouds */,
 				E78BD22C281EEB29000B44F0 /* VertexShaders */,
+				E743079427F8002100BECBD0 /* Multipass */,
 				E7FCB467212A2B1000CED4FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1879,7 +1862,6 @@
 				E75A1B4C27F1759100779D64 /* Filters.Colors.metallib */,
 				E75A1B6827F1791800779D64 /* Filters.Deforms.metallib */,
 				E75A20AC27F25BA900779D64 /* Generators.Circles.metallib */,
-				E74307A427F8DF1200BECBD0 /* Shaders.Multipass.metallib */,
 				E79BDBB5280E2C35005E3A87 /* Filters.ShadowBuffers.metallib */,
 				E79BDBBD280E2C36005E3A87 /* Filters.NotWorking.metallib */,
 				E79BDBC5280E2C67005E3A87 /* Filters.Generators.metallib */,
@@ -1959,21 +1941,6 @@
 			name = Filters.Feedback;
 			productName = "Edge Detection";
 			productReference = E71716AC2818EC8D006A916C /* Filters.Feedback.metallib */;
-			productType = "com.apple.product-type.metal-library";
-		};
-		E743079A27F8DF1200BECBD0 /* Shaders.Multipass */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E74307A127F8DF1200BECBD0 /* Build configuration list for PBXNativeTarget "Shaders.Multipass" */;
-			buildPhases = (
-				E743079B27F8DF1200BECBD0 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Shaders.Multipass;
-			productName = Simple;
-			productReference = E74307A427F8DF1200BECBD0 /* Shaders.Multipass.metallib */;
 			productType = "com.apple.product-type.metal-library";
 		};
 		E743D701236C83FE00EB81BC /* Template */ = {
@@ -2400,7 +2367,6 @@
 				E79BDBC7280E2CAC005E3A87 /* PBXTargetDependency */,
 				E79BDBC9280E2CAC005E3A87 /* PBXTargetDependency */,
 				E79BDBCB280E2CAC005E3A87 /* PBXTargetDependency */,
-				E74307A927F8DF4200BECBD0 /* PBXTargetDependency */,
 				E76DDD4E27DA71FD006BEBB2 /* PBXTargetDependency */,
 				E75A20D627F25BFA00779D64 /* PBXTargetDependency */,
 				E75A1B6D27F1797900779D64 /* PBXTargetDependency */,
@@ -2464,7 +2430,6 @@
 			projectRoot = "";
 			targets = (
 				E7FCB465212A2B1000CED4FA /* AppRender */,
-				E743079A27F8DF1200BECBD0 /* Shaders.Multipass */,
 				E743D701236C83FE00EB81BC /* Template */,
 				E7ED18EF257E903A0075DD2E /* Simple Scenes */,
 				E7B5734D25B6B2AD00DF1452 /* CIFilters */,
@@ -2647,7 +2612,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=Scenes\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=Multipass\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
 		};
 		E7D7C06A25ABB333004D75CD /* Run Script Copy Shaders */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2733,18 +2698,6 @@
 			files = (
 				E71716A72818EC8D006A916C /* support.metal in Sources */,
 				E71716A82818EC8D006A916C /* glsl.metal in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E743079B27F8DF1200BECBD0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E743079C27F8DF1200BECBD0 /* glsl.metal in Sources */,
-				E743079D27F8DF1200BECBD0 /* scenetest.metal in Sources */,
-				E743079E27F8DF1200BECBD0 /* shapes.metal in Sources */,
-				E743079F27F8DF1200BECBD0 /* sdf.metal in Sources */,
-				E74307A027F8DF1200BECBD0 /* support.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2942,6 +2895,7 @@
 				E75A20CE27F25BC900779D64 /* Physics no collisions.metal in Sources */,
 				E75A20C327F25BC900779D64 /* Radar 2.metal in Sources */,
 				E75A20BC27F25BC900779D64 /* Hyperbolic tesselation.metal in Sources */,
+				E78BD32D2824747B000B44F0 /* Bello2.metal in Sources */,
 				E75A20D127F25BC900779D64 /* Contour.metal in Sources */,
 				E75A20B727F25BC900779D64 /* Trainpoints.metal in Sources */,
 				E75A20A727F25BA900779D64 /* support.metal in Sources */,
@@ -3130,6 +3084,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E78BD32B2824710D000B44F0 /* sdf.metal in Sources */,
 				E78BD32428223DD5000B44F0 /* shapes.metal in Sources */,
 				E78BD32528223DED000B44F0 /* Animation Test.metal in Sources */,
 				E78BD32628223DED000B44F0 /* Bello.metal in Sources */,
@@ -3376,11 +3331,6 @@
 			target = E71716A52818EC8D006A916C /* Filters.Feedback */;
 			targetProxy = E71716C92818ECBC006A916C /* PBXContainerItemProxy */;
 		};
-		E74307A927F8DF4200BECBD0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E743079A27F8DF1200BECBD0 /* Shaders.Multipass */;
-			targetProxy = E74307A827F8DF4200BECBD0 /* PBXContainerItemProxy */;
-		};
 		E75A1B1F27EE829700779D64 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E75A1AD727EE823F00779D64 /* Filters.Filters */;
@@ -3536,30 +3486,6 @@
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		E74307A227F8DF1200BECBD0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
-			};
-			name = Debug;
-		};
-		E74307A327F8DF1200BECBD0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MHEBPE6SV2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
 			};
 			name = Release;
 		};
@@ -4367,15 +4293,6 @@
 			buildConfigurations = (
 				E71716AA2818EC8D006A916C /* Debug */,
 				E71716AB2818EC8D006A916C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E74307A127F8DF1200BECBD0 /* Build configuration list for PBXNativeTarget "Shaders.Multipass" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E74307A227F8DF1200BECBD0 /* Debug */,
-				E74307A327F8DF1200BECBD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

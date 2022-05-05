@@ -3,36 +3,29 @@
 
 #include "Common.h"
 
-struct InputBuffer {
-  struct {
-    int4 _1;
-    int4 _2;
-    int4 _3;
-  } pipeline;
-};
-
-initialize() {
-  in.pipeline._1 = {3, 600, 1, 0};
-  in.pipeline._2 = {3, 600, 1, 0};
-  in.pipeline._3 = {3, 600, 1, 0};
+frameInitialize() {
+  ctrl.instanceCount = 3;
+  ctrl.vertexCount = 600;
 }
 
-vertexPass(_1) {
+vertexFn() {
   VertexOut v;
+
+  if (iid == 0) {
 
   float x = uni.iTime / 3;
   v.color = float4(float3(min(abs(cos(x)),abs(sin(2*x)))), 1);
   float radius = 0.49 * max(0.4, abs(sin(uni.iTime * 1.33)));
 
-  v.where.xy = annulus(vid, in.pipeline._1.y / 6, radius - 0.05, radius );
+  v.where.xy = annulus(vid, ctrl.vertexCount / 6, radius - 0.05, radius );
   v.where.zw = {0, 1};
   v.where = v.where * scale(aspectRatio.y, aspectRatio.x, 1);
 
-  return v;
-}
+      return v;
 
-vertexPass(_2) {
-  // float cc = min(abs(cos(uni.iTime * 0.33)),abs(sin(uni.iTime * 0.66)));
+  } else if (iid == 1) {
+
+    // float cc = min(abs(cos(uni.iTime * 0.33)),abs(sin(uni.iTime * 0.66)));
   float3 rv = float3(0.);
   rv.x = max(0.4, abs(sin(uni.iTime * 1.33)));
   rv.y = mix(0.05, rv.x * 0.6, abs(cos(uni.iTime * 0.66)));
@@ -41,15 +34,14 @@ vertexPass(_2) {
 
   float radius = rv.z;
   VertexOut v;
-  v.where.xy = annulus(vid, in.pipeline._2.y / 6, radius - 0.05, radius );
+  v.where.xy = annulus(vid, ctrl.vertexCount / 6, radius - 0.05, radius );
   v.where.zw = {0, 1};
   v.where = v.where * scale(aspectRatio.y, aspectRatio.x, 1);
 
   v.color = float4(255, 0, 231, 255) / 255.;
   return v;
-}
+  } else if (iid == 2) {
 
-vertexPass(_3) {
   // float cc = min(abs(cos(uni.iTime * 0.33)),abs(sin(uni.iTime * 0.66)));
   float3 rv = float3(0.);
   rv.x = max(0.4, abs(sin(uni.iTime * 1.33)));
@@ -59,11 +51,13 @@ vertexPass(_3) {
 
   float radius = rv.y;
   VertexOut v;
-  v.where.xy = annulus(vid, in.pipeline._1.y / 6, radius - 0.05, radius );
+  v.where.xy = annulus(vid, ctrl.vertexCount / 6, radius - 0.05, radius );
   v.where.zw = {0, 1};
   v.where = v.where * scale(aspectRatio.y, aspectRatio.x, 1);
 
   v.color = float4(255, 0, 231, 255) / 255.;
+  return v;
+  }
   return v;
 }
 

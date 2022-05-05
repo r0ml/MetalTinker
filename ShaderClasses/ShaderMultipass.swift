@@ -24,4 +24,8 @@ final class ShaderMultipass : GenericShader {
     let a = super.setupRenderPipeline(vertexFunction: vertexFunction, fragmentFunction: fragmentFunction)
     return a
   }
+
+  override func doInitialization() {
+    super.doInitialization()
+  }
 }
