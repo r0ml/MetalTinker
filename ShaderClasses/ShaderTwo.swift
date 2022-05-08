@@ -492,8 +492,3 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
     
 }
 
-// FIXME: This can be moved up to Shader if I also take fragmentTextures
-extension ShaderTwo {
-  // FIXME: when I fix RenderPassPipeline -- move this out of the class
-
-}

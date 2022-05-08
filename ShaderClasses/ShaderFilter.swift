@@ -90,7 +90,7 @@ class ShaderFilter : ParameterizedShader {
     psd.fragmentFunction = fragmentFunction
     psd.colorAttachments[0].pixelFormat = thePixelFormat
     psd.isAlphaToOneEnabled = false
-    psd.colorAttachments[0].isBlendingEnabled = false // true?
+    psd.colorAttachments[0].isBlendingEnabled = true // true?
     psd.colorAttachments[0].alphaBlendOperation = .add
     psd.colorAttachments[0].rgbBlendOperation = .add
     psd.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha // I would like to set this to   .one   for some cases
@@ -170,12 +170,16 @@ class ShaderFilter : ParameterizedShader {
   }
 
   override func morePrefs() -> [IdentifiableView] {
+    // Here is where I can load any stored texture parameters
+    // I could store different texture parameters for different shaders
+    // or use the same texture parameters for all shaders
     let c = self.buildImageWells()
      let d = IdentifiableView(id: "sources", view: AnyView(c))
     return [d]
   }
 
   func buildImageWells() -> AnyView {
+    
     return AnyView(
       ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: {
       self.fragmentTextures = $0 }))

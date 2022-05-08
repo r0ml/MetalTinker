@@ -41,7 +41,8 @@ class DynamicPreferences {
       let dd =  UserDefaults.standard.object(forKey: dnam)
       
       if let _ = bstm.structure {
-        if bstm.name == "pipeline" { continue }
+       // if bstm.name == "pipeline" { continue }
+        // This is where segmented options happen
         let ddm = bstm.children;
         if let kk = ddm.first?.datatype, kk == .int || kk == .bool  {
           var v : Int = 0
@@ -110,6 +111,12 @@ class DynamicPreferences {
   }
   
   private func makeSegmented( _ t:String, _ p:String, _ items : [MyMTLStruct], value: Int) -> AnyView {
+    // first time in -- set the value
+    for (i, tt) in items.enumerated() {
+      tt.setValue( Int32(i == value ? 1 : 0) )
+    }
+
+
     let sb = XSegmentedControl.init(items: items, title: t, pref: p, sel : Observable<Int>(value) {
       UserDefaults.standard.set($0, forKey: p)
       for (i, tt) in items.enumerated() {

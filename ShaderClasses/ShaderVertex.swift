@@ -70,7 +70,7 @@ class ShaderVertex : ShaderFeedback {
 
     psd.vertexFunction = vertexFunction
     psd.fragmentFunction = fragmentFunction
-    psd.colorAttachments[0].pixelFormat = thePixelFormat
+    psd.colorAttachments[0].pixelFormat = thePixelFormat 
     psd.isAlphaToOneEnabled = false
     psd.colorAttachments[0].isBlendingEnabled = true
     psd.colorAttachments[0].alphaBlendOperation = .add
@@ -127,65 +127,11 @@ class ShaderVertex : ShaderFeedback {
 
   }
 
-  /*
-  override func beginFrame(_ cqq : MTLCommandQueue) {
-    //        print("start \(#function)")
-
-    /*      // FIXME: I want the render pipeline metadata
-
-     if let gg = cpr?.arguments.first(where: { $0.name == "in" }),
-     let ib = device.makeBuffer(length: gg.bufferDataSize, options: [.storageModeShared ]) {
-     ib.label = "defaults buffer for \(self.myName)"
-     ib.contents().storeBytes(of: 0, as: Int.self)
-     initializationBuffer = ib
-     } else if let ib = device.makeBuffer(length: 8, options: [.storageModeShared]) {
-     ib.label = "empty kernel compute buffer for \(self.myName)"
-     initializationBuffer = ib
-     } else {
-     os_log("failed to allocate initialization MTLBuffer", type: .fault)
-     return
-     }
-     */
-
-
-    if let fips = frameInitializePipelineState,
-       let commandBuffer = cqq.makeCommandBuffer(),
-       let computeEncoder = commandBuffer.makeComputeCommandEncoder()
-    {
-      commandBuffer.label = "Frame Initialize command buffer for \(self.myName)"
-      computeEncoder.label = "frame initialization and defaults encoder \(self.myName)"
-      computeEncoder.setComputePipelineState(fips)
-      //        computeEncoder.setBuffer(uniformBuffer, offset: 0, index: uniformId)
-      computeEncoder.setBuffer(initializationBuffer, offset: 0, index: kbuffId)
-      computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
-
-      let ms = MTLSize(width: 1, height: 1, depth: 1);
-      computeEncoder.dispatchThreadgroups(ms, threadsPerThreadgroup: ms);
-      computeEncoder.endEncoding()
-
-      commandBuffer.commit()
-      commandBuffer.waitUntilCompleted() // I need these values to proceed
-    }
-
-    // at this point, the frame initialization (ctrl) buffer has been set
-    // FIXME: I should probably add a compute buffer to hold values across frames?
-
-    /*    if let gg = cpr?.arguments.first(where: { $0.name == "in" }) {
-     inbuf = MyMTLStruct.init(initializationBuffer, gg)
-     processArguments(inbuf)
-     }
-     */
-
-
-  }
-   */
-
   override func setInitializationArguments( _ computeEncoder : MTLComputeCommandEncoder) {
     computeEncoder.setBuffer(controlBuffer, offset: 0, index: ctrlBuffId)
 
     super.setInitializationArguments(computeEncoder)
   }
-
 
   override func beginShader() {
     //    print("start \(#function)")

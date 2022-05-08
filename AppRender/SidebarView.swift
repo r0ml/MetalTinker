@@ -17,6 +17,7 @@ var functionMaps = [ // "Shaders" : Function("Shaders"),
 ]
 
 struct SidebarView : View {
+  @AppStorage("selectedGroup") var selectedItem : String?
 
   //  @State var selectedItem : String?
 //  var initialSelection : String?
@@ -35,7 +36,7 @@ struct SidebarView : View {
 
   var body: some View {
     NavigationView {
-      List {
+      List(selection: $selectedItem) {
 
         FoldersListView("Generators", folders: ShaderLib<GenericShader>.getList("Generators"))
         FoldersListView("Parameterized", folders: ShaderLib<ParameterizedShader>.getList("Parameterized"))

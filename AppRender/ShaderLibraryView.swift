@@ -39,10 +39,10 @@ struct FoldersListView<T : GenericShader> : View {
 
 struct ShaderListView<T: GenericShader>: View {
   var items : [T]
-  @State var sel : String?
+  @AppStorage("selectedShader") var sel : String?
   
   var body: some View {
-    List {
+    List(selection: $sel) {
       ForEach( items ) { li  in
         NavigationLink(destination: ShaderMetalView(shader: li),
                        tag: li.id,

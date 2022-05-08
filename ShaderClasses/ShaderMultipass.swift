@@ -5,7 +5,7 @@
 import MetalKit
 import SceneKit
 
-final class ShaderMultipass : GenericShader {
+final class ShaderMultipass : ShaderVertex {
  
     //  typealias Config = ConfigController
   
@@ -18,6 +18,11 @@ final class ShaderMultipass : GenericShader {
 //    config = Config(s)
   }
 
+  override var myGroup : String {
+    get { "Multipass" }
+  }
+
+
   override func setupRenderPipeline(vertexFunction: MTLFunction?, fragmentFunction: MTLFunction?) -> (MTLRenderPipelineState, MTLRenderPipelineReflection, MTLRenderPipelineDescriptor)? {
     print("hunh")
 
@@ -27,5 +32,9 @@ final class ShaderMultipass : GenericShader {
 
   override func doInitialization() {
     super.doInitialization()
+  }
+
+  override func justInitialization() {
+    super.justInitialization()
   }
 }

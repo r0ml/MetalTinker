@@ -536,25 +536,6 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
 
   
   func beginFrame(_ cqq : MTLCommandQueue) {
-    //        print("start \(#function)")
-    
-    /*      // FIXME: I want the render pipeline metadata
-     
-     if let gg = cpr?.arguments.first(where: { $0.name == "in" }),
-     let ib = device.makeBuffer(length: gg.bufferDataSize, options: [.storageModeShared ]) {
-     ib.label = "defaults buffer for \(self.myName)"
-     ib.contents().storeBytes(of: 0, as: Int.self)
-     initializationBuffer = ib
-     } else if let ib = device.makeBuffer(length: 8, options: [.storageModeShared]) {
-     ib.label = "empty kernel compute buffer for \(self.myName)"
-     initializationBuffer = ib
-     } else {
-     os_log("failed to allocate initialization MTLBuffer", type: .fault)
-     return
-     }
-     */
-    
-    
     if
       let fips = frameInitializePipelineState,
       let commandBuffer = cqq.makeCommandBuffer(),
@@ -580,14 +561,6 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     // at this point, the frame initialization (ctrl) buffer has been set
     // FIXME: I should probably add a compute buffer to hold values across frames?
-    
-    /*    if let gg = cpr?.arguments.first(where: { $0.name == "in" }) {
-     inbuf = MyMTLStruct.init(initializationBuffer, gg)
-     processArguments(inbuf)
-     }
-     */
-    
-    
   }
 
   func setInitializationArguments(_ computeEncoder : MTLComputeCommandEncoder) {
@@ -726,7 +699,7 @@ extension GenericShader { // was from MetalDelegate
     //      print("in gpusem", terminator: "" )
     let gw = gpuSemaphore.wait(timeout: .now() + .microseconds(1) /*    .microseconds(1000/60) */ )
     if gw == .timedOut {
-      print("GPU timed out")
+//      print("GPU timed out")
       return false }
 
     times.lastTime = times.currentTime

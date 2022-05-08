@@ -190,6 +190,11 @@ class ParameterizedShader : GenericShader {
   override func buildPrefView() -> [IdentifiableView] {
     beginShader()
     if let z = cached { return z }
+
+    // I should move the creation of TextureParameters here
+
+
+
     if let mo = myOptions {
       let a = DynamicPreferences.init(myName)
       dynPref = a
@@ -222,6 +227,8 @@ class ParameterizedShader : GenericShader {
 
   func beginShader() {
     //    print("start \(#function)")
+
+    // should doInitialization go here?
 
     if let ips = initializePipelineState,
        let commandBuffer = commandQueue.makeCommandBuffer(),

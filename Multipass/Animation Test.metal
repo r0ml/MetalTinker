@@ -28,11 +28,11 @@ initialize() {
 }
 
 frameInitialize() {
-  ctrl.pass[0].vertexCount = 18;
-  ctrl.pass[0].instanceCount = 1;
+  ctrl.pass[1].vertexCount = 18;
+  ctrl.pass[1].instanceCount = 1;
 
-  ctrl.pass[1].vertexCount = 150;
-  ctrl.pass[1].instanceCount = 6;
+  ctrl.pass[0].vertexCount = 150;
+  ctrl.pass[0].instanceCount = 6;
 }
 
 //--- Animation Functions ---
@@ -62,27 +62,10 @@ static float animation(InputBuffer in, float s, float e, float t) {
   return 0;
 }
 
-// hexagon
-vertexPass(_1) {
-  float time = uni.iTime;
-  time = mod(time,10.0);
-  
-  float hexrad = animation(in, 0.0,1.0,time) - animation(in, 8.0,9.0,time);
-  hexrad = 0.1 * hexrad + 0.1;
-  
-  VertexOut v;
-  v.where.xy = polygon(vid, 6, hexrad );
-  v.where.zw = {0, 1};
-  v.where = v.where * scale(aspectRatio.y, aspectRatio.x, 1);
-
-  v.color = {0.4 , 0.5, 0.6, 1};
-  return v;
-}
-
 static float2 polar(float a) { return float2(cos(a),sin(a)); }
 
 // circle
-vertexPass(_2) {
+vertexPass(_1) {
   VertexOut v;
   v.where.xy = polygon(vid, 50, 0.075 );
   v.where.zw = {0, 1};
@@ -115,5 +98,22 @@ vertexPass(_2) {
   v.where.xy = v.where.xy * aspect * rot2d( - animation(in, 3.0,6.0,time)*TAU) / aspect;
   
   
+  return v;
+}
+
+// hexagon
+vertexPass(_2) {
+  float time = uni.iTime;
+  time = mod(time,10.0);
+
+  float hexrad = animation(in, 0.0,1.0,time) - animation(in, 8.0,9.0,time);
+  hexrad = 0.1 * hexrad + 0.1;
+
+  VertexOut v;
+  v.where.xy = polygon(vid, 6, hexrad );
+  v.where.zw = {0, 1};
+  v.where = v.where * scale(aspectRatio.y, aspectRatio.x, 1);
+
+  v.color = {0.4 , 0.5, 0.6, 1};
   return v;
 }

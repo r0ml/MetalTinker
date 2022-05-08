@@ -6,6 +6,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 import MetalKit
 import AVFoundation
+import os
 
 struct ImageStrip : View {
   @Binding var texes : [TextureParameter]
@@ -105,6 +106,13 @@ struct ImageStrip : View {
 
               if let j = urlData as? URL {
                 // FIXME: Fix this on StackOverflow
+                do {
+                  let bmd = try j.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
+                  UserDefaults.standard.set(bmd, forKey: "texture\(jj.id)")  // should it be index instead of id?
+                } catch(let e ) {
+                  os_log("failed to store URL for texture %s", e.localizedDescription)
+                }
+
                 let uti = UTType.types(tag: j.pathExtension, tagClass: UTTagClass.filenameExtension, conformingTo: UTType.data)
                 /*            let uti = UTTypeCreatePreferredIdentifierForTag(
                  kUTTagClassFilenameExtension,

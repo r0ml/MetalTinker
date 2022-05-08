@@ -158,7 +158,6 @@ class SpriteTest : SKScene {
 
 }
 
-
 extension SKColor {
   func toSRGB() -> SKColor {
 
