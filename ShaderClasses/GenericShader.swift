@@ -76,8 +76,8 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     
     myName = s
     super.init()
-    //    print("init \(s)")
-    self.doInitialization()
+
+//    self.doInitialization()
   }
   
   

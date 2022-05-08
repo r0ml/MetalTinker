@@ -67,14 +67,28 @@ class TextureParameter : Identifiable {
       type = a.textureType
       access = a.access
       data = a.textureDataType
+
+      if let z = UserDefaults.standard.data(forKey: "texture\(id)") {
+        var isStale = false
+        if let bmu = try? URL(resolvingBookmarkData: z, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale) {
+          if (!isStale) {
+            if bmu.startAccessingSecurityScopedResource() {
+              if let i = XImage.init(contentsOf: bmu) {
+                image = i
+                return
+              }
+            }
+          }
+        }
+      }
       image = XImage.init(named: ["london", "flagstones", "water", "wood", "still_life"][a.index % 5] )!
     } else {
       return nil
     }
 
-//    if a.name == "lastFrame" {
-//      print("lastFrame texture")
-//    }
+    //    if a.name == "lastFrame" {
+    //      print("lastFrame texture")
+    //    }
 
   }
 

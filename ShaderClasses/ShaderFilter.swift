@@ -55,6 +55,7 @@ class ShaderFilter : ParameterizedShader {
 
   override func specialInitialization() {
     let aa = metadata
+    fragmentTextures = []
     if let bb = aa?.fragmentArguments {
       processTextures(bb)
     }

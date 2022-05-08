@@ -229,6 +229,8 @@ class ParameterizedShader : GenericShader {
     //    print("start \(#function)")
 
     // should doInitialization go here?
+    self.doInitialization()
+
 
     if let ips = initializePipelineState,
        let commandBuffer = commandQueue.makeCommandBuffer(),
