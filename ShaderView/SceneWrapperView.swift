@@ -64,7 +64,7 @@ struct SceneWrapperView : View {
         let drag = DragGesture().updating($dragger) {
           cs, gs, t in gs = cs.location
           //    print("\(cs.location) from \(cs.startLocation) -- translation: \(cs.translation)")
-          if let sc = delegate.scene as? T3ShaderSCNScene {
+          if let sc = delegate.scene as? FragmentScene {
             let zz = sc.hiTest(point: cs.location, bounds: g.frame(in: .global))
 
             //    print("hitTest: \(zz)")

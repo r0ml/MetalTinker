@@ -43,8 +43,8 @@ class ParameterizedShader : GenericShader {
   }
 
 
-  required init(_ s : String ) {
-    super.init(s)
+  required init(_ s : String, _ l : MTLLibrary ) {
+    super.init(s, l)
   }
 
   override func justInitialization() {

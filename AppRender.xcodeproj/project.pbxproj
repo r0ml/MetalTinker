@@ -20,6 +20,7 @@
 		E726B096282713D2003F88A6 /* support.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7ED629721779685007ABB53 /* support.metal */; };
 		E726B097282713D2003F88A6 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E726B09F28271549003F88A6 /* Spine01.metal in Sources */ = {isa = PBXBuildFile; fileRef = E726B09D28271426003F88A6 /* Spine01.metal */; };
+		E726B0B02828B8F1003F88A6 /* ShaderNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726B0AF2828B8F1003F88A6 /* ShaderNodeView.swift */; };
 		E72A7FF023C2C1B6008C642A /* XColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FEF23C2C1B6008C642A /* XColorPicker.swift */; };
 		E72A7FF323C2C23F008C642A /* XBoolean.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FF223C2C23F008C642A /* XBoolean.swift */; };
 		E72A7FF623C2C275008C642A /* XSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A7FF523C2C275008C642A /* XSlider.swift */; };
@@ -618,6 +619,7 @@
 		E71AE71623E0FFB100A0FC1C /* Documentation.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Documentation.rtf; sourceTree = "<group>"; };
 		E726B09B282713D2003F88A6 /* Filters.Librorum.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Filters.Librorum.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E726B09D28271426003F88A6 /* Spine01.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Spine01.metal; sourceTree = "<group>"; };
+		E726B0AF2828B8F1003F88A6 /* ShaderNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderNodeView.swift; sourceTree = "<group>"; };
 		E72A7FEF23C2C1B6008C642A /* XColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XColorPicker.swift; sourceTree = "<group>"; };
 		E72A7FF223C2C23F008C642A /* XBoolean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XBoolean.swift; sourceTree = "<group>"; };
 		E72A7FF523C2C275008C642A /* XSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSlider.swift; sourceTree = "<group>"; };
@@ -1113,6 +1115,7 @@
 				E77675DA2283791A00614B7B /* glsl.h */,
 				E77675D72283786000614B7B /* glsl.metal */,
 				E7ED629721779685007ABB53 /* support.metal */,
+				E75A20A227F25B7B00779D64 /* Contour.metal */,
 				E74711E5238442D700FF2A77 /* support.h */,
 				E746F31423F0D107003598F6 /* sdf.metal */,
 				E746F31723F0D11E003598F6 /* sdf.h */,
@@ -1270,7 +1273,6 @@
 				E75A209427F25B7B00779D64 /* Colored Circles.metal */,
 				E75A208427F25B7B00779D64 /* Combinatorial Shape Rendering.metal */,
 				E75A208927F25B7B00779D64 /* Concentric hex lines.metal */,
-				E75A20A227F25B7B00779D64 /* Contour.metal */,
 				E75A207F27F25B7B00779D64 /* dot ring test 3D.metal */,
 				E75A209C27F25B7B00779D64 /* Dots On Planes.metal */,
 				E75A208F27F25B7B00779D64 /* first circle.metal */,
@@ -1632,6 +1634,7 @@
 			children = (
 				E7E9D6FE27DE4DCD00431EB0 /* ShaderMetalView.swift */,
 				E7C75A0A2815C13A003D906D /* ShaderSceneView.swift */,
+				E726B0AF2828B8F1003F88A6 /* ShaderNodeView.swift */,
 				E7E9D70027DE4E7D00431EB0 /* SceneWrapperView.swift */,
 				E71A02CB236767C000A88C16 /* MetalView.swift */,
 			);
@@ -2978,6 +2981,7 @@
 				E74F94592256A05900706CBF /* MetalVideoRecorder.swift in Sources */,
 				E7ED1A19257E909E0075DD2E /* Simple.swift in Sources */,
 				E7A5A43425B00CA10051A69A /* Linear Motion.swift in Sources */,
+				E726B0B02828B8F1003F88A6 /* ShaderNodeView.swift in Sources */,
 				E7C75A0B2815C13A003D906D /* ShaderSceneView.swift in Sources */,
 				E7B5728925B40B9F00DF1452 /* Simple_Circle_AA.swift in Sources */,
 				E774DE102816F8B0007998EA /* ShaderVertex.swift in Sources */,

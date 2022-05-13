@@ -7,7 +7,7 @@ import MetalKit
 
 
 // Renders a spritekit as the background for a SceneKit.  Hence, this is the same as just displaying the SpriteKit
-class Simple7 : T3ShaderSCNScene {
+class Simple7 : FragmentScene {
   override var group : String { get { "Circles" } }
 
   required init() {

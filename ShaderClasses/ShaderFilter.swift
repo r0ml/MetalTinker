@@ -38,8 +38,8 @@ class ShaderFilter : ParameterizedShader {
   }
   
 
-  required init(_ s : String ) {
-    super.init(s)
+  required init(_ s : String, _ l : MTLLibrary) {
+    super.init(s, l)
 //   function = Function(myGroup)
   }
 
@@ -134,7 +134,7 @@ class ShaderFilter : ParameterizedShader {
     for a in bst {
       if a.type == .texture {
         for z in 0..<a.arrayLength {
-          if let b = TextureParameter(a, z, id: fragmentTextures.count) {
+          if let b = TextureParameter(a, z, getTexture(fragmentTextures.count), textureKey(fragmentTextures.count), id: fragmentTextures.count) {
             fragmentTextures.append(b)
           }
         }
@@ -185,6 +185,28 @@ class ShaderFilter : ParameterizedShader {
       ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: {
       self.fragmentTextures = $0 }))
       )
+  }
+
+  func textureKey(_ z : Int) -> String {
+    return "\(self.myName).texture.\(z)"
+  }
+
+  func getTexture(_ z : Int) -> XImage {
+    if let z = UserDefaults.standard.data(forKey: textureKey(z) ) {
+      var isStale = false
+      if let bmu = try? URL(resolvingBookmarkData: z, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale) {
+        if (!isStale) {
+          if bmu.startAccessingSecurityScopedResource() {
+            defer { bmu.stopAccessingSecurityScopedResource() }
+            if let i = XImage.init(contentsOf: bmu) {
+              return i
+            }
+          }
+        }
+      }
+    }
+    return XImage.init(named: ["london", "flagstones", "water", "wood", "still_life"][z % 5] )!
+
   }
 
 

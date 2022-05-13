@@ -13,9 +13,9 @@ class ShaderPointCloud : ShaderVertex {
   override var topology : MTLPrimitiveTopologyClass { get { .point } }
 
 
-  required init(_ s : String ) {
+  required init(_ s : String, _ l : MTLLibrary ) {
     //    print("ShaderFilter init \(s)")
-    super.init(s)
+    super.init(s, l)
 //    function = Function(myGroup)
   }
 }

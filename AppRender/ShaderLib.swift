@@ -55,7 +55,7 @@ class ShaderLib<T : GenericShader> : Identifiable, Equatable, Hashable {
       }
       return nil
     }
-    return Set(res).sorted { $0.lowercased() < $1.lowercased() }.map { T.init($0) }
+    return Set(res).sorted { $0.lowercased() < $1.lowercased() }.map { T.init($0, lib) }
     //    return cache!
   }()
 }

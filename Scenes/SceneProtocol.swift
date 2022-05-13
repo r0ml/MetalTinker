@@ -14,7 +14,7 @@ protocol TinkerScene {
 var scenery : Dictionary<String, Dictionary<String, T1SCNScene>> = {
   var a = Dictionary<String, Dictionary<String, T1SCNScene>>()
 
-  let j = getSubclassesOf(T1SCNScene.self).filter { ($0 as? T3ShaderSCNScene.Type) == nil }
+  let j = getSubclassesOf(T1SCNScene.self).filter { ($0 as? FragmentScene.Type) == nil }
 
   // FIXME: this is broken -- need to split out the "SceneKit" shaders
   let m = functionMaps["SceneShaders"]?.libs.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() } ?? []
@@ -33,7 +33,7 @@ var scenery : Dictionary<String, Dictionary<String, T1SCNScene>> = {
     let ll = lib.label!
     for ss in res {
       var b = a[ ll, default: Dictionary<String, T1SCNScene>()]
-      b[ ss ] = T3ShaderSCNScene(shader: ss, library: ll)
+      b[ ss ] = FragmentScene(shader: ss, library: ll)
       a[ ll ] = b
     }
   }

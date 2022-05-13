@@ -70,14 +70,16 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
 
   var fragmentBuffers : [BufferParameter] = []
 
+  var library : MTLLibrary
 
-  required init(_ s : String ) {
+  required init(_ s : String, _ l : MTLLibrary ) {
     //    print("ShaderFilter init \(s)")
     
     myName = s
+    library = l
     super.init()
 
-//    self.doInitialization()
+    //    self.doInitialization()
   }
   
   
@@ -217,17 +219,23 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   func doMouseDetection(_ xview : MTKView?) {
     // FIXME: what is this in iOS land?  What is it in mac land?
     
-    var scale : Int = 1
 #if os(macOS)
-    if let xvv = xview {
-      let eml = NSEvent.mouseLocation
-      let wp = xvv.window!.convertPoint(fromScreen: eml)
-      let ml = xvv.convert(wp, from: nil)
+    Task {
 
-      if xvv.isMousePoint(ml, in: xvv.bounds) {
-        Task { await setup.setTouch(ml) }
+      await MainActor.run {
+        var scale : Int = 1
+        let eml = NSEvent.mouseLocation
+        if let xvv = xview,
+           let xww = xvv.window {
+          let wp = xww.convertPoint(fromScreen: eml)
+          let ml = xvv.convert(wp, from: nil)
+
+          if xvv.isMousePoint(ml, in: xvv.bounds) {
+            Task { await setup.setTouch(ml) }
+          }
+          scale = Int(xvv.window?.screen?.backingScaleFactor ?? 1)
+        }
       }
-      scale = Int(xvv.window?.screen?.backingScaleFactor ?? 1)
     }
 #endif
     
@@ -347,9 +355,9 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
       // the rpd color attachments should have the right textures in them
       //    makeEncoder(commandBuffer, multisampleCount, rpd)
 
-      if let c = xvv.currentDrawable {
-
-        let kk = xvv.currentRenderPassDescriptor!
+      if let c = xvv.currentDrawable,
+         let kk = xvv.currentRenderPassDescriptor,
+         c.texture != nil {
 
         //      let rt = self.renderPassDescriptor(delegate.mySize!).colorAttachments[0].resolveTexture //  frpp.resolveTextures.1
 
@@ -611,6 +619,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   }
 
   func buildPrefView() -> [IdentifiableView] {
+    doInitialization()
     return []
   }
 
@@ -699,7 +708,7 @@ extension GenericShader { // was from MetalDelegate
     //      print("in gpusem", terminator: "" )
     let gw = gpuSemaphore.wait(timeout: .now() + .microseconds(1) /*    .microseconds(1000/60) */ )
     if gw == .timedOut {
-//      print("GPU timed out")
+      //      print("GPU timed out")
       return false }
 
     times.lastTime = times.currentTime

@@ -372,7 +372,7 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
 
     func processTextures(_ bst : [MTLArgument] ) {
       for a in bst {
-        if let b = TextureParameter(a, 0, id: fragmentTextures.count) {
+        if let b = TextureParameter(a, 0, getTexture(fragmentTextures.count), textureKey(fragmentTextures.count), id: fragmentTextures.count) {
           fragmentTextures.append(b)
         }
       }
@@ -489,6 +489,30 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
       return functionMaps[s]!.find("passthruFragmentFn")!
     }
   */
+
+  func textureKey(_ z : Int) -> String {
+    return "\(self.myName).texture.\(z)"
+  }
+
+  func getTexture(_ z : Int) -> XImage {
+    if let z = UserDefaults.standard.data(forKey: textureKey(z) ) {
+      var isStale = false
+      if let bmu = try? URL(resolvingBookmarkData: z, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale) {
+        if (!isStale) {
+          if bmu.startAccessingSecurityScopedResource() {
+            defer { bmu.stopAccessingSecurityScopedResource() }
+            if let i = XImage.init(contentsOf: bmu) {
+              return i
+            }
+          }
+        }
+      }
+    }
+    return XImage.init(named: ["london", "flagstones", "water", "wood", "still_life"][z % 5] )!
+
+  }
+
+
     
 }
 

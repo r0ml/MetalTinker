@@ -47,10 +47,12 @@ struct SidebarView : View {
         FoldersListView("PointCloud", folders : ShaderLib<ShaderPointCloud>.getList("PointCloud")) // selectedItem: $selectedItem)
         FoldersListView("Multipass", folders: ShaderLib<ShaderMultipass>.getList("Multipass"))
 
-        // FIXME: put me back
-        SceneSidebarView(folderList: SceneShaderLib.folderList)
-        
+        ScenesListView("SceneShaders", folders: ShaderLib<GenericShader>.getList("SceneShaders"))
 
+        // FIXME: put me back
+//        SceneSidebarView(folderList: SceneShaderLib.folderList)
+        
+        // FIXME: put me back
 //        SpriteListView(folderList: SpriteShaderLib.folderList) // see SpriteLibraryView
       }
       

@@ -12,9 +12,9 @@ final class ShaderMultipass : ShaderVertex {
 //  var myName : String
 //  var config : Config
   
-  required init(_ s : String ) {
+  required init(_ s : String, _ l : MTLLibrary ) {
     print("ShaderMultipass init \(s)")
-    super.init(s)
+    super.init(s, l)
 //    config = Config(s)
   }
 

@@ -131,6 +131,8 @@ vertexFn(constant float &thickness, constant float &radius, constant int &arcid)
   return v;
 }
 
+
+// this is Arcs
  fragmentFn() {
    return thisVertex.color;
 }

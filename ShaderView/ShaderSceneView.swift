@@ -160,6 +160,11 @@ struct ShaderSceneView : View {
 //      SceneControlsView(scene: delegate.scene, paused: $paused ).frame(minWidth: 600)
     }
   }
+
+
+
+
+
 }
   
 extension GenericShader : SCNSceneRendererDelegate {

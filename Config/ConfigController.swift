@@ -58,8 +58,9 @@ class TextureParameter : Identifiable {
   var video : VideoStream?
   var texture : MTLTexture?
   var name : String
+  var key : String
 
-  init?(_ a : MTLArgument, _ n : Int, id: Int) {
+  init?(_ a : MTLArgument, _ n : Int, _ xi : XImage, _ udkey : String, id: Int) {
     self.id = id
     if a.type == .texture {
       name = a.name
@@ -67,12 +68,14 @@ class TextureParameter : Identifiable {
       type = a.textureType
       access = a.access
       data = a.textureDataType
-
-      if let z = UserDefaults.standard.data(forKey: "texture\(id)") {
+      key = udkey
+/*
+      if let z = UserDefaults.standard.data(forKey: "\(self.name).texture.\(id)") {
         var isStale = false
         if let bmu = try? URL(resolvingBookmarkData: z, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale) {
           if (!isStale) {
             if bmu.startAccessingSecurityScopedResource() {
+              defer { bmu.stopAccessingSecurityScopedResource() }
               if let i = XImage.init(contentsOf: bmu) {
                 image = i
                 return
@@ -82,6 +85,8 @@ class TextureParameter : Identifiable {
         }
       }
       image = XImage.init(named: ["london", "flagstones", "water", "wood", "still_life"][a.index % 5] )!
+ */
+      image = xi
     } else {
       return nil
     }

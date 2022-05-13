@@ -108,7 +108,7 @@ struct ImageStrip : View {
                 // FIXME: Fix this on StackOverflow
                 do {
                   let bmd = try j.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
-                  UserDefaults.standard.set(bmd, forKey: "texture\(jj.id)")  // should it be index instead of id?
+                  UserDefaults.standard.set(bmd, forKey: jj.key)  // should it be index instead of id?
                 } catch(let e ) {
                   os_log("failed to store URL for texture %s", e.localizedDescription)
                 }

@@ -8,7 +8,7 @@ import SwiftUI
 import os
 
 
-class T3ShaderSCNScene : T3SCNScene {
+class FragmentScene : T1SCNScene {
   override var group : String { get { self.library } }
   var shaderName : String
   var library : String
@@ -381,7 +381,7 @@ class T3ShaderSCNScene : T3SCNScene {
 
   func processTextures(_ bst : [MTLArgument] ) {
     for a in bst {
-      if let b = TextureParameter(a, 0, id: fragmentTextures.count) {
+      if let b = TextureParameter(a, 0, getTexture(fragmentTextures.count), textureKey(fragmentTextures.count), id: fragmentTextures.count) {
         fragmentTextures.append(b)
       }
     }
@@ -558,5 +558,31 @@ let uni = device.makeBuffer(length: uniformSize, options: [])!
     if let z = functionMaps["Shaders"]!.find(lun) { return z }
     return functionMaps["Shaders"]!.find("passthruFragmentFn")!
   }
+
+  func textureKey(_ z : Int) -> String {
+    return "\(self.shaderName).texture.\(z)"
+  }
+
+  func getTexture(_ z : Int) -> XImage {
+    if let z = UserDefaults.standard.data(forKey: textureKey(z) ) {
+      var isStale = false
+      if let bmu = try? URL(resolvingBookmarkData: z, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale) {
+        if (!isStale) {
+          if bmu.startAccessingSecurityScopedResource() {
+            defer { bmu.stopAccessingSecurityScopedResource() }
+            if let i = XImage.init(contentsOf: bmu) {
+              return i
+            }
+          }
+        }
+      }
+    }
+    return XImage.init(named: ["london", "flagstones", "water", "wood", "still_life"][z % 5] )!
+
+  }
+
+
+
+
 }
 
