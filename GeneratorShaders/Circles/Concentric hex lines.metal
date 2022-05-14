@@ -3,9 +3,9 @@
 
 #include "Common.h"
 
-fragmentFn() {
-  float time = uni.iTime * 1.;									// adjust time
-  float2 uv = worldCoordAspectAdjusted;
+fragmentFunc() {
+  float time = scn_frame.time;
+  float2 uv = worldCoordAdjusted;
   uv = uv * rot2d( PI * 0.25);
   float rads = atan2(uv.x, uv.y);
   float vertices = 6.;

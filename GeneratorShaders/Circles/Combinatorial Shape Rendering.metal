@@ -41,9 +41,9 @@ static float4 blur(float2 uv) {
   return result;
 }
 
-fragmentFn() {
+fragmentFunc() {
   // Normalized pixel coordinates (from 0 to 1)
-  float2 uv = textureCoord * aspectRatio;
+  float2 uv = textureCoord * nodeAspect;
 
   return blur(uv);
 }

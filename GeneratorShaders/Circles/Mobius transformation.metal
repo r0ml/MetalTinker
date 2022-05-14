@@ -3,14 +3,15 @@
 
 #include "Common.h" 
 
-fragmentFn() {
-  float2 p = worldCoordAspectAdjusted / 2;
+fragmentFunc() {
+  float2 p = worldCoordAdjusted / 2;
+  float t = scn_frame.time;
     p.y += 0.45;
     
-    float a = cos(uni.iTime);
-    float b = sin(uni.iTime);
-    float c = -sin(uni.iTime);
-    float d = cos(uni.iTime); // SL(2,R)
+    float a = cos(t);
+    float b = sin(t);
+    float c = -sin(t);
+    float d = cos(t); // SL(2,R)
     
     float nx = p.x * a + b;
     float ny = p.y * a;

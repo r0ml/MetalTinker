@@ -33,11 +33,7 @@
 
  */
 
-fragment float4 triskel2______Fragment(VertexOut thisVertex [[stage_in]],
-                                       constant SCNSceneBuffer&    scn_frame   [[buffer(0)]],
-                                       constant PerNodeData&   scn_node    [[buffer(1)]]
-                                       ) {
-
+fragmentFunc() {
   float2 z = worldCoord;
   float2 h = scn_node.boundingBox[1].xy; //  scn_node.boundingBox[0].xy
   float2 asrat = h.xy/h.y;

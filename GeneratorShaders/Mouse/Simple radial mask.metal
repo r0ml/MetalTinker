@@ -3,7 +3,7 @@
 
 #include "Common.h" 
 
-fragmentFn() {
+fragmentFunc() {
   float2 uv = textureCoord;
   
   float r_in = 0.15;         // inner limit of the mask

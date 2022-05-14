@@ -22,11 +22,12 @@ static float circle(float2 _st, float _radius){
   return smoothstep(_radius,_radius+0.01,length(pos));
 }
 
-fragmentFn() {
+fragmentFunc() {
 
 //  float2 st = thisVertex.where.xy/uni.iResolution.y;
-  float2 st = textureCoord * aspectRatio;
+  float2 aspect = nodeAspect; 
+  float2 st = textureCoord * aspect;
 
-  st = movingLayers(st*2.,9.,0.15, uni.iTime);
+  st = movingLayers(st*2.,9.,0.15, scn_frame.time);
   return float4(float3(circle(st, .3)), 1.);
 }

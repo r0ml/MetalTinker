@@ -51,12 +51,13 @@ static float iPlane( float2 p, float2 v, float2 a, float rad, float3 pla )
   return h;
 }
 
-fragmentFn() {
+fragmentFunc() {
 
   const float2 acc = float2(0.01,-9.0);
-  float2 p = worldCoordAspectAdjusted;
+  float2 p = worldCoordAdjusted;
+  float t = scn_frame.time;
 
-  float w = uni.iResolution.x/uni.iResolution.y;
+  float w = nodeAspect.x;
 
   float3 pla0 = float3( 0.0,1.0,1.0);
   float3 pla1 = float3(-1.0,0.0,  w);
@@ -69,8 +70,8 @@ fragmentFn() {
     // start position
     float id = float(i);
 
-    float time = mod( uni.iTime + id*0.5, 4.8 );
-    float sequ = floor( (uni.iTime+id*0.5)/4.8 );
+    float time = mod( t + id*0.5, 4.8 );
+    float sequ = floor( (t+id*0.5)/4.8 );
     float life = time/4.8;
 
     float rad = 0.05 + 0.1*rand(id*13.0 + sequ);

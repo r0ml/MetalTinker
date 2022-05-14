@@ -18,12 +18,12 @@ static float map(float3 p, float tim) {
   return d;
 }
 
-fragmentFn() {
-  float2 uv = worldCoordAspectAdjusted / 2;
-  float3 ro=float3(uv,uni.iTime*2.),rd=normalize(float3(uv,1.)),mp=ro;
+fragmentFunc() {
+  float2 uv = worldCoordAdjusted / 2;
+  float3 ro=float3(uv,scn_frame.time*2.),rd=normalize(float3(uv,1.)),mp=ro;
   int i;
   for (i=0;i<30;++i) {
-    float md=map(mp, uni.iTime);
+    float md=map(mp, scn_frame.time);
     if(md<.001)break;mp+=rd*md;
   }
   return float4(length(mp-ro)*.05);

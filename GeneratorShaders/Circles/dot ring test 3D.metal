@@ -18,19 +18,20 @@ static float ring(float2 uv, float n, float s, float f) {
 }
 
 
-fragmentFn() {
+fragmentFunc() {
   
-  float2 uv = worldCoordAspectAdjusted;
+  float2 uv = worldCoordAdjusted;
+  float tt = scn_frame.time;
   float3 col = float3(0.);
   
-  uv.x += .1 * cos(uni.iTime * .2);
-  uv.y += .1 * sin(uni.iTime * .2);
+  uv.x += .1 * cos(tt * .2);
+  uv.y += .1 * sin(tt * .2);
   
   float k = 12.;
   float n = 8.;
   for (float i = 0., s = 1. / n; i < 1.; i += s) {
     
-    float t = fract(uni.iTime * .1 + i);
+    float t = fract(tt * .1 + i);
     float z = smoothstep(1., .1, t);
     float f = smoothstep(0., 1., t) *
     smoothstep(1., .8, t);

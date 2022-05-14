@@ -3,9 +3,9 @@
 
 #include "Common.h"
 
-fragmentFn() {
-  float time = uni.iTime * 0.25;
-  float2 uv = worldCoordAspectAdjusted;
+fragmentFunc() {
+  float time = scn_frame.time * 0.25;
+  float2 uv = worldCoordAdjusted;
   uv *= float2(0.35, 1.);
   
   // z-rotation

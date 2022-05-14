@@ -19,16 +19,17 @@ static float point(float2 coord,float2 uv,float ang, float2 reso){
   return smoothstep(0.004+aa,0.002,distance(uv,coord))*smoothstep(tau*0.7,0.,ang)/2.;
 }
 
-fragmentFn() {
-  float2 uv = worldCoordAspectAdjusted / 2;
-  float aa=1/uni.iResolution.y;
+fragmentFunc() {
+  float2 uv = worldCoordAdjusted / 2;
+  float2 r = float2(1000, 1000);
+  float aa=1/r.y;
   
   //uv.x+=(rand(uv*uni.iTime)-0.5)/100.*smoothstep(0.7,1.,hash(floor(uni.iTime)));
   
   float dist=distance(uv,float2(0));
   float sdist=smoothstep(0.5+aa,0.5,dist);
   
-  float ang=uni.iTime*tau/5.;
+  float ang=scn_frame.time*tau/5.;
   float ang2=atan2(uv.x,uv.y);
   ang=mod(ang2+ang,tau);
   
@@ -39,22 +40,22 @@ fragmentFn() {
   col+=smoothstep(aa,0.,abs(uv.x))/4.;
   col+=smoothstep(aa,0.,abs(uv.y))/4.;
   
-  col+=mark(9*4,ang2,uv,0.45,0.5, uni.iResolution)/2.;
-  col+=mark(9*4*5,ang2,uv,0.475,0.5, uni.iResolution)/5.;
-  col+=circle(0.1,uv, uni.iResolution);
-  col+=circle(0.2,uv, uni.iResolution);
-  col+=circle(0.3,uv, uni.iResolution);
-  col+=circle(0.4,uv, uni.iResolution);
-  col+=point(float2(0.3,0.1),uv,ang, uni.iResolution);
-  col+=point(float2(-0.2,-0.3),uv,ang, uni.iResolution);
-  col+=point(float2(0.2,-0.1),uv,ang, uni.iResolution);
+  col+=mark(9*4,ang2,uv,0.45,0.5, r)/2.;
+  col+=mark(9*4*5,ang2,uv,0.475,0.5, r)/5.;
+  col+=circle(0.1,uv, r);
+  col+=circle(0.2,uv, r);
+  col+=circle(0.3,uv, r);
+  col+=circle(0.4,uv, r);
+  col+=point(float2(0.3,0.1),uv,ang, r);
+  col+=point(float2(-0.2,-0.3),uv,ang, r);
+  col+=point(float2(0.2,-0.1),uv,ang, r);
   
   float4 fragColor = mix(float4(0,col,0,0),float4(0.055,0.089,0.0,0)/1.3,1.-sdist);
   
   float l=cos(thisVertex.where.y);
   l*=l;
   l/=3.;
-  l+=0.6+rand(uv*uni.iTime);
+  l+=0.6+rand(uv*scn_frame.time);
   
   fragColor*=l;
   fragColor.w = 1;

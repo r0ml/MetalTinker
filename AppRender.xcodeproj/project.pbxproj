@@ -134,9 +134,7 @@
 		E75A20CE27F25BC900779D64 /* Physics no collisions.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A209227F25B7B00779D64 /* Physics no collisions.metal */; };
 		E75A20CF27F25BC900779D64 /* Linear map circle to ellipse.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A207D27F25B7B00779D64 /* Linear map circle to ellipse.metal */; };
 		E75A20D027F25BC900779D64 /* dot ring test 3D.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A207F27F25B7B00779D64 /* dot ring test 3D.metal */; };
-		E75A20D127F25BC900779D64 /* Contour.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A20A227F25B7B00779D64 /* Contour.metal */; };
 		E75A20D327F25BC900779D64 /* sunwave.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A208627F25B7B00779D64 /* sunwave.metal */; };
-		E75A20D427F25BC900779D64 /* Simple radial mask.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A20A327F25B7B00779D64 /* Simple radial mask.metal */; };
 		E75A20D727F2618D00779D64 /* Touch pressure.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD2E27DA7142006BEBB2 /* Touch pressure.metal */; };
 		E75A20D827F2618D00779D64 /* Reprojection.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD3927DA7142006BEBB2 /* Reprojection.metal */; };
 		E75A20D927F2618D00779D64 /* Simple RippleRadialDistortion.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD0C27DA7141006BEBB2 /* Simple RippleRadialDistortion.metal */; };
@@ -389,6 +387,7 @@
 		E7A5A47925B0D1720051A69A /* Static Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A47825B0D1720051A69A /* Static Points.swift */; };
 		E7A5A80325B26D110051A69A /* Attempt 19.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A45025B0CEAA0051A69A /* Attempt 19.swift */; };
 		E7A5A84525B353250051A69A /* SceneControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A84425B353250051A69A /* SceneControlsView.swift */; };
+		E7A9481A282F58E600BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
 		E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8CBA25A03F8400E464F9 /* Bello.swift */; };
 		E7AB8D3D25A5CCB600E464F9 /* Box Breathing Remix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */; };
 		E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */; };
@@ -690,7 +689,7 @@
 		E75A20A227F25B7B00779D64 /* Contour.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Contour.metal; sourceTree = "<group>"; };
 		E75A20A327F25B7B00779D64 /* Simple radial mask.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Simple radial mask.metal"; sourceTree = "<group>"; };
 		E75A20A427F25B7B00779D64 /* hexagonal tiling 3.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "hexagonal tiling 3.metal"; sourceTree = "<group>"; };
-		E75A20AC27F25BA900779D64 /* Generators.Circles.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Generators.Circles.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E75A20AC27F25BA900779D64 /* Scenes.Circles.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Scenes.Circles.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E75C931221ADE7D200679E62 /* Webcam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webcam.swift; sourceTree = "<group>"; };
 		E75EB4A327F4F5AF00F52D71 /* Box Blur2.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Box Blur2.metal"; sourceTree = "<group>"; };
 		E7652E192423FE80004CB302 /* AVAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAsset.swift; sourceTree = "<group>"; };
@@ -1115,7 +1114,6 @@
 				E77675DA2283791A00614B7B /* glsl.h */,
 				E77675D72283786000614B7B /* glsl.metal */,
 				E7ED629721779685007ABB53 /* support.metal */,
-				E75A20A227F25B7B00779D64 /* Contour.metal */,
 				E74711E5238442D700FF2A77 /* support.h */,
 				E746F31423F0D107003598F6 /* sdf.metal */,
 				E746F31723F0D11E003598F6 /* sdf.h */,
@@ -1266,8 +1264,8 @@
 			isa = PBXGroup;
 			children = (
 				E75A209027F25B7B00779D64 /* Arcs 2.metal */,
-				E78BD32C2824747B000B44F0 /* Bello2.metal */,
 				E75A209B27F25B7B00779D64 /* Arcs.metal */,
+				E78BD32C2824747B000B44F0 /* Bello2.metal */,
 				E75A209627F25B7B00779D64 /* chasers.metal */,
 				E75A209A27F25B7B00779D64 /* Circles 1.metal */,
 				E75A209427F25B7B00779D64 /* Colored Circles.metal */,
@@ -1286,7 +1284,6 @@
 				E75A207E27F25B7B00779D64 /* Radar.metal */,
 				E75A208127F25B7B00779D64 /* Radial Segments.metal */,
 				E75A208D27F25B7B00779D64 /* rainbow group.metal */,
-				E75A20A327F25B7B00779D64 /* Simple radial mask.metal */,
 				E75A208727F25B7B00779D64 /* soft shadows through holes.metal */,
 				E75A209827F25B7B00779D64 /* solar system.metal */,
 				E75A208627F25B7B00779D64 /* sunwave.metal */,
@@ -1423,6 +1420,7 @@
 		E773D5562812390800AD2173 /* GeneratorShaders */ = {
 			isa = PBXGroup;
 			children = (
+				E7A9481B282F5C3600BC2CD3 /* Mouse */,
 				E75A207C27F25B7B00779D64 /* Circles */,
 				E79BDB73280DED36005E3A87 /* Patterns */,
 			);
@@ -1606,6 +1604,15 @@
 			path = "Circles Vertex";
 			sourceTree = "<group>";
 		};
+		E7A9481B282F5C3600BC2CD3 /* Mouse */ = {
+			isa = PBXGroup;
+			children = (
+				E75A20A227F25B7B00779D64 /* Contour.metal */,
+				E75A20A327F25B7B00779D64 /* Simple radial mask.metal */,
+			);
+			path = Mouse;
+			sourceTree = "<group>";
+		};
 		E7B5733525B6B1FD00DF1452 /* CIFilters */ = {
 			isa = PBXGroup;
 			children = (
@@ -1621,6 +1628,7 @@
 				E7A5A39F25AD15B80051A69A /* PointScene.swift */,
 				E7539504257C065500642C36 /* T3SCNScene.swift */,
 				E785E2E425AA46E600511B0C /* SKSCNScene.swift */,
+				E74A43962576EC1A00639F19 /* SceneLibraryView.swift */,
 				E7B573B825B80A3B00DF1452 /* VertexScene.swift */,
 				E78BD3372824ABD1000B44F0 /* FragmentScene.swift */,
 				E78BD3352824AB1F000B44F0 /* VertexNode.swift */,
@@ -1824,7 +1832,7 @@
 				E75A1AE927EE825500779D64 /* Template2.metallib */,
 				E75A1B4C27F1759100779D64 /* Filters.Colors.metallib */,
 				E75A1B6827F1791800779D64 /* Filters.Deforms.metallib */,
-				E75A20AC27F25BA900779D64 /* Generators.Circles.metallib */,
+				E75A20AC27F25BA900779D64 /* Scenes.Circles.metallib */,
 				E71716842818EAF9006A916C /* Feedback.Simple.metallib */,
 				E7971B8F281B8C2900C15C5B /* Feedback.Multiple.metallib */,
 				E78BD229281EE568000B44F0 /* Generators.Patterns.metallib */,
@@ -1848,7 +1856,6 @@
 				E76DDCA027DA61D7006BEBB2 /* SidebarView.swift */,
 				E7D7C0E325AC27A1004D75CD /* ShaderLibraryView.swift */,
 				E7E9D6F627DD01F500431EB0 /* ShaderLib.swift */,
-				E74A43962576EC1A00639F19 /* SceneLibraryView.swift */,
 				E74A44182578002F00639F19 /* SpriteLibraryView.swift */,
 				E77675D4228347A800614B7B /* Library.swift */,
 				E79DD73A23E8DFF200DAB04A /* RenderSupport.swift */,
@@ -1991,9 +1998,9 @@
 			productReference = E75A1B6827F1791800779D64 /* Filters.Deforms.metallib */;
 			productType = "com.apple.product-type.metal-library";
 		};
-		E75A20A527F25BA900779D64 /* Generators.Circles */ = {
+		E75A20A527F25BA900779D64 /* Scenes.Circles */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E75A20A927F25BA900779D64 /* Build configuration list for PBXNativeTarget "Generators.Circles" */;
+			buildConfigurationList = E75A20A927F25BA900779D64 /* Build configuration list for PBXNativeTarget "Scenes.Circles" */;
 			buildPhases = (
 				E75A20A627F25BA900779D64 /* Sources */,
 			);
@@ -2001,9 +2008,9 @@
 			);
 			dependencies = (
 			);
-			name = Generators.Circles;
+			name = Scenes.Circles;
 			productName = "Edge Detection";
-			productReference = E75A20AC27F25BA900779D64 /* Generators.Circles.metallib */;
+			productReference = E75A20AC27F25BA900779D64 /* Scenes.Circles.metallib */;
 			productType = "com.apple.product-type.metal-library";
 		};
 		E76DDD4127DA7191006BEBB2 /* Filters.Blurs */ = {
@@ -2281,7 +2288,7 @@
 				E743D701236C83FE00EB81BC /* Template */,
 				E7ED18EF257E903A0075DD2E /* Simple Scenes */,
 				E7B5734D25B6B2AD00DF1452 /* CIFilters */,
-				E75A20A527F25BA900779D64 /* Generators.Circles */,
+				E75A20A527F25BA900779D64 /* Scenes.Circles */,
 				E78BD200281EE568000B44F0 /* Generators.Patterns */,
 				E717167D2818EAF9006A916C /* Feedback.Simple */,
 				E7971B6C281B8C2900C15C5B /* Feedback.Multiple */,
@@ -2702,6 +2709,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A9481A282F58E600BC2CD3 /* scenetest.metal in Sources */,
+				E75A20A827F25BA900779D64 /* glsl.metal in Sources */,
 				E75A20BB27F25BC900779D64 /* soft shadows through holes.metal in Sources */,
 				E75A20D327F25BC900779D64 /* sunwave.metal in Sources */,
 				E75A20B027F25BC900779D64 /* Radar.metal in Sources */,
@@ -2709,7 +2718,6 @@
 				E75A20D027F25BC900779D64 /* dot ring test 3D.metal in Sources */,
 				E75A20B627F25BC900779D64 /* Arcs 2.metal in Sources */,
 				E75A20CB27F25BC900779D64 /* lattice.metal in Sources */,
-				E75A20D427F25BC900779D64 /* Simple radial mask.metal in Sources */,
 				E75A20C027F25BC900779D64 /* Radial Segments.metal in Sources */,
 				E75A20C527F25BC900779D64 /* first circle.metal in Sources */,
 				E75A20B327F25BC900779D64 /* hexagonal tiling 3.metal in Sources */,
@@ -2719,12 +2727,10 @@
 				E75A20C327F25BC900779D64 /* Radar 2.metal in Sources */,
 				E75A20BC27F25BC900779D64 /* Hyperbolic tesselation.metal in Sources */,
 				E78BD32D2824747B000B44F0 /* Bello2.metal in Sources */,
-				E75A20D127F25BC900779D64 /* Contour.metal in Sources */,
 				E75A20B727F25BC900779D64 /* Trainpoints.metal in Sources */,
 				E75A20A727F25BA900779D64 /* support.metal in Sources */,
 				E75A20B127F25BC900779D64 /* Concentric hex lines.metal in Sources */,
 				E75A20B827F25BC900779D64 /* Combinatorial Shape Rendering.metal in Sources */,
-				E75A20A827F25BA900779D64 /* glsl.metal in Sources */,
 				E75A20B527F25BC900779D64 /* Colored Circles.metal in Sources */,
 				E75A20C927F25BC900779D64 /* chasers.metal in Sources */,
 				E75A20CA27F25BC900779D64 /* Arcs.metal in Sources */,
@@ -3108,7 +3114,7 @@
 		};
 		E75A20D627F25BFA00779D64 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E75A20A527F25BA900779D64 /* Generators.Circles */;
+			target = E75A20A527F25BA900779D64 /* Scenes.Circles */;
 			targetProxy = E75A20D527F25BFA00779D64 /* PBXContainerItemProxy */;
 		};
 		E76DDD4E27DA71FD006BEBB2 /* PBXTargetDependency */ = {
@@ -3917,7 +3923,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E75A20A927F25BA900779D64 /* Build configuration list for PBXNativeTarget "Generators.Circles" */ = {
+		E75A20A927F25BA900779D64 /* Build configuration list for PBXNativeTarget "Scenes.Circles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E75A20AA27F25BA900779D64 /* Debug */,

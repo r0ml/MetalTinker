@@ -3,9 +3,9 @@
 
 #include "Common.h"
 
-fragmentFn() {
-  float time = uni.iTime * 4.;									// adjust time
-  float2 uv = worldCoordAspectAdjusted;
+fragmentFunc() {
+  float time = scn_frame.time * 4.;									// adjust time
+  float2 uv = worldCoordAdjusted;
   float radsPercent = atan2(uv.x, uv.y) / TAU;           		// get angle to center
   float dist = length(uv) * 5.; // distance(uv, center);   		// multiply radius to achieve smaller rings
   float ringSegments = 1. + floor(dist * 4.);				 		// number of ring segments depends on radius

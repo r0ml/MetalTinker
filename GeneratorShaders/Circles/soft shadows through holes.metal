@@ -3,12 +3,12 @@
 
 #include "Common.h" 
 
-fragmentFn() {
-  float h = .01 + .6*(.5+.5*sin(uni.iTime));    // distance occluder-screen
+fragmentFunc() {
+  float h = .01 + .6*(.5+.5* scn_frame.sinTime);    // distance occluder-screen
   float r = .3;                             // holes radius
 
   
-  float2 U = textureCoord * aspectRatio * 4.;
+  float2 U = textureCoord * nodeAspect * 4.;
   
   float4 fragColor = 0;
   

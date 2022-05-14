@@ -29,7 +29,7 @@ static float2 doshift(float2 z, float2 a) {
   return mul(z - a, invert(float2(1, 0) - mul(conj(a), z)));
 }
 
-fragmentFn() {
+fragmentFunc() {
   float l = 1./3.*sqrt(3.);
   float halfl;
   int dcount=0;
@@ -43,8 +43,8 @@ fragmentFn() {
 //  thisVertex.where.xy = thisVertex.where.xy / min(uni.iResolution.x, uni.iResolution.y);
 //  thisVertex.where.xy = thisVertex.where.xy*2. - float2(1,1);
   
-  t = uni.iTime * 1.4;
-  float2 pos = worldCoordAspectAdjusted;
+  t = scn_frame.time * 1.4;
+  float2 pos = worldCoordAdjusted;
   
   pos = 1.05*pos;
   if (abs_sq(pos) >= 1.) return float4(0.5, 0.5, 0.5, 0.5);

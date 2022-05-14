@@ -97,13 +97,14 @@ static float3 renderAxes(float2 origin, float2 pos, const float3 fc)
   
 }
 
-fragmentFn() {
-  float2 pos = worldCoordAspectAdjusted / 2;
-  
+fragmentFunc() {
+  float2 pos = worldCoordAdjusted / 2;
+  float t = scn_frame.time;
+
   // animate the grid a bit with rotation, shear, and nonuniform scale
-  pos *= float2(sin(uni.iTime*0.72) * 0.5 + 1.0, 1.0);
-  pos = pos * rot2d(cos(uni.iTime) * 0.1);
-  pos.x += pos.y * sin(uni.iTime*0.89) * 0.5;
+  pos *= float2(sin(t*0.72) * 0.5 + 1.0, 1.0);
+  pos = pos * rot2d(cos(t) * 0.1);
+  pos.x += pos.y * sin(t*0.89) * 0.5;
   
   float4 fragColor = 0;
   fragColor.a = 1.0;

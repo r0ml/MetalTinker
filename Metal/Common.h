@@ -154,6 +154,18 @@ constant ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )
 
 // -------
 
+#define fragmentFunc() ffFF(shaderName)
+#define ffFF(a) fffFFF(a)
+#define fffFFF(a) fragment float4 a##______Fragment(VertexOut thisVertex [[stage_in]], \
+  constant SCNSceneBuffer&    scn_frame   [[buffer(0)]], \
+  constant PerNodeData&   scn_node    [[buffer(1)]] \
+  )
+
+#define resolution (scn_node.boundingBox[1].xy)
+#define nodeAspect (scn_node.boundingBox[1].xy / scn_node.boundingBox[1].y)
+#define worldCoordAdjusted (worldCoord * nodeAspect )
+
+
 #define fragmentFn(...) fragmentPass(, ##__VA_ARGS__ )
 
 #define fragmentPass(a, ...) _fragmentPass( a, shaderName, ##__VA_ARGS__ )
@@ -198,7 +210,7 @@ LastFrame(), \
 #define worldCoord ((2 * thisVertex.texCoords - 1) * float2(1, -1))
 #define textureCoord ( thisVertex.texCoords )
 #define aspectRatio (uni.iResolution / min(uni.iResolution.y, uni.iResolution.x))
-#define worldCoordAspectAdjusted (worldCoord * aspectRatio)
+#define worldCoordAspectAdjusted (worldCoord * aspectRatio )
 
 // ===========================================================================================================
 
