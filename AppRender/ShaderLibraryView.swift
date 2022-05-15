@@ -26,10 +26,10 @@ struct FoldersListView<T : GenericShader> : View {
                         .navigationBarTitle(li.id, displayMode: .inline)
                        #endif
                        ,
-                       tag: li.id,
+                       tag: "\(label)+\(li.id)",
                        selection: $selectedItem) {
           HStack {
-            Text(li.id).frame(maxWidth: .infinity, alignment: .leading)
+            Text(li.libnam).frame(maxWidth: .infinity, alignment: .leading)
           }
         }
       }
@@ -49,7 +49,7 @@ struct ShaderListView<T: GenericShader>: View {
                        selection: $sel
         ) {
           HStack {
-            Text( li.id ).frame(maxWidth: .infinity, alignment: .leading)
+            Text( li.myName ).frame(maxWidth: .infinity, alignment: .leading)
           }
         }
       }.frame(minWidth: 100, maxWidth: 400)
@@ -66,6 +66,7 @@ struct ShaderListView<T: GenericShader>: View {
 struct ScenesListView<T : GenericShader> : View {
   var folders : [ShaderLib<T>]
   //  var initialSelection : String
+  // @AppStorage("selectedShader")
   @State var selectedItem : String?
   var label : String
 
@@ -84,10 +85,10 @@ struct ScenesListView<T : GenericShader> : View {
                         .navigationBarTitle(li.id, displayMode: .inline)
                        #endif
                        ,
-                       tag: li.id,
+                       tag: "\(label)+\(li.id)",
                        selection: $selectedItem) {
           HStack {
-            Text(li.id).frame(maxWidth: .infinity, alignment: .leading)
+            Text(li.libnam).frame(maxWidth: .infinity, alignment: .leading)
           }
         }
       }
@@ -107,7 +108,7 @@ struct ScenesGroupView<T: GenericShader>: View {
                        selection: $sel
         ) {
           HStack {
-            Text( li.id ).frame(maxWidth: .infinity, alignment: .leading)
+            Text( li.myName ).frame(maxWidth: .infinity, alignment: .leading)
           }
         }
       }.frame(minWidth: 100, maxWidth: 400)

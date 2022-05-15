@@ -16,7 +16,7 @@ static float4 C( float2 U, float D, float d, float e, float a, float T, float r,
 }
 
 fragmentFunc() {
-  float2 R = float2(1000, 1000);
+  float2 R = scn_frame.viewportSize.xy; // float2(1000, 1000);
   float t = scn_frame.time;
   float2 U = worldCoordAdjusted * 40.; U.y -= 7.;
   float4 fragColor = 0;

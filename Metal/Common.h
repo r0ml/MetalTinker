@@ -161,7 +161,7 @@ constant ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )
   constant PerNodeData&   scn_node    [[buffer(1)]] \
   )
 
-#define resolution (scn_node.boundingBox[1].xy)
+// #define resolution (scn_node.boundingBox[1].xy)
 #define nodeAspect (scn_node.boundingBox[1].xy / scn_node.boundingBox[1].y)
 #define worldCoordAdjusted (worldCoord * nodeAspect )
 

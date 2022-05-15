@@ -384,10 +384,10 @@
 		E7A5A46425B0D12C0051A69A /* Attempt 23.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A46325B0D12C0051A69A /* Attempt 23.swift */; };
 		E7A5A46B25B0D13E0051A69A /* Infinity Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A46A25B0D13E0051A69A /* Infinity Particles.swift */; };
 		E7A5A47225B0D1530051A69A /* Loopless Dots Along Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A47125B0D1530051A69A /* Loopless Dots Along Circle.swift */; };
-		E7A5A47925B0D1720051A69A /* Static Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A47825B0D1720051A69A /* Static Points.swift */; };
 		E7A5A80325B26D110051A69A /* Attempt 19.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A45025B0CEAA0051A69A /* Attempt 19.swift */; };
 		E7A5A84525B353250051A69A /* SceneControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A84425B353250051A69A /* SceneControlsView.swift */; };
 		E7A9481A282F58E600BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A9481C28303A4B00BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
 		E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8CBA25A03F8400E464F9 /* Bello.swift */; };
 		E7AB8D3D25A5CCB600E464F9 /* Box Breathing Remix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */; };
 		E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */; };
@@ -824,7 +824,7 @@
 		E77675DA2283791A00614B7B /* glsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glsl.h; sourceTree = "<group>"; };
 		E785E2E425AA46E600511B0C /* SKSCNScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSCNScene.swift; sourceTree = "<group>"; };
 		E78BD1FE281D6F30000B44F0 /* Simple Kaleidoscope.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Simple Kaleidoscope.metal"; sourceTree = "<group>"; };
-		E78BD229281EE568000B44F0 /* Generators.Patterns.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Generators.Patterns.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E78BD229281EE568000B44F0 /* Scenes.Patterns.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Scenes.Patterns.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78BD234281EEC1A000B44F0 /* Vertex.Circles.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Vertex.Circles.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78BD23C281EEC1A000B44F0 /* Vertex.Shapes.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Vertex.Shapes.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78BD244281EEC1A000B44F0 /* Vertex.Simple.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Vertex.Simple.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -897,7 +897,6 @@
 		E7A5A46325B0D12C0051A69A /* Attempt 23.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attempt 23.swift"; sourceTree = "<group>"; };
 		E7A5A46A25B0D13E0051A69A /* Infinity Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Infinity Particles.swift"; sourceTree = "<group>"; };
 		E7A5A47125B0D1530051A69A /* Loopless Dots Along Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loopless Dots Along Circle.swift"; sourceTree = "<group>"; };
-		E7A5A47825B0D1720051A69A /* Static Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Static Points.swift"; sourceTree = "<group>"; };
 		E7A5A77B25B256960051A69A /* demosplash2016-cxw-03.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "demosplash2016-cxw-03.metal"; sourceTree = "<group>"; };
 		E7A5A77C25B256960051A69A /* Coloring CIrcle.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Coloring CIrcle.metal"; sourceTree = "<group>"; };
 		E7A5A77D25B256960051A69A /* Rounded Loading Spinner.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Rounded Loading Spinner.metal"; sourceTree = "<group>"; };
@@ -1782,7 +1781,6 @@
 				E7B5728025B40B8000DF1452 /* Simple_Eclipse.swift */,
 				E7B5727825B40B6700DF1452 /* Spinning_Circles.swift */,
 				E7B5727025B40B4F00DF1452 /* Spinning_Ring.swift */,
-				E7A5A47825B0D1720051A69A /* Static Points.swift */,
 				E7B5726825B3ADEF00DF1452 /* Vasarely 5.swift */,
 			);
 			path = Circles;
@@ -1835,7 +1833,7 @@
 				E75A20AC27F25BA900779D64 /* Scenes.Circles.metallib */,
 				E71716842818EAF9006A916C /* Feedback.Simple.metallib */,
 				E7971B8F281B8C2900C15C5B /* Feedback.Multiple.metallib */,
-				E78BD229281EE568000B44F0 /* Generators.Patterns.metallib */,
+				E78BD229281EE568000B44F0 /* Scenes.Patterns.metallib */,
 				E78BD234281EEC1A000B44F0 /* Vertex.Circles.metallib */,
 				E78BD23C281EEC1A000B44F0 /* Vertex.Shapes.metallib */,
 				E78BD244281EEC1A000B44F0 /* Vertex.Simple.metallib */,
@@ -2027,9 +2025,9 @@
 			productName = "Edge Detection";
 			productType = "com.apple.product-type.metal-library";
 		};
-		E78BD200281EE568000B44F0 /* Generators.Patterns */ = {
+		E78BD200281EE568000B44F0 /* Scenes.Patterns */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E78BD226281EE568000B44F0 /* Build configuration list for PBXNativeTarget "Generators.Patterns" */;
+			buildConfigurationList = E78BD226281EE568000B44F0 /* Build configuration list for PBXNativeTarget "Scenes.Patterns" */;
 			buildPhases = (
 				E78BD201281EE568000B44F0 /* Sources */,
 			);
@@ -2037,9 +2035,9 @@
 			);
 			dependencies = (
 			);
-			name = Generators.Patterns;
+			name = Scenes.Patterns;
 			productName = "Edge Detection";
-			productReference = E78BD229281EE568000B44F0 /* Generators.Patterns.metallib */;
+			productReference = E78BD229281EE568000B44F0 /* Scenes.Patterns.metallib */;
 			productType = "com.apple.product-type.metal-library";
 		};
 		E78BD22D281EEC1A000B44F0 /* Vertex.Circles */ = {
@@ -2203,7 +2201,6 @@
 				E7FCB464212A2B1000CED4FA /* Resources */,
 				E7ED18FC257E903A0075DD2E /* Embed Frameworks */,
 				E7E9D6E427DA731F00431EB0 /* Run Script Copy Filters */,
-				E773D5582812D83300AD2173 /* Run Script Copy Generators */,
 				E71716862818EB6E006A916C /* Run Script Copy Feedback */,
 				E78BD24B281EEC74000B44F0 /* Run Script Copy Vertex */,
 				E78BD2CD281F2A05000B44F0 /* Run Script Copy Parameterized */,
@@ -2289,7 +2286,7 @@
 				E7ED18EF257E903A0075DD2E /* Simple Scenes */,
 				E7B5734D25B6B2AD00DF1452 /* CIFilters */,
 				E75A20A527F25BA900779D64 /* Scenes.Circles */,
-				E78BD200281EE568000B44F0 /* Generators.Patterns */,
+				E78BD200281EE568000B44F0 /* Scenes.Patterns */,
 				E717167D2818EAF9006A916C /* Feedback.Simple */,
 				E7971B6C281B8C2900C15C5B /* Feedback.Multiple */,
 				E76DDD4127DA7191006BEBB2 /* Filters.Blurs */,
@@ -2351,24 +2348,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/Feedback\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/Feedback.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/Feedback.*.metallib ${OD}/\ncd ${OD}\nzmv -f 'Feedback.(*).metallib' '$1.metallib'\n";
-		};
-		E773D5582812D83300AD2173 /* Run Script Copy Generators */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script Copy Generators";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/zsh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/Generators\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/Generators.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/Generators.*.metallib ${OD}/\ncd ${OD}\nzmv -f 'Generators.(*).metallib' '$1.metallib'\n";
 		};
 		E78BD24B281EEC74000B44F0 /* Run Script Copy Vertex */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2759,6 +2738,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A9481C28303A4B00BC2CD3 /* scenetest.metal in Sources */,
 				E78BD297281F28EE000B44F0 /* triskel.metal in Sources */,
 				E78BD298281F28EE000B44F0 /* pavements hexagonal tiling 6.metal in Sources */,
 				E78BD218281EE568000B44F0 /* support.metal in Sources */,
@@ -3002,7 +2982,6 @@
 				E7D7C05025AB9EEF004D75CD /* Library.swift in Sources */,
 				E7E9D6EC27DC363B00431EB0 /* ShaderFilter.swift in Sources */,
 				E7A5A43C25B0CE6A0051A69A /* Dot Line.swift in Sources */,
-				E7A5A47925B0D1720051A69A /* Static Points.swift in Sources */,
 				E7EFE24C27A6E988007D6154 /* FixSwiftUI.swift in Sources */,
 				E7E9D70127DE4E7D00431EB0 /* SceneWrapperView.swift in Sources */,
 				E7CF9BD1227F42BF00413280 /* MTLTexture.swift in Sources */,
@@ -3124,7 +3103,7 @@
 		};
 		E78BD22B281EE5A3000B44F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E78BD200281EE568000B44F0 /* Generators.Patterns */;
+			target = E78BD200281EE568000B44F0 /* Scenes.Patterns */;
 			targetProxy = E78BD22A281EE5A3000B44F0 /* PBXContainerItemProxy */;
 		};
 		E78BD246281EEC5B000B44F0 /* PBXTargetDependency */ = {
@@ -3941,7 +3920,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E78BD226281EE568000B44F0 /* Build configuration list for PBXNativeTarget "Generators.Patterns" */ = {
+		E78BD226281EE568000B44F0 /* Build configuration list for PBXNativeTarget "Scenes.Patterns" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E78BD227281EE568000B44F0 /* Debug */,

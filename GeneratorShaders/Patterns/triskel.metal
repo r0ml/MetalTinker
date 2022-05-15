@@ -3,11 +3,8 @@
 
 #include "Common.h" 
 
-struct InputBuffer {};
-initialize() {}
-
-fragmentFn() {
-  float2 U = worldCoordAspectAdjusted + float2(0,.1);
+fragmentFunc() {
+  float2 U = worldCoordAdjusted + float2(0,.1);
   
   float a = -floor((atan2(U.y,U.x)-.33)*3./tau)/3.*tau -.05, l; // 3 symmetries
   U *= float2x2(cos(a),-sin(a),sin(a),cos(a));

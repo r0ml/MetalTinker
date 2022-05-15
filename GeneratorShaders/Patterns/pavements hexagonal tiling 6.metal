@@ -6,14 +6,8 @@
 
 #include "Common.h" 
 
-struct InputBuffer {};
-initialize() {}
-
-
-
-
-fragmentFn() {
-  float2 U = worldCoordAspectAdjusted * 3 *  1.73/2.;  // centered coords
+fragmentFunc() {
+  float2 U = worldCoordAdjusted * 3 *  1.73/2.;  // centered coords
   float2 uv = U;
   U *= float2x2(1,-1./1.73, 0,2./1.73);            // conversion to
   float3 g = float3(U,1.-U.x-U.y), g2,              // hexagonal coordinates

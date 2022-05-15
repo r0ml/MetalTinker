@@ -60,8 +60,8 @@ class Function {
     }
   }
   
-  func shaderLib<T>() -> [ShaderLib<T>] {
-    return libs.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }.map { ShaderLib<T>(lib: $0)}
+  func shaderLib<T>(group g : String) -> [ShaderLib<T>] {
+    return libs.filter({ $0.label != "default"  }).sorted { $0.label!.lowercased() < $1.label!.lowercased() }.map { ShaderLib<T>(group: g, lib: $0)}
   }
   
 

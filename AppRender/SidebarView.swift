@@ -37,8 +37,6 @@ struct SidebarView : View {
   var body: some View {
     NavigationView {
       List(selection: $selectedItem) {
-
-        FoldersListView("Generators", folders: ShaderLib<GenericShader>.getList("Generators"))
         FoldersListView("Parameterized", folders: ShaderLib<ParameterizedShader>.getList("Parameterized"))
         FoldersListView("Filters", folders: ShaderLib<ShaderFilter>.getList("Filters"))
         FoldersListView("Feedback", folders: ShaderLib<ShaderFeedback>.getList("Feedback"))
@@ -50,7 +48,7 @@ struct SidebarView : View {
         ScenesListView("SceneShaders", folders: ShaderLib<GenericShader>.getList("SceneShaders"))
 
         // FIXME: put me back
-//        SceneSidebarView(folderList: SceneShaderLib.folderList)
+        SceneSidebarView(folderList: SceneShaderLib.folderList("Scenes"))
         
         // FIXME: put me back
 //        SpriteListView(folderList: SpriteShaderLib.folderList) // see SpriteLibraryView

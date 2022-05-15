@@ -24,7 +24,7 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
   }
   
   public var id : String {
-    return myName
+    return String("\(myGroup)+\(myName)")
   }
   
   /// Used by subclass for passing in video frames

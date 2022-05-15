@@ -185,6 +185,9 @@ class ShaderVertex : ShaderFeedback {
 
     let sz = CGSize(width : rpd.colorAttachments[0].texture!.width, height: rpd.colorAttachments[0].texture!.height )
     iFrame += 1
+
+    if uniformBuffer == nil { return }
+    
     kk.setupUniform(iFrame: iFrame, size: sz, scale: Int(scale), uniform: uniformBuffer!, times: times )
 
     // texture and resolveTexture size mismatch    during resize

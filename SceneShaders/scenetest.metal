@@ -54,7 +54,7 @@ vertex_function(VertexInput                 in          [[ stage_in ]],
                 constant PerNodeData&   scn_node    [[buffer(1)]])
 {
     VertexOut vert;
-  // float4 z = scn_frame.viewportSize;
+//  float4 z = scn_frame.viewportSize;
 
   vert.where = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
     // Pass the texture coords to fragment function.

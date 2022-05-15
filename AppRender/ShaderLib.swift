@@ -14,17 +14,23 @@ class ShaderLib<T : GenericShader> : Identifiable, Equatable, Hashable {
   }
   
   var lib : MTLLibrary
-  
-  init(lib l: MTLLibrary) {
+  var group : String
+
+  init(group g : String, lib l: MTLLibrary) {
     lib = l
+    group = g
   }
   
   public var id : String {
+    return "\(group)+\(libnam)"
+  }
+
+  public var libnam : String {
     return lib.label ?? "none"
   }
   
   static func getList(_ s : String) -> [ShaderLib<T>] {
-    return functionMaps[s]!.shaderLib()
+    return functionMaps[s]!.shaderLib(group: s)
   }
 
 /*  static func filterList() -> [ShaderLib<ShaderFilter>] {

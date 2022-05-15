@@ -3,34 +3,73 @@
 
 #include "Common.h" 
 
-struct InputBuffer { };
-initialize() {}
+#define S(lr,e)  smoothstep( 0, 5./scn_frame.viewportSize.y, e - lr )            // base thick ring antialiased
 
-#define S(l,r,e)  smoothstep( 4./uni.iResolution.y, 0., abs(l-r) -e )            // base thick ring antialiased
-
-#define D(U,r,z) ( l=length(U) , a = atan2((U).x,(U).y),    \
-S(l,r,.08 )  * float4( float3(1.-S(l,r,.03)) , z )) // band pattern (col,Z)
-
-#define Z         (-.105 + cos( a ) ) * (1. - .05*T )              // Z arc + Z knot modulation
-
-#define T         sin( -3.*a )                                     // Z modulation for knot
-
-#define M(a)      fragColor =  a.w > fragColor.w ? a : fragColor ;                 \
-U *= float2x2(-.5,-.866,.866,-.5);                   // Z-buffer draw + rotate
-
-#define B         M( D( U +float2(0,d), r , Z ) )                    // draw arc
-
-
-fragmentFn() {
-  float2 U = worldCoordAspectAdjusted;
+fragmentFunc() {
+  float2 U = worldCoordAdjusted;
   U.y += .2;
-  float l,a, d=.6, r=.8;
-  
+  float l,a, d=.6;
+  float rrr=.8;
+
   float4 fragColor = 0;
-  fragColor.rgb += .5; // comment if you prefer black background
-  
-  M( D(U,.6,.5+.5*T) );    // ring
-  B; B; B;                 // 3 arcs
+  fragColor.rgb += .5; // gray background
+
+  float4 ma;
+  float z;
+  float t;
+  float lr;
+
+  // ring
+  rrr = 0.6;
+  l=length(U);
+  a = atan2((U).x,(U).y);
+  t = sin( -3.*a ) ;
+  z = .5 + .5 * t;
+
+  lr = abs(l-rrr);
+  ma = S(lr,.08 )  * float4( float3(1.-S(lr,.03)) , z );
+
+  fragColor =  ma.w > fragColor.w ? ma : fragColor ;
+  U *= float2x2(-.5,-.866,.866,-.5);
+
+
+  // the three arcs
+
+  float2 UU;
+  rrr = 0.8;
+  UU = U+float2(0, d);
+  l = length(UU);
+  a = atan2(UU.x, UU.y);
+  t = sin( -3.*a ) ;
+  z = (-.105 + cos( a ) ) * (1. - .05*t ) ;
+  lr = abs(l-rrr);
+  ma = S(lr,.08 )  * float4( float3(1.-S(lr,.03)) , z );
+
+  fragColor =  ma.w > fragColor.w ? ma : fragColor ;
+  U *= float2x2(-.5,-.866,.866,-.5);
+
+  UU = U+float2(0, d);
+  l = length(UU);
+  a = atan2(UU.x, UU.y);
+  t = sin( -3.*a ) ;
+  z = (-.105 + cos( a ) ) * (1. - .05*t ) ;
+  lr = abs(l-rrr);
+  ma = S(lr,.08 )  * float4( float3(1.-S(lr,.03)) , z );
+
+  fragColor =  ma.w > fragColor.w ? ma : fragColor ;
+  U *= float2x2(-.5,-.866,.866,-.5);
+
+  UU = U+float2(0,d);
+  l = length(UU);
+  a = atan2(UU.x, UU.y);
+  t = sin( -3.*a ) ;
+  z = (-.105 + cos( a ) ) * (1. - .05*t ) ;
+  lr = abs(l-rrr);
+  ma = S(lr,.08 )  * float4( float3(1.-S(lr,.03)) , z );
+
+  fragColor =  ma.w > fragColor.w ? ma : fragColor ;
+  U *= float2x2(-.5,-.866,.866,-.5);
+
   return float4(fragColor.rgb, 1);
 }
 

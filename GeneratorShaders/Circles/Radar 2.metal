@@ -21,7 +21,7 @@ static float point(float2 coord,float2 uv,float ang, float2 reso){
 
 fragmentFunc() {
   float2 uv = worldCoordAdjusted / 2;
-  float2 r = float2(1000, 1000);
+  float2 r = scn_frame.viewportSize.xy; // float2(1000, 1000);
   float aa=1/r.y;
   
   //uv.x+=(rand(uv*uni.iTime)-0.5)/100.*smoothstep(0.7,1.,hash(floor(uni.iTime)));

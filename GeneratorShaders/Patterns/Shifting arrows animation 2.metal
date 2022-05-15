@@ -3,12 +3,13 @@
 
 #include "Common.h"
 
-fragmentFn() {
-  float  h = .5,
-  t = uni.iTime / 1.5,
-  x = fract(t) - h,
-  a = t + x - x* abs(x+x),
-  p = 5. / uni.iResolution.y;
+fragmentFunc() {
+  float t = scn_frame.time / 1.5;
+  float  h = .5;
+  float x = fract(t) - h;
+  float a = t + x - x* abs(x+x);
+  float iresy = scn_frame.viewportSize.y; // 1000
+  float p = 5. / iresy;
   float2   U = thisVertex.where.xy*p, V, C = float2(h, .25);
   int    n = int(t) % 4, i=-1;
   float4 fragColor = 0;
