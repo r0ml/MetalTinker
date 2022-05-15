@@ -17,8 +17,8 @@ static void BBB(float v, bool c, float s, thread float4& fragColor, bool flat) {
   }
 }
 
-fragmentFn() {
-  float2 U = worldCoordAspectAdjusted;
+fragmentFunc(device InputBuffer &in) {
+  float2 U = worldCoordAdjusted;
 
   float a = atan2(U.y,U.x);
   float l = length(U);

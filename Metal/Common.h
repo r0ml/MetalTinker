@@ -154,11 +154,11 @@ constant ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )
 
 // -------
 
-#define fragmentFunc() ffFF(shaderName)
-#define ffFF(a) fffFFF(a)
-#define fffFFF(a) fragment float4 a##______Fragment(VertexOut thisVertex [[stage_in]], \
+#define fragmentFunc(...) ffFF(shaderName, ##__VA_ARGS__ )
+#define ffFF(a, ...) fffFFF(a, ##__VA_ARGS__ )
+#define fffFFF(a, ...) fragment float4 a##______Fragment(VertexOut thisVertex [[stage_in]], \
   constant SCNSceneBuffer&    scn_frame   [[buffer(0)]], \
-  constant PerNodeData&   scn_node    [[buffer(1)]] \
+  constant PerNodeData&   scn_node    [[buffer(1)]], ##__VA_ARGS__ \
   )
 
 // #define resolution (scn_node.boundingBox[1].xy)

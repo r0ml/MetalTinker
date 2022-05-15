@@ -36,8 +36,8 @@ static float S2(float x,float y,float a,float b) {
   return abs(fract(x)-.5) < .4  ? a + b * sin(pi/2.5* ( y -.25 + 3.*ceil(x) )) : 0.;
 }
 
-fragmentFn() {
-  float2 U = textureCoord * aspectRatio * 30.;
+fragmentFunc(device InputBuffer &in) {
+  float2 U = textureCoord * nodeAspect * 30.;
   if (in.variant.stringy) {
     bool b4 = in.isb;
     bool serge = in.serge;

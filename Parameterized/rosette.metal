@@ -14,8 +14,8 @@ static float D(float2 U, float2 d) {
   return .005 / abs( length( mod(U,d+d) -d ) -d.x ) ;
 }
 
-fragmentFn() {
-  float2 U = worldCoordAspectAdjusted;
+fragmentFunc(device InputBuffer &in) {
+  float2 U = worldCoordAdjusted;
   float4 fragColor = 0;
   if (in.plural) {
     U = 2.*U;

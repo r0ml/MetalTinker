@@ -11,7 +11,7 @@ import SceneKit
 class GenericShader : NSObject, Identifiable, ObservableObject {
   @Published var isRunningx : Bool = false
   @Published var isSteppingx : Bool = false
-  
+
   var metadata : MTLRenderPipelineReflection!
 
   /// this is the clear color for alpha blending?
@@ -622,6 +622,75 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     doInitialization()
     return []
   }
+
+
+
+
+
+  func getMetadata() {
+    let frag = String(myName + "______Fragment")
+    let vert = "dummy_vertex"
+
+    let psd = MTLRenderPipelineDescriptor()
+    psd.vertexFunction = functionMaps["SceneShaders"]!.find(vert)
+    psd.fragmentFunction = functionMaps["SceneShaders"]!.find(frag)
+
+    /*
+     typedef struct {
+       float3 position     [[ attribute(SCNVertexSemanticPosition) ]];
+       float2 texCoords    [[ attribute(SCNVertexSemanticTexcoord0) ]];
+       float4 color [[attribute(SCNVertexSemanticColor) ]];
+       float3 normal [[ attribute(SCNVertexSemanticNormal) ]];
+     } VertexInput;
+*/
+
+
+    /*
+    let vd = MTLVertexDescriptor()
+    vd.attributes[0].format = .float3
+    vd.attributes[0].offset = 0
+    vd.attributes[0].bufferIndex = 0
+
+    /*
+    vd.attributes[1].format = .float2
+    vd.attributes[1].offset = MemoryLayout<SIMD3<Float>>.stride
+    vd.attributes[1].bufferIndex = 0
+
+    vd.attributes[2].format = .float4
+    vd.attributes[2].offset = vd.attributes[1].offset + MemoryLayout<SIMD2<Float>>.stride
+    vd.attributes[2].bufferIndex = 0
+
+    vd.attributes[3].format = .float3
+    vd.attributes[3].offset = vd.attributes[2].offset + MemoryLayout<SIMD4<Float>>.stride
+    vd.attributes[3].bufferIndex = 0
+*/
+
+    psd.vertexDescriptor = vd
+
+    psd.inputPrimitiveTopology = .triangle
+
+    psd.colorAttachments[0].pixelFormat = thePixelFormat
+    psd.isAlphaToOneEnabled = false
+    psd.colorAttachments[0].isBlendingEnabled = true // true?
+    psd.colorAttachments[0].alphaBlendOperation = .add
+    psd.colorAttachments[0].rgbBlendOperation = .add
+    psd.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha // I would like to set this to   .one   for some cases
+    psd.colorAttachments[0].sourceAlphaBlendFactor = .sourceAlpha
+    psd.colorAttachments[0].destinationRGBBlendFactor =  .destinationAlpha //   doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
+    psd.colorAttachments[0].destinationAlphaBlendFactor = .destinationAlpha //   doesBlend ? .destinationAlpha : .oneMinusSourceAlpha
+*/
+
+
+    do {
+      try device.makeRenderPipelineState(descriptor: psd, options: [.argumentInfo, .bufferTypeInfo], reflection: &metadata)
+    } catch let er {
+      // let m = "Failed to create render render pipeline state for \(self.label), error \(er.localizedDescription)"
+      os_log("%s", type:.error, er.localizedDescription)
+      return
+    }
+
+  }
+
 
 }
 

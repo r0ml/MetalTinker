@@ -11,8 +11,8 @@ initialize() {
   in.smoothness = {0.1, 0.2, 0.4};
 }
 
-fragmentFn() {
-  float2 uv = worldCoordAspectAdjusted;
+fragmentFunc(device InputBuffer &in) {
+  float2 uv = worldCoordAdjusted;
   float2 mouse = toWorld(uni.iMouse.xy) * aspectRatio;
   uv*=10.;
   mouse*=10.;

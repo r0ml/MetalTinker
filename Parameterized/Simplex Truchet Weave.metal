@@ -388,20 +388,21 @@ float3 simplexWeave(float2 p, float time, const InputBuffer in){
 
 
 
-fragmentFn() {
+fragmentFunc(device InputBuffer &in) {
 
     // Screen coordinates. I've put a cap on the fullscreen resolution to stop
     // the pattern looking too blurred out.
   float2 uv = textureCoord;
-   
+  float t = scn_frame.time;
+
     // Position with some scrolling.
-    float2 p = uv + float2(.8660254, .5)*uni.iTime/16.; 
+    float2 p = uv + float2(.8660254, .5)*t/16.;
     
     // Screen rotation to level the pattern, but I liked the current angle.
     //p *= rot2(-3.14159/12.); 
     
     // The simplex Truchet weave routine.
-  float3 col = simplexWeave(p, uni.iTime, in);
+  float3 col = simplexWeave(p, t, in);
     
     // Using the Y screen coordinate to produce a subtle change in color.
     col = mix(col, col.yxz, -uv.y*.5 + .5);

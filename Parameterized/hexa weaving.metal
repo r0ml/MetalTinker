@@ -18,7 +18,7 @@ initialize() {
 }
 
 
-fragmentFn() {
+fragmentFunc(device InputBuffer &in) {
   float N = in.variant.oriental ? in.axes.y : 3;              // number of axis
   
   // varying over time....
@@ -26,7 +26,7 @@ fragmentFn() {
   
   float2x2 rm = rot2d(PI/N);
   float S = 8.;              // scale
-  float2 U = worldCoordAspectAdjusted / 2;
+  float2 U = worldCoordAdjusted / 2;
 
   if (in.variant.hex1 || in.variant.hex3 ) {
     U *= S;
@@ -45,7 +45,9 @@ fragmentFn() {
     } else {
       ux = 0;
     }
-    float4 ss = smoothstep(S/uni.iResolution.y, 0., ux);               // strip
+
+    float2 reso = 1 / scn_frame.inverseResolution;
+    float4 ss = smoothstep(S/reso.y, 0., ux);               // strip
     
     if (in.variant.hex1 || in.variant.hex3) {
       fragColor = max( fragColor,  ss * ( .7 + .3* sin(TAU * ( U.y*1.73/2. + .5*floor(U.x) ))) ); // waves

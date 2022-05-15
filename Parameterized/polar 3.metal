@@ -13,13 +13,14 @@ struct InputBuffer {
 initialize() {
 }
 
-fragmentFn() {
-  float2 U = worldCoordAspectAdjusted;
+fragmentFunc(device InputBuffer &in) {
+  float t = scn_frame.time;
+  float2 U = worldCoordAdjusted;
   float l = 25 * length(U);
   
   float      L = in.variant._2 ? ceil(l) * 6. : exp2(floor(log2(l))) * 9.;
   
-  float       a = atan2(U.x,U.y) - uni.iTime * ( in.variant._2 ? 2 * fract(10000 * sin(L)) - .5 : floor(l-5.)/2.) ;
+  float       a = atan2(U.x,U.y) - t * ( in.variant._2 ? 2 * fract(10000 * sin(L)) - .5 : floor(l-5.)/2.) ;
   
   float4 fragColor = (!in.variant._3) * (.6 + .4* cos(  (in.variant._2 ? 0 :  floor(l)) +floor(fract(a/TAU)*L) + float4(0,23,21,0) ) );
   return fragColor - ((in.variant._3 ? -1 : 1) * max(0., 9.* max( cos( TAU *l ), cos( a*L  )) - 8. ));

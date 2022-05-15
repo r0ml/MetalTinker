@@ -13,14 +13,15 @@ initialize() {
   in.radius = {0.1, 0.25, 0.5 };
 }
 
-fragmentFn() {
+fragmentFunc(device InputBuffer &in) {
   // update layout params
-  float rows = in.dotRows.y + 3. * sin(uni.iTime);
-  float curRadius = in.radius.y + 0.15 * cos(uni.iTime);
-  float curRotation = uni.iTime;
-  float2 curCenter = float2(cos(uni.iTime), sin(uni.iTime));
+  float t = scn_frame.time;
+  float rows = in.dotRows.y + 3. * sin(t);
+  float curRadius = in.radius.y + 0.15 * cos(t);
+  float curRotation = t;
+  float2 curCenter = float2(cos(t), sin(t));
   // get original coordinate, translate & rotate
-  float2 uv = worldCoordAspectAdjusted;
+  float2 uv = worldCoordAdjusted;
   uv += curCenter;
   uv = uv * rot2d(curRotation);
   // calc row index to offset x of every other row
@@ -32,7 +33,8 @@ fragmentFn() {
     uvRepeat = fract(float2(0.5, 0.) + uv * rows) - float2(0.5, 0.5);
   }
   // adaptive antialiasing, draw, invert
-  float aa = uni.iResolution.y * in.dotRows.y * 0.00001;
+  float2 reso = 1 / scn_frame.inverseResolution;
+  float aa = reso.y * in.dotRows.y * 0.00001;
   float col = smoothstep(curRadius - aa, curRadius + aa, length(uvRepeat));
   if (in.invert == 1) col = 1. - col;
   return float4(float3(col),1.0);

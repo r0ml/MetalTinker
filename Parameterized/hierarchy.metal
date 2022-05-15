@@ -18,11 +18,13 @@ static float endC(float2 V, float2 U, float2 A, InputBuffer in) {
   }
 }
 
-fragmentFn() {
+fragmentFunc(device InputBuffer &in) {
   float4 incr = float4(.11,.14,.2,0);
   // without the .01, sometimes you're dividing by zero
-  float2 A = 4./(1.01+sin(uni.iTime));
-  float2 U = worldCoordAspectAdjusted;
+  float t = scn_frame.time;
+  float2 A = 4./(1.01+sin(t));
+  float2 U = worldCoordAdjusted;
+
   float2 s = sign(U)+float2(U.x==0, U.y==0); // I only need to do this on roll
   U = abs(U);
   float2 V = pow(U, A);
@@ -32,7 +34,7 @@ fragmentFn() {
     fragColor += incr;
     U = U/.4-1.;
     if (in.kaleidoscope || in.roll) {
-      U = U * makeMat(cos(uni.iTime+float4(0,55,33,0)));
+      U = U * makeMat(cos(t+float4(0,55,33,0)));
       if (in.roll) {
         U = s * U;
         s = sign(U)+float2(U.x == 0, U.y == 0);

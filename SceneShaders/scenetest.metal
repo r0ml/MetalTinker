@@ -14,11 +14,10 @@ struct PlaneNodeBuffer {
 };
 
 typedef struct {
-    float3 position     [[ attribute(SCNVertexSemanticPosition) ]];
-    float2 texCoords    [[ attribute(SCNVertexSemanticTexcoord0) ]];
+  float3 position     [[ attribute(SCNVertexSemanticPosition) ]];
+  float2 texCoords    [[ attribute(SCNVertexSemanticTexcoord0) ]];
   float4 color [[attribute(SCNVertexSemanticColor) ]];
-  float3 normal [[ attribute(SCNVertexSemanticNormal) ]];
-  
+  float3 normal [[ attribute(SCNVertexSemanticNormal) ]];  
 } VertexInput;
 
 /*
@@ -46,6 +45,11 @@ typedef struct {
   float2x3 boundingBox;
   float2x3 worldBoundingBox;
 } PerNodeData;
+
+vertex VertexOut dummy_vertex() {
+  VertexOut v;
+  return v;
+}
 
 // We will not be using the values encapuslated in SCNSceneBuffer
 vertex VertexOut

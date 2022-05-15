@@ -31,18 +31,20 @@ static float3 circles(float2 u,float2 s,float h,float2 C, float2 reso) {
   return circle(u-cs(i*t*2.+h)*s.y-C,s.x,1, reso) * huen(float3(i/f.y,1, 0.75), 3);
 }
 
-fragmentFn() {
-  float2 u= worldCoordAspectAdjusted;
+fragmentFunc(device InputBuffer &in) {
+  float2 u= worldCoordAdjusted;
 
 //  float2 m=uni.iMouse.xy;//float2(R,r)  ;
 //  m=abs(2*m-1) ;
+  float2 reso = 1/scn_frame.inverseResolution;
+  float t = scn_frame.time;
 
-  float3 c = float3(circle(u, in.center.y, 0, uni.iResolution)) ; //draw center
+  float3 c = float3(circle(u, in.center.y, 0, reso)) ; //draw center
   float i = floor((min(in.size.y * 2 * ( 1/in.size.y -1)+0.01,length(u) - in.center.y))/(in.size.y * 2)); // i-th layer
   float2 a=float2(1, 2 * i + 1) * in.size.y;
   a.y += in.center.y;
   if (i >= 0) {
-    c += circles(u, a, sin(uni.iTime) * in.size.y * i * pi, 0, uni.iResolution); // draw surrounding circles
+    c += circles(u, a, sin(t) * in.size.y * i * pi, 0, reso); // draw surrounding circles
   }
   return float4(1 - c, 1);
 }

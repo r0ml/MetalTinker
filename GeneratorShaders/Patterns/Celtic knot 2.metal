@@ -3,7 +3,7 @@
 
 #include "Common.h" 
 
-#define S(lr,e)  smoothstep( 0, 5./scn_frame.viewportSize.y, e - lr )            // base thick ring antialiased
+#define S(lr,e)  smoothstep( 0, 5. * scn_frame.inverseResolution.y, e - lr )            // base thick ring antialiased
 
 fragmentFunc() {
   float2 U = worldCoordAdjusted;

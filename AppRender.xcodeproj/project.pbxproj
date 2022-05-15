@@ -290,7 +290,6 @@
 		E78BD2C8281F29E0000B44F0 /* glsl.metal in Sources */ = {isa = PBXBuildFile; fileRef = E77675D72283786000614B7B /* glsl.metal */; };
 		E78BD2D1281F2A70000B44F0 /* Bubbles.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A208E27F25B7B00779D64 /* Bubbles.metal */; };
 		E78BD2D2281F2A88000B44F0 /* circle packing mouse.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A209927F25B7B00779D64 /* circle packing mouse.metal */; };
-		E78BD2D3281F2A98000B44F0 /* Cosine jamming.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A209327F25B7B00779D64 /* Cosine jamming.metal */; };
 		E78BD2D4281F2AAA000B44F0 /* Halftone Dots.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A208A27F25B7B00779D64 /* Halftone Dots.metal */; };
 		E78BD2D5281F2AC1000B44F0 /* hierarchy.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A208B27F25B7B00779D64 /* hierarchy.metal */; };
 		E78BD2D6281F2AD4000B44F0 /* Motion Blur.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A208527F25B7B00779D64 /* Motion Blur.metal */; };
@@ -388,6 +387,7 @@
 		E7A5A84525B353250051A69A /* SceneControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A84425B353250051A69A /* SceneControlsView.swift */; };
 		E7A9481A282F58E600BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
 		E7A9481C28303A4B00BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A9481D2830AA3800BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
 		E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8CBA25A03F8400E464F9 /* Bello.swift */; };
 		E7AB8D3D25A5CCB600E464F9 /* Box Breathing Remix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */; };
 		E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */; };
@@ -1439,16 +1439,16 @@
 		E78BD2D0281F2A40000B44F0 /* Parameterized */ = {
 			isa = PBXGroup;
 			children = (
+				E7A9481F28314B1A00BC2CD3 /* Mouse */,
 				E75A208E27F25B7B00779D64 /* Bubbles.metal */,
+				E78BD28C281F28EE000B44F0 /* chain cloth.metal */,
 				E75A209927F25B7B00779D64 /* circle packing mouse.metal */,
-				E75A209327F25B7B00779D64 /* Cosine jamming.metal */,
 				E75A208A27F25B7B00779D64 /* Halftone Dots.metal */,
+				E78BD287281F28EE000B44F0 /* hexa weaving.metal */,
 				E75A208B27F25B7B00779D64 /* hierarchy.metal */,
 				E75A208527F25B7B00779D64 /* Motion Blur.metal */,
 				E75A209F27F25B7B00779D64 /* polar 3.metal */,
 				E75A20A127F25B7B00779D64 /* rosette.metal */,
-				E78BD28C281F28EE000B44F0 /* chain cloth.metal */,
-				E78BD287281F28EE000B44F0 /* hexa weaving.metal */,
 				E78BD28B281F28EE000B44F0 /* round weaving.metal */,
 				E78BD28A281F28EE000B44F0 /* Simplex Truchet Weave.metal */,
 				E78BD28F281F28EE000B44F0 /* weaving.metal */,
@@ -1608,6 +1608,14 @@
 			children = (
 				E75A20A227F25B7B00779D64 /* Contour.metal */,
 				E75A20A327F25B7B00779D64 /* Simple radial mask.metal */,
+			);
+			path = Mouse;
+			sourceTree = "<group>";
+		};
+		E7A9481F28314B1A00BC2CD3 /* Mouse */ = {
+			isa = PBXGroup;
+			children = (
+				E75A209327F25B7B00779D64 /* Cosine jamming.metal */,
 			);
 			path = Mouse;
 			sourceTree = "<group>";
@@ -2203,10 +2211,10 @@
 				E7E9D6E427DA731F00431EB0 /* Run Script Copy Filters */,
 				E71716862818EB6E006A916C /* Run Script Copy Feedback */,
 				E78BD24B281EEC74000B44F0 /* Run Script Copy Vertex */,
-				E78BD2CD281F2A05000B44F0 /* Run Script Copy Parameterized */,
 				E78BD3002820E580000B44F0 /* Run Script Copy PointClouds */,
 				E78BD318282219E4000B44F0 /* Run Script Copy SceneShaders */,
 				E78BD32A28223E24000B44F0 /* Run Script Copy MultipassShaders */,
+				E7A9481E2830C42200BC2CD3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2367,24 +2375,6 @@
 			shellPath = /bin/zsh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=Vertex\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
 		};
-		E78BD2CD281F2A05000B44F0 /* Run Script Copy Parameterized */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script Copy Parameterized";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/zsh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=Parameterized\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
-		};
 		E78BD3002820E580000B44F0 /* Run Script Copy PointClouds */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2440,6 +2430,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=Multipass\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
+		};
+		E7A9481E2830C42200BC2CD3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nautoload zmv\nDIRX=Parameterized\nexport OD=${METAL_LIBRARY_OUTPUT_DIR}/${DIRX}\nmkdir -p \"${OD}\"\n\necho ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncp -a ${TARGET_BUILD_DIR}/${DIRX}.*.metallib ${OD}/\ncd ${OD}\nzmv -f ${DIRX}'.(*).metallib' '$1.metallib'\n";
 		};
 		E7E9D6E427DA731F00431EB0 /* Run Script Copy Filters */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2838,6 +2845,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A9481D2830AA3800BC2CD3 /* scenetest.metal in Sources */,
 				E78BD29E281F29E0000B44F0 /* shapes.metal in Sources */,
 				E78BD2D7281F2ADD000B44F0 /* polar 3.metal in Sources */,
 				E78BD2DC281F2B29000B44F0 /* Simplex Truchet Weave.metal in Sources */,
@@ -2846,7 +2854,6 @@
 				E78BD2D9281F2AFE000B44F0 /* chain cloth.metal in Sources */,
 				E78BD2D4281F2AAA000B44F0 /* Halftone Dots.metal in Sources */,
 				E78BD2D6281F2AD4000B44F0 /* Motion Blur.metal in Sources */,
-				E78BD2D3281F2A98000B44F0 /* Cosine jamming.metal in Sources */,
 				E78BD2D8281F2AE9000B44F0 /* rosette.metal in Sources */,
 				E78BD2D5281F2AC1000B44F0 /* hierarchy.metal in Sources */,
 				E78BD2DB281F2B1C000B44F0 /* round weaving.metal in Sources */,

@@ -8,8 +8,8 @@ fragmentFunc() {
   float  h = .5;
   float x = fract(t) - h;
   float a = t + x - x* abs(x+x);
-  float iresy = scn_frame.viewportSize.y; // 1000
-  float p = 5. / iresy;
+  float iresy = scn_frame.inverseResolution.y; // viewportSize.y; // 1000
+  float p = 5. * iresy;
   float2   U = thisVertex.where.xy*p, V, C = float2(h, .25);
   int    n = int(t) % 4, i=-1;
   float4 fragColor = 0;

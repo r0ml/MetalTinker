@@ -46,7 +46,7 @@ static float W( float2 U ) {
 
 // ==============
 
-fragmentFn() {
+fragmentFunc(device InputBuffer &in) {
   float2 U = textureCoord;
   
   if (in.variant._1) {

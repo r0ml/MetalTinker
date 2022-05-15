@@ -3,17 +3,19 @@
 
 import SwiftUI
 import SceneKit
+import os
 
-struct ShaderNodeView : View {
+struct ShaderNodeView<T : GenericShader> : View {
   @GestureState var magnifyBy : CGFloat = 1
   @GestureState var dragger : CGPoint = .zero
 
   @State var overImg = false
   @State var paused = false
-  var shader : GenericShader
+  var shader : T
   var mouseLocation : NSPoint { NSEvent.mouseLocation }
 
-  init(shader: GenericShader) {
+
+  init(shader: T) {
     self.shader = shader
   }
 
@@ -134,6 +136,7 @@ struct ShaderNodeView : View {
         }
       }
       //      SceneControlsView(scene: delegate.scene, paused: $paused ).frame(minWidth: 600)
+      PreferencesView(shdr: shader)
     }
   }
 
@@ -166,15 +169,17 @@ struct ShaderNodeView : View {
     rootNode.addChildNode(nn)
 
 
-//    let target = SCNLookAtConstraint(target: nn)
-//    target.isGimbalLockEnabled = true
-//    myCameraNode.constraints = [target]
+    //    let target = SCNLookAtConstraint(target: nn)
+    //    target.isGimbalLockEnabled = true
+    //    myCameraNode.constraints = [target]
 
     scene.background.contents = XColor.orange
     scene.isPaused = false
     
     return scene
   }
+
+
 
 
   func getProgram() -> SCNNode {
@@ -195,40 +200,84 @@ struct ShaderNodeView : View {
     // FIXME: this is broken -- need to split out the SceneKit shaders
     p.library = shader.library // functionMaps["SceneShaders"]!.libs.first(where: {$0.label == self.library })!
 
-    //    Task {
-    //        justInitialization()
-    //    }
 
-    // FIXME:
-    // I could also use key-value coding on an nsdata object
-    // on geometry or material call  setValue: forKey: "uni"
+    if let shad = shader as? ParameterizedShader {
 
-    // Bind the name of the fragment function parameters to the program.
-    /*      p.handleBinding(ofBufferNamed: "uni",
-     frequency: .perFrame,
-     handler: {
-     (buffer: SCNBufferStream, node: SCNNode, shadable: SCNShadable, renderer: SCNRenderer) -> Void in
-     //                           let s = renderer.currentViewport.size
-     let s = planeSize
-     ttt.currentTime = now()
 
-     var u = self.setupUniform(size: CGSize(width: s.width * 10.0, height: s.height * 10), times: ttt)
-     buffer.writeBytes(&u, count: MemoryLayout<Uniform>.stride)
+      // get the metadata
+      shad.getMetadata()
 
-     })
-     */
-    /*    p.handleBinding(ofBufferNamed: "in",
-     frequency: .perFrame,
-     handler: {
-     (buffer: SCNBufferStream, node: SCNNode, shadable: SCNShadable, renderer: SCNRenderer) -> Void in
-     if let ib = self.config.initializationBuffer {
-     buffer.writeBytes(ib.contents(), count: ib.length)
-     } else {
-     var zero = 0
-     buffer.writeBytes(&zero, count: MemoryLayout<Double>.stride)
-     }
-     })
-     */
+
+      // FIXME:
+      // this could indeed be  justInitialization()
+      // run the initialization shader here to get default values.
+
+
+//      shad.justInitialization()
+
+      /*
+      var ibl = 8
+      if let aa = (shad.metadata.fragmentArguments?.filter { $0.name == "in" })?.first {
+        ibl = aa.bufferDataSize
+      }
+      if ibl == 0 { ibl = 8 }
+
+      if let ib = device.makeBuffer(length: ibl, options: [.storageModeShared ]) {
+        ib.label = "defaults buffer for \(shader.myName)"
+        ib.contents().storeBytes(of: 0, as: Int.self)
+        shader.initializationBuffer = ib
+      }
+*/
+
+      // now I should also build the pref view -- and populate the initialization buffer with values from UserDefaults
+
+
+      // What I have not yet figured out is how to initialize the values on first use (before UserDefault is set)
+
+
+
+      //    Task {
+      //        justInitialization()
+      //    }
+
+      // FIXME:
+      // I could also use key-value coding on an nsdata object
+      // on geometry or material call  setValue: forKey: "uni"
+
+      // Bind the name of the fragment function parameters to the program.
+      /*      p.handleBinding(ofBufferNamed: "uni",
+       frequency: .perFrame,
+       handler: {
+       (buffer: SCNBufferStream, node: SCNNode, shadable: SCNShadable, renderer: SCNRenderer) -> Void in
+       //                           let s = renderer.currentViewport.size
+       let s = planeSize
+       ttt.currentTime = now()
+
+       var u = self.setupUniform(size: CGSize(width: s.width * 10.0, height: s.height * 10), times: ttt)
+       buffer.writeBytes(&u, count: MemoryLayout<Uniform>.stride)
+
+       })
+       */
+
+
+      // At this point, if the metadata indicates that I need an input buffer ...
+
+
+      p.handleBinding(ofBufferNamed: "in",
+                      frequency: .perFrame,
+                      handler: {
+        (buffer: SCNBufferStream, node: SCNNode, shadable: SCNShadable, renderer: SCNRenderer) -> Void in
+        if let ib = shad.initializationBuffer {
+//          var jj = Int32(40)
+//          buffer.writeBytes(&jj, count: MemoryLayout<Int32>.stride)
+               buffer.writeBytes(ib.contents(), count: ib.length)
+        } else {
+          var zero = 0
+          buffer.writeBytes(&zero, count: MemoryLayout<Double>.stride)
+        }
+      })
+    }
+
 
     j.program = p
     j.isDoubleSided = true

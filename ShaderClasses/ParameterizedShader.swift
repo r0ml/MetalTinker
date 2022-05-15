@@ -28,13 +28,12 @@ class ParameterizedShader : GenericShader {
 
   /// This is the CPU overlay on the initialization buffer
   var inbuf : MyMTLStruct!
-  var initializationBuffer : MTLBuffer!
-
   var cached : [IdentifiableView]?
 
   var myOptions : MyMTLStruct!
   var dynPref : DynamicPreferences? // need to hold on to this for the callback
 
+  var initializationBuffer : MTLBuffer!
   var initializeReflection : MTLComputePipelineReflection?
   var initializePipelineState : MTLComputePipelineState?
 
