@@ -6,13 +6,10 @@ struct InputBuffer {
   bool srgb = false;
 };
 
-initialize() {
-}
-
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(device InputBuffer &in, texture2d<float> tex) {
   float4 fragColor = tex.sample(iChannel0, textureCoord );
   
-  float cColor = 0.5 + 0.5*sin(uni.iTime);
+  float cColor = 0.5 + 0.5*sin(scn_frame.time);
   float cValue;
 
 //  float cValue = max(max(fragColor.x,fragColor.y),fragColor.z);

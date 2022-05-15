@@ -131,7 +131,7 @@ static float3 image(int panel, float2 uv, float time, texture2d<float> tex0) {
   return float3(0);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
 //  shaderName shad;
   
   const float ROWS = 3.;
@@ -160,7 +160,7 @@ fragmentFn(texture2d<float> tex) {
     {
       // We're inside one of the panels
       int panel = iuv.x + iuv.y * int(COLUMNS);
-      srgb = image(panel, uv, uni.iTime, tex);
+      srgb = image(panel, uv, scn_frame.time, tex);
     }
   }
   

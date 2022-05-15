@@ -9,11 +9,11 @@ static float3 hueRotation(float3 c, float hueRotationAngle){ // <= this is the t
     return mix(hueRotationValues.xxx * dot(hueRotationValues.xxx, c), c, hueRotationValues.z) + (cross(hueRotationValues.xxx, c) * hueRotationValues.y);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 uv = textureCoord;
   float3 c = tex.sample(iChannel0, uv).xyz;
    
-  float hueRotationAngle = uni.iTime * 180.0;
+  float hueRotationAngle = scn_frame.time * 180.0;
       
   c = (abs(textureCoord.x - 0.5) < 0.001) ?
         float3(1.0) :

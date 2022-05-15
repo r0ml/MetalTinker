@@ -15,7 +15,7 @@ initialize() {
   in.sigma = {1, 2.8, 5};
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(device InputBuffer &in, texture2d<float> tex) {
   float2 b = thisVertex.texCoords;
   float4 original = tex.sample(iChannel0, b);
 

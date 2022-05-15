@@ -17,7 +17,7 @@ initialize() {
   in.channel._2 = 1;
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(device InputBuffer &in, texture2d<float> tex) {
   float x = dot(tex.sample(iChannel0, textureCoord), float4( in.channel._0, in.channel._1, in.channel._2, 0));
   return float4(x, x, x, 1);
 }

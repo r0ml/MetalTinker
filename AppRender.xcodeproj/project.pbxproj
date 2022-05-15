@@ -81,9 +81,7 @@
 		E75A1B4E27F175D900779D64 /* Brightness contrast saturation.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD0D27DA7141006BEBB2 /* Brightness contrast saturation.metal */; };
 		E75A1B4F27F1761100779D64 /* c1-Brannan Filter.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCFB27DA7141006BEBB2 /* c1-Brannan Filter.metal */; };
 		E75A1B5127F1762F00779D64 /* Channel Query 2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD0E27DA7141006BEBB2 /* Channel Query 2.metal */; };
-		E75A1B5227F1767900779D64 /* Color temperature sRGB.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD0B27DA7141006BEBB2 /* Color temperature sRGB.metal */; };
 		E75A1B5327F1769100779D64 /* Blurs.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD0927DA7141006BEBB2 /* Blurs.metal */; };
-		E75A1B5627F176BF00779D64 /* Filter Gamma Correction.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD1127DA7141006BEBB2 /* Filter Gamma Correction.metal */; };
 		E75A1B5727F176CA00779D64 /* Filter Inversion.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD2B27DA7141006BEBB2 /* Filter Inversion.metal */; };
 		E75A1B5827F176D200779D64 /* Filter Solarization.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD2627DA7141006BEBB2 /* Filter Solarization.metal */; };
 		E75A1B5927F1777200779D64 /* Rgba to sepia in time.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD2127DA7141006BEBB2 /* Rgba to sepia in time.metal */; };
@@ -98,7 +96,6 @@
 		E75A1B7B27F17CF400779D64 /* fading effect.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCDB27DA7141006BEBB2 /* fading effect.metal */; };
 		E75A1B7C27F17D5D00779D64 /* Black and White Fade.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCAC27DA7141006BEBB2 /* Black and White Fade.metal */; };
 		E75A1B7D27F17D8E00779D64 /* Filter Box Blur.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCB227DA7141006BEBB2 /* Filter Box Blur.metal */; };
-		E75A1B7E27F17DAA00779D64 /* Filter Radial Blur.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCBB27DA7141006BEBB2 /* Filter Radial Blur.metal */; };
 		E75A1B8327F17E6800779D64 /* Video filters.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCCA27DA7141006BEBB2 /* Video filters.metal */; };
 		E75A1B8627F17EB400779D64 /* Simple Night-Vision effect.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCC427DA7141006BEBB2 /* Simple Night-Vision effect.metal */; };
 		E75A1B8727F17EC800779D64 /* Screen Chromatic Aberration.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCA727DA7141006BEBB2 /* Screen Chromatic Aberration.metal */; };
@@ -162,7 +159,6 @@
 		E75A20EF27F2618D00779D64 /* FB Algua.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD3B27DA7142006BEBB2 /* FB Algua.metal */; };
 		E75A20F027F2618D00779D64 /* Verbose Raytrace Quad.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD2427DA7141006BEBB2 /* Verbose Raytrace Quad.metal */; };
 		E75A20F127F2618D00779D64 /* Rock the London.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCFD27DA7141006BEBB2 /* Rock the London.metal */; };
-		E75EB4A427F4F5EB00F52D71 /* Box Blur2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75EB4A327F4F5AF00F52D71 /* Box Blur2.metal */; };
 		E75EB4A527F4F6A300F52D71 /* Comic Book Video FX.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCB627DA7141006BEBB2 /* Comic Book Video FX.metal */; };
 		E75EB4A627F4F6A300F52D71 /* Video BillBoarding.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCC027DA7141006BEBB2 /* Video BillBoarding.metal */; };
 		E75EB4A727F4F6A300F52D71 /* isovalues video.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCB927DA7141006BEBB2 /* isovalues video.metal */; };
@@ -388,6 +384,16 @@
 		E7A9481A282F58E600BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
 		E7A9481C28303A4B00BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
 		E7A9481D2830AA3800BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A948202831660000BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A948212831660A00BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A948222831661600BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A948232831662100BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A948242831663300BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A948252831663B00BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
+		E7A948272831689000BC2CD3 /* Filter Gamma Correction.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD1127DA7141006BEBB2 /* Filter Gamma Correction.metal */; };
+		E7A948282831689800BC2CD3 /* Color temperature sRGB.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD0B27DA7141006BEBB2 /* Color temperature sRGB.metal */; };
+		E7A94829283168E800BC2CD3 /* Filter Radial Blur.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCBB27DA7141006BEBB2 /* Filter Radial Blur.metal */; };
+		E7A9482A283168F400BC2CD3 /* Box Blur2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75EB4A327F4F5AF00F52D71 /* Box Blur2.metal */; };
 		E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8CBA25A03F8400E464F9 /* Bello.swift */; };
 		E7AB8D3D25A5CCB600E464F9 /* Box Breathing Remix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8D3C25A5CCB600E464F9 /* Box Breathing Remix.swift */; };
 		E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AB8DBE25A7C1BA00E464F9 /* ryb color wheel.swift */; };
@@ -1207,9 +1213,6 @@
 				E76DDD0D27DA7141006BEBB2 /* Brightness contrast saturation.metal */,
 				E76DDCFB27DA7141006BEBB2 /* c1-Brannan Filter.metal */,
 				E76DDD0E27DA7141006BEBB2 /* Channel Query 2.metal */,
-				E76DDD0B27DA7141006BEBB2 /* Color temperature sRGB.metal */,
-				E76DDD1127DA7141006BEBB2 /* Filter Gamma Correction.metal */,
-				E76DDD2B27DA7141006BEBB2 /* Filter Inversion.metal */,
 				E76DDD2627DA7141006BEBB2 /* Filter Solarization.metal */,
 				E76DDCAA27DA7141006BEBB2 /* RGB Grid.metal */,
 				E76DDD2F27DA7142006BEBB2 /* RGB to HSV-HSL.metal */,
@@ -1307,6 +1310,7 @@
 		E76DDCA227DA646B006BEBB2 /* FilterShaders */ = {
 			isa = PBXGroup;
 			children = (
+				E7A94826283166D800BC2CD3 /* Mouse */,
 				E726B09C28271401003F88A6 /* Librorum */,
 				E76DDCF327DA7141006BEBB2 /* Blurs */,
 				E75A1B4D27F175AE00779D64 /* Colors */,
@@ -1346,9 +1350,7 @@
 			isa = PBXGroup;
 			children = (
 				E76DDD0927DA7141006BEBB2 /* Blurs.metal */,
-				E75EB4A327F4F5AF00F52D71 /* Box Blur2.metal */,
 				E76DDCB227DA7141006BEBB2 /* Filter Box Blur.metal */,
-				E76DDCBB27DA7141006BEBB2 /* Filter Radial Blur.metal */,
 				E76DDCF627DA7141006BEBB2 /* Gaussian blur.metal */,
 				E76DDD1827DA7141006BEBB2 /* Texture LOD.metal */,
 			);
@@ -1616,6 +1618,18 @@
 			isa = PBXGroup;
 			children = (
 				E75A209327F25B7B00779D64 /* Cosine jamming.metal */,
+			);
+			path = Mouse;
+			sourceTree = "<group>";
+		};
+		E7A94826283166D800BC2CD3 /* Mouse */ = {
+			isa = PBXGroup;
+			children = (
+				E75EB4A327F4F5AF00F52D71 /* Box Blur2.metal */,
+				E76DDCBB27DA7141006BEBB2 /* Filter Radial Blur.metal */,
+				E76DDD0B27DA7141006BEBB2 /* Color temperature sRGB.metal */,
+				E76DDD1127DA7141006BEBB2 /* Filter Gamma Correction.metal */,
+				E76DDD2B27DA7141006BEBB2 /* Filter Inversion.metal */,
 			);
 			path = Mouse;
 			sourceTree = "<group>";
@@ -2512,6 +2526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A948242831663300BC2CD3 /* scenetest.metal in Sources */,
 				E726B09F28271549003F88A6 /* Spine01.metal in Sources */,
 				E726B096282713D2003F88A6 /* support.metal in Sources */,
 				E726B097282713D2003F88A6 /* glsl.metal in Sources */,
@@ -2533,6 +2548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A948252831663B00BC2CD3 /* scenetest.metal in Sources */,
 				E75A1AC027EE821400779D64 /* perlin video transition test.metal in Sources */,
 				E75A1ACA27EE821400779D64 /* pixellated transition.metal in Sources */,
 				E75A1AC927EE821400779D64 /* Flip.metal in Sources */,
@@ -2560,6 +2576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A948232831662100BC2CD3 /* scenetest.metal in Sources */,
 				E75EB4C227F4F6A300F52D71 /* Columns Sliced and Repeated.metal in Sources */,
 				E75A1B8C27F17F3600779D64 /* Melting Paint.metal in Sources */,
 				E75EB4AC27F4F6A300F52D71 /* Money filter.metal in Sources */,
@@ -2632,9 +2649,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A948282831689800BC2CD3 /* Color temperature sRGB.metal in Sources */,
+				E7A948212831660A00BC2CD3 /* scenetest.metal in Sources */,
 				E75A1B8A27F17EFD00779D64 /* RGB Grid.metal in Sources */,
 				E75A1B4727F1759100779D64 /* support.metal in Sources */,
-				E75A1B5227F1767900779D64 /* Color temperature sRGB.metal in Sources */,
 				E75A1B8827F17EDE00779D64 /* Simple Chromatic Abberation.metal in Sources */,
 				E75A1B5927F1777200779D64 /* Rgba to sepia in time.metal in Sources */,
 				E75A1B5A27F177A900779D64 /* Simple Effects.metal in Sources */,
@@ -2645,11 +2663,11 @@
 				E75A1B5727F176CA00779D64 /* Filter Inversion.metal in Sources */,
 				E75A1B8627F17EB400779D64 /* Simple Night-Vision effect.metal in Sources */,
 				E75A1B6027F178DD00779D64 /* RGB to HSV-HSL.metal in Sources */,
+				E7A948272831689000BC2CD3 /* Filter Gamma Correction.metal in Sources */,
 				E75A1B4827F1759100779D64 /* glsl.metal in Sources */,
 				E75A1B7C27F17D5D00779D64 /* Black and White Fade.metal in Sources */,
 				E75A1B5827F176D200779D64 /* Filter Solarization.metal in Sources */,
 				E75A1B4F27F1761100779D64 /* c1-Brannan Filter.metal in Sources */,
-				E75A1B5627F176BF00779D64 /* Filter Gamma Correction.metal in Sources */,
 				E75A1B5E27F1782C00779D64 /* two lines hue rotation.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2658,6 +2676,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A948222831661600BC2CD3 /* scenetest.metal in Sources */,
 				E75A20EF27F2618D00779D64 /* FB Algua.metal in Sources */,
 				E75A20E327F2618D00779D64 /* fresnel distortion.metal in Sources */,
 				E75A20EA27F2618D00779D64 /* VHSFilter.metal in Sources */,
@@ -2730,9 +2749,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E75EB4A427F4F5EB00F52D71 /* Box Blur2.metal in Sources */,
+				E7A9482A283168F400BC2CD3 /* Box Blur2.metal in Sources */,
+				E7A948202831660000BC2CD3 /* scenetest.metal in Sources */,
+				E7A94829283168E800BC2CD3 /* Filter Radial Blur.metal in Sources */,
 				E76DDD4C27DA71E6006BEBB2 /* support.metal in Sources */,
-				E75A1B7E27F17DAA00779D64 /* Filter Radial Blur.metal in Sources */,
 				E75A1B5327F1769100779D64 /* Blurs.metal in Sources */,
 				E75A1B7D27F17D8E00779D64 /* Filter Box Blur.metal in Sources */,
 				E76DDD4B27DA71E1006BEBB2 /* glsl.metal in Sources */,

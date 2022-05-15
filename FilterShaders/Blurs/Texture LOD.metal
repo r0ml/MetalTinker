@@ -16,7 +16,7 @@ initialize() {
   in.level = {0.5, 3, 6};
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(device InputBuffer &in, texture2d<float> tex) {
   float2 uv = textureCoord;
 
 //   float lod = (1 + sin( uni.iTime ))*3;  // step( uv.x, 0.5 );

@@ -42,7 +42,7 @@ constant const float brightness = 0.15;
 constant const float contrast = 1.2;
 constant const float saturation = 1.5;
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float4 color = tex.sample( iChannel0, textureCoord );
   return brightnessMatrix( brightness ) *  contrastMatrix( contrast ) *  saturationMatrix( saturation ) * color;
 }

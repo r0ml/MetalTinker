@@ -6,7 +6,7 @@
 constant const float RADIUS = 0.03;
 constant const int SAMPLES = 20;
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float3 sum = 0;
   float2 b = textureCoord;
 

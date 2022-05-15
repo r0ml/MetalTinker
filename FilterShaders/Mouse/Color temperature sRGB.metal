@@ -7,9 +7,6 @@ struct InputBuffer {
   bool WithQuickAndDirtyLuminancePreservation = true;
 };
 
-initialize() {
-}
-
 // Color temperature (sRGB) stuff
 
 constant const float LuminancePreservationFactor = 1.0;

@@ -34,7 +34,9 @@ static float3 contrastAdjust( const float3 color, const float c) {
     return 0.5 + c * (color - 0.5);
   }
 
-fragmentFn(texture2d<float> tex) {
+// FIXME: I could have an option to toggle the filter?
+// or just oscillate over time
+fragmentFunc(texture2d<float> tex) {
   const float3 tint = float3(255., 248., 242.) / 255.;
 
   float2 uv = textureCoord;
@@ -51,5 +53,5 @@ fragmentFn(texture2d<float> tex) {
   col = saturate(contrastAdjust(col - 0.04, 1.14));
   col = tint * col;
   col = sqrt(col);
-  return float4( mix(col, ocol, uv.x > uni.iMouse.x ), 1);
+  return float4(col, 1); // float4( mix(col, ocol, uv.x > uni.iMouse.x ), 1);
 }

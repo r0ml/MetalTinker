@@ -3,7 +3,7 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 uv = textureCoord;
   
   float2 d = abs((uv - 0.5) * 2.0);

@@ -12,7 +12,7 @@ initialize() {
   in.SAMPLES = {2, 10, 12};
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFn( /* device InputBuffer &in, */ texture2d<float> tex) {
   float2 uv = textureCoord;
   float3  res = float3(0);
   float radius = 1.0 / (in.SAMPLES.y * in.SAMPLES.y);
@@ -20,7 +20,7 @@ fragmentFn(texture2d<float> tex) {
     res += tex.sample(iChannel0, uv).xyz;
     float2 d = uni.iMouse.xy-uv;
     if (in.JITTER) {
-      d *= .5 + .01*rand(d*uni.iTime);
+      d *= .5 + .01*rand(d* uni.iTime /* scn_frame.time */);
     }
     uv += d * radius;
   }

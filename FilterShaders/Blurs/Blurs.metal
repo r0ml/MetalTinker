@@ -10,7 +10,9 @@ struct InputBuffer {
     } value;
 };
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(device InputBuffer &in, texture2d<float> tex) {
+  float hor = scn_frame.inverseResolution.x; // 1. / uni.iResolution.x;
+  float ver = scn_frame.inverseResolution.y; // 1. / uni.iResolution.y;
 
   float2 uv = textureCoord;
   if (in.value.cheap) {
@@ -19,26 +21,24 @@ fragmentFn(texture2d<float> tex) {
     float3 sum = tex.sample(iChannel0, uv).xyz;
   
     for(uint i = 0; i < ITERATIONS / 4; i++) {
-      sum += tex.sample(iChannel0, uv + float2(float(i) / uni.iResolution.x, 0.) * RADIUS).xyz;
+      sum += tex.sample(iChannel0, uv + float2(float(i) * hor, 0.) * RADIUS).xyz;
     }
   
     for(uint i = 0; i < ITERATIONS / 4; i++) {
-      sum += tex.sample(iChannel0, uv - float2(float(i) / uni.iResolution.x, 0.) * RADIUS).xyz;
+      sum += tex.sample(iChannel0, uv - float2(float(i) * hor, 0.) * RADIUS).xyz;
     }
   
     for(uint i = 0; i < ITERATIONS / 4; i++) {
-      sum += tex.sample(iChannel0, uv + float2(0., float(i) / uni.iResolution.y) * RADIUS).xyz;
+      sum += tex.sample(iChannel0, uv + float2(0., float(i) * ver) * RADIUS).xyz;
     }
   
     for(uint i = 0; i < ITERATIONS / 4; i++) {
-      sum += tex.sample(iChannel0, uv - float2(0., float(i) / uni.iResolution.y) * RADIUS).xyz;
+      sum += tex.sample(iChannel0, uv - float2(0., float(i) * ver) * RADIUS).xyz;
     }
     return float4(sum / float(ITERATIONS + 1), 1.);
   }
 
   if (in.value.onepass) {
-    float hor = 1. / uni.iResolution.x;
-    float ver = 1. / uni.iResolution.y;
     const float iter = 5.;
 
     float4 pic = tex.sample(iChannel0,uv)/(iter * 10.);
@@ -66,7 +66,7 @@ fragmentFn(texture2d<float> tex) {
 
     float4 t = float4(0.0);
 
-    float2 texel = 1.0 / uni.iResolution.xy;
+    float2 texel = float2(hor, ver); // 1 / uni.iResolution.xy;
     float2 d = texel * dist;
 
     for(int i = 0; i < loops; i++){

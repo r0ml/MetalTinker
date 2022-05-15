@@ -74,7 +74,7 @@ static   float3 channels( const float3 color, float3 channels , float adjust ) {
   return clr;
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(device InputBuffer &in, texture2d<float> tex) {
   constexpr sampler iChannel0(coord::normalized, address::repeat, filter::linear);
   float2 uv = textureCoord;
   float3 col = tex.sample(iChannel0, uv).rgb;

@@ -12,9 +12,7 @@ struct InputBuffer {
   } effect;
 };
 
-initialize() { }
-
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(device InputBuffer &in, texture2d<float> tex) {
   float2 p = textureCoord;
   float4 fragColor = tex.sample(iChannel0, p);
 
@@ -36,7 +34,7 @@ fragmentFn(texture2d<float> tex) {
       fragColor.b = tex.sample(iChannel0, p+offset.yx).b;
     } else { fragColor.rgb = fragColor.brg; }
     //Line
-    if( mod(abs(p.x+.5/uni.iResolution.y),.25)<1./uni.iResolution.y ) { fragColor = float4(1.); }
+    if( mod(abs(p.x+.5 * scn_frame.inverseResolution.y ),.25)<  scn_frame.inverseResolution.y ) { fragColor = float4(1.); }
   }
   return fragColor;
 }

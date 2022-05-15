@@ -12,8 +12,8 @@ float4x4
 0,     0,     0,     1
 );
 
-fragmentFn(texture2d<float> tex) {
-    float timeFactor = ( 1.0 + sin( uni.iTime ) ) * 0.5;
+fragmentFunc(texture2d<float> tex) {
+    float timeFactor = ( 1.0 + scn_frame.sinTime ) * 0.5;
     float4 color = tex.sample( iChannel0, textureCoord );
     float4x4 rgba2sepiaDiff = float4x4( 1.0 ) + timeFactor * ( rgba2sepia - float4x4( 1.0 ) );
     
