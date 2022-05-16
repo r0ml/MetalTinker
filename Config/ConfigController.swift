@@ -97,6 +97,13 @@ class TextureParameter : Identifiable {
 
   }
 
+  func getTexture() -> MTLTexture {
+    if texture == nil {
+      texture = image.getTexture(textureLoader, mipmaps: true)
+    }
+    return texture!
+  }
+
   func setTexture(_ t : MTLTexture) {
     texture = t
   }

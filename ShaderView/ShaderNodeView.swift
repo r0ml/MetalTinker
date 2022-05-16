@@ -13,7 +13,7 @@ struct ShaderNodeView<T : GenericShader> : View {
   @State var paused = false
   var shader : T
   var mouseLocation : NSPoint { NSEvent.mouseLocation }
-
+  var theDelegate = MyDelegate()
 
   init(shader: T) {
     self.shader = shader
@@ -68,12 +68,14 @@ struct ShaderNodeView<T : GenericShader> : View {
           await z.setup.setSize(g.size)
         }
 
-        SceneView(scene: kk,
+        let sv = SceneView(scene: kk,
                   options: paused ? [] : [ .allowsCameraControl, .rendersContinuously ],
                   //                      preferredFramesPerSecond: 120,
                   antialiasingMode: SCNAntialiasingMode.multisampling4X,
-                  delegate: MyDelegate()
+                  delegate: theDelegate
         )
+
+        sv
         .gesture(mag)
         .gesture(drag)
         .onHover { over in
@@ -90,45 +92,29 @@ struct ShaderNodeView<T : GenericShader> : View {
 
 
             //              if let b = arg.window?.screen?.backingScaleFactor {
-            let bb : CGFloat = CGFloat(multisampleCount)
+            let bb : CGFloat = 1 // CGFloat(multisampleCount)
             let k = g.frame(in: .global)
 
             let q = offs.height - k.maxY
 
 
 
-            Task {
+//            Task {
 
-              if (k.minX != 0) {
+//              if (k.minX != 0) {
                 let j = CGPoint(x: (zz.x - k.minX) / bb  , y: (zz.y - k.minY ) / bb  )
 
                 let jj = CGPoint(x: (z.x - offs.minX - k.minX) / bb, y: (z.y - offs.minY - q /* k.minY */ ) / bb )
 
-                //              print(k, g.safeAreaInsets, offs, g, z, zz)
-                //              print(jj, j)
-                await self.shader.setup.setTouch(jj) // mouseLocation
-
-                //                }
+          //  print(j, jj)
 
 
-                //                let offs = NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
+            let fracx = jj.x / g.size.width
+            let fracy = jj.y / g.size.height
 
-                //              let loff = xvv.convert(CGPoint.zero, to: xvv.window!)
-                //                let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
-                //              let lpoint = CGPoint(x: ptx.x - loff.x, y: ptx.y - loff.y)
-
-                //                scale = xscale
-
-                // I don't know why the 40 is needed -- but it seems to work
-                //                let zlpoint = CGPoint(x: lpoint.x, y: lpoint.y - xvv.bounds.height - 40 )
-                //                if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xvv.bounds.width && zlpoint.y < xvv.bounds.height {
-                //                  delegate.setup.mouseLoc = zlpoint
-                //                }
-
-
-                //              }}
-              } else {
-                //            print("hunh?")
+            Task {
+              await MainActor.run {
+                theDelegate.pointerLocation = jj // CGPoint(x: fracx, y: fracy)
               }
             }
             return arg
@@ -199,6 +185,18 @@ struct ShaderNodeView<T : GenericShader> : View {
 
     // FIXME: this is broken -- need to split out the SceneKit shaders
     p.library = shader.library // functionMaps["SceneShaders"]!.libs.first(where: {$0.label == self.library })!
+
+
+
+
+    p.handleBinding(ofBufferNamed: "mouse",
+                    frequency: .perFrame,
+                    handler: {
+      (buffer: SCNBufferStream, node: SCNNode, shadable: SCNShadable, renderer: SCNRenderer) -> Void in
+      var z = theDelegate.hitLocation
+        buffer.writeBytes(&z, count: MemoryLayout.size(ofValue: z))
+      }
+  )
 
 
     if let shad = shader as? ParameterizedShader {
@@ -278,6 +276,28 @@ struct ShaderNodeView<T : GenericShader> : View {
       })
     }
 
+    if let shad = shader as? ShaderFilter {
+
+
+
+
+      // FIXME: check out "setArguments" in the Shader -- that is where the arguments get set.
+
+//      for i in 0..<shad.fragmentTextures.count {
+//        setFragmentTexture(i)
+//        renderEncoder.setFragmentTexture( fragmentTextures[i].texture, index: fragmentTextures[i].index)
+//      }
+
+      for k in shad.fragmentTextures {
+//        let materialProperty = SCNMaterialProperty(contents: k.image)
+        let materialProperty = SCNMaterialProperty(contents: k.getTexture() )
+        j.setValue(materialProperty, forKey: k.name)
+      }
+
+    }
+
+
+
 
     j.program = p
     j.isDoubleSided = true
@@ -319,6 +339,60 @@ struct ShaderNodeView<T : GenericShader> : View {
 
 
 
+  /*
+  func doMouseDetection() {
+    // FIXME: what is this in iOS land?  What is it in mac land?
+
+#if os(macOS)
+    Task {
+
+      await MainActor.run {
+        var scale : Int = 1
+        let eml = NSEvent.mouseLocation
+
+        if let xvv = xview,
+           let xww = xvv.window {
+          let wp = xww.convertPoint(fromScreen: eml)
+          let ml = xvv.convert(wp, from: nil)
+
+          if xvv.isMousePoint(ml, in: xvv.bounds) {
+            Task { await setup.setTouch(ml) }
+          }
+          scale = Int(xvv.window?.screen?.backingScaleFactor ?? 1)
+        }
+      }
+    }
+#endif
+
+#if targetEnvironment(macCatalyst)
+    if let xvv = xview {
+      let ourEvent = CGEvent(source: nil)!
+      let point = ourEvent.unflippedLocation
+      let xscale =  xvv.window!.screen.scale // was scale
+                                             //      let ptx = CGPoint(x: point.x / xscale, y: point.y / xscale)
+                                             //
+
+
+      let offs = (NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
+
+      //      let offs = ws.value(forKeyPath: "_frame") as! CGRect
+      //      let soff = ws.value(forKeyPath: "screen._frame") as! CGRect
+
+      let loff = xvv.convert(CGPoint.zero, to: xvv.window!)
+      let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
+      let lpoint = CGPoint(x: ptx.x - loff.x, y: ptx.y - loff.y)
+
+      scale = Int(xscale)
+
+      // I don't know why the 40 is needed -- but it seems to work
+      let zlpoint = CGPoint(x: lpoint.x, y: lpoint.y - xvv.bounds.height - 40 )
+      if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xvv.bounds.width && zlpoint.y < xvv.bounds.height {
+        Task { await setup.setTouch(zlpoint) }
+      }
+    }
+#endif
+  }
+*/
 
 
 
@@ -328,10 +402,103 @@ struct ShaderNodeView<T : GenericShader> : View {
 class MyDelegate : NSObject, SCNSceneRendererDelegate {
   var showsStatistics : Bool = true
   var debugOptions: SCNDebugOptions = []
+  var pointerLocation : CGPoint = CGPoint(x: 0, y: 0)
+  var hitLocation : SIMD2<Float> = .zero
 
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
     renderer.showsStatistics = self.showsStatistics
     renderer.debugOptions = self.debugOptions
+  }
+
+  func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
+    Task {
+
+      await MainActor.run {
+    let pov = renderer.pointOfView!.position
+    let jj = pointerLocation
+    let bxx = renderer.currentViewport  //  childNodes[1].boundingBox
+    let bbb = scene.rootNode.boundingBox
+
+    let xxx = bbb.min.x + (jj.x / bxx.width) * (bbb.max.x - bbb.min.x)
+    let yyy = bbb.min.y + (jj.y / bxx.height) * (bbb.max.y - bbb.min.y)
+
+
+
+/*
+//            Task {
+
+//              await MainActor.run {
+        var scale : Int = 1
+        let eml = NSEvent.mouseLocation
+        if let xvv = xview,
+           let xww = xvv.window {
+          let wp = xww.convertPoint(fromScreen: eml)
+          let ml = xvv.convert(wp, from: nil)
+
+          if xvv.isMousePoint(ml, in: xvv.bounds) {
+            Task { await setup.setTouch(ml) }
+          }
+          scale = Int(xvv.window?.screen?.backingScaleFactor ?? 1)
+        }
+//              }
+//            }
+*/
+
+
+
+
+
+    // FIXME:
+//    let zzy = scene.rootNode.hitTestWithSegment(from: kk.rootNode.childNodes.first!.position, to: SCNVector3(x: xxx, y: yyy, z: -0.001))
+    let zzy = renderer.hitTest(jj)
+//            let zzz = kk.physicsWorld.rayTestWithSegment(from: kk.rootNode.childNodes.first!.position, to: SCNVector3(x: xxx, y: yyy, z: -0.001))  //  hitTest(point: k, bounds: g.frame(in: .global))
+
+        for n in zzy {
+          if n.node.name == "Shader plane node" {
+            Task {
+              await MainActor.run {
+                let bbb = n.node.boundingBox
+                let lc = n.localCoordinates
+                let xx = (lc.x - bbb.min.x) / (bbb.max.x - bbb.min.x)
+                let yy = (lc.y - bbb.min.y) / (bbb.max.y - bbb.min.y)
+                self.hitLocation = .init(Float(xx),Float(yy) )
+                print(self.hitLocation)
+              }
+            }
+          }
+        }
+//            print("ok")
+
+//                //              print(k, g.safeAreaInsets, offs, g, z, zz)
+//                //              print(jj, j)
+//                 await self.shader.setup.setTouch(jj) // mouseLocation
+
+        //                }
+
+
+        //                let offs = NSClassFromString("NSApplication")?.value(forKeyPath: "sharedApplication.windows._frame") as? [CGRect])![0]
+
+        //              let loff = xvv.convert(CGPoint.zero, to: xvv.window!)
+        //                let ptx = CGPoint(x: point.x - offs.minX, y: point.y - offs.minY )
+        //              let lpoint = CGPoint(x: ptx.x - loff.x, y: ptx.y - loff.y)
+
+        //                scale = xscale
+
+        // I don't know why the 40 is needed -- but it seems to work
+        //                let zlpoint = CGPoint(x: lpoint.x, y: lpoint.y - xvv.bounds.height - 40 )
+        //                if zlpoint.x >= 0 && zlpoint.y >= 0 && zlpoint.x < xvv.bounds.width && zlpoint.y < xvv.bounds.height {
+        //                  delegate.setup.mouseLoc = zlpoint
+        //                }
+
+
+        //              }}
+//              } else {
+//                //            print("hunh?")
+//              }
+//            }
+      }
+    }
+
   }
 
 }
