@@ -12,15 +12,15 @@ initialize() {
   in.SAMPLES = {2, 10, 12};
 }
 
-fragmentFn( /* device InputBuffer &in, */ texture2d<float> tex) {
+fragmentFunc( device InputBuffer &in, texture2d<float> tex, device float2& mouse) {
   float2 uv = textureCoord;
   float3  res = float3(0);
   float radius = 1.0 / (in.SAMPLES.y * in.SAMPLES.y);
   for(int i = 0; i < in.SAMPLES.y; ++i) {
     res += tex.sample(iChannel0, uv).xyz;
-    float2 d = uni.iMouse.xy-uv;
+    float2 d = mouse-uv;
     if (in.JITTER) {
-      d *= .5 + .01*rand(d* uni.iTime /* scn_frame.time */);
+      d *= .5 + .01*rand(d* scn_frame.time /* scn_frame.time */);
     }
     uv += d * radius;
   }

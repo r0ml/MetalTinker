@@ -13,9 +13,9 @@ static float noise(const float2 p)
   noisePerlin(p)     * 0.0125;
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 uv = textureCoord;
-  float t = abs(sin(uni.iTime));
+  float t = abs(sin(scn_frame.time));
   
   // fade to black
   return mix(tex.sample(iChannel0, uv), float4(0), smoothstep(t + .1, t - .1, noise(thisVertex.where.xy * .4)));

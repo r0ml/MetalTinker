@@ -37,10 +37,11 @@ static float2 raytraceTexturedQuad( float3 rayOrigin, float3 rayDirection, float
                 dot(pos, up)    / dot(up,    up)) + 0.5;
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   //Screen UV goes from 0 - 1 along each axis
-  float2 p = worldCoordAspectAdjusted;
-  float screenAspect = uni.iResolution.x/uni.iResolution.y;
+  float2 p = worldCoordAdjusted;
+  float2 screenAspect = nodeAspect; // uni.iResolution.x/uni.iResolution.y;
+  float t = scn_frame.time;
 
   //Normalized Ray Dir
   float3 dir = float3(p.x, p.y, 1.0);
@@ -48,8 +49,8 @@ fragmentFn(texture2d<float> tex) {
 
   //Define the plane
   float3 planePosition = float3(0.0, 0.0, 0.5);
-  float3 planeRotation = float3(0.4*cos(0.3*uni.iTime), 0.4*sin(0.6*uni.iTime), 0.0);
-  float2 planeDimension = float2(-screenAspect, 1.0);
+  float3 planeRotation = float3(0.4*cos(0.3*t), 0.4*sin(0.6*t), 0.0);
+  float2 planeDimension = screenAspect * float2(1, -1); //    float2(-1, 0) * screenAspect;
 
   float2 uv = raytraceTexturedQuad(float3(0), dir, planePosition, planeRotation, planeDimension);
 

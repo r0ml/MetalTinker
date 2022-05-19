@@ -119,7 +119,7 @@ static float3 dividex (float3 target, float3 blend){
  return target/blend;   
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1) {
 	float2 uv = textureCoord;
 	
 	//upper texture
@@ -128,7 +128,7 @@ fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
 	//lower texture
 	float3 lowerTexture = tex1.sample(iChannel0, uv).xyz;
     
-    int time = int (mod (uni.iTime, 18.0));
+    int time = int (mod (scn_frame.time, 18.0));
     
     float3 finalImage = float3(0.0);
     if (time==0) finalImage =  darken ( upperTexture,  lowerTexture	);

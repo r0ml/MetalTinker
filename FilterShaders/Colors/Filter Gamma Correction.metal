@@ -5,11 +5,11 @@
 
 constant const float GAMMA = 2.2;
 
-fragmentFn(texture2d<float> tex) {
-  float m = uni.iMouse.x ;
+fragmentFunc(texture2d<float> tex, device float2& mouse) {
+  float m = mouse.x ;
   float2 b = textureCoord;
   
-  float l = smoothstep(0., 1. / uni.iResolution.y, abs(m - b.x));
+  float l = smoothstep(0., scn_frame.inverseResolution.y , abs(m - b.x));
   
   float3 cl = tex.sample(iChannel0, b).rgb;
   float3 cf = pow( cl, 1. / GAMMA);

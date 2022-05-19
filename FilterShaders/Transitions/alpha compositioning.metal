@@ -34,10 +34,13 @@ static float4 aXorB(float4 a,float4 b) {
   return float4(a*(1.-b)+b*(1.-a));
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
-  float2 u=frame(textureCoord, uni.iResolution);
-  float2 m=frame(uni.iMouse, uni.iResolution);
-  float2 n=frame(uni.lastTouch, uni.iResolution);
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1, constant float2& mouse, device InputBuffer& in) {
+  float2 reso = 1/scn_frame.inverseResolution;
+  float2 u=frame(textureCoord, reso);
+  float2 m=frame(mouse, reso);
+
+// FIXME: this should be uni.lastTouch, not mouse
+  float2 n=frame(mouse, reso);
   /*  if (!uni.mouseButtons) {
    m=.5*float2(cos(uni.iTime*phi),0.);
    n=.5*float2(sin(uni.iTime),cos(uni.iTime));

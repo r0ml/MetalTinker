@@ -3,10 +3,10 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   constexpr sampler iChannel0(coord::normalized, address::repeat, filter::linear);
-  float2 f = textureCoord * uni.iResolution;
-  f.y += sin(uni.iTime + f.x * 0.01) * 50.0;
-  float2 uv = f / uni.iResolution.xy;
+  float2 f = textureCoord ;
+  f.y += sin(scn_frame.time + f.x * 20) / 20;
+  float2 uv = f ;
 	return tex.sample(iChannel0, uv);
 }

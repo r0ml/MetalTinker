@@ -64,9 +64,9 @@ static float snoise(float2 v)
   return 130.0 * dot(m, g);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 uv = textureCoord;
-  float time = uni.iTime * 2.0;
+  float time = scn_frame.time * 2.0;
   
   // Create large, incidental noise waves
   float noise = max(0.0, snoise(float2(time, uv.y * 0.3)) - 0.3) * (1.0 / 0.7);

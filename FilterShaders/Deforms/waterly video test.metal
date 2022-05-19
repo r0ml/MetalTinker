@@ -23,9 +23,9 @@ static float myfbm( float3 p ) {
   return f;
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1) {
   float2 uv = textureCoord;
-  float3 p = 4.*float3(uv,0.)+uni.iTime*1.2; // (.1,.7,1.2);
+  float3 p = 4.*float3(uv,0.)+scn_frame.time*1.2; // (.1,.7,1.2);
   float x = myfbm(p);
   float3 v = .5+.5*sin(x*float3(30.,20.,10.));
   float3 Ti = tex0.sample(iChannel0, .02*v.xy+uv).rgb * 1.4 - .2;

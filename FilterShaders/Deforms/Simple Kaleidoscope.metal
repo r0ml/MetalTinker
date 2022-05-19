@@ -88,7 +88,7 @@ static float2 polarRep(float2 U, float n) {
   r = length(U);
   a = mod(a+n/2.,n) - n/2.;
   U = r * float2(cos(a), sin(a));
-  return .5* ( U+U - float2(1,0) );
+  return U - .5 * float2(1,0);
 }
 
 static float2x2 mat2x(float4 x) { return float2x2(x.xy, x.zw); }
@@ -108,10 +108,11 @@ static float m(float3 p, float t) {
   return length(max(abs(p)-.5*float3(.5, .3, .8), 0.));
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, constant InputBuffer& in, constant float2& mouse) {
 //  float2 uv = (thisVertex.where.xy-.5*uni.iResolution.xy) * 7.2 / uni.iResolution.y;
-  float2 uv = worldCoordAspectAdjusted * 3.6;
-  const float mt = mix(uni.iTime, uni.iTime * .3 + 10, in.style._3);
+  float2 uv = worldCoordAdjusted * 3.6;
+  float t = scn_frame.time;
+  const float mt = mix(t, t * .3 + 10, in.style._3);
 
   const float r = 1.0;
   const float a = mt*.1;
@@ -131,37 +132,37 @@ fragmentFn(texture2d<float> tex) {
     const float q = mt * .2 / tau;
     uv = loop(uv, c, s, q, 30);
   } else if (in.style._4) {
-    float2 p = worldCoordAspectAdjusted;
+    float2 p = worldCoordAdjusted;
     float4 fragColor = 0;
     for (int c = 0; c < 3; c++) {
       for (float s = 1.; s > .2; s *= .8 ) {
-        fragColor[c] += s * .064 / length( p = ( abs(p) / dot(p, p) - s ) * makeMat(cos( uni.iTime*.5+.05*float(c) + float4(0,33,11,0))) );
+        fragColor[c] += s * .064 / length( p = ( abs(p) / dot(p, p) - s ) * makeMat(cos( t*.5+.05*float(c) + float4(0,33,11,0))) );
       }
     }
     fragColor.w = 1;
     return fragColor;
   } else if (in.style._5) {
-    float3 p = float3(worldCoordAspectAdjusted, 0);
+    float3 p = float3(worldCoordAdjusted, 0);
 
     float3 col = float3(0.0);
     float fog = 1.0;
     for(int i = 0; i < 4; i++) {
-      p = transform1(p, uni.iTime);
+      p = transform1(p, t);
       col += saw(p*2.0);
       fog /= log(abs(p.z)+1.0)+1.0;
     }
     //   int t = int(saw(time)*1.9);
     return float4( col*fog, 1);
   } else if (in.style._6) {
-    float time=uni.iTime*0.15;
+    float time=t*0.15;
     float3 k1=noiseq(time)*float3(0.1,0.19,0.3)+float3(1.3,0.8,.63);
     float3 k2=noiseq(time+1000.0)*float3(0.2,0.2,0.05)+float3(0.9,0.9,.05);
     //float k3=clamp(texture(iChannel0,float2(0.01,0.)).x,0.8,1.0); float k4=clamp(texture(iChannel0,float2(0.2,0.)).x,0.5,1.0); k2+=float3((k3-0.8)*0.05); k1+=float3((k4-0.5)*0.01);
     float g=pow(abs(sin(time*0.8+9000.0)),4.0);
 
-    float2 R = uni.iResolution.xy;
+//    float2 R = uni.iResolution.xy;
 
-    float2 r1=(thisVertex.where.xy / R.y-float2(0.5*R.x/R.y,0.5));
+    float2 r1=(textureCoord-0.5) * nodeAspect;
     float l = length(r1);
     float2 rotate=float2(cos(time),sin(time));
     r1=float2(r1.x*rotate.x+r1.y*rotate.y,r1.y*rotate.x-r1.x*rotate.y);
@@ -177,21 +178,20 @@ fragmentFn(texture2d<float> tex) {
     return fragColor;
 
   } else if (in.style._7) {
-    float2 U = worldCoordAspectAdjusted;
-    float t = uni.iTime/5.;
-    float n = 10.* (.5-.5*cos(TAU*t));
+    float2 U = worldCoordAdjusted;
+    float t2 = t/5.;
+    float n = 10.* (.5-.5*cos(TAU*t2));
 
-    for( float i=0.; i < mod(t,4.); i++) {
+    for( float i=0.; i < mod(t2,4.); i++) {
       U = polarRep(U, n);
     }
 
     return tex.sample(iChannel0, .5+U);
   } else if (in.style._8) {
     // set position
-    float2 v = uni.iResolution.xy;
-    float2 p = (thisVertex.where.xy-v*.5)*.4 / v.y;
+    float2 p = (textureCoord-.5)*.4;
     // breathing effect
-    p += p * sin(dot(p, p)*20.-uni.iTime) * .04;
+    p += p * sin(dot(p, p)*20.-t) * .04;
 
 
     float4 fragColor = 0;
@@ -200,7 +200,7 @@ fragmentFn(texture2d<float> tex) {
     for (float i = .5 ; i < 8. ; i++)
 
       // fractal formula and rotation
-      p = abs(2.*fract(p-.5)-1.) * mat2x(cos(.01*(uni.iTime+uni.iMouse.x*uni.iResolution.x*.1)*i*i + .78*float4(1,7,3,1))),
+      p = abs(2.*fract(p-.5)-1.) * mat2x(cos(.01*(t+mouse.x*100)*i*i + .78*float4(1,7,3,1))),
 
       // coloration
       fragColor += exp(-abs(p.y)*5.) * (cos(float4(2,3,1,0)*i)*.5+.5);
@@ -213,7 +213,7 @@ fragmentFn(texture2d<float> tex) {
     return fragColor;
 
   } else if (in.style._9) {
-    float2 uv = worldCoordAspectAdjusted / 2;
+    float2 uv = worldCoordAdjusted / 2;
 
     uv *= 3.0;
 
@@ -224,7 +224,7 @@ fragmentFn(texture2d<float> tex) {
       float scaleFactor = float(i)+2.0;
 
       // rotation
-      uv *= rot2d(uni.iTime * scaleFactor * 0.01);
+      uv *= rot2d(t * scaleFactor * 0.01);
 
       // polar transform
       const float scale = 2.0*PI/float(SIDES);
@@ -235,13 +235,13 @@ fragmentFn(texture2d<float> tex) {
       uv = float2(dot(dir, uv), dot(codir, uv));
 
       // translation
-      uv.x -= uni.iTime * scaleFactor * 0.01;
+      uv.x -= t * scaleFactor * 0.01;
 
       // repetition
       uv = abs(fract(uv+0.5)*2.0-1.0)*0.7;
 
       // coloration
-      fragColor.rgb += exp(-min(uv.x, uv.y)*10.) * (cos(float3(2,3,1)*float(i)+uni.iTime*0.5)*.5+.5);
+      fragColor.rgb += exp(-min(uv.x, uv.y)*10.) * (cos(float3(2,3,1)*float(i)+t*0.5)*.5+.5);
 
     }
 
@@ -250,15 +250,15 @@ fragmentFn(texture2d<float> tex) {
     return fragColor;
 
   } else if (in.style._10) {
-    float2 g = -abs(worldCoordAspectAdjusted);
+    float2 g = -abs(worldCoordAdjusted);
     float3 r = float3(0, 0, 1), d = float3(g, -1), p;
-    d.xz = ro(d.xz, uni.iDate.w);
-    d.yz = ro(d.yz, - uni.iDate.w);
-    d.xy = ro(d.xy, uni.iDate.w );
+    d.xz = ro(d.xz, t);
+    d.yz = ro(d.yz, - t);
+    d.xy = ro(d.xy, t);
     float t = 0., h;
     for (int i = 0; i < 99; i++) {
       p = r + d * t;
-      h = m(p, uni.iDate.w);
+      h = m(p, t);
       t += h;
       if (h < .005 || t > 40.) break;
     }

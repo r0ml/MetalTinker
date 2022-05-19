@@ -15,22 +15,19 @@ initialize() {
   in.border_thickness = {0, 0.01, 0.05};
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, constant float2& mouse, device InputBuffer& in) {
   //Convert to UV coordinates, accounting for aspect ratio
   float2 uv = textureCoord;
   
-  //at the beginning of the sketch, center the magnifying glass.
-  float2 mouse = uni.iMouse.xy ;
-
-  uv *= aspectRatio;
-  mouse *= aspectRatio;
+  uv *= nodeAspect;
+  float2 mous = mouse * nodeAspect;
 
 
   //UV coordinates of mouse
 //  float2 mouse_uv = mouse / uni.iResolution.y;
   
   //Distance to mouse
-  float mouse_dist = distance(uv, mouse);
+  float mouse_dist = distance(uv, mous);
   
   //Draw the texture
   float4 fragColor = tex.sample(iChannel0, uv);
@@ -42,7 +39,7 @@ fragmentFn(texture2d<float> tex) {
   
   //Draw a zoomed-in version of the texture
   if (mouse_dist < in.lens_radius.y) {
-    fragColor = tex.sample(iChannel0, mouse + (uv - mouse) / in.magnification.y);
+    fragColor = tex.sample(iChannel0, mous + (uv - mous) / in.magnification.y);
   }
   return fragColor;
 }

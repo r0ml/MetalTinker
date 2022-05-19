@@ -20,19 +20,24 @@ static float4 sampleTexture(const texture2d<float> smp, const float2 winCoord, c
   return smp.sample(iChannel0, textureCoordinates);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, device float2& mouse) {
   const float textureSamplesCount = 8.0;
   const float mean = 0.0;
 
-  float2 mouseCoords = uni.iMouse.xy * uni.iResolution;
+  float2 reso = 1 / scn_frame.inverseResolution;
+
+//  float2 resox = scn_node.boundingBox[1].xy - scn_node.boundingBox[0].xy;
+
+  float2 mouseCoords = mouse * reso;
   // This causes the lens to animate in a figure-eight pattern if the user hasn't clicked anything.
-  if ( all(mouseCoords == float2(0.0)) )
+/*  if ( all(mouseCoords == float2(0.0)) )
   {
     mouseCoords = (float2(sin(uni.iTime), sin(uni.iTime) * cos(uni.iTime)) * 0.35 + float2(0.5)) * uni.iResolution.xy;
   }
+*/
 
   float distanceFromLensCenter = distance(thisVertex.where.xy, mouseCoords);
-  float distanceFactor = -1.0 * pow(0.04 * 640.0 / uni.iResolution.x * distanceFromLensCenter, 5.0) + uni.iResolution.x;
+  float distanceFactor = -1.0 * pow(0.04 * 640.0 / reso.x * distanceFromLensCenter, 5.0) + reso.x;
   distanceFactor = max(1.0, distanceFactor);
 
   float2 textureDisplacement = float2(0.0, 0.0);
@@ -45,7 +50,7 @@ fragmentFn(texture2d<float> tex) {
   float standardDeviation = 40.0/distanceFactor;
 
   float divisor = (normalDistribution(mean, standardDeviation, 0.0) + 1.0) * distanceFactor;
-  float4 accumulator = sampleTexture(tex, thisVertex.where.xy, textureDisplacement, uni.iResolution) * divisor;
+  float4 accumulator = sampleTexture(tex, thisVertex.where.xy, textureDisplacement, reso) * divisor;
 
   float2 polarityArray[4];
   polarityArray[0] = float2(1.0, 1.0);
@@ -62,7 +67,7 @@ fragmentFn(texture2d<float> tex) {
       for (int p = 0; p < 4; ++p)
       {
         float2 offset = float2(x, y) * polarityArray[p];
-        accumulator += sampleTexture(tex, thisVertex.where.xy, offset, uni.iResolution) * multiplier;
+        accumulator += sampleTexture(tex, thisVertex.where.xy, offset, reso) * multiplier;
         divisor += (multiplier);
       }
     }

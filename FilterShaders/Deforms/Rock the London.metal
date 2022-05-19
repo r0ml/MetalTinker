@@ -29,13 +29,13 @@ static void GetCameraRayLookat( const float3 vPos, const float3 vInterest, const
   GetCameraRay(vPos, vForwards, vUp, winCoord, ray);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   C_Ray ray;
   // adjust this for distance and edge distrotion.
 
   float zPosition = 3.0;
   float3 vCameraPos = float3(0.0, 0.0, zPosition);
-  vCameraPos.x += sin(uni.iTime * 5.0) * 0.5;
+  vCameraPos.x += sin(scn_frame.time * 5.0) * 0.5;
 
   float3 vCameraIntrest = float3(0.0, 0.0, 20.0);
   GetCameraRayLookat( vCameraPos, vCameraIntrest, textureCoord, ray);

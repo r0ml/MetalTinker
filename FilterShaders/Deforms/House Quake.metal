@@ -57,12 +57,13 @@ static float2 Shake(float maxshake, float mag, float timex)
   return float2(val1*shakescale,val2*shakescale);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float maxshake = 0.05;				// max shake amount
-  float mag = 0.5+sin(uni.iTime)*0.5;		// shake magnitude...
+  float t = scn_frame.time;
+  float mag = 0.5+sin(t)*0.5;		// shake magnitude...
 
   // *temp* , We will calc shakexy once in the vertex shader...
-  float2 shakexy = Shake(maxshake,mag, uni.iTime);
+  float2 shakexy = Shake(maxshake,mag, t);
 
   float2 uv = textureCoord;
 

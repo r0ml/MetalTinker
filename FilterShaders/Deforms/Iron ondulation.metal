@@ -17,9 +17,9 @@ initialize() {
 
 // static constexpr sampler chan(coord::normalized, address::repeat, filter::linear, mip_filter::nearest);
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, device InputBuffer& in) {
   float2 uv = textureCoord;
-  float2 xy = uv * in.knob1.y + 2 * interporand( thisVertex.where.xy / 10 / uni.iResolution + uni.iTime * in.knob2.y, 128 ).rg - 1;
+  float2 xy = uv * in.knob1.y + 2 * interporand( textureCoord / 10 + scn_frame.time * in.knob2.y, 128 ).rg - 1;
   return tex.sample(iChannel0, uv - cos(xy) * in.knob3.y);
 }
 

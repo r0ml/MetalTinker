@@ -11,10 +11,10 @@ static float exponentialInOut(float t) {
   : -0.5 * pow(2.0, 10.0 - (t * 20.0)) + 1.0;
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   // params
   float2 textureOffset = float2(-0.5);
-  float easedProgress = exponentialInOut(mod(uni.iTime * 0.3, 1.));
+  float easedProgress = exponentialInOut(mod(scn_frame.time * 0.3, 1.));
   float rotation = easedProgress * TAU;
   float aspect = 5.32/3.;
   float zoom = 0.872;
@@ -22,7 +22,7 @@ fragmentFn(texture2d<float> tex) {
   
   // rotate
   float2 uv = textureCoord;
-  uv = float2((uv.x - 0.5) * (uni.iResolution.x / uni.iResolution.y), uv.y - 0.5);
+  uv = float2((uv.x - 0.5), uv.y - 0.5) * nodeAspect;
   uv *= (2. - zoom) / 2.;
   uv *= rot2d(rotation);
   uv.y *= aspect;

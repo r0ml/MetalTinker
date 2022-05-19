@@ -24,10 +24,10 @@ static float3 colorTemperatureToRGB(const float temperature){
 }
 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(device InputBuffer& in, texture2d<float> tex, device float2& mouse) {
   float2 uv = textureCoord;
-  float temperature = mix(1000.0, 40000.0, uni.iMouse.x ); // mix(1000.0, 15000.0, (sin(uni.iTime * (TAU / 10.0)) * 0.5) + 0.5);
-  float temperatureStrength = (1.0 - saturate((uni.iMouse.y ) * (1.0 / 0.9))) ;
+  float temperature = mix(1000.0, 40000.0, mouse.x ); // mix(1000.0, 15000.0, (sin(uni.iTime * (TAU / 10.0)) * 0.5) + 0.5);
+  float temperatureStrength = (1.0 - saturate((mouse.y ) * (1.0 / 0.9))) ;
   if(uv.y > 0.1){
     float3 inColor = tex.sample(iChannel0, uv).xyz;
     float3 outColor = mix(inColor, inColor * colorTemperatureToRGB(temperature), temperatureStrength);
@@ -36,7 +36,7 @@ fragmentFn(texture2d<float> tex) {
     }
     return float4(outColor, 1.0);
   }else{
-    float2 f = float2(1.5) / uni.iResolution.xy;
+    float2 f = float2(1.5) * scn_frame.inverseResolution;
     return float4(mix(colorTemperatureToRGB(mix(1000.0, 40000.0, uv.x)), float3(0.0), min(min(smoothstep(uv.x - f.x, uv.x, (temperature - 1000.0) / 39000.0),
                                                                                               smoothstep(uv.x + f.x, uv.x, (temperature - 1000.0) / 39000.0)),
                                                                                           1.0 - min(smoothstep(0.04 - f.y, 0.04, uv.y),

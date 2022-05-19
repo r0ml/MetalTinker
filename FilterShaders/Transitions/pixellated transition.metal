@@ -11,13 +11,13 @@ initialize() {
   in.squares = {10, 16, 25};
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1, device InputBuffer& in) {
   float2 uv = textureCoord;
 
-  float2 tc = worldCoordAspectAdjusted / 2.;
+  float2 tc = worldCoordAdjusted / 2.;
   tc = floor(tc * in.squares.y + 0.5) / in.squares.y;  // pixellate
   float mask = length(tc);   // create the circle mask
-  mask = mod(mask - uni.iTime*0.2, 2.0);     // mod the mask so that we get alternating rings
+  mask = mod(mask - scn_frame.time*0.2, 2.0);     // mod the mask so that we get alternating rings
   mask = step(mask, 1.0);     // step the mask to threshold it to black and white
   
     // sample textures and choose mask

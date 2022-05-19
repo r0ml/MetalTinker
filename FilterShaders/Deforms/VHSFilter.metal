@@ -3,7 +3,7 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   
   // distance from center of image, used to adjust blur
   float2 uv = textureCoord;
@@ -18,7 +18,7 @@ fragmentFn(texture2d<float> tex) {
   // reduce blur towards center
   //blur *= d;
   
-  float myTime = uni.iTime * 1.0;
+  float myTime = scn_frame.time * 1.0;
   
   // fragColor = texture( iChannel0, float2(uv.x + sin( (uv.y + sin(myTime)) * abs(sin(myTime) + sin(2.0 * myTime) + sin(0.3 * myTime) + sin(1.4 * myTime) + cos(0.7 * myTime) + cos(1.3 * myTime)) * 4.0 ) * 0.02,uv.y) );
   

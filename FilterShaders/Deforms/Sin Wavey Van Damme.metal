@@ -3,12 +3,12 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   // Normalised pixel position
   float2 uv = textureCoord; // pixelPos_n
   
   // Amount to offset a row by
-  float rowOffsetMagnitude = sin(uni.iTime*10.0) * 0.05;
+  float rowOffsetMagnitude = sin(scn_frame.time*10.0) * 0.05;
   
   // Determine the row the pixel belongs too
   float row = floor(uv.y/0.001);

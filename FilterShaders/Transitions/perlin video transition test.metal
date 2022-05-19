@@ -21,14 +21,19 @@ static float myfbm( float3 p )
 
 // --- sliders and mouse widgets
 
-static bool affMouse(float2 FragCoord, float2 reso, float2 mouse, Uniform in, thread float4& FragColor)
+static bool affMouse(float2 pix, float2 mouse, thread float4& FragColor)
 {
   float R=5.;
-  float2 pix = FragCoord.xy/reso.y;
-  float pt = max(1e-2,1./reso.y); R*=pt;
+  float pt = 0.01;
+  R*=pt;
 
   float2 ptr = mouse;
-  float2 val = in.lastTouch;
+
+
+  // FIXME: this should be uni.lastTouch, nout mouse
+  float2 val = mouse; // in.lastTouch;
+
+
   float s=sign(val.x); val = val*s;
 
   // current mouse pos
@@ -49,11 +54,11 @@ static bool affMouse(float2 FragCoord, float2 reso, float2 mouse, Uniform in, th
 
   return false;
 }
-static bool affSlider(float2 p0, float2 dp, float v, float2 winCoord, float2 reso, thread float4& FragColor)
+static bool affSlider(float2 p0, float2 dp, float v, float2 pix, thread float4& FragColor)
 {
   float R=5.;
-  float2 pix = winCoord/reso.y;
-  float pt = max(1e-2,1./reso.y); R*=pt;
+  float pt = 0.01; // max(1e-2,1./reso.y);
+  R*=pt;
   pix -= p0;
 
   float dp2 = dot(dp,dp);
@@ -71,28 +76,27 @@ static bool affSlider(float2 p0, float2 dp, float v, float2 winCoord, float2 res
 }
 
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
-  float2 FragCoord;
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1, constant float2& mouse) {
   float4 FragColor = 0;
-  FragCoord=thisVertex.where.xy;
+  float2 FragCoord= textureCoord;
   // --- events
 
   float2 uv  = textureCoord;
-  float2 val = uni.iMouse.xy;
+  float2 val = mouse;
 
-  if (affMouse(FragCoord, uni.iResolution, uni.iMouse, uni, FragColor)) return FragColor;
-//  if (!uni.mouseButtons) // auto-tuning if no user tuning
-//  {
-    float t = uni.iTime;
-    val = float2(.95,.5) + float2(.04,.3)*float2(cos(t),sin(t));
-//  }
-  if (affSlider(float2(.05,.02),float2(.4,0),val.x, FragCoord, uni.iResolution, FragColor)) {return FragColor;}
-  if (affSlider(float2(.02,.05),float2(0,.4),val.y, FragCoord, uni.iResolution, FragColor)) {return FragColor;}
+  if (affMouse(FragCoord, val, FragColor)) return FragColor;
+  //  if (!uni.mouseButtons) // auto-tuning if no user tuning
+  //  {
+  float t = scn_frame.time;
+  val = float2(.95,.5) + float2(.04,.3)*float2(cos(t),sin(t));
+  //  }
+  if (affSlider(float2(.05,.02),float2(.4,0),val.x, FragCoord, FragColor)) {return FragColor;}
+  if (affSlider(float2(.02,.05),float2(0,.4),val.y, FragCoord, FragColor)) {return FragColor;}
 
   // --- shaping noise
 
   float3 dir = float3(0.,0.,1.);
-  float3 p = 4.*float3(uv,0)+uni.iTime*dir;
+  float3 p = 4.*float3(uv,0)+t*dir;
   float x = myfbm(p);
   // float x1=x;
   // shape 2 ou 3 regions separated by noisy borders

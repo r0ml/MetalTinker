@@ -13,14 +13,14 @@ initialize() {
   in.rspeed = {10, 30, 100};
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1, device InputBuffer& in ) {
   float2 uv = textureCoord;
   float perWidth = 1.0 / in.slices.y;
   float index = floor( uv.x / perWidth );
   float centerX = perWidth * ( index + 0.5 );
   float left = perWidth * index;
   float right = left + perWidth;
-  float angle = mod(uni.iTime * in.rspeed.y, 2 * PI);
+  float angle = mod(scn_frame.time * in.rspeed.y, 2 * PI);
 
   float2 cod = float2( ( uv.x - centerX) / cos( angle ) + centerX, uv.y );
   

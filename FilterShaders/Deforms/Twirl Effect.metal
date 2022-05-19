@@ -3,12 +3,12 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 uv = textureCoord;
   // float2 mo = uni.iMouse.xy;
 
   float speed = 0.8;
-  float t0 = uni.iTime*speed;
+  float t0 = scn_frame.time*speed;
   float t1 = sin(t0*2.);
   // float t2 = 0.5*t1+0.5;
 

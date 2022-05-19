@@ -3,7 +3,7 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 texturespace_uv = textureCoord;
   
   float aperture = 210.0;
@@ -11,7 +11,7 @@ fragmentFn(texture2d<float> tex) {
   float maxFactor = sin(apertureHalf);
   
   float2 uv;
-  float2 xy = worldCoordAspectAdjusted;
+  float2 xy = worldCoordAdjusted;
   float d = length(xy);
   if (d < (2.0-maxFactor))
   {
@@ -21,10 +21,10 @@ fragmentFn(texture2d<float> tex) {
     float phi = atan2(xy.y, xy.x);
     
     uv.x = r * cos(phi) + 0.5;
-    uv.y = r * sin(phi) + 0.5;
+    uv.y = 1 - (r * sin(phi) + 0.5);
     
     // WARP IT A LITTLE BIT
-    uv.x += 0.02 * sin(4.0 * uni.iTime + 15.0 * uv.y);
+    uv.x += 0.02 * sin(4.0 * scn_frame.time + 15.0 * uv.y);
   }
   else
   {

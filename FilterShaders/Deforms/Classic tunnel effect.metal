@@ -3,10 +3,10 @@
 
 #include "Common.h"
 
-static float2 tunnel(const float2 pix, float2 reso, float time, thread float& z) {
-  float aspect = reso.x / reso.y;
+static float2 tunnel(const float2 pix, float2 aspect, float time, thread float& z) {
+
   float2 center = float2(cos(time * 0.15), 0.0);
-  float2 pt = (pix * 2.0 - 1.0) * float2(aspect, 1.0);
+  float2 pt = (pix * 2.0 - 1.0) * aspect;
   
   float2 dir = pt - center;
   
@@ -18,13 +18,13 @@ static float2 tunnel(const float2 pix, float2 reso, float time, thread float& z)
   return float2(angle * 2.0 + time * 0.25, z + time * 0.5);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float3 color = float3(1.0, 1.0, 1.0);
   
   float2 tc = textureCoord;
   
   float z;
-  float2 tun = tunnel(tc, uni.iResolution, uni.iTime, z);
+  float2 tun = tunnel(tc, nodeAspect, scn_frame.time, z);
   
   color = float3(saturate(2.0 / z)) * tex.sample(iChannel0, tun).xyz;
   

@@ -11,8 +11,8 @@ static float fbm(float2 p) {
   return v;
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
-  float2 uv = worldCoordAspectAdjusted / 2.;
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1, device InputBuffer& in) {
+  float2 uv = textureCoord;
 
   float3 src = tex0.sample(iChannel0, uv).rgb;
   float3 tgt = tex1.sample(iChannel0, uv).rgb;
@@ -21,7 +21,7 @@ fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
 
   uv.x -= 1.5;
 
-  float ctime = mod(uni.iTime*.5,2.5);
+  float ctime = mod(scn_frame.time*.5,2.5);
 
   // burn
   float d = uv.x+uv.y*0.5 + 0.5*fbm(uv*15.1) + ctime*1.3;

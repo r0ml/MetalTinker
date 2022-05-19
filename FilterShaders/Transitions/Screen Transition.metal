@@ -3,9 +3,9 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   // Convert gametime to a rotating value between 0 and 1
-  float time = mod(uni.iTime, 5.0) / 5.0;
+  float time = mod(scn_frame.time, 5.0) / 5.0;
   // Calculate the UV coordinates
   float2 uv = textureCoord;
   

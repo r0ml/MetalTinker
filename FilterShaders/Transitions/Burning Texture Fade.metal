@@ -45,10 +45,11 @@ static float3 background(const float2 pos, float time, texture2d<float> tex)
   return color * float3(.0666, .0266, .00333);
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
-  float2 uv = textureCoord * aspectRatio;
-  
-  float t = mod(uni.iTime*.15, 1.2);
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1) {
+  float2 uv = textureCoord * nodeAspect;
+
+  float tt = scn_frame.time;
+  float t = mod(tt *.15, 1.2);
   
   // fade to black
   float4 fragColor = mix(tex0.sample(iChannel0, uv), float4(0), smoothstep(t + .1, t - .1, noise(thisVertex.where.xy * .4)));
@@ -57,6 +58,6 @@ fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
   fragColor.rgb = saturate(fragColor.rgb + step(fragColor.a, .1) * 1.6 * noise(2000. * uv) * float3(1.2,.5,.0) );
   
   // fancy background under burned texture
-  fragColor.rgb = fragColor.rgb * step(.01, fragColor.a) + background(.1 * uv, uni.iTime, tex1) * step(fragColor.a, .01);
+  fragColor.rgb = fragColor.rgb * step(.01, fragColor.a) + background(.1 * uv, tt, tex1) * step(fragColor.a, .01);
   return fragColor;
 }

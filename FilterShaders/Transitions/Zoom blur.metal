@@ -35,9 +35,9 @@ static float3 crossFade( float2 uv, float dissolve, texture2d<float> tex0, textu
   return mix(tex0.sample(smplr, uv).rgb, tex1.sample(smplr, uv).rgb, dissolve);
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1, device InputBuffer& in) {
   float2 texCoord = textureCoord;
-  float progress = sin(uni.iTime*0.5) * 0.5 + 0.5;
+  float progress = sin(scn_frame.time*0.5) * 0.5 + 0.5;
   // Linear interpolate center across center half of the image
   float2 center = float2(Linear_ease(0.5, 0.0, 1.0, progress),0.5);
   float dissolve = Exponential_easeInOut(0.0, 1.0, 1.0, progress);

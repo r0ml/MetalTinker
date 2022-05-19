@@ -1213,6 +1213,9 @@
 				E76DDD0D27DA7141006BEBB2 /* Brightness contrast saturation.metal */,
 				E76DDCFB27DA7141006BEBB2 /* c1-Brannan Filter.metal */,
 				E76DDD0E27DA7141006BEBB2 /* Channel Query 2.metal */,
+				E76DDD0B27DA7141006BEBB2 /* Color temperature sRGB.metal */,
+				E76DDD1127DA7141006BEBB2 /* Filter Gamma Correction.metal */,
+				E76DDD2B27DA7141006BEBB2 /* Filter Inversion.metal */,
 				E76DDD2627DA7141006BEBB2 /* Filter Solarization.metal */,
 				E76DDCAA27DA7141006BEBB2 /* RGB Grid.metal */,
 				E76DDD2F27DA7142006BEBB2 /* RGB to HSV-HSL.metal */,
@@ -1310,7 +1313,6 @@
 		E76DDCA227DA646B006BEBB2 /* FilterShaders */ = {
 			isa = PBXGroup;
 			children = (
-				E7A94826283166D800BC2CD3 /* Mouse */,
 				E726B09C28271401003F88A6 /* Librorum */,
 				E76DDCF327DA7141006BEBB2 /* Blurs */,
 				E75A1B4D27F175AE00779D64 /* Colors */,
@@ -1332,8 +1334,8 @@
 				E76DDCF027DA7141006BEBB2 /* Fade.metal */,
 				E76DDCE027DA7141006BEBB2 /* Flip.metal */,
 				E76DDCE327DA7141006BEBB2 /* Noise Transition.metal */,
-				E76DDCE627DA7141006BEBB2 /* perlin video transition test.metal */,
 				E76DDD3027DA7142006BEBB2 /* Photoshop Blend Modes.metal */,
+				E76DDCE627DA7141006BEBB2 /* perlin video transition test.metal */,
 				E76DDCDD27DA7141006BEBB2 /* Pixel Transition.metal */,
 				E76DDCEF27DA7141006BEBB2 /* pixellated transition.metal */,
 				E76DDCDA27DA7141006BEBB2 /* Portal 2 Box Flip Rotation.metal */,
@@ -1350,7 +1352,9 @@
 			isa = PBXGroup;
 			children = (
 				E76DDD0927DA7141006BEBB2 /* Blurs.metal */,
+				E75EB4A327F4F5AF00F52D71 /* Box Blur2.metal */,
 				E76DDCB227DA7141006BEBB2 /* Filter Box Blur.metal */,
+				E76DDCBB27DA7141006BEBB2 /* Filter Radial Blur.metal */,
 				E76DDCF627DA7141006BEBB2 /* Gaussian blur.metal */,
 				E76DDD1827DA7141006BEBB2 /* Texture LOD.metal */,
 			);
@@ -1381,7 +1385,6 @@
 				E76DDCB527DA7141006BEBB2 /* Infinite Video.metal */,
 				E76DDCB927DA7141006BEBB2 /* isovalues video.metal */,
 				E76DDCF427DA7141006BEBB2 /* LaPlace filter.metal */,
-				E76DDCAF27DA7141006BEBB2 /* Sobel filterw.metal */,
 				E76DDCBF27DA7141006BEBB2 /* lumidots.metal */,
 				E76DDCB127DA7141006BEBB2 /* maze dither - alt.metal */,
 				E76DDD3227DA7142006BEBB2 /* Melting Paint.metal */,
@@ -1406,6 +1409,7 @@
 				E76DDCD527DA7141006BEBB2 /* Sketch Drawing.metal */,
 				E76DDCB427DA7141006BEBB2 /* Sketchy Stippling Stylization.metal */,
 				E76DDCF527DA7141006BEBB2 /* Sobel filter.metal */,
+				E76DDCAF27DA7141006BEBB2 /* Sobel filterw.metal */,
 				E76DDD0127DA7141006BEBB2 /* Spreading Frost.metal */,
 				E76DDD0827DA7141006BEBB2 /* Texture mip diff.metal */,
 				E76DDD0027DA7141006BEBB2 /* VHS pause effect.metal */,
@@ -1618,18 +1622,6 @@
 			isa = PBXGroup;
 			children = (
 				E75A209327F25B7B00779D64 /* Cosine jamming.metal */,
-			);
-			path = Mouse;
-			sourceTree = "<group>";
-		};
-		E7A94826283166D800BC2CD3 /* Mouse */ = {
-			isa = PBXGroup;
-			children = (
-				E75EB4A327F4F5AF00F52D71 /* Box Blur2.metal */,
-				E76DDCBB27DA7141006BEBB2 /* Filter Radial Blur.metal */,
-				E76DDD0B27DA7141006BEBB2 /* Color temperature sRGB.metal */,
-				E76DDD1127DA7141006BEBB2 /* Filter Gamma Correction.metal */,
-				E76DDD2B27DA7141006BEBB2 /* Filter Inversion.metal */,
 			);
 			path = Mouse;
 			sourceTree = "<group>";

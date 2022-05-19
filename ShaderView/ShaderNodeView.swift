@@ -461,8 +461,8 @@ class MyDelegate : NSObject, SCNSceneRendererDelegate {
                 let lc = n.localCoordinates
                 let xx = (lc.x - bbb.min.x) / (bbb.max.x - bbb.min.x)
                 let yy = (lc.y - bbb.min.y) / (bbb.max.y - bbb.min.y)
-                self.hitLocation = .init(Float(xx),Float(yy) )
-                print(self.hitLocation)
+                self.hitLocation = .init(Float(xx),1-Float(yy) )
+       //         print(self.hitLocation)
               }
             }
           }

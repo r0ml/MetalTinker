@@ -13,8 +13,8 @@ initialize() {
   in.speed = {0.1, 0.5, 2};
 }
 
-fragmentFn(texture2d<float> tex) {
-  float speed = uni.iTime * in.speed.y;
+fragmentFunc(texture2d<float> tex, device InputBuffer& in) {
+  float speed = scn_frame.time * in.speed.y;
 
   float2 uv = textureCoord;
 

@@ -32,8 +32,8 @@ static float4 bgColor (float2 p, float2 pfr, float2 pto, texture2d<float> vid0, 
   return c;
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
-  float progress = sin(uni.iTime*.5)*.5+.5;
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1) {
+  float progress = sin(scn_frame.time*.5)*.5+.5;
   float2 p = textureCoord;
 //  float progress = uni.iMouse.x;
 

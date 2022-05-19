@@ -7,10 +7,6 @@ struct InputBuffer {
   bool ENABLE_SHADOW = false;
 };
 
-initialize() {
-}
-
-
 constant const int kMaxIterations = 64;
 
 // Turn up iterations if you enable this
@@ -211,14 +207,15 @@ static float3 GetColor( C_Ray ray, texture2d<float> tex0, const bool shadow )
   return vResult;
 }
 
-fragmentFn(texture2d<float> tex)
+fragmentFunc(texture2d<float> tex, device InputBuffer& in)
 {
   C_Ray ray;
 
   float3 vCameraPos = float3(0.0, 0.0, 0.0);
+  float t = scn_frame.time;
 
-  vCameraPos.x += sin(uni.iTime * 5.0) * 1.5;
-  vCameraPos.z += (sin(uni.iTime * 3.0) + 1.2) * 3.0;
+  vCameraPos.x += sin(t * 5.0) * 1.5;
+  vCameraPos.z += (sin(t * 3.0) + 1.2) * 3.0;
 
   float3 vCameraIntrest = float3(0.0, 1.0, 20.0);
 

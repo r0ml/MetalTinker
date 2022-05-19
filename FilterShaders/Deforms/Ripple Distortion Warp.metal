@@ -18,7 +18,7 @@ static float2 Distort(float2 p, float power, float speed, float freq, float time
   return float2(0.5, -0.5) * (p + 1.0);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 xy = worldCoord;
   float2 uvt;
   float d = length(xy);
@@ -27,7 +27,7 @@ fragmentFn(texture2d<float> tex) {
   if (d < 1.0 && uPower != 0.0)
   {
     //if power is 0, then don't call the distortion function since there's no reason to do it :)
-    uvt = Distort(xy, uPower, uSpeed, uFrequency, uni.iTime);
+    uvt = Distort(xy, uPower, uSpeed, uFrequency, scn_frame.time);
   }
   else
   {

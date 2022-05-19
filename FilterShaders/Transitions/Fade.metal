@@ -13,11 +13,11 @@ initialize() {
   in.intermission = {0, 2, 4};
 }
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1) {
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1, device InputBuffer& in ) {
   float2 uv = textureCoord;
 
   float tot = 2. * (in.duration.y + in.intermission.y);
-  float t = mod(uni.iTime, tot);
+  float t = mod(scn_frame.time, tot);
   float z = mod(t, in.duration.y + in.intermission.y);
   bool s = t > (in.duration.y + in.intermission.y);
   float m = min(z, in.duration.y) / in.duration.y;
