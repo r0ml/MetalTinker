@@ -38,9 +38,7 @@ static float4 mapColor(float4 orig) {
   return float4(outColor.xyz, orig.w);
 }
 
-fragmentFn(texture2d<float> tex) {
-  float2 s  = float2(uni.iResolution.x/uni.iResolution.y,1.)*1000.;
-  float2 uv = floor(textureCoord*s)/s;
-  
+fragmentFunc(texture2d<float> tex) {
+  float2 uv = textureCoord * nodeAspect;
   return mapColor(tex.sample(iChannel0, uv));
 }

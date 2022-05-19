@@ -3,10 +3,10 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 q = textureCoord;
-  float2 uv = 0.5 + (q-0.5)*(0.9 + 0.1*sin(0.2*uni.iTime));
-  
+  float t = scn_frame.time;
+  float2 uv = 0.5 + (q-0.5)*(0.9 + 0.1*sin(0.2*t));
   float3 oricol = tex.sample( iChannel0, q).xyz;
   float3 col;
   
@@ -20,11 +20,11 @@ fragmentFn(texture2d<float> tex) {
   
   col *= float3(0.95,1.05,0.95);
   
-  col *= 0.9+0.1*sin(10.0*uni.iTime+uv.y*1000.0);
+  col *= 0.9+0.1*sin(10.0*t+uv.y*1000.0);
   
-  col *= 0.99+0.01*sin(110.0*uni.iTime);
+  col *= 0.99+0.01*sin(110.0*t);
   
-  float comp = smoothstep( 0.2, 0.7, sin(uni.iTime) );
+  float comp = smoothstep( 0.2, 0.7, sin(t) );
   col = mix( col, oricol, saturate(-2.0+2.0*q.x+3.0*comp) );
   
   return float4(col,1.0);

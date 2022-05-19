@@ -13,11 +13,10 @@ static float bx2(float x)
   return x * 2.0 - 1.0;
 }
 
-fragmentFn(texture2d<float> tex) {
-  float2 texelSize = float2(1.0, 1.0) / uni.iResolution.xy;
+fragmentFunc(texture2d<float> tex, constant float2& mouse) {
+  float2 texelSize = scn_frame.inverseResolution;
   float2 uv = textureCoord;
-  float2 mouse = uni.iMouse.xy;
-  
+
   float uvXOffset = bx2(uv.x);
   float mouseXOffset = // uni.mouseButtons ?
   bx2(mouse.x); //  : 0.0;

@@ -8,9 +8,9 @@ static float fbm(const float2 p) {
 }
 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 b = textureCoord;
-  float cloudVal = (fbm(b+uni.iTime));
+  float cloudVal = (fbm(b+scn_frame.time));
   
   float3 backPx = tex.sample( iChannel0, b ).rgb;
   float3 frontPx = float3(0.3, 0.3, 0.3);

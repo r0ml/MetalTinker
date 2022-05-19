@@ -3,8 +3,8 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
-  float2 uv = thisVertex.texCoords;
+fragmentFunc(texture2d<float> tex) {
+  float2 uv = textureCoord;
 
   // float3 cf = texfilter(fc, in.inputTexture);
   float3 scc = tex.sample(iChannel0, uv).rgb;

@@ -3,11 +3,11 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float EDGE = .2;
   
   float2 uv = textureCoord;
-  float edge = EDGE * abs(sin(uni.iTime / 5.));
+  float edge = EDGE * abs(sin(scn_frame.time / 5.));
   
   float4 fragColor = tex.sample(iChannel0, uv);
   fragColor *= (smoothstep(0., edge, uv.x)) * (1. - smoothstep(1. - edge, 1., uv.x));

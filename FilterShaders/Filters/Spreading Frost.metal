@@ -6,9 +6,10 @@
 #define FROSTYNESS 0.5
 //#define RANDNERF 2.5
 
-fragmentFn(texture2d<float> tex0, texture2d<float> tex1, texture2d<float> tex2) {
+fragmentFunc(texture2d<float> tex0, texture2d<float> tex1, texture2d<float> tex2) {
   float2 uv = textureCoord;
-    float progress = fract(uni.iTime / 4.0);
+  float t = scn_frame.time;
+    float progress = fract(t / 4.0);
 
     float4 frost = tex1.sample(iChannel0, uv);
     float icespread = tex2.sample(iChannel0, uv).r;

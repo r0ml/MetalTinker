@@ -10,7 +10,7 @@
 //#define MIR_4
 //#define MIR_4_REVERSE
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 uv = textureCoord;
 
 #if defined(MIR_VER)

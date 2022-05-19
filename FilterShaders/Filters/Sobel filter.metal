@@ -20,7 +20,7 @@ struct InputBuffer {
 initialize() {
   in.THRESHOLD = {0, 0.2, 1};
 }
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, device InputBuffer& in) {
 
   texture2d<float> vid = tex;
 
@@ -70,7 +70,7 @@ fragmentFn(texture2d<float> tex) {
       }
     }
   } else if (in.value.edge_glow) {
-    float2 d = (sin(uni.iTime * 5.0)*0.5 + 1.5) / uni.iResolution; // kernel offset
+    float2 d = (sin(scn_frame.time * 5.0)*0.5 + 1.5) * scn_frame.inverseResolution; // kernel offset
     float2 p = thisVertex.texCoords;
 
     // simple sobel edge detection

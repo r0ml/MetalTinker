@@ -18,8 +18,8 @@ static float fu(float2 pos, float size, thread float2& uv){
   return a*b;
 }
 
-fragmentFn(texture2d<float> texz) {
-  float2 uv = worldCoordAspectAdjusted;
+fragmentFunc(texture2d<float> texz) {
+  float2 uv = worldCoordAdjusted;
   uv.x-=0.2;
   float4 tex = texz.sample(iChannel0, textureCoord);
   float e = fu(float2(0),1.0, uv);

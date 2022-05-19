@@ -160,7 +160,6 @@
 		E75A20F027F2618D00779D64 /* Verbose Raytrace Quad.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDD2427DA7141006BEBB2 /* Verbose Raytrace Quad.metal */; };
 		E75A20F127F2618D00779D64 /* Rock the London.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCFD27DA7141006BEBB2 /* Rock the London.metal */; };
 		E75EB4A527F4F6A300F52D71 /* Comic Book Video FX.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCB627DA7141006BEBB2 /* Comic Book Video FX.metal */; };
-		E75EB4A627F4F6A300F52D71 /* Video BillBoarding.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCC027DA7141006BEBB2 /* Video BillBoarding.metal */; };
 		E75EB4A727F4F6A300F52D71 /* isovalues video.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCB927DA7141006BEBB2 /* isovalues video.metal */; };
 		E75EB4A827F4F6A300F52D71 /* dotty video.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCBD27DA7141006BEBB2 /* dotty video.metal */; };
 		E75EB4A927F4F6A300F52D71 /* Oldschool plane deformations.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCBC27DA7141006BEBB2 /* Oldschool plane deformations.metal */; };
@@ -170,12 +169,10 @@
 		E75EB4AD27F4F6A300F52D71 /* mmcmask.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCD127DA7141006BEBB2 /* mmcmask.metal */; };
 		E75EB4AE27F4F6A300F52D71 /* Night vision.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCC927DA7141006BEBB2 /* Night vision.metal */; };
 		E75EB4AF27F4F6A300F52D71 /* Sketch Drawing.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCD527DA7141006BEBB2 /* Sketch Drawing.metal */; };
-		E75EB4B027F4F6A300F52D71 /* circle dithering.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCD827DA7141006BEBB2 /* circle dithering.metal */; };
 		E75EB4B127F4F6A300F52D71 /* Halftone Lines 2.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCAB27DA7141006BEBB2 /* Halftone Lines 2.metal */; };
 		E75EB4B227F4F6A300F52D71 /* shutter 007.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCC827DA7141006BEBB2 /* shutter 007.metal */; };
 		E75EB4B327F4F6A300F52D71 /* RAIN Glass.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCCC27DA7141006BEBB2 /* RAIN Glass.metal */; };
 		E75EB4B427F4F6A300F52D71 /* place-ify.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCCE27DA7141006BEBB2 /* place-ify.metal */; };
-		E75EB4B527F4F6A300F52D71 /* watercolor.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCD027DA7141006BEBB2 /* watercolor.metal */; };
 		E75EB4B627F4F6A300F52D71 /* Mirror.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCAD27DA7141006BEBB2 /* Mirror.metal */; };
 		E75EB4B727F4F6A300F52D71 /* maze dither - alt.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCB127DA7141006BEBB2 /* maze dither - alt.metal */; };
 		E75EB4B827F4F6A300F52D71 /* Raytracing textured triangles.metal in Sources */ = {isa = PBXBuildFile; fileRef = E76DDCA627DA7141006BEBB2 /* Raytracing textured triangles.metal */; };
@@ -727,7 +724,6 @@
 		E76DDCBD27DA7141006BEBB2 /* dotty video.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "dotty video.metal"; sourceTree = "<group>"; };
 		E76DDCBE27DA7141006BEBB2 /* Columns Sliced and Repeated.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Columns Sliced and Repeated.metal"; sourceTree = "<group>"; };
 		E76DDCBF27DA7141006BEBB2 /* lumidots.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = lumidots.metal; sourceTree = "<group>"; };
-		E76DDCC027DA7141006BEBB2 /* Video BillBoarding.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Video BillBoarding.metal"; sourceTree = "<group>"; };
 		E76DDCC127DA7141006BEBB2 /* Sin Wavey Van Damme.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Sin Wavey Van Damme.metal"; sourceTree = "<group>"; };
 		E76DDCC227DA7141006BEBB2 /* emboss video texture.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "emboss video texture.metal"; sourceTree = "<group>"; };
 		E76DDCC327DA7141006BEBB2 /* Image Cel Shade.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Image Cel Shade.metal"; sourceTree = "<group>"; };
@@ -741,13 +737,11 @@
 		E76DDCCC27DA7141006BEBB2 /* RAIN Glass.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "RAIN Glass.metal"; sourceTree = "<group>"; };
 		E76DDCCD27DA7141006BEBB2 /* CRT effect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "CRT effect.metal"; sourceTree = "<group>"; };
 		E76DDCCE27DA7141006BEBB2 /* place-ify.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "place-ify.metal"; sourceTree = "<group>"; };
-		E76DDCD027DA7141006BEBB2 /* watercolor.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = watercolor.metal; sourceTree = "<group>"; };
 		E76DDCD127DA7141006BEBB2 /* mmcmask.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = mmcmask.metal; sourceTree = "<group>"; };
 		E76DDCD227DA7141006BEBB2 /* meshify.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = meshify.metal; sourceTree = "<group>"; };
 		E76DDCD527DA7141006BEBB2 /* Sketch Drawing.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Sketch Drawing.metal"; sourceTree = "<group>"; };
 		E76DDCD627DA7141006BEBB2 /* Ripple Distortion Warp.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Ripple Distortion Warp.metal"; sourceTree = "<group>"; };
 		E76DDCD727DA7141006BEBB2 /* Money filter.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Money filter.metal"; sourceTree = "<group>"; };
-		E76DDCD827DA7141006BEBB2 /* circle dithering.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "circle dithering.metal"; sourceTree = "<group>"; };
 		E76DDCDA27DA7141006BEBB2 /* Portal 2 Box Flip Rotation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Portal 2 Box Flip Rotation.metal"; sourceTree = "<group>"; };
 		E76DDCDB27DA7141006BEBB2 /* fading effect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "fading effect.metal"; sourceTree = "<group>"; };
 		E76DDCDC27DA7141006BEBB2 /* Zoom blur.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Zoom blur.metal"; sourceTree = "<group>"; };
@@ -1365,7 +1359,6 @@
 			isa = PBXGroup;
 			children = (
 				E76DDCC527DA7141006BEBB2 /* cheap outline and cartoon effect.metal */,
-				E76DDCD827DA7141006BEBB2 /* circle dithering.metal */,
 				E76DDCFF27DA7141006BEBB2 /* Cloud Blending.metal */,
 				E76DDCBE27DA7141006BEBB2 /* Columns Sliced and Repeated.metal */,
 				E76DDCB627DA7141006BEBB2 /* Comic Book Video FX.metal */,
@@ -1413,11 +1406,9 @@
 				E76DDD0127DA7141006BEBB2 /* Spreading Frost.metal */,
 				E76DDD0827DA7141006BEBB2 /* Texture mip diff.metal */,
 				E76DDD0027DA7141006BEBB2 /* VHS pause effect.metal */,
-				E76DDCC027DA7141006BEBB2 /* Video BillBoarding.metal */,
 				E76DDCA927DA7141006BEBB2 /* Video Wall.metal */,
 				E76DDD0F27DA7141006BEBB2 /* Vignette Filter II.metal */,
 				E76DDD1D27DA7141006BEBB2 /* Vignette Filter.metal */,
-				E76DDCD027DA7141006BEBB2 /* watercolor.metal */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -2594,7 +2585,6 @@
 				E75A1B0427EE827B00779D64 /* grate.metal in Sources */,
 				E75A1ADA27EE823F00779D64 /* support.metal in Sources */,
 				E75EB4AB27F4F6A300F52D71 /* Video Wall.metal in Sources */,
-				E75EB4B027F4F6A300F52D71 /* circle dithering.metal in Sources */,
 				E75A1B8F27F17F4000779D64 /* Sobel filterw.metal in Sources */,
 				E75EB4C127F4F6A300F52D71 /* lumidots.metal in Sources */,
 				E75A1B1627EE827B00779D64 /* Vignette Filter.metal in Sources */,
@@ -2611,12 +2601,10 @@
 				E75A1B1C27EE827B00779D64 /* VHS pause effect.metal in Sources */,
 				E75A1B8B27F17F3200779D64 /* LaPlace filter.metal in Sources */,
 				E75A1B1B27EE827B00779D64 /* Vignette Filter II.metal in Sources */,
-				E75EB4A627F4F6A300F52D71 /* Video BillBoarding.metal in Sources */,
 				E75A1B1727EE827B00779D64 /* Filters.metal in Sources */,
 				E75A1B8D27F17F3800779D64 /* Rain drops on screen.metal in Sources */,
 				E75EB4A527F4F6A300F52D71 /* Comic Book Video FX.metal in Sources */,
 				E75EB4B627F4F6A300F52D71 /* Mirror.metal in Sources */,
-				E75EB4B527F4F6A300F52D71 /* watercolor.metal in Sources */,
 				E75EB4B427F4F6A300F52D71 /* place-ify.metal in Sources */,
 				E75A1AF427EE827B00779D64 /* Texture mip diff.metal in Sources */,
 				E75EB4C327F4F6A300F52D71 /* Rotoscoping.metal in Sources */,

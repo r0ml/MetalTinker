@@ -21,7 +21,7 @@ initialize() {
   in.THRESHOLD = {0, 0.2, 1};
 }
 
-fragmentFn(texture2d<float> vid) {
+fragmentFunc(texture2d<float> vid, device InputBuffer& in ) {
 
   float3x3 sobelx =
   float3x3(-1.0, -2.0, -1.0,
@@ -39,6 +39,8 @@ fragmentFn(texture2d<float> vid) {
   float2 uv = textureCoord;
   float2 res = textureSize(vid);
   float3 pix = vid.sample(iChannel0, uv).xyz;
+
+  float t = scn_frame.time;
 
   if (in.value.lengthx) {
 
@@ -69,8 +71,8 @@ fragmentFn(texture2d<float> vid) {
       }
     }
   } else if (in.value.edge_glow) {
-    float2 d = (sin(uni.iTime * 5.0)*0.5 + 1.5) / uni.iResolution; // kernel offset
-    float2 p = thisVertex.where.xy / uni.iResolution;
+    float2 d = (sin(t * 5.0)*0.5 + 1.5) * scn_frame.inverseResolution; // kernel offset
+    float2 p = textureCoord;
 
     // simple sobel edge detection
     float2 gxy = 0;
@@ -91,12 +93,12 @@ fragmentFn(texture2d<float> vid) {
     col += float4(0.0, g, g2, 1.0);
     return col;
   } else   if (in.value.dfdx) {
-    float2 uv = thisVertex.where.xy / uni.iResolution;
+    float2 uv = textureCoord;
     float4 color =  vid.sample(iChannel0, uv);
     float gray = length(color.rgb);
     return float4(float3(step(0.06, length(float2(dfdx(gray), dfdy(gray))))), 1.0);
   } else if (in.value.fwidth) {
-    float4 fragColor = fwidth(vid.sample(iChannel0, thisVertex.where.xy / uni.iResolution))*15.;
+    float4 fragColor = fwidth(vid.sample(iChannel0, textureCoord))*15.;
     fragColor.w = 1;
     return fragColor;
   } else if (in.value.test) {
@@ -105,7 +107,7 @@ fragmentFn(texture2d<float> vid) {
     float3x3 Cr;
 
     float2 inv_res = 1. /res;
-    float2 uv = thisVertex.where.xy / uni.iResolution;
+    float2 uv = textureCoord;
 
     for (int i=0; i<3; i++) {
       for (int j=0; j<3; j++) {

@@ -105,12 +105,12 @@ static float3 rotoscope_full(float2 uv, texture2d<float> vid0)
  }
  */
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, constant InputBuffer &in, constant float2& mouse) {
   float2 uv = textureCoord;
   float3 ns = texsample(uv, 1., tex);
   
   float3 cl = in.ENABLE_QUANTIZATION ?  rotoscope_full(uv, tex) : 1;
-  float m = uni.iMouse.x ;
+  float m = mouse.x ;
   
   if (in.ENABLE_COLOR) {
     cl *= ns;
@@ -118,7 +118,7 @@ fragmentFn(texture2d<float> tex) {
   
   float3  frs = float3(
                        (uv.x  < m ? ns : cl)    // Mix the 2 channels
-                       * smoothstep(0., 1. / uni.iResolution.y, abs(m - uv.x))
+                       * smoothstep(0., scn_frame.inverseResolution.y, abs(m - uv.x))
                        );
   
   return float4(frs, 1);

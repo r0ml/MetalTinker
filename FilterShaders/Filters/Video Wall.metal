@@ -6,7 +6,7 @@
 constant const float BOXES = 10.;
 constant const float MIN_BRIGHTNESS = 0.3;
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   // Normalized pixel coordinates (from 0 to 1)
   float2 uv = textureCoord;
   

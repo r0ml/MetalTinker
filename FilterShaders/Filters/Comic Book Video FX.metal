@@ -107,14 +107,14 @@ static float _added( const float2 _sh, const float _sa, const float _ca, const f
   }
 }
 
-static float4 Halftone(const float2 _fragCoord, float2 reso, texture2d<float> vid0) {
+static float4 Halftone(const float2 fc, texture2d<float> vid0) {
   {
     float _threshold = 0.8;
-    float _ratio = (reso.y / reso.x);
-    float _coordX = (_fragCoord.x / reso.x);
-    float _coordY = (_fragCoord.y / reso.x);
+//    float _ratio = (reso.y / reso.x);
+    float _coordX = (fc.x );
+    float _coordY = (fc.y );
     float2 _dstCoord = float2(_coordX, _coordY);
-    float2 _srcCoord = float2(_coordX, (_coordY / _ratio));
+    float2 _srcCoord = float2(_coordX, (_coordY ));
     float2 _rotationCenter = float2(0.5, 0.5);
     float2 _shift = (_dstCoord - _rotationCenter);
     float _dotSize = 1.0;
@@ -127,9 +127,9 @@ static float4 Halftone(const float2 _fragCoord, float2 reso, texture2d<float> vi
   }
 }
 
-fragmentFn(texture2d<float> tex)
+fragmentFunc(texture2d<float> tex)
 {
-  float2 uv = thisVertex.where.xy.xy / uni.iResolution.xy;
+  const float2 uv = textureCoord;
   
   float fCartoonEffect = 50.0;
   float outline = 0.0001;
@@ -138,7 +138,7 @@ fragmentFn(texture2d<float> tex)
   float SensitivityUpper = fCartoonEffect;
   float SensitivityLower = fCartoonEffect;
   
-  float dx = uni.iResolution.x/uni.iResolution.y * outline;
+  float dx = outline;
   float dy = outline;
   
   float4 c1 = tex.sample(iChannel0, uv +  float2(-dx,-dy));
@@ -168,7 +168,7 @@ fragmentFn(texture2d<float> tex)
   c1 = float4(HSLToRGB(hsl),1.0);
   
   float4 basePixel = c1 * c0;
-  float4 overlayPixel = Halftone(thisVertex.where.xy, uni.iResolution, tex);
+  float4 overlayPixel = Halftone(uv, tex);
   
   if (overlayPixel.x > 0.0) {
     overlayPixel = basePixel;

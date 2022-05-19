@@ -11,7 +11,7 @@ static float rgbToGray(float4 rgba) {
   return dot(rgba.xyz, W);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float posterSteps = 8.;
 
   // current location & color
@@ -21,8 +21,8 @@ fragmentFn(texture2d<float> tex) {
 
   // get samples around pixel
   float colors[9];
-  float stepX = stepH/uni.iResolution.x;
-  float stepY = stepV/uni.iResolution.y;
+  float stepX = stepH * scn_frame.inverseResolution.x;
+  float stepY = stepV * scn_frame.inverseResolution.y;
   colors[0] = rgbToGray(tex.sample(iChannel0, uv + float2(-stepX, stepY)));
   colors[1] = rgbToGray(tex.sample(iChannel0, uv + float2(0, stepY)));
   colors[2] = rgbToGray(tex.sample(iChannel0, uv + float2(stepX, stepY)));
@@ -58,5 +58,5 @@ fragmentFn(texture2d<float> tex) {
   }
 
   // draw most common color in kernel (or original)
-  return mix(float4(float3(colors[maxIndex]), 1.0), float4(float3(colors[4]), 1.0), mod(uni.iTime, 1.) > 0.5);
+  return mix(float4(float3(colors[maxIndex]), 1.0), float4(float3(colors[4]), 1.0), mod(scn_frame.time, 1.) > 0.5);
 }

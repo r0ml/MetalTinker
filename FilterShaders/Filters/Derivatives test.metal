@@ -3,7 +3,7 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 b = textureCoord;
   float3  col = tex.sample( iChannel0, b).xyz;
   float lum = dot(col,float3(0.333));
@@ -15,7 +15,7 @@ fragmentFn(texture2d<float> tex) {
     col *= 1.5*float3( saturate(1.0-8.0*f) );
   } else {
     // bottom left: emboss
-    float3  nor = normalize( float3( dfdx(lum), 64.0/uni.iResolution.x, dfdy(lum) ) );
+    float3  nor = normalize( float3( dfdx(lum), 64.0 * scn_frame.inverseResolution.x, dfdy(lum) ) );
     if( b.x<0.5 ) {
       float lig = 0.5 + dot(nor,float3(0.7,0.2,-0.7));
       col = float3(lig);
@@ -28,7 +28,7 @@ fragmentFn(texture2d<float> tex) {
   
   col *= smoothstep( 0.003, 0.004, abs(b.x-0.5) );
   col *= 1.0 - (1.0-smoothstep( 0.007, 0.008, abs(b.x-0.5) ))*(1.0-smoothstep(0.49,0.5,b.x));
-  col = mix( col, ocol, pow( 0.5 + 0.5*sin(uni.iTime), 4.0 ) );
+  col = mix( col, ocol, pow( 0.5 + 0.5*sin(scn_frame.time), 4.0 ) );
   
   return float4( col, 1.0 );
 }

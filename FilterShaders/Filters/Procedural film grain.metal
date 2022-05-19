@@ -58,12 +58,12 @@ static float3 soft_light(float3 a, float3 b, float w) {
   return mix(a, pow(a, pow(float3(2.0), 2.0 * (float3(0.5) - b))), w);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, constant InputBuffer& in) {
 //  float2 ps = float2(1.0) / uni.iResolution.xy;
   float2 uv = textureCoord;
   float4 fragColor = tex.sample(iChannel0, uv);
 
-  float t = uni.iTime * float(in.SPEED.y);
+  float t = scn_frame.time * float(in.SPEED.y);
   float seed = dot(uv, float2(12.9898, 78.233));
   float noise = fract(t+rand(seed));
   noise = gaussian(noise, float(in.MEAN.y), float(in.VARIANCE.y) * float(in.VARIANCE.y));

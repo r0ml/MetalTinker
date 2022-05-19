@@ -3,11 +3,11 @@
 
 #include "Common.h" 
  
-float3 lerp(float3 colorone, float3 colortwo, float value) {
+static float3 lerp(float3 colorone, float3 colortwo, float value) {
   return (colorone + value*(colortwo-colorone));
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float nColors = 4.0;
   float vx_offset = 0.5;
   float2 uv = textureCoord;

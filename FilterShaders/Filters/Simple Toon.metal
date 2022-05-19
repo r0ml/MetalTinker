@@ -64,10 +64,10 @@ static float3 median(float2 uv, float2 tsize, texture2d<float> vid0) {
 }
 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 uv = textureCoord;
   
-  float3 c = median(uv, 1.6 / uni.iResolution.xy, tex);
+  float3 c = median(uv, 1.6 * scn_frame.inverseResolution, tex);
   c = hsv2rgb(c);
   return float4(c,1.0);
 }

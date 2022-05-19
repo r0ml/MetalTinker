@@ -3,15 +3,15 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
-  float2 U = worldCoordAspectAdjusted;
+fragmentFunc(texture2d<float> tex) {
+  float2 U = worldCoordAdjusted;
   
   float4 fragColor = tex.sample(iChannel0,textureCoord);
   
   float N = 12.;
   float c = cos(TAU/N);
   float s = sin(TAU/N);
-  float a = PI/4.*(.5+.5*sin(uni.iTime)),d,A;
+  float a = PI/4.*(.5+.5*sin(scn_frame.time)),d,A;
   
   for (int i=0; i<20; i++) {
     d = -dot(U-float2(-1,1),float2(sin(a),cos(a)));

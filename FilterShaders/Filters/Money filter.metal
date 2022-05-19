@@ -3,13 +3,13 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
-  float2 xy = thisVertex.where.xy / uni.iResolution.yy;
+fragmentFunc(texture2d<float> tex) {
+  float2 xy = textureCoord;
   
   float amplitud = 0.03;
   float frecuencia = 10.0;
   float gris = 1.0;
-  float divisor = 4.8 / uni.iResolution.y;
+  float divisor = 4.8 * scn_frame.inverseResolution.y;
   float grosorInicial = divisor * 0.2;
   
   const int kNumPatrones = 6;
@@ -22,7 +22,7 @@ fragmentFn(texture2d<float> tex) {
   datosPatron[4] = float3(1.0, 0.0, 0.3); // 90
   datosPatron[5] = float3(0.0, 1.0, 0.2); // 0
   
-  float4 color = tex.sample(iChannel0, float2(thisVertex.where.xy.x / uni.iResolution.x, xy.y));
+  float4 color = tex.sample(iChannel0, xy);
   float4 fragColor = color;
   
   for(int i = 0; i < kNumPatrones; i++)

@@ -19,7 +19,7 @@ static float2 noise(float2 p){
   return mix(mix(a, b, mu.x), mix(c, d, mu.x), mu.y);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 u = textureCoord,
   v = textureCoord / 10,
   n = noise(v*200.); // Displacement
@@ -28,7 +28,7 @@ fragmentFn(texture2d<float> tex) {
   
   // Loop through the different inverse sizes of drops
   for (float r = 4. ; r > 0. ; r--) {
-    float2 x = uni.iResolution.xy * r * .015,  // Number of potential drops (in a grid)
+    float2 x =  r * .015 / scn_frame.inverseResolution,  // Number of potential drops (in a grid)
     p = TAU * u * x + (n - .5) * 2.,
     s = sin(p);
     
@@ -39,7 +39,7 @@ fragmentFn(texture2d<float> tex) {
     float4 d = float4(noise(v*200.), noise(v));
     
     // Drop shape and fading
-    float t = (s.x+s.y) * max(0., 1. - fract(uni.iTime * (d.b + .1) + d.g) * 2.);;
+    float t = (s.x+s.y) * max(0., 1. - fract(scn_frame.time * (d.b + .1) + d.g) * 2.);;
     
     // d.r -> only x% of drops are kept on, with x depending on the size of drops
     if (d.r < (5.-r)*.08 && t > .5) {

@@ -21,10 +21,9 @@ initialize() {
 
 #define PRECISION 6.
 
-fragmentFn(texture2d<float> tex) {
-  float2 r = uni.iResolution.xy;
-  float4 p = gammaDecode(tex.sample(iChannel0,thisVertex.where.xy/r)),
-  s = gammaDecode(tex.sample(iChannel0,(thisVertex.where.xy+.5)/r));
+fragmentFunc(texture2d<float> tex, constant InputBuffer & in) {
+  float4 p = gammaDecode(tex.sample(iChannel0, textureCoord )),
+  s = gammaDecode(tex.sample(iChannel0,textureCoord));
   float l = saturate(pow(length(p-s),in.outline_power.y) * in.outline_strength.y + in.outline_bias.y);
   p = floor( gammaEncode(p)*(in.precision.y+.999))/in.precision.y;
   return mix(p, in.outline_color.y, l);

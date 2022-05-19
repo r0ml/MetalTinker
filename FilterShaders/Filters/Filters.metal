@@ -16,17 +16,18 @@ struct InputBuffer {
 initialize() {
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, constant InputBuffer& in, constant float2& mouse) {
   float2 uv = textureCoord;
   float3 ocol = tex.sample(iChannel0, uv).rgb;
   float3 col = ocol;
+  float t = scn_frame.time;
 
   if (in.type.barrel_and_pincushion) {
     float2 distortion_center = float2(0.5,0.5);
 
     //K1 < 0 is pincushion distortion
     //K1 >=0 is barrel distortion
-    float k1 = 1.0 * sin(uni.iTime*0.5),
+    float k1 = 1.0 * sin(t*0.5),
     k2 = 0.5;
 
     float2 rx = uv - distortion_center;
@@ -38,10 +39,10 @@ fragmentFn(texture2d<float> tex) {
     col = tex.sample( iChannel0, dest_uv).rgb;
   } else if (in.type.bloating) {
     float maxPower = 1.5; //Change this to change the grade of bloating that is applied to the image.
-    float2 bloatPos = float2(0,0); //The position at which the effect occurs
+    float2 bloatPos = 0; //The position at which the effect occurs
 
-    float n = smoothstep(0.,1.,abs(1.-mod(uni.iTime/2.,2.)));
-    float2 q = (bloatPos+uni.iResolution.xy/2.)/uni.iResolution.xy;
+    float n = smoothstep(0.,1.,abs(1.-mod(t/2.,2.)));
+    float2 q = bloatPos+0.5;
     float l = length(uv-q);
     float2 p = uv - q;
 
@@ -57,7 +58,7 @@ fragmentFn(texture2d<float> tex) {
 
     for(int i = 0; i < 3; i++){
       for(int j = 0; j < 3; j++){
-        float2 realRes = float2(i - 1, j - 1)/(uni.iResolution/2);
+        float2 realRes = float2(i - 1, j - 1) * scn_frame.inverseResolution * 2;
         float3 x = tex.sample(iChannel0, uv + realRes, level(1)).rgb ;
         col += pow(x, 2.2);
       }
@@ -78,5 +79,5 @@ fragmentFn(texture2d<float> tex) {
     col = (tex.sample(iChannel0, uv - delta) * 3. - tex.sample(iChannel0, uv) - tex.sample(iChannel0, uv+delta)).rgb;
   }
 
-  return float4( mix(col, ocol, uv.x > uni.iMouse.x ) * (abs(uv.x - uni.iMouse.x) > 2./uni.iResolution.x) , 1);
+  return float4( mix(col, ocol, uv.x > mouse.x ) * (abs(uv.x - mouse.x) > 2. * scn_frame.inverseResolution.x) , 1);
 }

@@ -40,7 +40,7 @@ static float2 random(float2 p){
   return fract((p.xx + p.yx) * p.xy);
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, device InputBuffer& in) {
   float kernelx[mSize];
   float2 q = textureCoord;
   float3 col = tex.sample(iChannel0, q).rgb;
@@ -49,7 +49,7 @@ fragmentFn(texture2d<float> tex) {
   r.x *= TAU;
   float2 cr = float2(sin(r.x),cos(r.x))*sqrt(r.y);
 
-  float3 blurred = tex.sample(iChannel0, q + cr * (float2(mSize) / uni.iResolution.xy) ).rgb;
+  float3 blurred = tex.sample(iChannel0, q + cr * (float2(mSize) * scn_frame.inverseResolution) ).rgb;
 
   // comparison
   if (in.compare) {
@@ -65,7 +65,7 @@ fragmentFn(texture2d<float> tex) {
     // this can be done in two passes
     for (int i = -kSize; i <= kSize; ++i) {
       for (int j = -kSize; j <= kSize; ++j) {
-        blurred += kernelx[kSize+j]*kernelx[kSize+i]*tex.sample(iChannel0, (thisVertex.where.xy+float2(float(i),float(j))) / uni.iResolution.xy).rgb;
+        blurred += kernelx[kSize+j]*kernelx[kSize+i]*tex.sample(iChannel0, (thisVertex.where.xy+float2(float(i),float(j))) * scn_frame.inverseResolution).rgb;
       }
     }
     blurred = blurred / Z / Z;

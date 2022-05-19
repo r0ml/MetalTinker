@@ -47,13 +47,14 @@ static float noise(float2 uv, float time)
   
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float2 uv = textureCoord;
   
   float2 crt_uv = crt_coords(uv, 4.);
-  
-  float s1 = scanline(uv, 200., -10., uni.iTime);
-  float s2 = scanline(uv, 20., -3., uni.iTime);
+  float t = scn_frame.time;
+
+  float s1 = scanline(uv, 200., -10., t);
+  float s2 = scanline(uv, 20., -3., t);
   
   float4 col;
   col.r = tex.sample(iChannel0, crt_uv + float2(0., 0.01)).r;
@@ -62,5 +63,5 @@ fragmentFn(texture2d<float> tex) {
   col.a = tex.sample(iChannel0, crt_uv).a;
   
   col = mix(col, float4(s1 + s2), 0.05);
-  return mix(col, float4(noise(uv * 75., uni.iTime)), 0.05) * vignette(uv, 1.9, .6, 8.);;
+  return mix(col, float4(noise(uv * 75., t)), 0.05) * vignette(uv, 1.9, .6, 8.);;
 }

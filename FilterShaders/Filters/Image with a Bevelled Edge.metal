@@ -3,7 +3,7 @@
 
 #include "Common.h" 
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float imh = 0.8 ;
   float imw = imh;
   float imx = float( 1 - imw ) / 2.0 ;

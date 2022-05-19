@@ -3,18 +3,19 @@
 
 #include "Common.h"
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
   float columns = 6.;//4. + 3.5 * sin(uni.iTime);
   float columnWidth = 1. / columns;
-  float scrollProgress = 0.5 + 1./2. * sin(PI + uni.iTime);
-  float zoom = 1. + 0.5 * sin(uni.iTime);
+  float t = scn_frame.time;
+  float scrollProgress = 0.5 + 1./2. * sin(PI + t);
+  float zoom = 1. + 0.5 * sin(t);
   float aspect = 4.5/3.;
-  float padding = 0.15 + 0.15 * sin(uni.iTime);
+  float padding = 0.15 + 0.15 * sin(t);
   float4 color = float4(1.);
   
   // get coordinates, rotate & fix aspect ratio
-  float2 uv = worldCoordAspectAdjusted;
-  uv = uv * rot2d(0.2 * sin(uni.iTime));
+  float2 uv = worldCoordAdjusted;
+  uv = uv * rot2d(0.2 * sin(t));
   uv.y *= aspect; // fix aspect ratio
   
   // create grid coords & set color

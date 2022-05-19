@@ -5,11 +5,11 @@
 
 constexpr sampler smp(coord::normalized, address::repeat, filter::linear, mip_filter::linear);
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, constant float2& mouse) {
   float2 uv = textureCoord;
-  float2 center = uni.iMouse.xy;
+  float2 center = mouse;
 
-  float2 aspect = uni.iResolution / uni.iResolution.x;
+  float2 aspect = nodeAspect;
   float size = 3;
   float d = distance( aspect * (center - 0.5) , aspect * ( uv - 0.5) ) * size;
 

@@ -34,24 +34,23 @@ initialize() {
 //---------------------------------------------------------
 // Your usual image functions and utility stuff
 //---------------------------------------------------------
-static float4 getCol(float2 pos, float2 reso, texture2d<float> vid0)
+static float4 getCol(float2 uv, texture2d<float> vid0)
 {
-  float2 uv = pos / reso;
   return vid0.sample(iChannel0, uv);
 }
 
-static float getVal(float2 pos, float2 reso, texture2d<float> vid0)
+static float getVal(float2 pos, texture2d<float> vid0)
 {
-  float4 c=getCol(pos, reso, vid0);
+  float4 c=getCol(pos, vid0);
   return luminance(c.xyz);
 }
 
-static float2 getGrad(float2 pos, float eps, float2 reso, texture2d<float> vid0)
+static float2 getGrad(float2 pos, float eps, texture2d<float> vid0)
 {
   float2 d=float2(eps,0);
   return float2(
-                getVal(pos+d.xy, reso, vid0)-getVal(pos-d.xy, reso, vid0),
-                getVal(pos+d.yx, reso, vid0)-getVal(pos-d.yx, reso, vid0)
+                getVal(pos+d.xy, vid0)-getVal(pos-d.xy, vid0),
+                getVal(pos+d.yx, vid0)-getVal(pos-d.yx, vid0)
                 )/eps/2.;
 }
 
@@ -66,8 +65,9 @@ static float2 getGrad(float2 pos, float eps, float2 reso, texture2d<float> vid0)
 // Let's do this!
 //---------------------------------------------------------
 
-fragmentFn(texture2d<float> tex) {
-  float2 pos = thisVertex.where.xy;
+fragmentFunc(texture2d<float> tex, device InputBuffer &in) {
+  float2 pos = textureCoord;
+
   float weight = 1.0;
   
   for (float j = 0.; j < ANGLENUM; j += 1.)
@@ -79,13 +79,13 @@ fragmentFn(texture2d<float> tex) {
     
     for (float i = -RANGE; i <= RANGE; i += STEP)
     {
-      float2 pos2 = pos + normalize(dir)*i;
+      float2 pos2 = pos + normalize(dir)*i*scn_frame.inverseResolution;
       
       // texture texture wrap can't be set to anything other than clamp  (-_-)
-      if (pos2.y < 0. || pos2.x < 0. || pos2.x > uni.iResolution.x || pos2.y > uni.iResolution.y)
+      if (pos2.y < 0. || pos2.x < 0. || pos2.x > 1 || pos2.y > 1)
         continue;
       
-      float2 g = getGrad(pos2, 1., uni.iResolution, tex);
+      float2 g = getGrad(pos2, scn_frame.inverseResolution.x, tex);
       if (length(g) < MAGIC_GRAD_THRESH)
         continue;
       
@@ -93,7 +93,7 @@ fragmentFn(texture2d<float> tex) {
     }
   }
   
-  float4 col = in.GRAYSCALE ? float4(getVal(pos, uni.iResolution, tex)) : getCol(pos, uni.iResolution, tex);
+  float4 col = in.GRAYSCALE ? float4(getVal(pos, tex)) : getCol(pos, tex);
 
   float4 background = mix(col, float4(1), MAGIC_COLOR);
   
@@ -103,10 +103,10 @@ fragmentFn(texture2d<float> tex) {
   
   
   // because apparently all shaders need one of these. It's like a law or something.
-  float r = length(pos - uni.iResolution.xy*.5) / uni.iResolution.x;
+  float r = length(pos - 0.5);
   float vign = 1. - r*r*r;
   
-  float a = interporand(pos/uni.iResolution.xy).x;
+  float a = interporand(pos).x;
   
   return vign * mix(float4(0), background, weight) + a/25.;
   //fragColor = getCol(pos);

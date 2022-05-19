@@ -3,21 +3,22 @@
 
 #include "Common.h" 
 
-static float4 T(float2 uv, float i, float j, float2 reso, texture2d<float>vid) {
-  return vid.sample(iChannel0, uv/reso + float2(i,j)/textureSize(vid));
+static float4 T(float2 uv, float i, float j, texture2d<float>vid) {
+  return vid.sample(iChannel0, uv + float2(i,j)/textureSize(vid));
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex) {
+  float2 tc = textureCoord;
   float4 fragColor = (
-                      T(thisVertex.where.xy, -1,-1, uni.iResolution, tex)+
-                      T(thisVertex.where.xy, 0,-1 , uni.iResolution, tex)+
-                      T(thisVertex.where.xy, 1,-1,  uni.iResolution, tex)+
-                      T(thisVertex.where.xy, -1, 0, uni.iResolution, tex)+
-                      T(thisVertex.where.xy, 0, 0,  uni.iResolution, tex)+
-                      T(thisVertex.where.xy, 1, 0,  uni.iResolution, tex)+
-                      T(thisVertex.where.xy, -1, 1, uni.iResolution, tex)+
-                      T(thisVertex.where.xy, 0, 1,  uni.iResolution, tex)+
-                      T(thisVertex.where.xy, 1, 1,  uni.iResolution, tex) ) / 9.;
+                      T(tc, -1,-1, tex)+
+                      T(tc, 0,-1 , tex)+
+                      T(tc, 1,-1,  tex)+
+                      T(tc, -1, 0, tex)+
+                      T(tc, 0, 0,  tex)+
+                      T(tc, 1, 0,  tex)+
+                      T(tc, -1, 1, tex)+
+                      T(tc, 0, 1,  tex)+
+                      T(tc, 1, 1,  tex) ) / 9.;
 
   float v = sin(TAU*3.*length(fragColor.xyz));
 

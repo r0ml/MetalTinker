@@ -9,19 +9,19 @@ struct InputBuffer {
 initialize() {
 }
 
-fragmentFn(texture2d<float> tex) {
+fragmentFunc(texture2d<float> tex, constant InputBuffer & in) {
   constexpr sampler chan(coord::normalized, address::repeat, filter::linear, mip_filter::linear);
   
   float2 u = textureCoord;
   
-  float2 n = in.random ? fract(rand2(uni.iTime+u))
+  float2 n = in.random ? fract(rand2(scn_frame.time+u))
   : interporand(u * .1).rg;  // Displacement
   
   float4 fragColor = tex.sample(chan, u, level(3.5) );
   
   // Loop through the different inverse sizes of drops
   for (float r = 4. ; r > 0. ; r--) {
-    float2 x = uni.iResolution * r * .015;  // Number of potential drops (in a grid)
+    float2 x = r * .015 / scn_frame.inverseResolution;  // Number of potential drops (in a grid)
     float2 p = TAU * u * x + (n - .5) * 2.;
     float2 s = sin(p);
     
@@ -30,7 +30,7 @@ fragmentFn(texture2d<float> tex) {
     float3 d = interporand(round(u * x - 0.25) / x);
     
     // Drop shape and fading
-    float t = (s.x+s.y) * max(0., 1. - fract(uni.iTime * (d.b + .1) + d.g) * 2.);;
+    float t = (s.x+s.y) * max(0., 1. - fract(scn_frame.time * (d.b + .1) + d.g) * 2.);;
     
     // d.r -> only x% of drops are kept on, with x depending on the size of drops
     if (d.r < (5.-r)*.08 && t > .5) {
