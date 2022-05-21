@@ -1,6 +1,3 @@
-// relying on hexagonal tiling tutos https://www.shadertoy.com/view/4dKXR3
-//                               and https://www.shadertoy.com/view/XdKXz3
-// from https://www.shadertoy.com/view/4dKXz3
 
 #define shaderName pavements_hexagonal_tiling_6
 

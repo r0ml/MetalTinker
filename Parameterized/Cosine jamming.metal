@@ -13,7 +13,7 @@ initialize() {
 
 fragmentFunc(device InputBuffer &in) {
   float2 uv = worldCoordAdjusted;
-  float2 mouse = toWorld(uni.iMouse.xy) * aspectRatio;
+  float2 mouse = (2 * mouse - 1) * nodeAspect;
   uv*=10.;
   mouse*=10.;
 

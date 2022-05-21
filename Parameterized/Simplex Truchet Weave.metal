@@ -1,66 +1,3 @@
-/** 
-Author: Shane
-Rendering toroidal segments in random order at the vertex positions of triangular grid cells to create a simplex Truchet weave pattern.
-*/
-
-/*
-
-	Simplex Truchet Weave
-	---------------------
-
-	Mattz made a pretty cool 2D simplex grid-based Truchet pattern a while back,
-    which sent me on a tangent to make a 3D simplex grid version. At the time, I 
-	also considered making a 2D simplex weave, but got sidetracked -- probably 
-	by another of Mattz's interesting examples. :) Anyway, I finally got around
-	to it. 
-
-	A hexagonal weave arrangement has more variation, but I think the triangular 
-	version has a certain tightly wound appeal. I tried to track down an example 
-	image on the internet to reference, but couldn't find one, so didn't know
-	what the pattern would look like until I'd coded it. 
-
-	Thankfully, the construction process was pretty simple: First, set up a 2D 
-	simplex grid -- the equilateral triangle one. For each grid (triangle) cell, 
-	render a torus at each of the vertices. Make sure the center of the ring of 
-	each toroidal segment cuts the midpoint of each of the triangle edge lines. 
-	The magic happens when you render the three tori in random order, which
-	results in the spaghetti-like pattern you see.
-
-	How one sets about randomizing the rendering order depends upon the preferred 
-	technique of the individual, but I've explained how I went about it in the 
-	code. On a side note, most of the code in this example is window dressing. 
-	The pattern portion isn't long at all. I might put together a minimal version
-	to illustrate that... or wait for Fabrice or Greg Rostami o do it. :)
-
-	I coded this for a bit of fun, but it's possible to apply the pattern to far 
-	more interesting things. For instance, it can be applied to anthing that's
-	constructed with equilateral triangles -- like an icosahedral surface, etc. 
-
-	On the 3D side, I've already rendered some prisms in a simplex arrangement, 
-	but I'd like to put together an extruded version of this particular random 
-	pattern at some stage... I'm not looking forward to it, so I hope it looks 
-	interesting when completed. :)
-
-	By the way, there's a "NO_WEAVE" option below that is mildy interesting. 
-	Plus, a "SHOW_SIMPLEX_GRID" option for anyone who requires a rough visual 
-	cell tile construction aid.
-
-
-
-	Similar examples:
-
-	// A triangular Truchet pattern. This one is rendered in a non-overlapping
-	// fashion.
-	slimy triangular truchet - mattz
-	https://www.shadertoy.com/view/lsffzX
-
-	// I was pretty enamored with this example, so posted a 2D and 3D example not 
-	// long afterward.    
-	Hexagonal Truchet Weaving - BigWIngs
-	https://www.shadertoy.com/view/llByzz
-
-
-*/
 
 #define shaderName simplex_truchet_weave
 
@@ -385,8 +322,6 @@ float3 simplexWeave(float2 p, float time, const InputBuffer in){
  
 
 }
-
-
 
 fragmentFunc(device InputBuffer &in) {
 

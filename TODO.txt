@@ -1,13 +1,15 @@
 
-Move Scenes into a framework, and then register all the Scenes in the framework.
+- Add support for Video
+- implement the controls
+  - pause/resume
+  - save picture
+  - save video
 
-
+- Move Scenes into a framework, and then register all the Scenes in the framework.
 
 - should I separate depth handling from blend mode?
 
 - clearColor is handled differently between MetalView and offscreen snapshot for preview
-
-- If the requested texture is not available, don't crash
 
 - loop music playback
 

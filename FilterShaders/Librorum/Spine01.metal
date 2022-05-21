@@ -14,8 +14,8 @@ struct InputBuffer {
 // initialize() {
 // }
 
-fragmentFn(texture2d<float> image, texture2d<float> depth) {
-  float2 z = textureCoord * aspectRatio * (textureSize(image).y / textureSize(image));
+fragmentFunc(texture2d<float> image, texture2d<float> depth, device InputBuffer& in) {
+  float2 z = textureCoord * nodeAspect * (textureSize(image).y / textureSize(image));
 
   if (in.source.image) {
     return image.sample(iChannel0, z);

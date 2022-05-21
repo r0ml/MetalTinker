@@ -13,7 +13,7 @@ var functionMaps = [ // "Shaders" : Function("Shaders"),
                     "Parameterized" : Function("Parameterized"),
                     "Multipass" : Function("Multipass"),
                     "PointCloud" : Function("PointClouds"),
-                    "SceneShaders" : Function("Scenes"),
+//                    "SceneShaders" : Function("Scenes"),
 ]
 
 struct SidebarView : View {
@@ -45,7 +45,7 @@ struct SidebarView : View {
         FoldersListView("PointCloud", folders : ShaderLib<ShaderPointCloud>.getList("PointCloud")) // selectedItem: $selectedItem)
         FoldersListView("Multipass", folders: ShaderLib<ShaderMultipass>.getList("Multipass"))
 
-        ScenesListView("SceneShaders", folders: ShaderLib<GenericShader>.getList("SceneShaders"))
+        ScenesListView("Generators", folders: ShaderLib<GenericShader>.getList("Generators"))
         ScenesListView("Parameterized", folders: ShaderLib<ParameterizedShader>.getList("Parameterized"))
         ScenesListView("Filters", folders: ShaderLib<ShaderFilter>.getList("Filters"))
 

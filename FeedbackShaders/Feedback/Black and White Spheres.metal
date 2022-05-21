@@ -1,14 +1,4 @@
-/**
- Author: PauloFalcao
- Use Your Mouse!!! And change MAXAA in BufA
 
- A variation of Cubes and Spheres (black and white version)
- With stochastic sampling anti-aliasing
- Using buffers for accumulation
-
- Original made in Jan 2012 for glslsandbox - http://glslsandbox.com/e#1215.0
-
- */
 #define shaderName Black_and_White_Spheres
 
 #include "Common.h"

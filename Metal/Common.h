@@ -163,7 +163,7 @@ constant ControlBuffer &ctrl [[buffer(ctrlBuffId) ]], ##__VA_ARGS__ )
 
 // #define resolution (scn_node.boundingBox[1].xy)
 #define nodeAspect (scn_node.boundingBox[1].xy / scn_node.boundingBox[1].y)
-#define worldCoordAdjusted (worldCoord * nodeAspect )
+#define worldCoordAdjusted ((2 * thisVertex.texCoords - 1) * nodeAspect )
 
 
 #define fragmentFn(...) fragmentPass(, ##__VA_ARGS__ )

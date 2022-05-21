@@ -38,7 +38,7 @@ class FragmentScene : T1SCNScene {
     p.vertexFunctionName = "vertex_function"
 
     // FIXME: this is broken -- need to split out the SceneKit shaders
-    p.library = functionMaps["SceneShaders"]!.libs.first(where: {$0.label == self.library })!
+    p.library = functionMaps["Generators"]!.libs.first(where: {$0.label == self.library })!
 
 //    Task {
       justInitialization()

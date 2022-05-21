@@ -632,8 +632,8 @@ class GenericShader : NSObject, Identifiable, ObservableObject {
     let vert = "dummy_vertex"
 
     let psd = MTLRenderPipelineDescriptor()
-    psd.vertexFunction = functionMaps["SceneShaders"]!.find(vert)
-    psd.fragmentFunction = functionMaps["SceneShaders"]!.find(frag)
+    psd.vertexFunction = functionMaps["Generators"]!.find(vert)
+    psd.fragmentFunction = functionMaps["Generators"]!.find(frag)
 
     /*
      typedef struct {

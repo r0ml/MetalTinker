@@ -1,73 +1,7 @@
-/** 
- Author: Shane
- I tend to call them fish scale tiles, but I've heard them referred to as Japanese wave patterns, European tiles, etc. Either way, it's just an excuse to play around with 2D polar coordinates.
-
- Japanese Wave Pattern
- ---------------------
-
- I tend to call them fish scale tiles, but I've heard them referred to as Japanese wave
- patterns, European tiles, etc. Either way, it's just an excuse to play around with 2D
- polar coordinates.
-
- This particular design is based on something I came across on the net years ago. I'm
- not sure who originally came up with it, but I see it frequently in various forms all
- over the net. I have a feeling that the originals were hand drawn, because I don't
- think anyone would ever get bored enough to code one... :)
-
- Conceptually, there's nothing difficult here, but the routines are a little fiddly. In
- essence, the texture is constructed from a series of fan-like shapes made up of
- combinations of strategically placed circles. Decorating the tiles involves a few steps,
- due to the intricate details. However, it's essentially nothing more than a few lines
- and shapes rendered on a polar grid.
-
- Getting finely detailed images to look right on everyone's system is impossible. I find
- the biggest problem is the large range in PPIs these days. What looks right on my
- system might not look that great on someone elses.
-
- I coded this using the 800x450 canvas on a 17 inch laptop with 1920x1080 resolution, so
- the resulting image physically looks the size of Samsung phone in side view. However,
- it's not uncommon for people to have systems with PPIs way in excess of that these days,
- which would result in a much smaller image, and thus, squashed details. Unfortunately,
- it's not possibe to control that.
-
- In order to show the repeat texture qualities, I've opted for scales that look the same
- size at different resolutions. That may or may not have been the best choice.
-
- There's a compile option to distinguish between alternating scale layers and another
- option to turn off the highlights, just in case a rippling, hardened scale is messing
- with your sense of physical correctness. It disturbs mine a bit. :)
-
- Other examples:
-
- // I deliberately refrained from looking at Kuvkar's rendition in the hope that I could
- // bring something new to the table. I didn't. :D
- European Cobblestone Tiles - kuvkar
- https://www.shadertoy.com/view/ldyXz1
-
- // Awesome usage of fish scales would be putting it mildly. :)
- Kelp Forest - BigWIngs
- https://www.shadertoy.com/view/llcSz8
-
- // Fabrices take on it. I might look into it more closely.
- Hexagonal Tiling 5 - FabriceNeyret2
- https://www.shadertoy.com/view/4dKXz3
-
-
- */
-
 
 #define shaderName japanese_wave_pattern
 
 #include "Common.h" 
-
-struct InputBuffer { };
-
-initialize() {}
-
-
-
-
-
 
 // Cheap bump highlights.
 constant const bool SHOW_HIGHLIGHTS = true;

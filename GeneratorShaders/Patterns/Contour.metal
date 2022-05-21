@@ -11,22 +11,22 @@ static float4 FakeStencil(float2 pos, float time, float2 mouse) {
   return float4(1.) * shape;
 }
 
-fragmentFunc() {
+fragmentFunc(constant float2& mouse) {
   float P = 0.001;
   float t = scn_frame.time;
   float4 outlineColor = float4(.9,.15,0.04,1.);
   float2 uv = textureCoord * nodeAspect;
 //  uv.y = (uv.y - 0.5) * uni.iResolution.y / uni.iResolution.x + 0.5;
   
-  float stencil = FakeStencil(uv + float2(-1.,0.) * P, t, uni.iMouse).x;
-  stencil += FakeStencil(uv + float2(1.,0.) * P , t, uni.iMouse).x;
-  stencil += FakeStencil(uv + float2(0.,-1.) * P, t, uni.iMouse).x;
-  stencil += FakeStencil(uv + float2(0.,1.) * P , t, uni.iMouse).x;
+  float stencil = FakeStencil(uv + float2(-1.,0.) * P, t, mouse).x;
+  stencil += FakeStencil(uv + float2(1.,0.) * P , t, mouse).x;
+  stencil += FakeStencil(uv + float2(0.,-1.) * P, t, mouse).x;
+  stencil += FakeStencil(uv + float2(0.,1.) * P , t, mouse).x;
   
-  stencil += FakeStencil(uv + float2(-.7,-.7) * P, t, uni.iMouse).x;
-  stencil += FakeStencil(uv + float2(.7,.7) * P  , t, uni.iMouse).x;
-  stencil += FakeStencil(uv + float2(.7,-.7) * P , t, uni.iMouse).x;
-  stencil += FakeStencil(uv + float2(-.7,.7) * P , t, uni.iMouse).x;
+  stencil += FakeStencil(uv + float2(-.7,-.7) * P, t, mouse).x;
+  stencil += FakeStencil(uv + float2(.7,.7) * P  , t, mouse).x;
+  stencil += FakeStencil(uv + float2(.7,-.7) * P , t, mouse).x;
+  stencil += FakeStencil(uv + float2(-.7,.7) * P , t, mouse).x;
   
   // Contour
   float a = smoothstep(3.5,4.5,stencil)*(1. - smoothstep(7.9,8.,stencil));
