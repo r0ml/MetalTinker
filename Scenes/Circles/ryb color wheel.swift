@@ -124,6 +124,9 @@ class ryb_color_wheel_Remix : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = ryb_color_wheel_Sprite()
   }
 

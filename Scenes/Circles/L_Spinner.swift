@@ -123,6 +123,9 @@ class L_Spinner : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = L_Spinner_Sprite()
   }
 

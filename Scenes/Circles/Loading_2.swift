@@ -123,6 +123,9 @@ class Loading_2 : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Loading_2_Sprite()
   }
 

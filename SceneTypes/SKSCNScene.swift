@@ -5,7 +5,7 @@ import Foundation
 import SceneKit
 import SpriteKit
 
-class SKSCNScene : T3SCNScene {
+class SKSCNScene : T1SCNScene {
 //  override var group : String { get  { "" } }
   var skScene : SKScene!
   var planeNode : SCNNode = SCNNode()

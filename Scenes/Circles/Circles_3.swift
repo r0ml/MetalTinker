@@ -158,6 +158,9 @@ class Circles_3 : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Circles_3_Sprite()
   }
 

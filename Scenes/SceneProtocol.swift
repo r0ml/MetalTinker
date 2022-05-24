@@ -7,10 +7,6 @@
 import SceneKit
 import SpriteKit
 
-protocol TinkerScene {
-  var group : String {get}
-}
-
 var scenery : Dictionary<String, Dictionary<String, T1SCNScene>> = {
   var a = Dictionary<String, Dictionary<String, T1SCNScene>>()
 
@@ -44,7 +40,7 @@ var scenery : Dictionary<String, Dictionary<String, T1SCNScene>> = {
   for kk in k {
     var n = kk.group
     if n == "abstract base class" { continue }
-    var b = a[ n, default: Dictionary<String, T3SCNScene>() ]
+    var b = a[ n, default: Dictionary<String, T1SCNScene>() ]
     b[ String(describing: type(of: kk) ) ] = kk
     a[n] = b
   }

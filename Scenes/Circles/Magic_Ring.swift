@@ -123,6 +123,9 @@ class Magic_Ring : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Magic_Ring_Sprite()
   }
 

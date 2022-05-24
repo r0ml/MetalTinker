@@ -57,12 +57,6 @@ struct ShaderListView<T: GenericShader>: View {
   }
 }
 
-
-
-
-
-
-
 struct ScenesListView<T : GenericShader> : View {
   var folders : [ShaderLib<T>]
   //  var initialSelection : String

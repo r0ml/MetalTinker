@@ -13,6 +13,9 @@ class Dot_Wave : PointScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
 
     #if os(macOS)
     self.background.contents = XColor.init(deviceWhite: 112 / 255.0, alpha: 1)

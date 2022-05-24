@@ -123,6 +123,9 @@ class Perturbation : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Perturbation_Sprite()
   }
 

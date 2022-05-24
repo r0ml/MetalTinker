@@ -5,7 +5,7 @@ import Foundation
 import SceneKit
 
 // Renders a spritekit as the background for a SceneKit.  Hence, this is the same as just displaying the SpriteKit
-class VertexSCNScene : T3SCNScene {
+class VertexSCNScene : T1SCNScene {
   override var group : String { get { "Vertices" } }
   
 //  override var group : String { get { self.library } }

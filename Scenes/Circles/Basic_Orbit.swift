@@ -158,6 +158,9 @@ class Basic_Orbit : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Basic_Orbit_Sprite()
   }
 

@@ -158,6 +158,9 @@ class Ball_Bounce_2 : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Ball_Bounce_2_Sprite()
   }
 

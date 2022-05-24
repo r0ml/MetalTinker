@@ -13,7 +13,9 @@ class Attempt_19 : PointScene {
 
   required init() {
     super.init()
+  }
 
+  override func draw() {
     #if os(macOS)
     self.background.contents = XColor.init(deviceWhite: 112 / 255.0, alpha: 1)
     #else

@@ -123,6 +123,9 @@ class Vasarely_5 : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Vasarely_5_Sprite()
   }
 

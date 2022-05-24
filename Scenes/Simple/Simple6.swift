@@ -6,11 +6,14 @@ import SceneKit
 
 
 // Renders a spritekit as the background for a SceneKit.  Hence, this is the same as just displaying the SpriteKit
-class Simple6 : T3SCNScene {
+class Simple6 : T1SCNScene {
   override var group : String { get { "Simple" } }
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     self.background.contents = Simple3()
   }
 

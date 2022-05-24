@@ -3,11 +3,14 @@
 
 import SceneKit
 
-class Simple : T3SCNScene {
+class Simple : T1SCNScene {
   override var group : String { get  { "Simple" } }
   
   required init() {
     super.init()
+  }
+
+  override func draw() {
     let mat = SCNMaterial()
     mat.diffuse.contents = XColor.red
     let a = SCNSphere(radius: 0.5)

@@ -158,6 +158,9 @@ class Arcs : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Arcs_Sprite()
   }
 

@@ -124,6 +124,9 @@ class Rotating_LED_Strip : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Rotating_LED_Strip_Sprite()
   }
 

@@ -40,14 +40,12 @@ struct SceneWrapperView : View {
         cs, gs, t in gs = cs
       }
       .onChanged { m in
-        if let x = delegate.scene as? T3SCNScene {
-          DispatchQueue.main.async { x.zoom(m) }
-        }
+        let x = delegate.scene
+        DispatchQueue.main.async { x.zoom(m) }
       }
       .onEnded { g in
-        if let x = delegate.scene as? T3SCNScene {
-          DispatchQueue.main.async { x.updateZoom(g) }
-        }
+        let x = delegate.scene
+        DispatchQueue.main.async { x.updateZoom(g) }
       }
   }
 
@@ -74,6 +72,7 @@ struct SceneWrapperView : View {
           }
         }
         let z = delegate.scene
+        let _ = z.draw()
         let _ = z.setSize(g.size)
         SceneView(scene: z,
                   options: paused ? [] : [ .allowsCameraControl, .rendersContinuously ],

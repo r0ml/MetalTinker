@@ -158,6 +158,9 @@ class Circles_Intersection : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Circles_Intersection_Sprite()
   }
 

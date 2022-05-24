@@ -158,6 +158,9 @@ class Chrome_Logo : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Chrome_Logo_Sprite()
   }
 

@@ -123,6 +123,9 @@ class Loading_With_Glow_and_Falloff : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Loading_With_Glow_and_Falloff_Sprite()
   }
 

@@ -4,11 +4,14 @@
 import Foundation
 import SceneKit
 
-class Simple4 : T3SCNScene {
+class Simple4 : T1SCNScene {
   override var group : String  { get { "Simple" } }
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     let k = Simple3()
 
     let a = SCNFloor()

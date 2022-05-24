@@ -123,6 +123,9 @@ class Simple_Eclipse : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Simple_Eclipse_Sprite()
   }
 

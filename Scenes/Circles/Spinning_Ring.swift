@@ -123,6 +123,9 @@ class Spinning_Ring : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Spinning_Ring_Sprite()
   }
 

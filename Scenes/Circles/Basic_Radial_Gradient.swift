@@ -158,6 +158,9 @@ class Basic_Radial_Gradient : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Basic_Radial_Gradient_Sprite()
   }
 

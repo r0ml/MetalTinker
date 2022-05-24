@@ -158,6 +158,9 @@ class Box_Breathing_Remix : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Box_Breathing_Remix_Sprite()
   }
   

@@ -75,6 +75,9 @@ class Breathing_Exercise_Remix : SKSCNScene {
 
   required init () {
     super.init()
+  }
+
+  override func draw() {
     skScene = Breathing_Exercise_Sprite()
   }
 

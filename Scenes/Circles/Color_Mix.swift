@@ -158,6 +158,9 @@ class Color_Mix : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Color_Mix_Sprite()
   }
 

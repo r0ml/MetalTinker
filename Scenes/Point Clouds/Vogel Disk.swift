@@ -10,6 +10,9 @@ class Vogel_Disk : PointScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     let z = SCNVector3(0, 0, 1)
     let j = SCNAction.rotate(by: CGFloat.pi * 2, around: z, duration: 10)
     let act = SCNAction.repeatForever(j)

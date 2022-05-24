@@ -109,6 +109,9 @@ class Bello : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Bello_Sprite()
   }
 

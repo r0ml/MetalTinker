@@ -158,6 +158,9 @@ class Blade_Jumper : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Blade_Jumper_Sprite()
   }
 

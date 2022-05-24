@@ -123,6 +123,9 @@ class Rotating_Color_Ring : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Rotating_Color_Ring_Sprite()
   }
 

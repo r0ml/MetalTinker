@@ -29,6 +29,33 @@
 		E7378783283741AC00EA3499 /* shapes.metal in Sources */ = {isa = PBXBuildFile; fileRef = E704CBCD25638F6100FB8C5F /* shapes.metal */; };
 		E7378784283741C700EA3499 /* sdf.metal in Sources */ = {isa = PBXBuildFile; fileRef = E746F31423F0D107003598F6 /* sdf.metal */; };
 		E73C6FEF2838AA7F00FD3490 /* Cosine jamming.metal in Sources */ = {isa = PBXBuildFile; fileRef = E75A209327F25B7B00779D64 /* Cosine jamming.metal */; };
+		E73C6FF22839E3A300FD3490 /* A_Cube_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C6FF12839E3A300FD3490 /* A_Cube_3.swift */; };
+		E73C6FF3283AF30A00FD3490 /* ShaderMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6FE27DE4DCD00431EB0 /* ShaderMetalView.swift */; };
+		E73C6FF4283AF31800FD3490 /* ShaderSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C75A0A2815C13A003D906D /* ShaderSceneView.swift */; };
+		E73C7020283C45AC00FD3490 /* A_Cube_10.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C701F283C45AC00FD3490 /* A_Cube_10.swift */; };
+		E73C7022283C644F00FD3490 /* Triangle_Occlusion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7021283C644F00FD3490 /* Triangle_Occlusion.swift */; };
+		E73C7024283C645F00FD3490 /* Walking_cubes_again.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7023283C645F00FD3490 /* Walking_cubes_again.swift */; };
+		E73C7026283C646E00FD3490 /* Wanderlust.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7025283C646E00FD3490 /* Wanderlust.swift */; };
+		E73C7028283C649800FD3490 /* Zizou.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7027283C649800FD3490 /* Zizou.swift */; };
+		E73C702A283C64B100FD3490 /* Toon_shaded_tours.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7029283C64B100FD3490 /* Toon_shaded_tours.swift */; };
+		E73C702C283C64BA00FD3490 /* Tetrahedral_interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C702B283C64BA00FD3490 /* Tetrahedral_interpolation.swift */; };
+		E73C702E283C64D000FD3490 /* Stellated_dodecahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C702D283C64D000FD3490 /* Stellated_dodecahedron.swift */; };
+		E73C7030283C64DC00FD3490 /* Sphere_tracing_105.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C702F283C64DC00FD3490 /* Sphere_tracing_105.swift */; };
+		E73C7032283C64E500FD3490 /* Rotating_point_cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7031283C64E400FD3490 /* Rotating_point_cube.swift */; };
+		E73C7034283C64EE00FD3490 /* Quad_distance_3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7033283C64EE00FD3490 /* Quad_distance_3D.swift */; };
+		E73C7036283C64FA00FD3490 /* Parallelogram_intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7035283C64FA00FD3490 /* Parallelogram_intersection.swift */; };
+		E73C7038283C650C00FD3490 /* Optimize_AABB_intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7037283C650C00FD3490 /* Optimize_AABB_intersection.swift */; };
+		E73C703A283C651600FD3490 /* One_pyramid_challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7039283C651600FD3490 /* One_pyramid_challenge.swift */; };
+		E73C703C283C652000FD3490 /* One_Cube_challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C703B283C652000FD3490 /* One_Cube_challenge.swift */; };
+		E73C703E283C66E300FD3490 /* Demosplash2016-cxw-09.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C703D283C66E300FD3490 /* Demosplash2016-cxw-09.swift */; };
+		E73C7040283C66EE00FD3490 /* Capsule_occlusion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C703F283C66EE00FD3490 /* Capsule_occlusion.swift */; };
+		E73C7042283C66F800FD3490 /* Capsule_intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7041283C66F800FD3490 /* Capsule_intersection.swift */; };
+		E73C7044283C670100FD3490 /* Box_occlusion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7043283C670100FD3490 /* Box_occlusion.swift */; };
+		E73C7046283C670A00FD3490 /* Box_occlusion_clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7045283C670A00FD3490 /* Box_occlusion_clipping.swift */; };
+		E73C7048283C671400FD3490 /* BiCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7047283C671400FD3490 /* BiCapsule.swift */; };
+		E73C704A283C672200FD3490 /* Archimedean_Solids.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7049283C672200FD3490 /* Archimedean_Solids.swift */; };
+		E73C704C283C672E00FD3490 /* A_Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C704B283C672E00FD3490 /* A_Triangle.swift */; };
+		E73C704E283C673700FD3490 /* A_Triangle_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C704D283C673700FD3490 /* A_Triangle_2.swift */; };
 		E73D807427E17A7300F25018 /* ConfigControllerT3SCN.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */; };
 		E743D67D236BEEBB00EB81BC /* videos in Resources */ = {isa = PBXBuildFile; fileRef = E743D67C236BEEBB00EB81BC /* videos */; };
 		E743D68A236C081E00EB81BC /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = E743D689236C081E00EB81BC /* TODO.txt */; };
@@ -393,16 +420,13 @@
 		E7A36A2A28373E2400AED44B /* Metaballs kinda yellow.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A36A1728373E2400AED44B /* Metaballs kinda yellow.metal */; };
 		E7A36A2B28373E2400AED44B /* Blobs-DistanceMergingTheory.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7A36A1828373E2400AED44B /* Blobs-DistanceMergingTheory.metal */; };
 		E7A3A16A21A7E07500742611 /* Common.h in Sources */ = {isa = PBXBuildFile; fileRef = E701A3F12171573F00FC9795 /* Common.h */; };
-		E7A5A3A025AD15B80051A69A /* PointScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A39F25AD15B80051A69A /* PointScene.swift */; };
+		E7A5A3A025AD15B80051A69A /* T1SCNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A39F25AD15B80051A69A /* T1SCNScene.swift */; };
 		E7A5A3A725AD4EBD0051A69A /* Vogels Distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3A625AD4EBD0051A69A /* Vogels Distribution.swift */; };
 		E7A5A3EE25AE78680051A69A /* Vogel Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A3ED25AE78680051A69A /* Vogel Disk.swift */; };
 		E7A5A43425B00CA10051A69A /* Linear Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A43325B00CA10051A69A /* Linear Motion.swift */; };
 		E7A5A43C25B0CE6A0051A69A /* Dot Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A43B25B0CE6A0051A69A /* Dot Line.swift */; };
 		E7A5A44325B0CE870051A69A /* Dot Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A44225B0CE870051A69A /* Dot Wave.swift */; };
-		E7A5A44A25B0CE970051A69A /* Circle Spiral.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A44925B0CE970051A69A /* Circle Spiral.swift */; };
 		E7A5A46425B0D12C0051A69A /* Attempt 23.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A46325B0D12C0051A69A /* Attempt 23.swift */; };
-		E7A5A46B25B0D13E0051A69A /* Infinity Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A46A25B0D13E0051A69A /* Infinity Particles.swift */; };
-		E7A5A47225B0D1530051A69A /* Loopless Dots Along Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A47125B0D1530051A69A /* Loopless Dots Along Circle.swift */; };
 		E7A5A80325B26D110051A69A /* Attempt 19.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A45025B0CEAA0051A69A /* Attempt 19.swift */; };
 		E7A5A84525B353250051A69A /* SceneControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A5A84425B353250051A69A /* SceneControlsView.swift */; };
 		E7A9481A282F58E600BC2CD3 /* scenetest.metal in Sources */ = {isa = PBXBuildFile; fileRef = E7539441257AD22F00642C36 /* scenetest.metal */; };
@@ -452,7 +476,6 @@
 		E7B573A725B7F0D000DF1452 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B573A625B7F0D000DF1452 /* CGSize.swift */; };
 		E7B573B025B7F0F500DF1452 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B573AF25B7F0F500DF1452 /* CGPoint.swift */; };
 		E7B573B925B80A3B00DF1452 /* VertexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B573B825B80A3B00DF1452 /* VertexScene.swift */; };
-		E7C75A0B2815C13A003D906D /* ShaderSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C75A0A2815C13A003D906D /* ShaderSceneView.swift */; };
 		E7CF9BCD227F425400413280 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCC227F425400413280 /* NSColor.swift */; };
 		E7CF9BCF227F429A00413280 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BCE227F429A00413280 /* UserDefaults.swift */; };
 		E7CF9BD1227F42BF00413280 /* MTLTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BD0227F42BF00413280 /* MTLTexture.swift */; };
@@ -460,7 +483,6 @@
 		E7CF9BD9227F434A00413280 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BD8227F434A00413280 /* NSView.swift */; };
 		E7CF9BDC227F439300413280 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF9BDB227F439300413280 /* String.swift */; };
 		E7D7C03F25AB9C6F004D75CD /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A02C12366511A00A88C16 /* PreferencesView.swift */; };
-		E7D7C04B25AB9E31004D75CD /* T3SCNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7539504257C065500642C36 /* T3SCNScene.swift */; };
 		E7D7C05025AB9EEF004D75CD /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77675D4228347A800614B7B /* Library.swift */; };
 		E7D7C0B225ABB440004D75CD /* VideoSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E731C35F21AF6847001D2345 /* VideoSupport.swift */; };
 		E7D7C0B625ABB443004D75CD /* Webcam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C931221ADE7D200679E62 /* Webcam.swift */; };
@@ -474,7 +496,6 @@
 		E7E9D6F127DC603100431EB0 /* ShaderMultipass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6F027DC603100431EB0 /* ShaderMultipass.swift */; };
 		E7E9D6F727DD01F500431EB0 /* ShaderLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6F627DD01F500431EB0 /* ShaderLib.swift */; };
 		E7E9D6FD27DD06AD00431EB0 /* ImageStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6FC27DD06AD00431EB0 /* ImageStrip.swift */; };
-		E7E9D6FF27DE4DCD00431EB0 /* ShaderMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D6FE27DE4DCD00431EB0 /* ShaderMetalView.swift */; };
 		E7E9D70127DE4E7D00431EB0 /* SceneWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9D70027DE4E7D00431EB0 /* SceneWrapperView.swift */; };
 		E7ED18F7257E903A0075DD2E /* Simple_Scenes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E7ED18F8257E903A0075DD2E /* Simple_Scenes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7ED18F0257E903A0075DD2E /* Simple_Scenes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -662,6 +683,73 @@
 		E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSegmentedControl.swift; sourceTree = "<group>"; };
 		E72D600A2391D948009CF90A /* MyMTLStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMTLStruct.swift; sourceTree = "<group>"; };
 		E731C35F21AF6847001D2345 /* VideoSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSupport.swift; sourceTree = "<group>"; };
+		E73C6FF12839E3A300FD3490 /* A_Cube_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Cube_3.swift; sourceTree = "<group>"; };
+		E73C6FF5283C447100FD3490 /* Rotating Point Cube.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Rotating Point Cube.metal"; sourceTree = "<group>"; };
+		E73C6FF6283C447100FD3490 /* Toon Shaded Torus.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Toon Shaded Torus.metal"; sourceTree = "<group>"; };
+		E73C6FF7283C447100FD3490 /* Triangle occlusion.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Triangle occlusion.metal"; sourceTree = "<group>"; };
+		E73C6FF8283C447100FD3490 /* BiCapsule.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BiCapsule.metal; sourceTree = "<group>"; };
+		E73C6FF9283C447100FD3490 /* a Quad.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Quad.metal"; sourceTree = "<group>"; };
+		E73C6FFA283C447100FD3490 /* a Cube 5.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 5.metal"; sourceTree = "<group>"; };
+		E73C6FFB283C447200FD3490 /* one pyramid challenge.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "one pyramid challenge.metal"; sourceTree = "<group>"; };
+		E73C6FFC283C447200FD3490 /* Capsule intersection.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Capsule intersection.metal"; sourceTree = "<group>"; };
+		E73C6FFD283C447200FD3490 /* one cube challenge - v3.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "one cube challenge - v3.metal"; sourceTree = "<group>"; };
+		E73C6FFE283C447200FD3490 /* a Cube 4.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 4.metal"; sourceTree = "<group>"; };
+		E73C6FFF283C447200FD3490 /* Stellated Dodecahedron.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Stellated Dodecahedron.metal"; sourceTree = "<group>"; };
+		E73C7000283C447200FD3490 /* a Cube 13.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 13.metal"; sourceTree = "<group>"; };
+		E73C7001283C447200FD3490 /* Box occlusion clipping.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Box occlusion clipping.metal"; sourceTree = "<group>"; };
+		E73C7002283C447200FD3490 /* a Cylinder 5.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cylinder 5.metal"; sourceTree = "<group>"; };
+		E73C7003283C447200FD3490 /* demosplash2016-cxw-09.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "demosplash2016-cxw-09.metal"; sourceTree = "<group>"; };
+		E73C7004283C447200FD3490 /* a Cylinder 2.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cylinder 2.metal"; sourceTree = "<group>"; };
+		E73C7005283C447200FD3490 /* Quad distance 3D.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Quad distance 3D.metal"; sourceTree = "<group>"; };
+		E73C7006283C447200FD3490 /* a Cube 11.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 11.metal"; sourceTree = "<group>"; };
+		E73C7007283C447200FD3490 /* a Cube 12.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 12.metal"; sourceTree = "<group>"; };
+		E73C7008283C447200FD3490 /* Tetrahedral Interpolation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Tetrahedral Interpolation.metal"; sourceTree = "<group>"; };
+		E73C7009283C447200FD3490 /* Sphere Tracing 105.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Sphere Tracing 105.metal"; sourceTree = "<group>"; };
+		E73C700A283C447300FD3490 /* a Triangle 2.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Triangle 2.metal"; sourceTree = "<group>"; };
+		E73C700B283C447300FD3490 /* Box occlusion.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Box occlusion.metal"; sourceTree = "<group>"; };
+		E73C700C283C447300FD3490 /* A_Cube 10.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "A_Cube 10.metal"; sourceTree = "<group>"; };
+		E73C700D283C447300FD3490 /* a Quad 2.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Quad 2.metal"; sourceTree = "<group>"; };
+		E73C700E283C447300FD3490 /* a Cube 2.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 2.metal"; sourceTree = "<group>"; };
+		E73C700F283C447300FD3490 /* optimize AABB intersection.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "optimize AABB intersection.metal"; sourceTree = "<group>"; };
+		E73C7010283C447300FD3490 /* Archimedean Solids.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Archimedean Solids.metal"; sourceTree = "<group>"; };
+		E73C7011283C447300FD3490 /* a Cube 8.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 8.metal"; sourceTree = "<group>"; };
+		E73C7012283C447300FD3490 /* a Triangle.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Triangle.metal"; sourceTree = "<group>"; };
+		E73C7013283C447300FD3490 /* a Cube 6.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 6.metal"; sourceTree = "<group>"; };
+		E73C7014283C447300FD3490 /* Parallelogram intersection.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Parallelogram intersection.metal"; sourceTree = "<group>"; };
+		E73C7015283C447300FD3490 /* a Torus 2.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Torus 2.metal"; sourceTree = "<group>"; };
+		E73C7016283C447300FD3490 /* a Cube 7.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cube 7.metal"; sourceTree = "<group>"; };
+		E73C7017283C447300FD3490 /* A_Cube 3.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "A_Cube 3.metal"; sourceTree = "<group>"; };
+		E73C7018283C447400FD3490 /* a Cylinder 4.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cylinder 4.metal"; sourceTree = "<group>"; };
+		E73C7019283C447400FD3490 /* a Cylinder 3.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "a Cylinder 3.metal"; sourceTree = "<group>"; };
+		E73C701A283C447400FD3490 /* Capsule occlusion.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Capsule occlusion.metal"; sourceTree = "<group>"; };
+		E73C701B283C448200FD3490 /* Walking cubes again.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Walking cubes again.metal"; sourceTree = "<group>"; };
+		E73C701C283C448200FD3490 /* zizou.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = zizou.metal; sourceTree = "<group>"; };
+		E73C701D283C448200FD3490 /* Wanderlust.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Wanderlust.metal; sourceTree = "<group>"; };
+		E73C701E283C44D100FD3490 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
+		E73C701F283C45AC00FD3490 /* A_Cube_10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Cube_10.swift; sourceTree = "<group>"; };
+		E73C7021283C644F00FD3490 /* Triangle_Occlusion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle_Occlusion.swift; sourceTree = "<group>"; };
+		E73C7023283C645F00FD3490 /* Walking_cubes_again.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walking_cubes_again.swift; sourceTree = "<group>"; };
+		E73C7025283C646E00FD3490 /* Wanderlust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wanderlust.swift; sourceTree = "<group>"; };
+		E73C7027283C649800FD3490 /* Zizou.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zizou.swift; sourceTree = "<group>"; };
+		E73C7029283C64B100FD3490 /* Toon_shaded_tours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toon_shaded_tours.swift; sourceTree = "<group>"; };
+		E73C702B283C64BA00FD3490 /* Tetrahedral_interpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetrahedral_interpolation.swift; sourceTree = "<group>"; };
+		E73C702D283C64D000FD3490 /* Stellated_dodecahedron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stellated_dodecahedron.swift; sourceTree = "<group>"; };
+		E73C702F283C64DC00FD3490 /* Sphere_tracing_105.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere_tracing_105.swift; sourceTree = "<group>"; };
+		E73C7031283C64E400FD3490 /* Rotating_point_cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotating_point_cube.swift; sourceTree = "<group>"; };
+		E73C7033283C64EE00FD3490 /* Quad_distance_3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad_distance_3D.swift; sourceTree = "<group>"; };
+		E73C7035283C64FA00FD3490 /* Parallelogram_intersection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parallelogram_intersection.swift; sourceTree = "<group>"; };
+		E73C7037283C650C00FD3490 /* Optimize_AABB_intersection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optimize_AABB_intersection.swift; sourceTree = "<group>"; };
+		E73C7039283C651600FD3490 /* One_pyramid_challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = One_pyramid_challenge.swift; sourceTree = "<group>"; };
+		E73C703B283C652000FD3490 /* One_Cube_challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = One_Cube_challenge.swift; sourceTree = "<group>"; };
+		E73C703D283C66E300FD3490 /* Demosplash2016-cxw-09.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Demosplash2016-cxw-09.swift"; sourceTree = "<group>"; };
+		E73C703F283C66EE00FD3490 /* Capsule_occlusion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capsule_occlusion.swift; sourceTree = "<group>"; };
+		E73C7041283C66F800FD3490 /* Capsule_intersection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capsule_intersection.swift; sourceTree = "<group>"; };
+		E73C7043283C670100FD3490 /* Box_occlusion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box_occlusion.swift; sourceTree = "<group>"; };
+		E73C7045283C670A00FD3490 /* Box_occlusion_clipping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box_occlusion_clipping.swift; sourceTree = "<group>"; };
+		E73C7047283C671400FD3490 /* BiCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiCapsule.swift; sourceTree = "<group>"; };
+		E73C7049283C672200FD3490 /* Archimedean_Solids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archimedean_Solids.swift; sourceTree = "<group>"; };
+		E73C704B283C672E00FD3490 /* A_Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Triangle.swift; sourceTree = "<group>"; };
+		E73C704D283C673700FD3490 /* A_Triangle_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Triangle_2.swift; sourceTree = "<group>"; };
 		E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigControllerT3SCN.swift; sourceTree = "<group>"; };
 		E743079927F8B4F200BECBD0 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E743D67C236BEEBB00EB81BC /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = videos; sourceTree = "<group>"; };
@@ -685,7 +773,6 @@
 		E74F94582256A05800706CBF /* MetalVideoRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalVideoRecorder.swift; sourceTree = "<group>"; };
 		E7500791216B181100FABE79 /* Shader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
 		E7539441257AD22F00642C36 /* scenetest.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = scenetest.metal; sourceTree = "<group>"; };
-		E7539504257C065500642C36 /* T3SCNScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T3SCNScene.swift; sourceTree = "<group>"; };
 		E753EBFA21B905DD003E4678 /* ConfigController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigController.swift; sourceTree = "<group>"; };
 		E75A1ABD27EE81B400779D64 /* Filters.Transitions.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Filters.Transitions.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E75A1AE127EE823F00779D64 /* Filters.Filters.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = Filters.Filters.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -928,7 +1015,7 @@
 		E7A36A1628373E2300AED44B /* baby first metaballs.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "baby first metaballs.metal"; sourceTree = "<group>"; };
 		E7A36A1728373E2400AED44B /* Metaballs kinda yellow.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Metaballs kinda yellow.metal"; sourceTree = "<group>"; };
 		E7A36A1828373E2400AED44B /* Blobs-DistanceMergingTheory.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Blobs-DistanceMergingTheory.metal"; sourceTree = "<group>"; };
-		E7A5A39F25AD15B80051A69A /* PointScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointScene.swift; sourceTree = "<group>"; };
+		E7A5A39F25AD15B80051A69A /* T1SCNScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T1SCNScene.swift; sourceTree = "<group>"; };
 		E7A5A3A625AD4EBD0051A69A /* Vogels Distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vogels Distribution.swift"; sourceTree = "<group>"; };
 		E7A5A3C125AD510A0051A69A /* Circle Spiral.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Circle Spiral.metal"; sourceTree = "<group>"; };
 		E7A5A3C225AD510A0051A69A /* Linear motion.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "Linear motion.metal"; sourceTree = "<group>"; };
@@ -945,11 +1032,8 @@
 		E7A5A43325B00CA10051A69A /* Linear Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Linear Motion.swift"; sourceTree = "<group>"; };
 		E7A5A43B25B0CE6A0051A69A /* Dot Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dot Line.swift"; sourceTree = "<group>"; };
 		E7A5A44225B0CE870051A69A /* Dot Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dot Wave.swift"; sourceTree = "<group>"; };
-		E7A5A44925B0CE970051A69A /* Circle Spiral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Circle Spiral.swift"; sourceTree = "<group>"; };
 		E7A5A45025B0CEAA0051A69A /* Attempt 19.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attempt 19.swift"; sourceTree = "<group>"; };
 		E7A5A46325B0D12C0051A69A /* Attempt 23.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attempt 23.swift"; sourceTree = "<group>"; };
-		E7A5A46A25B0D13E0051A69A /* Infinity Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Infinity Particles.swift"; sourceTree = "<group>"; };
-		E7A5A47125B0D1530051A69A /* Loopless Dots Along Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loopless Dots Along Circle.swift"; sourceTree = "<group>"; };
 		E7A5A77B25B256960051A69A /* demosplash2016-cxw-03.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "demosplash2016-cxw-03.metal"; sourceTree = "<group>"; };
 		E7A5A77C25B256960051A69A /* Coloring CIrcle.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Coloring CIrcle.metal"; sourceTree = "<group>"; };
 		E7A5A77D25B256960051A69A /* Rounded Loading Spinner.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "Rounded Loading Spinner.metal"; sourceTree = "<group>"; };
@@ -1175,6 +1259,80 @@
 			path = Metal;
 			sourceTree = "<group>";
 		};
+		E73C6FF02839E37A00FD3490 /* Shapes3d */ = {
+			isa = PBXGroup;
+			children = (
+				E73C700E283C447300FD3490 /* a Cube 2.metal */,
+				E73C6FFE283C447200FD3490 /* a Cube 4.metal */,
+				E73C6FFA283C447100FD3490 /* a Cube 5.metal */,
+				E73C7013283C447300FD3490 /* a Cube 6.metal */,
+				E73C7016283C447300FD3490 /* a Cube 7.metal */,
+				E73C7011283C447300FD3490 /* a Cube 8.metal */,
+				E73C7006283C447200FD3490 /* a Cube 11.metal */,
+				E73C701E283C44D100FD3490 /* Template.swift */,
+				E73C700C283C447300FD3490 /* A_Cube 10.metal */,
+				E73C701F283C45AC00FD3490 /* A_Cube_10.swift */,
+				E73C7007283C447200FD3490 /* a Cube 12.metal */,
+				E73C7000283C447200FD3490 /* a Cube 13.metal */,
+				E73C7004283C447200FD3490 /* a Cylinder 2.metal */,
+				E73C7019283C447400FD3490 /* a Cylinder 3.metal */,
+				E73C7018283C447400FD3490 /* a Cylinder 4.metal */,
+				E73C7002283C447200FD3490 /* a Cylinder 5.metal */,
+				E73C700D283C447300FD3490 /* a Quad 2.metal */,
+				E73C6FF9283C447100FD3490 /* a Quad.metal */,
+				E73C7015283C447300FD3490 /* a Torus 2.metal */,
+				E73C700A283C447300FD3490 /* a Triangle 2.metal */,
+				E73C704D283C673700FD3490 /* A_Triangle_2.swift */,
+				E73C7012283C447300FD3490 /* a Triangle.metal */,
+				E73C704B283C672E00FD3490 /* A_Triangle.swift */,
+				E73C7017283C447300FD3490 /* A_Cube 3.metal */,
+				E73C6FF12839E3A300FD3490 /* A_Cube_3.swift */,
+				E73C7010283C447300FD3490 /* Archimedean Solids.metal */,
+				E73C7049283C672200FD3490 /* Archimedean_Solids.swift */,
+				E73C6FF8283C447100FD3490 /* BiCapsule.metal */,
+				E73C7047283C671400FD3490 /* BiCapsule.swift */,
+				E73C7001283C447200FD3490 /* Box occlusion clipping.metal */,
+				E73C7045283C670A00FD3490 /* Box_occlusion_clipping.swift */,
+				E73C700B283C447300FD3490 /* Box occlusion.metal */,
+				E73C7043283C670100FD3490 /* Box_occlusion.swift */,
+				E73C6FFC283C447200FD3490 /* Capsule intersection.metal */,
+				E73C7041283C66F800FD3490 /* Capsule_intersection.swift */,
+				E73C701A283C447400FD3490 /* Capsule occlusion.metal */,
+				E73C703F283C66EE00FD3490 /* Capsule_occlusion.swift */,
+				E73C7003283C447200FD3490 /* demosplash2016-cxw-09.metal */,
+				E73C703D283C66E300FD3490 /* Demosplash2016-cxw-09.swift */,
+				E73C6FFD283C447200FD3490 /* one cube challenge - v3.metal */,
+				E73C703B283C652000FD3490 /* One_Cube_challenge.swift */,
+				E73C6FFB283C447200FD3490 /* one pyramid challenge.metal */,
+				E73C7039283C651600FD3490 /* One_pyramid_challenge.swift */,
+				E73C700F283C447300FD3490 /* optimize AABB intersection.metal */,
+				E73C7037283C650C00FD3490 /* Optimize_AABB_intersection.swift */,
+				E73C7014283C447300FD3490 /* Parallelogram intersection.metal */,
+				E73C7035283C64FA00FD3490 /* Parallelogram_intersection.swift */,
+				E73C7005283C447200FD3490 /* Quad distance 3D.metal */,
+				E73C7033283C64EE00FD3490 /* Quad_distance_3D.swift */,
+				E73C6FF5283C447100FD3490 /* Rotating Point Cube.metal */,
+				E73C7031283C64E400FD3490 /* Rotating_point_cube.swift */,
+				E73C7009283C447200FD3490 /* Sphere Tracing 105.metal */,
+				E73C702F283C64DC00FD3490 /* Sphere_tracing_105.swift */,
+				E73C6FFF283C447200FD3490 /* Stellated Dodecahedron.metal */,
+				E73C702D283C64D000FD3490 /* Stellated_dodecahedron.swift */,
+				E73C7008283C447200FD3490 /* Tetrahedral Interpolation.metal */,
+				E73C702B283C64BA00FD3490 /* Tetrahedral_interpolation.swift */,
+				E73C6FF6283C447100FD3490 /* Toon Shaded Torus.metal */,
+				E73C7029283C64B100FD3490 /* Toon_shaded_tours.swift */,
+				E73C6FF7283C447100FD3490 /* Triangle occlusion.metal */,
+				E73C7021283C644F00FD3490 /* Triangle_Occlusion.swift */,
+				E73C701B283C448200FD3490 /* Walking cubes again.metal */,
+				E73C7023283C645F00FD3490 /* Walking_cubes_again.swift */,
+				E73C701D283C448200FD3490 /* Wanderlust.metal */,
+				E73C7025283C646E00FD3490 /* Wanderlust.swift */,
+				E73C701C283C448200FD3490 /* zizou.metal */,
+				E73C7027283C649800FD3490 /* Zizou.swift */,
+			);
+			path = Shapes3d;
+			sourceTree = "<group>";
+		};
 		E743079427F8002100BECBD0 /* Multipass */ = {
 			isa = PBXGroup;
 			children = (
@@ -1188,6 +1346,7 @@
 		E74A41CC2576B4F600639F19 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E73C6FF02839E37A00FD3490 /* Shapes3d */,
 				E7ED2487257E92110075DD2E /* Circles */,
 				E7A5A3A525AD4E800051A69A /* Point Clouds */,
 				E74A42522576B7C500639F19 /* SceneProtocol.swift */,
@@ -1604,11 +1763,8 @@
 			children = (
 				E7A5A45025B0CEAA0051A69A /* Attempt 19.swift */,
 				E7A5A46325B0D12C0051A69A /* Attempt 23.swift */,
-				E7A5A44925B0CE970051A69A /* Circle Spiral.swift */,
 				E7A5A44225B0CE870051A69A /* Dot Wave.swift */,
-				E7A5A46A25B0D13E0051A69A /* Infinity Particles.swift */,
 				E7A5A43325B00CA10051A69A /* Linear Motion.swift */,
-				E7A5A47125B0D1530051A69A /* Loopless Dots Along Circle.swift */,
 				E7A5A3ED25AE78680051A69A /* Vogel Disk.swift */,
 				E7A5A3A625AD4EBD0051A69A /* Vogels Distribution.swift */,
 			);
@@ -1692,8 +1848,7 @@
 		E7B573A525B7F07400DF1452 /* SceneTypes */ = {
 			isa = PBXGroup;
 			children = (
-				E7A5A39F25AD15B80051A69A /* PointScene.swift */,
-				E7539504257C065500642C36 /* T3SCNScene.swift */,
+				E7A5A39F25AD15B80051A69A /* T1SCNScene.swift */,
 				E785E2E425AA46E600511B0C /* SKSCNScene.swift */,
 				E74A43962576EC1A00639F19 /* SceneLibraryView.swift */,
 				E7B573B825B80A3B00DF1452 /* VertexScene.swift */,
@@ -3086,11 +3241,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E73C7036283C64FA00FD3490 /* Parallelogram_intersection.swift in Sources */,
 				E7B5729125B40BC300DF1452 /* Rotating_LED_Strip.swift in Sources */,
-				E7E9D6FF27DE4DCD00431EB0 /* ShaderMetalView.swift in Sources */,
+				E73C703C283C652000FD3490 /* One_Cube_challenge.swift in Sources */,
+				E73C7046283C670A00FD3490 /* Box_occlusion_clipping.swift in Sources */,
 				E74A445C257804AC00639F19 /* Simple3.swift in Sources */,
 				E72A7FF923C2C2AB008C642A /* XSegmentedControl.swift in Sources */,
 				E7B572D125B40E5A00DF1452 /* Circles_Intersections.swift in Sources */,
+				E73C7026283C646E00FD3490 /* Wanderlust.swift in Sources */,
 				E7A3A16A21A7E07500742611 /* Common.h in Sources */,
 				E7B5730125B40FB400DF1452 /* Ball_Bounce.swift in Sources */,
 				E71E629E27A264EB009E13F6 /* SpriteProtocol.swift in Sources */,
@@ -3098,36 +3256,42 @@
 				E7B572F925B40F7A00DF1452 /* Basic_Orbit.swift in Sources */,
 				E71A02CA23673C2400A88C16 /* CIImage.swift in Sources */,
 				E7D7C0B625ABB443004D75CD /* Webcam.swift in Sources */,
+				E73C7028283C649800FD3490 /* Zizou.swift in Sources */,
 				E7B5727925B40B6700DF1452 /* Spinning_Circles.swift in Sources */,
 				E7CF9BD9227F434A00413280 /* NSView.swift in Sources */,
 				E7A5A84525B353250051A69A /* SceneControlsView.swift in Sources */,
 				E7A5A3A725AD4EBD0051A69A /* Vogels Distribution.swift in Sources */,
 				E7B573B025B7F0F500DF1452 /* CGPoint.swift in Sources */,
+				E73C704A283C672200FD3490 /* Archimedean_Solids.swift in Sources */,
 				E7B5730925B40FD600DF1452 /* Ball_Bounce_2.swift in Sources */,
 				E7D7C0C225ABB48F004D75CD /* ControlsView.swift in Sources */,
 				E7D7C0BE25ABB48B004D75CD /* DynamicPreferences.swift in Sources */,
 				E74F94592256A05900706CBF /* MetalVideoRecorder.swift in Sources */,
 				E7ED1A19257E909E0075DD2E /* Simple.swift in Sources */,
 				E7A5A43425B00CA10051A69A /* Linear Motion.swift in Sources */,
+				E73C702E283C64D000FD3490 /* Stellated_dodecahedron.swift in Sources */,
 				E726B0B02828B8F1003F88A6 /* ShaderNodeView.swift in Sources */,
-				E7C75A0B2815C13A003D906D /* ShaderSceneView.swift in Sources */,
 				E7B5728925B40B9F00DF1452 /* Simple_Circle_AA.swift in Sources */,
+				E73C7030283C64DC00FD3490 /* Sphere_tracing_105.swift in Sources */,
 				E774DE102816F8B0007998EA /* ShaderVertex.swift in Sources */,
-				E7A5A47225B0D1530051A69A /* Loopless Dots Along Circle.swift in Sources */,
 				E7B5728125B40B8000DF1452 /* Simple_Eclipse.swift in Sources */,
 				E7ED629821779685007ABB53 /* support.metal in Sources */,
 				E7CF9BDC227F439300413280 /* String.swift in Sources */,
 				E7B5731125B4100300DF1452 /* Arcs.swift in Sources */,
 				E7D7C0B225ABB440004D75CD /* VideoSupport.swift in Sources */,
 				E7B561E827A343480070EC65 /* XEvent.swift in Sources */,
+				E73C7022283C644F00FD3490 /* Triangle_Occlusion.swift in Sources */,
 				E7E9D6F127DC603100431EB0 /* ShaderMultipass.swift in Sources */,
+				E73C7032283C64E500FD3490 /* Rotating_point_cube.swift in Sources */,
 				E7D7C05025AB9EEF004D75CD /* Library.swift in Sources */,
 				E7E9D6EC27DC363B00431EB0 /* ShaderFilter.swift in Sources */,
 				E7A5A43C25B0CE6A0051A69A /* Dot Line.swift in Sources */,
 				E7EFE24C27A6E988007D6154 /* FixSwiftUI.swift in Sources */,
+				E73C7048283C671400FD3490 /* BiCapsule.swift in Sources */,
 				E7E9D70127DE4E7D00431EB0 /* SceneWrapperView.swift in Sources */,
 				E7CF9BD1227F42BF00413280 /* MTLTexture.swift in Sources */,
 				E71A02C82367397B00A88C16 /* NSImageView.swift in Sources */,
+				E73C7020283C45AC00FD3490 /* A_Cube_10.swift in Sources */,
 				E7AB8CBB25A03F8400E464F9 /* Bello.swift in Sources */,
 				E7B573B925B80A3B00DF1452 /* VertexScene.swift in Sources */,
 				E773D5552812377C00AD2173 /* RenderPipelinePass.swift in Sources */,
@@ -3138,13 +3302,18 @@
 				E78BD3362824AB1F000B44F0 /* VertexNode.swift in Sources */,
 				E77675D82283786000614B7B /* glsl.metal in Sources */,
 				E7B572B925B40C3900DF1452 /* Loading_2.swift in Sources */,
+				E73C7042283C66F800FD3490 /* Capsule_intersection.swift in Sources */,
 				E7AB8D3D25A5CCB600E464F9 /* Box Breathing Remix.swift in Sources */,
 				E7D7C0C625ABB4B1004D75CD /* MetalView.swift in Sources */,
 				E7B572F125B40F4E00DF1452 /* Basic_Radial_Gradient.swift in Sources */,
-				E7D7C04B25AB9E31004D75CD /* T3SCNScene.swift in Sources */,
 				E72A7FF023C2C1B6008C642A /* XColorPicker.swift in Sources */,
 				E78BD2EC2820E3BE000B44F0 /* ShaderPointCloud.swift in Sources */,
 				E7B561EA27A3559B0070EC65 /* XFloat.swift in Sources */,
+				E73C6FF3283AF30A00FD3490 /* ShaderMetalView.swift in Sources */,
+				E73C7040283C66EE00FD3490 /* Capsule_occlusion.swift in Sources */,
+				E73C6FF4283AF31800FD3490 /* ShaderSceneView.swift in Sources */,
+				E73C704C283C672E00FD3490 /* A_Triangle.swift in Sources */,
+				E73C704E283C673700FD3490 /* A_Triangle_2.swift in Sources */,
 				E7A5A46425B0D12C0051A69A /* Attempt 23.swift in Sources */,
 				E7D7C03F25AB9C6F004D75CD /* PreferencesView.swift in Sources */,
 				E7B5734525B6B24300DF1452 /* CIFilters.metal in Sources */,
@@ -3153,10 +3322,15 @@
 				E7A5A80325B26D110051A69A /* Attempt 19.swift in Sources */,
 				E7ED2489257E923E0075DD2E /* Breathing Exercise.swift in Sources */,
 				E74A42532576B7C500639F19 /* SceneProtocol.swift in Sources */,
+				E73C7024283C645F00FD3490 /* Walking_cubes_again.swift in Sources */,
+				E73C702A283C64B100FD3490 /* Toon_shaded_tours.swift in Sources */,
 				E7652E1A2423FE80004CB302 /* AVAsset.swift in Sources */,
 				E7E9D6EE27DC365E00431EB0 /* ShaderTwo.swift in Sources */,
 				E7B5729925B40BD900DF1452 /* Rotating_Color_Ring.swift in Sources */,
 				E72A7FF323C2C23F008C642A /* XBoolean.swift in Sources */,
+				E73C7034283C64EE00FD3490 /* Quad_distance_3D.swift in Sources */,
+				E73C7038283C650C00FD3490 /* Optimize_AABB_intersection.swift in Sources */,
+				E73C702C283C64BA00FD3490 /* Tetrahedral_interpolation.swift in Sources */,
 				E73D807427E17A7300F25018 /* ConfigControllerT3SCN.swift in Sources */,
 				E7ED19D9257E909E0075DD2E /* Simple4.swift in Sources */,
 				E7B572D925B40E7F00DF1452 /* Circles_3.swift in Sources */,
@@ -3169,13 +3343,15 @@
 				E7B573A725B7F0D000DF1452 /* CGSize.swift in Sources */,
 				E7B572B125B40C2000DF1452 /* Loading_With_Glow_and_Falloff.swift in Sources */,
 				E7CF9BCD227F425400413280 /* NSColor.swift in Sources */,
-				E7A5A44A25B0CE970051A69A /* Circle Spiral.swift in Sources */,
 				E7ED1A59257E909E0075DD2E /* Simple7.swift in Sources */,
 				E71E629D27A264D6009E13F6 /* ShaderLibraryView.swift in Sources */,
 				E7A5A44325B0CE870051A69A /* Dot Wave.swift in Sources */,
 				E72D600B2391D948009CF90A /* MyMTLStruct.swift in Sources */,
 				E7A5A3EE25AE78680051A69A /* Vogel Disk.swift in Sources */,
+				E73C703E283C66E300FD3490 /* Demosplash2016-cxw-09.swift in Sources */,
 				E7B572C925B40E1100DF1452 /* Color_Mix.swift in Sources */,
+				E73C6FF22839E3A300FD3490 /* A_Cube_3.swift in Sources */,
+				E73C7044283C670100FD3490 /* Box_occlusion.swift in Sources */,
 				E7FCB46A212A2B1000CED4FA /* AppRender.swift in Sources */,
 				E71A02C62366847600A88C16 /* ViewModel.swift in Sources */,
 				E7B572C125B40C5B00DF1452 /* L_Spinner.swift in Sources */,
@@ -3188,8 +3364,7 @@
 				E7D7C0D125ABB55F004D75CD /* Shader.swift in Sources */,
 				E7B572A925B40C0800DF1452 /* Magic_Ring.swift in Sources */,
 				E7AB8E0125A8497F00E464F9 /* MetalX.swift in Sources */,
-				E7A5A46B25B0D13E0051A69A /* Infinity Particles.swift in Sources */,
-				E7A5A3A025AD15B80051A69A /* PointScene.swift in Sources */,
+				E7A5A3A025AD15B80051A69A /* T1SCNScene.swift in Sources */,
 				E748C45A239809E100AD7A64 /* RenderSetup.swift in Sources */,
 				E74A43972576EC1A00639F19 /* SceneLibraryView.swift in Sources */,
 				E774DE0E2816E524007998EA /* SettingsView.swift in Sources */,
@@ -3197,6 +3372,7 @@
 				E746F31523F0D107003598F6 /* sdf.metal in Sources */,
 				E7B5726925B3ADEF00DF1452 /* Vasarely 5.swift in Sources */,
 				E7AB8DBF25A7C1BA00E464F9 /* ryb color wheel.swift in Sources */,
+				E73C703A283C651600FD3490 /* One_pyramid_challenge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

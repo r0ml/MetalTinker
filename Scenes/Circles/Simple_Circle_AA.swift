@@ -123,6 +123,9 @@ class Simple_Circle_AA : SKSCNScene {
 
   required init() {
     super.init()
+  }
+
+  override func draw() {
     skScene = Simple_Circle_AA_Sprite()
   }
 
