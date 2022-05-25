@@ -7,8 +7,8 @@ import SwiftUI
 struct XBoolean : View {
   var label: String = ""
   var pref : String = ""
-  var config : MyMTLStruct
-  
+  var config : ValueSettable // MyMTLStruct
+
   @State var bool : Bool = false {
     didSet {
       print("set \(label)")

@@ -65,7 +65,7 @@ class DynamicPreferences {
         let dat = bstm.value
         switch dat {
         case is Bool: // flag (checkbox)
-          let x = self.makeBoolean(bstm, value: dd) // value: b)
+          let x = self.makeBoolean(bstm.name, BoolParameter(mtl: bstm), value: dd as? Bool) // value: b)
           res.append( IdentifiableView(id: dnam, view: x) )
           
         case is SIMD4<Float>: // color (use a colorPicker)
@@ -91,7 +91,94 @@ class DynamicPreferences {
     }
     return res
   }
-  
+
+
+
+
+
+  func buildOptionsPane(_ bst : Mirror) -> [IdentifiableView] {
+/*    guard let _ = bst.structure else {
+      os_log("options buffer argument was not a struct", type: .error)
+      return [ IdentifiableView(id: UUID().uuidString, view: AnyView(Text("options buffer argument was not a struct")))]
+    }
+*/
+
+    var res : [IdentifiableView] = []
+
+    for bstm in bst.children {
+      // let offs = bst.offset + bstm.offset
+//      if inputBufferReservedNames.contains(bstm.name) { continue }
+
+
+      let dnam = "\(self.title).\(bstm.label!)"
+      // if this key already has a value, ignore the initialization value
+      let dd =  UserDefaults.standard.object(forKey: dnam)
+
+ /*     if let _ = bstm.structure {
+       // if bstm.name == "pipeline" { continue }
+        // This is where segmented options happen
+        let ddm = bstm.children;
+        if let kk = ddm.first?.datatype, kk == .int || kk == .bool  {
+          var v : Int = 0
+
+          for (i, tt) in ddm.enumerated() {
+            let z : Int? = tt.value as? Int
+            if (z != 0) {
+              v = i
+              break
+            }
+          }
+
+
+          let x = self.makeSegmented( bstm.name, dnam, ddm, value: (dd as? Int) ?? v)
+          res.append( IdentifiableView(id: dnam, view: x) )
+
+        }
+      } else {
+
+   */     let dat = bstm.value
+        switch dat {
+        case is BoolParameter: // flag (checkbox)
+          let x = self.makeBoolean(bstm.label!, dat as! BoolParameter, value: dd as? Bool) // value: b)
+          res.append( IdentifiableView(id: dnam, view: x) )
+
+/*
+        case is SIMD4<Float>: // color (use a colorPicker)
+          let v = dat as! SIMD4<Float>
+          let cc = XColor.init(v)
+          let x = self.makeColorPicker(bstm, value: cc)
+          res.append( IdentifiableView(id: dnam, view: x) )
+*/
+
+/*
+ case is IntParameter: // integer slider (x and z are minimum and maximum values)
+          let v = dat as! IntParameter
+          let x = self.makeNumberSlider(bstm, value: SIMD3<Float>(Float(v[0]), Float(v[1]), Float(v[2]) ), isFloat: false)
+          res.append( IdentifiableView(id: dnam, view: x) )
+*/
+
+          /*
+        case is FloatParameter: // floating point slider (x and z are minimum and maximum values)
+          let v = dat as! FloatParameter
+          let x = self.makeNumberSlider(bstm, value: v, isFloat : true)
+          res.append( IdentifiableView(id: dnam, view: x) )
+*/
+        default:
+          os_log("%s", type:.error, "\(bstm.label!) is \(type(of: bstm.value))")
+        }
+//      }
+    }
+    return res
+  }
+
+
+
+
+
+
+
+
+
   private func makeColorPicker(_ arg : MyMTLStruct, value: XColor) -> AnyView {
     return AnyView(XColorPicker(value: value, label: arg.name, pref: "\(self.title).\(arg.name!)", config: arg, f: { _ in
       
@@ -105,11 +192,11 @@ class DynamicPreferences {
     )
   }
   
-  private func makeBoolean(_ arg : MyMTLStruct, value: Any?) -> AnyView {
-    let button =  XBoolean(label: arg.name, pref : "\(self.title).\(arg.name!)", config: arg, bool: value as? Bool ?? arg.value as! Bool)
+  private func makeBoolean(_ nam : String, _ arg : BoolParameter, value: Bool?) -> AnyView {
+    let button =  XBoolean(label: nam, pref : "\(self.title).\(nam)", config: arg, bool: value ?? arg.getValue() )
     return AnyView(button)
   }
-  
+
   private func makeSegmented( _ t:String, _ p:String, _ items : [MyMTLStruct], value: Int) -> AnyView {
     // first time in -- set the value
     for (i, tt) in items.enumerated() {
@@ -135,4 +222,44 @@ class DynamicPreferences {
     of.f = slider.updateVal
     return AnyView(slider)
   }
+
+  /*
+  private func makeNumberSlider( _ arg : Mirror.Child, value: FloatParameter, isFloat : Bool ) -> AnyView {
+    let of = Observable<Double>(Double(value.val))
+    let slider = XSlider.init( val: of, minVal: Double(value.low), maxVal: Double(value.high),
+                               pref: "\(self.title).\(arg.name!)", config: arg.value as! FloatParameter, isFloat: isFloat
+    )
+    // FIXME: ugly
+    of.f = slider.updateVal
+    return AnyView(slider)
+  }
+*/
+
+
 }
+
+protocol ValueSettable {
+  //  associatedtype VType
+  func setValue<T>(_ x : T)
+  func getValue<T>() -> T
+}
+
+extension MyMTLStruct : ValueSettable {
+  typealias VType = Any
+}
+
+/*
+class SettableValue : ValueSettable {
+  var obj : AnyObject
+  var lab : String
+
+  init(_ s : String, _ o : AnyObject) {
+    obj = o
+    lab = s
+  }
+
+  func setValue(_ x : Any) {
+    obj.setValue(x, forKey: lab)
+  }
+}
+*/

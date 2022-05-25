@@ -252,7 +252,9 @@ class FragmentScene : T1SCNScene {
   /// this is the clear color for alpha blending?
   var clearColor : SIMD4<Float> = SIMD4<Float>( 0.16, 0.17, 0.19, 0.1 )
 
-  /* private */ var cached : [IdentifiableView]?
+  // FIXME: inherited?
+  // var cached : [IdentifiableView]?
+
   //  private var renderManager : RenderManager
 
   var pipelinePasses : [RenderPipelinePass] = []
@@ -283,7 +285,7 @@ class FragmentScene : T1SCNScene {
   }
 
   // this is getting called during onTapGesture in LibraryView -- when I'm launching the ShaderView
-  func buildPrefView() -> [IdentifiableView] {
+  override func buildPrefView() -> [IdentifiableView] {
     if let z = cached { return z }
     if let mo = myOptions {
       let a = DynamicPreferences.init(shaderName)

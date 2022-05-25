@@ -22,12 +22,14 @@ class T1SCNScene : SCNScene, SCNSceneRendererDelegate {
   var scale : CGFloat = 0
 
   class Options {
-    var height : Int = 1
-    var width : Int = 1
-    var depth : Int = 1
+    var height = FloatParameter(1, range: 0.2 ..< 2)
+    var width = FloatParameter(1, range: 0.2 ..< 2)
+    var depth = FloatParameter(1, range: 0.2 ..< 2)
+
+    var flag = BoolParameter(false)
   }
 
-  var options = Options()
+  var options : Options? = Options()
 
   override required init() {
     let c = SCNCamera()
@@ -99,6 +101,48 @@ class T1SCNScene : SCNScene, SCNSceneRendererDelegate {
   func draw() {
     // implemented by subclasses
   }
+
+
+
+  var cached : [IdentifiableView]?
+
+
+  func buildPrefView() -> [IdentifiableView] {
+//    beginShader()
+    if let z = cached { return z }
+
+    // I should move the creation of TextureParameters here
+
+    if let mo = options {
+      let mr = Mirror(reflecting: mo)
+      let a = DynamicPreferences.init(self.className)
+//      dynPref = a
+
+      let k = a.buildOptionsPane(mr)
+      cached = k
+      return k
+    }
+
+/*
+    if let mo = myOptions {
+      let a = DynamicPreferences.init(myName)
+      dynPref = a
+
+
+//      let jj = self.morePrefs()
+      //      let c = ImageStrip(texes: Binding.init(get: { return self.fragmentTextures } , set: { self.fragmentTextures = $0 }))
+
+      let k = jj + /* [IdentifiableView(id: "sources", view: AnyView(c))] + */ a.buildOptionsPane(mo)
+      cached = k
+      return k
+    }
+ */
+
+    return []
+  }
+
+
+
 
 }
 

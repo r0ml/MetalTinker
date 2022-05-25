@@ -10,20 +10,30 @@ struct IdentifiableView : Identifiable {
 }
 
 struct PreferencesView : View {
-  var shader : GenericShader
+  var shader : GenericShader?
+  var scene : T1SCNScene?
 
   init(shdr: GenericShader) {
     self.shader = shdr
   }
 
+  init(scene: T1SCNScene) {
+    self.scene = scene
+  }
 /*  init(shader: T?) {
     config = shader?.config
   }*/
 
   var body: some View {
-      List(shader.buildPrefView()) { ( x : IdentifiableView) in
+    if let shad = shader {
+      List(shad.buildPrefView()) { ( x : IdentifiableView) in
         x.view
       }
+    } else if let scen = scene {
+      List(scen.buildPrefView()) { (x : IdentifiableView) in
+        x.view
+      }
+    }
   }
   
   func buildView(types: [Any], index: Int) -> AnyView {

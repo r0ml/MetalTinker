@@ -56,6 +56,7 @@
 		E73C704A283C672200FD3490 /* Archimedean_Solids.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C7049283C672200FD3490 /* Archimedean_Solids.swift */; };
 		E73C704C283C672E00FD3490 /* A_Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C704B283C672E00FD3490 /* A_Triangle.swift */; };
 		E73C704E283C673700FD3490 /* A_Triangle_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C704D283C673700FD3490 /* A_Triangle_2.swift */; };
+		E73C7050283D8FB400FD3490 /* DynamicParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C704F283D8FB400FD3490 /* DynamicParameters.swift */; };
 		E73D807427E17A7300F25018 /* ConfigControllerT3SCN.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */; };
 		E743D67D236BEEBB00EB81BC /* videos in Resources */ = {isa = PBXBuildFile; fileRef = E743D67C236BEEBB00EB81BC /* videos */; };
 		E743D68A236C081E00EB81BC /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = E743D689236C081E00EB81BC /* TODO.txt */; };
@@ -750,6 +751,7 @@
 		E73C7049283C672200FD3490 /* Archimedean_Solids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archimedean_Solids.swift; sourceTree = "<group>"; };
 		E73C704B283C672E00FD3490 /* A_Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Triangle.swift; sourceTree = "<group>"; };
 		E73C704D283C673700FD3490 /* A_Triangle_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_Triangle_2.swift; sourceTree = "<group>"; };
+		E73C704F283D8FB400FD3490 /* DynamicParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicParameters.swift; sourceTree = "<group>"; };
 		E73D807327E17A7300F25018 /* ConfigControllerT3SCN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigControllerT3SCN.swift; sourceTree = "<group>"; };
 		E743079927F8B4F200BECBD0 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E743D67C236BEEBB00EB81BC /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = videos; sourceTree = "<group>"; };
@@ -1211,6 +1213,7 @@
 			children = (
 				E753EBFA21B905DD003E4678 /* ConfigController.swift */,
 				E70DAB43226056E5009B02CD /* DynamicPreferences.swift */,
+				E73C704F283D8FB400FD3490 /* DynamicParameters.swift */,
 				E71A02C32366512B00A88C16 /* ControlsView.swift */,
 				E71A02C12366511A00A88C16 /* PreferencesView.swift */,
 				E72A7FF823C2C2AB008C642A /* XSegmentedControl.swift */,
@@ -3286,6 +3289,7 @@
 				E7D7C05025AB9EEF004D75CD /* Library.swift in Sources */,
 				E7E9D6EC27DC363B00431EB0 /* ShaderFilter.swift in Sources */,
 				E7A5A43C25B0CE6A0051A69A /* Dot Line.swift in Sources */,
+				E73C7050283D8FB400FD3490 /* DynamicParameters.swift in Sources */,
 				E7EFE24C27A6E988007D6154 /* FixSwiftUI.swift in Sources */,
 				E73C7048283C671400FD3490 /* BiCapsule.swift in Sources */,
 				E7E9D70127DE4E7D00431EB0 /* SceneWrapperView.swift in Sources */,

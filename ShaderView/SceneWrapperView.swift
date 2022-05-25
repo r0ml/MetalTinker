@@ -84,6 +84,7 @@ struct SceneWrapperView : View {
           .gesture(drag)
       }
       SceneControlsView(scene: delegate.scene, paused: $paused ).frame(minWidth: 600)
+      PreferencesView(scene: delegate.scene)
     }
   }
 }
